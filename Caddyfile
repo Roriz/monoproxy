@@ -1,0 +1,17 @@
+app.enrichreader.com {
+  root * /var/www/app.enrichreader.com
+  
+  try_files {path} {path}/ /index.html
+
+  encode zstd gzip
+  
+  file_server
+}
+
+api.enrichreader.com {
+  reverse_proxy localhost:3000
+}
+
+app.activegenie.ai {
+  reverse_proxy localhost:3001
+}
