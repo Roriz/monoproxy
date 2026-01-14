@@ -16,13 +16,13 @@ function clone_or_pull {
 # reader-app
 clone_or_pull reader-app enrichreader/reader-app
 cd reader-app
-npm install && npm run build
+./bin/docker-build
 cd ../
 
 # reader-backend
 clone_or_pull reader-backend enrichreader/reader-backend
 cd reader-backend
-RESTART_MODE=always RAILS_ENV=production PORT=3000 docker compose up -d
+PORT=3000 ./bin/up
 cd ../
 
 # enrichreader-lfs
