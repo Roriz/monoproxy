@@ -9,9 +9,9 @@ app.enrichreader.com {
 }
 
 api.enrichreader.com {
-  reverse_proxy localhost:3000
+  reverse_proxy 127.0.0.1:3000
 }
 
 app.activegenie.ai {
-  reverse_proxy localhost:3001
+  reverse_proxy 127.0.0.1:3001
 }
