@@ -1,5 +1,5 @@
 app.enrichreader.com {
-  root * /var/www/app.enrichreader.com
+  root * ../reader-app/build
   
   try_files {path} {path}/ /index.html
 
