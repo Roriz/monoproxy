@@ -1,4 +1,4 @@
-app.{$ENRICHREADER_DOMAIN:enrichreader.localhost} {
+app.enrichreader.com {
 	root * ../reader-app/build
 
 	try_files {path} {path}/ /index.html
@@ -8,10 +8,10 @@ app.{$ENRICHREADER_DOMAIN:enrichreader.localhost} {
 	file_server
 }
 
-api.{$ENRICHREADER_DOMAIN:enrichreader.localhost} {
+api.enrichreader.com {
 	reverse_proxy 127.0.0.1:3000
 }
 
-app.{$ACTIVE_GENIE_DOMAIN:activegenie.localhost} {
+app.activegenie.ai {
 	reverse_proxy 127.0.0.1:3001
 }
