@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# Exit on any error, unset variable, or pipe failure
+set -e
+set -u
+set -o pipefail
+
+# Source helpers
+# shellcheck source=bin/helpers/utils.sh
+source "$(dirname "$0")/helpers/utils.sh"
+
+# --- Configuration ---
+REMOTE_HOST="${REMOTE_HOST:-46.62.147.61}"
+REMOTE_USER="${REMOTE_USER:-root}"
+REMOTE_DIR="${REMOTE_DIR:-/apps/monoproxy}"
+ARCHIVE="${ARCHIVE:-monoproxy.tar.gz}"
+
+# --- Deployment Steps ---
+
+cleanup_local() {
+  if [ -f "$ARCHIVE" ]; then
+    info "Cleaning up local archive..."
+    rm "$ARCHIVE"
+  fi
+}
+
+create_archive() {
+  info "Archiving project (excluding logs, tmp, and vcs)..."
+  tar --exclude-vcs \
+      --exclude='./.git' \
+      --exclude='./tmp' \
+      --exclude='./log' \
+      --exclude="$ARCHIVE" \
+      -czf "$ARCHIVE" .
+  
+  if [ ! -f "$ARCHIVE" ]; then
+    error "Failed to create archive: $ARCHIVE"
+  fi
+}
+
+upload_archive() {
+  info "Uploading $ARCHIVE to $REMOTE_USER@$REMOTE_HOST..."
+  if ! scp "$ARCHIVE" "$REMOTE_USER@$REMOTE_HOST:/tmp/$ARCHIVE"; then
+    error "Failed to upload archive to remote host."
+  fi
+}
+
+remote_deploy() {
+  info "Executing remote deployment steps..."
+  
+  ssh "$REMOTE_USER@$REMOTE_HOST" bash -s << BASH
+    set -e
+    
+    # We redefine colors inside the SSH session because the sourced file is local
+    CYAN='\033[0;36m'
+    NC='\033[0m'
+    remote_info() { echo -e "\${CYAN}[REMOTE]\${NC} \$1"; }
+
+    remote_info "Preparing target directory: $REMOTE_DIR"
+    rm -rf "$REMOTE_DIR"
+    mkdir -p "$REMOTE_DIR"
+    cd "$REMOTE_DIR"
+
+    remote_info "Extracting archive..."
+    tar -xzf "/tmp/$ARCHIVE" -C "$REMOTE_DIR"
+    
+    remote_info "Cleaning up remote archive..."
+    rm "/tmp/$ARCHIVE"
+
+    # Environment Setup
+    if [ -f .env.production ]; then
+      remote_info "Sourcing .env.production..."
+      set -a
+      source .env.production
+      set +a
+    fi
+
+    # Execute build/restart
+    remote_info "Running update script..."
+    chmod +x bin/*
+    ./bin/up
+
+    remote_info "Ready to serve."
+BASH
+}
+
+# --- Main Execution ---
+
+main() {
+  check_project_root
+
+  # Traps to ensure local cleanup happens even on failure
+  trap cleanup_local EXIT
+
+  info "Starting Deployment to $REMOTE_HOST..."
+  
+  create_archive
+  upload_archive
+  remote_deploy
+
+  success "Deployment completed successfully!"
+}
+
+main "$@"

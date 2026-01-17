@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Source helpers
+# shellcheck source=bin/helpers/utils.sh
+source "$(dirname "$0")/helpers/utils.sh"
+
+# Domain Configuration
+if [ "${PRODUCTION:-false}" == "true" ]; then
+  export ENRICHREADER_DOMAIN="enrichreader.com"
+  export ACTIVE_GENIE_DOMAIN="activegenie.ai"
+  info "Configured domains for PRODUCTION"
+fi
+
+info "Managing Caddy services..."
+sudo systemctl stop caddy || true
+sudo caddy stop || true
+sudo caddy trust
+sudo caddy start
+
+success "Caddy is up and running."

@@ -1,17 +1,17 @@
-app.enrichreader.com {
-  root * ../reader-app/build
-  
-  try_files {path} {path}/ /index.html
+app.{$ENRICHREADER_DOMAIN:enrichreader.localhost} {
+	root * ../reader-app/build
 
-  encode zstd gzip
-  
-  file_server
+	try_files {path} {path}/ /index.html
+
+	encode zstd gzip
+
+	file_server
 }
 
-api.enrichreader.com {
-  reverse_proxy 127.0.0.1:3000
+api.{$ENRICHREADER_DOMAIN:enrichreader.localhost} {
+	reverse_proxy 127.0.0.1:3000
 }
 
-app.activegenie.ai {
-  reverse_proxy 127.0.0.1:3001
+app.{$ACTIVE_GENIE_DOMAIN:activegenie.localhost} {
+	reverse_proxy 127.0.0.1:3001
 }

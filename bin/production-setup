@@ -1,0 +1,121 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+set -u
+set -o pipefail
+
+# Source helpers
+# shellcheck source=bin/helpers/utils.sh
+source "$(dirname "$0")/helpers/utils.sh"
+
+# --- Configuration ---
+ENV_VARS=(
+  "PRODUCTION=true"
+  "RESTART_MODE=always"
+  "NODE_ENV=production"
+  "RAILS_ENV=production"
+)
+
+install_caddy() {
+  if command -v caddy &> /dev/null; then
+    info "Caddy is already installed. Skipping..."
+    return
+  fi
+
+  info "Installing Caddy..."
+  apt update
+  apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+  
+  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list
+  
+  chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+  chmod o+r /etc/apt/sources.list.d/caddy-stable.list
+  
+  apt update
+  apt install -y caddy
+  success "Caddy installed successfully."
+}
+
+install_docker() {
+  if command -v docker &> /dev/null; then
+    info "Docker is already installed. Skipping..."
+  else
+    info "Installing Docker..."
+    apt install -y ca-certificates curl
+    install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    chmod a+r /etc/apt/keyrings/docker.asc
+
+    # Add the repository to Apt sources:
+    echo "Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc" | tee /etc/apt/sources.list.d/docker.sources > /dev/null
+
+    apt update
+    apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    systemctl start docker
+    systemctl enable docker
+    success "Docker installed successfully."
+  fi
+
+  # Docker group setup
+  if [ -n "${SUDO_USER:-}" ]; then
+    if ! getent group docker > /dev/null; then
+      groupadd docker
+      info "Docker group created."
+    fi
+
+    if ! groups "$SUDO_USER" | grep -q "\bdocker\b"; then
+      usermod -aG docker "$SUDO_USER"
+      warn "User $SUDO_USER added to the docker group. You will need to logout and login for this to take effect."
+    fi
+  fi
+}
+
+setup_environment() {
+  info "Setting up environment variables in ~/.bashrc..."
+  
+  TARGET_HOME=$HOME
+  if [ -n "${SUDO_USER:-}" ]; then
+    TARGET_HOME=$(eval echo "~$SUDO_USER")
+  fi
+
+  BASHRC="$TARGET_HOME/.bashrc"
+
+  for var_entry in "${ENV_VARS[@]}"; do
+    var_name=$(echo "$var_entry" | cut -d'=' -f1)
+    if grep -q "export $var_name=" "$BASHRC"; then
+      info "Variable $var_name already exists in $BASHRC. Updating..."
+      sed -i "s|^export $var_name=.*|export $var_entry|" "$BASHRC"
+    else
+      info "Adding $var_entry to $BASHRC..."
+      echo "export $var_entry" >> "$BASHRC"
+    fi
+  done
+  
+  success "Environment variables configured."
+}
+
+# --- Main Execution ---
+
+main() {
+  info "Starting Production Setup..."
+
+  check_privileges
+  
+  apt update
+  
+  install_caddy
+  install_docker
+  setup_environment
+
+  success "Production setup completed!"
+  info "Please log out and log back in (or run 'newgrp docker') to apply group changes."
+  info "Environment variables will be available in your next shell session."
+}
+
+main "$@"
