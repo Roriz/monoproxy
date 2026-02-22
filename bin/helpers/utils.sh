@@ -9,6 +9,15 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # --- Helper Functions ---
+header() {
+  echo -e "\n${CYAN}🚀 $1${NC}"
+  echo -e "${CYAN}$(printf '%*s' "${#1}" '' | tr ' ' '=')===${NC}\n"
+}
+
+step() {
+  echo -e "${BLUE}  ➜${NC} $1"
+}
+
 info() {
   echo -e "${BLUE}[INFO]${NC} $1"
 }

@@ -26,6 +26,7 @@ cleanup_local() {
 
 create_archive() {
   info "Archiving project (excluding logs, tmp, and vcs)..."
+  touch "$ARCHIVE"
   tar --exclude-vcs \
       --exclude='./.git' \
       --exclude='./tmp' \

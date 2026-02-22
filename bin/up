@@ -1,14 +1,65 @@
 #!/bin/bash
 
+current_dir="$(pwd)"
+
 # Source helpers
 # shellcheck source=bin/helpers/utils.sh
 source "$(dirname "$0")/helpers/utils.sh"
 
-info "Managing Caddy services..."
-sudo systemctl stop caddy || true
-sudo caddy stop || true
+# Ensure we are in the project root
+check_project_root
+
+# Auto-discovery of paths if not set
+if [ -z "${READER_BACKEND_PATH:-}" ] && [ -d "../reader-backend" ]; then
+  export READER_BACKEND_PATH="$(realpath ../reader-backend)"
+fi
+
+if [ -z "${READER_APP_PATH:-}" ] && [ -d "../reader-app" ]; then
+  export READER_APP_PATH="$(realpath ../reader-app)"
+fi
+
+mkdir -p tmp
+
+header "Starting Monoproxy Services"
+
+step "Stopping existing Caddy services..."
+sudo systemctl stop caddy 2>/dev/null || true
+sudo caddy stop 2>/dev/null || true
+
+step "Setting up Caddy trust..."
 sudo caddy trust
 
-sudo caddy start --config Caddyfile.${RAILS_ENV:-development}
+if [ -d "${READER_BACKEND_PATH:-}" ]; then
+  header "Backend: $(basename "$READER_BACKEND_PATH")"
+  step "Triggering backend update (backgrounded)..."
+  (cd "$READER_BACKEND_PATH" && bin/up) > tmp/backend-up.log 2>&1 &
+else
+  info "Backend path not detected. Skipping backend update."
+fi
 
-success "Caddy is up and running."
+
+if [ -d "${READER_APP_PATH:-}" ]; then
+  header "App: $(basename "$READER_APP_PATH")"
+  if [ "${PRODUCTION:-}" = "true" ]; then
+    step "Building production Docker image (backgrounded)..."
+    (cd "$READER_APP_PATH" && bin/docker-build) > tmp/app-build.log 2>&1 &
+  else
+    step "Starting development Docker environment (backgrounded)..."
+    (cd "$READER_APP_PATH" && bin/docker-dev) > tmp/app-dev.log 2>&1 &
+  fi
+else
+  info "App path not detected. Skipping app update."
+fi
+
+header "Finalizing Caddy"
+CONF_FILE="Caddyfile.${RAILS_ENV:-development}"
+if [ -f "$CONF_FILE" ]; then
+  step "Starting Caddy with config: $CONF_FILE"
+  if sudo caddy start --config "$CONF_FILE"; then
+    success "Monoproxy is up and running!"
+  else
+    error "Failed to start Caddy with configuration: $CONF_FILE"
+  fi
+else
+  error "Caddy configuration file not found: $CONF_FILE"
+fi

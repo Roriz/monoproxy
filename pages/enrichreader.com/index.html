@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnrichReader | The End of Static Text</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --purple-glow: rgba(168, 85, 247, 0.4);
+      --amber-glow: rgba(245, 158, 11, 0.4);
+    }
+
+    body {
+      background-color: #030303;
+      color: #f2f2f2;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .serif {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .glass:hover {
+      border-color: rgba(168, 85, 247, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .glow-purple {
+      box-shadow: 0 0 30px -10px var(--purple-glow);
+    }
+
+    .glow-text-purple {
+      text-shadow: 0 0 15px var(--purple-glow);
+    }
+
+    /* Particle Background Simulation */
+    .void-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000 100%);
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: twinkle var(--duration) infinite;
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: 0.2;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+      }
+    }
+
+    /* Demo Interactions */
+    .reveal-card {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .reveal-trigger:hover .reveal-card {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .chapter-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      background: #222;
+      border-radius: 2px;
+      outline: none;
+    }
+
+    .chapter-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: #a855f7;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #000;
+      box-shadow: 0 0 10px var(--purple-glow);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="void-bg" id="void"></div>
+
+  <!-- Nav -->
+  <nav
+    class="fixed top-0 w-full z-50 px-4 py-4 md:p-6 flex justify-between items-center max-w-7xl mx-auto left-0 right-0">
+    <div class="text-xl md:text-2xl font-bold tracking-tighter glow-text-purple shrink-0">ENRICH<span
+        class="text-purple-500">READER</span>
+    </div>
+    <div
+      class="flex items-center space-x-2 md:space-x-10 text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-gray-500 font-semibold shrink-0">
+      <a href="#demo" class="hover:text-white transition whitespace-nowrap">The Magic</a>
+      <a href="#vision" class="hover:text-white transition whitespace-nowrap">Vision</a>
+      <a href="#"
+        class="px-3 py-2 md:px-5 md:py-2.5 bg-white text-black rounded-full font-bold hover:bg-purple-500 hover:text-white transition-all transform hover:scale-105 whitespace-nowrap">Join
+        Alpha</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="relative pt-40 pb-20 px-6 text-center max-w-5xl mx-auto min-h-screen flex flex-col justify-center">
+    <h1 class="text-6xl md:text-9xl font-bold mb-8 serif italic leading-tight">
+      The End of <span class="text-gray-700 decoration-purple-500/30">Static Text</span>
+    </h1>
+    <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light mb-12">
+      No more wikis. <span class="text-white">No more spoilers.</span> Enjoy the story without leaving the page.
+    </p>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+      <a href="#"
+        class="px-10 py-4 bg-purple-600 rounded-full font-bold text-lg hover:bg-purple-500 transition glow-purple">Get
+        Early Access</a>
+      <div class="text-gray-500 text-xs font-mono uppercase tracking-widest">v1.1_alpha_leak</div>
+    </div>
+  </header>
+
+  <!-- Interactive Demo Section -->
+  <section id="demo" class="py-40 px-6 max-w-6xl mx-auto">
+    <div class="text-center mb-24">
+      <h2 class="text-3xl md:text-5xl font-bold mb-4 serif">Progressive Disclosure</h2>
+      <p class="text-gray-500 text-sm md:text-lg">Scroll to see how character knowledge evolves. No spoilers, ever...
+        until you reach them.</p>
+    </div>
+
+    <div class="relative flex flex-col md:flex-row gap-12 md:items-stretch">
+      <!-- Left Column: Timeline Text -->
+      <div class="md:w-3/5 space-y-40 pb-40 w-full pt-[320px] md:pt-0" id="timeline-texts">
+
+
+        <!-- A Study in Scarlet -->
+        <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="1">
+          <div class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+            <span class="w-8 h-px bg-gray-700"></span> A Study in Scarlet
+          </div>
+          <div class="text-2xl md:text-4xl leading-[1.6] serif italic text-gray-400">
+            "<span
+              class="text-purple-400 border-b border-purple-400/30 px-1 rounded bg-purple-400/10 transition-colors">Sherlock
+              Holmes</span>' quick eye took in my occupation, and he shook his head with a smile as he noticed my
+            questioning glances."
+          </div>
+        </div>
+
+        <!-- The Adventures of Sherlock Holmes -->
+        <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="2">
+          <div class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+            <span class="w-8 h-px bg-gray-700"></span> The Adventures of Sherlock Holmes
+          </div>
+          <div class="text-2xl md:text-4xl leading-[1.6] serif italic text-gray-400">
+            "To <span
+              class="text-purple-400 border-b border-purple-400/30 px-1 rounded bg-purple-400/10 transition-colors">Sherlock
+              Holmes</span> she is always the woman. I have seldom heard him mention her under any other name. In his
+            eyes she eclipses and predominates the whole of her sex."
+          </div>
+        </div>
+
+        <!-- The Final Problem -->
+        <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="3">
+          <div class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+            <span class="w-8 h-px bg-gray-700"></span> The Final Problem
+          </div>
+          <div class="text-2xl md:text-4xl leading-[1.6] serif italic text-gray-400">
+            "You may have read of the remarkable explorations of a Norwegian named <span
+              class="text-purple-400 border-b border-purple-400/30 px-1 rounded bg-purple-400/10 transition-colors">Sigerson</span>,
+            but I am sure that it never occurred to you that you were receiving news of your friend."
+          </div>
+        </div>
+
+        <!-- His Last Bow -->
+        <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="4">
+          <div
+            class="text-[10px] font-bold text-red-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3 animate-pulse">
+            <span class="w-8 h-px bg-red-800"></span> His Last Bow
+          </div>
+          <div class="text-2xl md:text-4xl leading-[1.6] serif italic text-gray-400">
+            "But you have retired, <span
+              class="text-red-400 border-b border-red-500/50 px-1 rounded bg-red-500/10 transition-colors shadow-[0_0_15px_rgba(239,68,68,0.3)]">Holmes</span>.
+            We heard of you as living the life of a hermit among your bees and your books in a small farm upon the South
+            Downs."
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Sticky Profile -->
+      <div class="md:w-2/5 absolute inset-0 md:relative w-full pointer-events-none md:pointer-events-auto z-30">
+        <div
+          class="sticky top-24 md:top-32 glass rounded-3xl md:rounded-[40px] p-6 md:p-10 border-purple-500/30 glow-purple transition-all duration-500 z-40 pointer-events-auto"
+          id="sticky-profile">
+          <div
+            class="text-[10px] font-bold text-purple-500 mb-4 md:mb-6 uppercase tracking-widest transition-colors duration-300"
+            id="profile-tag">Entity: Character</div>
+
+          <div class="flex items-center gap-4 md:block">
+            <div
+              class="relative w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-purple-500/20 to-gray-800/50 flex items-center justify-center md:mb-6 border border-purple-500/30 overflow-hidden transition-all duration-500 shrink-0"
+              id="profile-img-container">
+              <span class="text-2xl md:text-4xl transition-transform duration-500" id="profile-icon">🎻</span>
+            </div>
+
+            <div>
+              <div class="font-bold text-xl md:text-3xl mb-2 transition-colors duration-300 text-white"
+                id="profile-name">Sherlock Holmes</div>
+
+              <div class="flex gap-2 mb-0 md:mb-6 flex-wrap transition-all duration-300" id="profile-tags">
+                <span
+                  class="text-[10px] md:text-xs px-2 md:px-3 py-1 bg-white/5 border border-white/10 rounded-full text-gray-300">Consulting
+                  Detective</span>
+                <span
+                  class="text-[10px] md:text-xs px-2 md:px-3 py-1 bg-white/5 border border-white/10 rounded-full text-gray-300">Analytical
+                  Chemist</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="text-xs md:text-base text-gray-400 leading-relaxed min-h-[60px] md:min-h-[100px] transition-all duration-300 mt-4 md:mt-0"
+            id="profile-desc">
+            I'm a consulting detective, if you can understand what that is. Here in London we have lots of Government
+            detectives and lots of private ones.
+          </div>
+
+          <div id="spoiler-warning" class="mt-4 md:mt-8 hidden overflow-hidden transition-all duration-500">
+            <div class="p-3 md:p-4 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-start gap-3">
+              <span class="text-base md:text-lg">⚠️</span>
+              <div>
+                <div class="text-[10px] md:text-xs font-bold text-red-500 uppercase tracking-wider mb-1">Major Spoiler
+                  Unlocked</div>
+                <div class="text-[10px] md:text-xs text-red-400/80">This information was progressively revealed over
+                  1300+ chapters.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it Works Section -->
+  <section id="how-it-works" class="py-40 px-6 max-w-7xl mx-auto relative">
+    <div class="text-center mb-24 relative z-10">
+      <h2 class="text-4xl md:text-6xl font-bold mb-6 serif italic">The Alchemy of Reading</h2>
+      <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">
+        Three steps to mutate your static library into a living, breathing world. No vendor lock-in, just pure
+        enrichment.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+      <!-- Connection Line (Desktop) -->
+      <div
+        class="hidden md:block absolute top-[130px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-gray-800 via-purple-500/40 to-purple-400 z-0">
+      </div>
+
+      <!-- Step 1 -->
+      <div
+        class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 hover:border-gray-500/50 bg-[#0a0a0a]/90">
+        <div
+          class="w-16 h-16 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center text-2xl mb-8 font-mono text-gray-400 group-hover:text-white transition-colors duration-300 shadow-[0_0_15px_rgba(255,255,255,0.05)] shrink-0">
+          1</div>
+        <div class="block mb-8 relative w-full flex justify-center">
+          <div
+            class="w-[200px] h-[400px] rounded-[32px] border-[6px] border-gray-800 bg-black relative overflow-hidden shadow-2xl group-hover:border-gray-500 transition-colors duration-500">
+            <!-- Top Notch/Speaker area -->
+            <div class="absolute top-0 inset-x-0 h-4 bg-gray-800 rounded-b-xl w-24 mx-auto z-20"></div>
+            <!-- Placeholder IMG 1 -->
+            <img src="step1-upload.jpg" id="img-step-1" alt="Upload Book"
+              class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500 grayscale group-hover:grayscale-0 relative z-10">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-10"></div>
+          </div>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 serif italic text-gray-200">The Book</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">
+          Bring your own soul. We don't sell books. Drop <span class="text-purple-400 font-semibold">your personal
+            file</span>. Your library, your privacy.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div
+        class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 hover:border-purple-500/50 hover:shadow-[0_0_40px_-10px_rgba(168,85,247,0.2)] bg-[#0a0a0a]/90">
+        <div
+          class="w-16 h-16 rounded-full bg-purple-900/30 border border-purple-500/30 flex items-center justify-center text-2xl mb-8 font-mono text-purple-400 group-hover:text-purple-300 transition-colors duration-300 shadow-[0_0_15px_rgba(168,85,247,0.2)] group-hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] shrink-0">
+          2</div>
+        <div class="block mb-8 relative w-full flex justify-center">
+          <div
+            class="w-[200px] h-[400px] rounded-[32px] border-[6px] border-purple-900/40 bg-black relative overflow-hidden shadow-[0_0_30px_#a855f730] group-hover:border-purple-500/80 transition-all duration-500">
+            <!-- Top Notch/Speaker area -->
+            <div
+              class="absolute top-0 inset-x-0 h-4 bg-purple-900/40 group-hover:bg-purple-500/80 rounded-b-xl w-24 mx-auto z-20 transition-colors duration-500">
+            </div>
+            <!-- Placeholder IMG 2 -->
+            <img src="step2-skin.jpg" id="img-step-2" alt="Install Skin"
+              class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal relative z-10">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-10"></div>
+          </div>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 serif italic text-purple-100">The Skin</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          Search and install a <span class="text-purple-400 font-semibold">Skin</span>. This is the Engine that
+          brings interactions, lore, and memory to your book.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div
+        class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 hover:border-purple-400/60 hover:shadow-[0_0_60px_-15px_rgba(168,85,247,0.4)] bg-[#0a0a0a]/90 border-purple-500/20 z-20">
+        <div
+          class="w-16 h-16 rounded-full bg-purple-600 border border-purple-400 flex items-center justify-center text-2xl mb-8 font-mono text-white transition-colors duration-300 shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse shrink-0">
+          3</div>
+        <div class="block mb-8 relative w-full flex justify-center">
+          <div
+            class="w-[200px] h-[400px] rounded-[32px] border-[6px] border-purple-500/50 bg-black relative overflow-hidden shadow-[0_0_40px_rgba(168,85,247,0.3)] group-hover:border-purple-400 group-hover:shadow-[0_0_60px_rgba(168,85,247,0.6)] transition-all duration-500">
+            <!-- Top Notch/Speaker area -->
+            <div
+              class="absolute top-0 inset-x-0 h-4 bg-purple-500/50 group-hover:bg-purple-400 rounded-b-xl w-24 mx-auto z-20 transition-colors duration-500">
+            </div>
+            <!-- Placeholder IMG 3 -->
+            <img src="step3-enjoy.jpg" id="img-step-3" alt="Enriched Experience"
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 relative z-10">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80 z-10">
+            </div>
+          </div>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 serif italic text-white glow-text-purple">The Experience</h3>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          Open your book and witness a <span class="text-purple-400 font-semibold">living story</span>. Characters have
+          evolving bios and the story responds to your progress.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Vision / Value Props -->
+  <section id="vision"
+    class="py-40 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+    <div class="glass p-10 rounded-3xl hover:translate-y-[-8px] transition-transform duration-500">
+      <div class="text-purple-500 mb-6 font-mono text-xl tracking-tighter">01/</div>
+      <h3 class="text-2xl font-bold mb-4 serif italic">Character Profile</h3>
+      <p class="text-gray-400 leading-relaxed">A real-time RPG profile tracking everything known about a character up to
+        that specific mention. Deep lore immersion, <span class="text-purple-400/80">zero spoilers</span>.</p>
+    </div>
+    <div class="glass p-10 rounded-3xl border-purple-500/20 hover:translate-y-[-8px] transition-transform duration-500">
+      <div class="text-purple-500 mb-6 font-mono text-xl tracking-tighter">02/</div>
+      <h3 class="text-2xl font-bold mb-4 serif italic">The Directory</h3>
+      <p class="text-gray-400 leading-relaxed">Progressively unlock a living archive of plots, characters, items, and
+        locations. The world's secrets revealed <span class="text-purple-400/80">layer by layer</span>.</p>
+    </div>
+    <div class="glass p-10 rounded-3xl hover:translate-y-[-8px] transition-transform duration-500">
+      <div class="text-purple-500 mb-6 font-mono text-xl tracking-tighter">03/</div>
+      <h3 class="text-2xl font-bold mb-4 serif italic">Classified Images</h3>
+      <p class="text-gray-400 leading-relaxed">No more random appendices. Every piece of art is woven into the
+        experience, appearing in profiles, mentions, or the directory <span class="text-purple-400/80">exactly when it's
+          relevant</span>.</p>
+    </div>
+  </section>
+
+  <!-- Personal Pitch -->
+  <section class="py-40 px-6 text-center bg-white/[0.01] border-y border-white/5">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold mb-8 serif italic text-gray-400">I built this because I hate reading</h2>
+      <p class="text-xl text-gray-300 leading-relaxed font-light italic mb-8">
+        "I love stories, but tracking 50 characters across 1,400 chapters felt like homework. I built EnrichReader to
+        hack my own brain, to handle the memory work so I could finally just feel the story"
+      </p>
+      <div class="text-[10px] font-bold tracking-[0.5em] text-purple-500 uppercase">- Rada, Founder</div>
+    </div>
+  </section>
+
+  <!-- Footer / CTA -->
+  <footer class="py-40 text-center px-6">
+    <h2 class="text-4xl md:text-6xl font-bold mb-12 serif italic">Join the Alpha Leak.</h2>
+    <a href="#"
+      class="inline-block px-12 py-5 bg-white text-black rounded-full font-bold text-xl hover:bg-purple-600 hover:text-white transition-all transform hover:scale-105">Request
+      Invite</a>
+    <p class="mt-8 text-gray-500 text-xs tracking-widest uppercase">Alpha: Very small amount of supported series &
+      limited devices supported</p>
+  </footer>
+
+  <script>
+    // Particle Background Generator
+    const voidEl = document.getElementById('void');
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 1;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+      voidEl.appendChild(star);
+    }
+
+    // Progressive scroll logic
+    const profileData = {
+      "1": {
+        name: "Sherlock Holmes",
+        desc: "I'm a consulting detective, if you can understand what that is. Here in London we have lots of Government detectives and lots of private ones.",
+        tags: ["Consulting Detective", "Analytical Chemist"],
+        icon: "🎻",
+        theme: "purple"
+      },
+      "2": {
+        name: "The Great Detective",
+        desc: "I am the last and highest court of appeal in detection. When Gregson, or Lestrade, or Athelney Jones are out of their depths—which, by the way, is their normal state—the matter is laid before me.",
+        tags: ["Master Detective", "Logician"],
+        icon: "🔎",
+        theme: "purple"
+      },
+      "3": {
+        name: "The Ghost of 221B",
+        desc: "Any attempt at recovering the bodies was absolutely hopeless, and there, deep down in that dreadful cauldron of swirling water and seething foam, will lie for all time the most dangerous criminal and the foremost champion of the law of their generation.",
+        tags: ["Norwegian Explorer", "Sigerson", "The Empty House"],
+        icon: "🕵️",
+        theme: "purple"
+      },
+      "4": {
+        name: "The Master Sleuth",
+        desc: "Here is the fruit of my leisured ease, the magnum opus of my latter years! 'Practical Handbook of Bee Culture, with some Observations upon the Segregation of the Queen.' Alone I did it.",
+        tags: ["Apiarist", "Altamont", "Sussex Downs"],
+        icon: "🐝",
+        theme: "red"
+      }
+    };
+
+    const steps = document.querySelectorAll('.timeline-step');
+    const pName = document.getElementById('profile-name');
+    const pDesc = document.getElementById('profile-desc');
+    const pTags = document.getElementById('profile-tags');
+    const pIcon = document.getElementById('profile-icon');
+    const sWarn = document.getElementById('spoiler-warning');
+    const profileBox = document.getElementById('sticky-profile');
+    const pTag = document.getElementById('profile-tag');
+    const pImgContainer = document.getElementById('profile-img-container');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          steps.forEach(s => { s.classList.remove('opacity-100'); s.classList.add('opacity-30'); });
+          entry.target.classList.remove('opacity-30');
+          entry.target.classList.add('opacity-100');
+
+          const stepId = entry.target.getAttribute('data-step');
+          const data = profileData[stepId];
+
+          pName.innerText = data.name;
+          pDesc.innerText = data.desc;
+          pIcon.innerText = data.icon;
+
+          pIcon.classList.remove('scale-110');
+          setTimeout(() => pIcon.classList.add('scale-110'), 50);
+
+          pTags.innerHTML = data.tags.map(tag => `<span class="text-[10px] md:text-xs px-2 md:px-3 py-1 bg-white/5 border border-white/10 rounded-full text-gray-300 transition-all">${tag}</span>`).join('');
+
+          if (data.theme === 'red') {
+            sWarn.classList.remove('hidden');
+            profileBox.classList.remove('border-purple-500/30', 'glow-purple');
+            profileBox.classList.add('border-red-500/50', 'shadow-[0_0_40px_-10px_rgba(239,68,68,0.4)]');
+            pName.classList.add('text-red-400');
+            pTag.classList.replace('text-purple-500', 'text-red-500');
+            pImgContainer.classList.replace('from-purple-500/20', 'from-red-500/20');
+            pImgContainer.classList.replace('border-purple-500/30', 'border-red-500/50');
+          } else {
+            sWarn.classList.add('hidden');
+            profileBox.classList.add('border-purple-500/30', 'glow-purple');
+            profileBox.classList.remove('border-red-500/50', 'shadow-[0_0_40px_-10px_rgba(239,68,68,0.4)]');
+            pName.classList.remove('text-red-400');
+            pTag.classList.replace('text-red-500', 'text-purple-500');
+            pImgContainer.classList.replace('from-red-500/20', 'from-purple-500/20');
+            pImgContainer.classList.replace('border-red-500/50', 'border-purple-500/30');
+          }
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px' });
+
+    steps.forEach(step => observer.observe(step));
+  </script>
+</body>
+
+</html>

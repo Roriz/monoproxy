@@ -15,6 +15,8 @@ ENV_VARS=(
   "RESTART_MODE=always"
   "NODE_ENV=production"
   "RAILS_ENV=production"
+  "READER_BACKEND_PATH=/apps/reader-backend"
+  "READER_APP_PATH=/apps/reader-app"
 )
 
 install_caddy() {
