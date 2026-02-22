@@ -8,6 +8,16 @@ app.enrichreader.com {
 	file_server
 }
 
+enrichreader.com, www.enrichreader.com {
+	root * ../pages/enrichreader.com
+
+	try_files {path} {path}/ /index.html
+
+	encode zstd gzip
+
+	file_server
+}
+
 api.enrichreader.com {
 	reverse_proxy 127.0.0.1:3000
 }
