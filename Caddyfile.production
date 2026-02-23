@@ -9,7 +9,7 @@ app.enrichreader.com {
 }
 
 enrichreader.com, www.enrichreader.com {
-	root * ../pages/enrichreader.com
+	root * ./pages/enrichreader.com
 
 	try_files {path} {path}/ /index.html
 
