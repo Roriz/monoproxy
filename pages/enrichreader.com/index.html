@@ -29,137 +29,24 @@
   <!-- Resource Hints for Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.tailwindcss.com">
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
 
-  <!-- Fonts -->
-  <link
+  <!-- Optimized Fonts Loading -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap">
+  <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
-    rel="stylesheet">
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap">
+  </noscript>
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Static Tailwind CSS -->
+  <link rel="stylesheet" href="style.css">
 
-  <style>
-    :root {
-      --purple-glow: rgba(168, 85, 247, 0.4);
-      --amber-glow: rgba(245, 158, 11, 0.4);
-    }
 
-    body {
-      background-color: #030303;
-      color: #f2f2f2;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
-    .serif {
-      font-family: 'Playfair Display', serif;
-    }
-
-    .glass {
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.3s ease;
-    }
-
-    .glass:hover {
-      border-color: rgba(168, 85, 247, 0.3);
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .glow-purple {
-      box-shadow: 0 0 30px -10px var(--purple-glow);
-    }
-
-    .glow-text-purple {
-      text-shadow: 0 0 15px var(--purple-glow);
-    }
-
-    /* Screen Reader Only - A11y */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-
-    /* Particle Background Simulation */
-    .void-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000 100%);
-    }
-
-    .star {
-      position: absolute;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.3;
-      /* GPU Acceleration for smooth performance */
-      will-change: transform, opacity;
-      animation: twinkle var(--duration) infinite;
-    }
-
-    @keyframes twinkle {
-
-      0%,
-      100% {
-        opacity: 0.2;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.5;
-        transform: scale(1.2);
-      }
-    }
-
-    /* Demo Interactions */
-    .reveal-card {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
-    }
-
-    .reveal-trigger:hover .reveal-card {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .chapter-slider {
-      -webkit-appearance: none;
-      width: 100%;
-      height: 4px;
-      background: #222;
-      border-radius: 2px;
-      outline: none;
-    }
-
-    .chapter-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
-      background: #a855f7;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid #000;
-      box-shadow: 0 0 10px var(--purple-glow);
-    }
-  </style>
 </head>
+
 
 <body>
   <!-- Semantic background element -->
@@ -236,20 +123,8 @@
           </blockquote>
         </div>
 
-        <!-- The Final Problem -->
-        <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="3">
-          <div class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
-            <span class="w-8 h-px bg-gray-700"></span> The Final Problem
-          </div>
-          <blockquote class="text-2xl md:text-4xl leading-[1.6] serif italic text-gray-400">
-            "You may have read of the remarkable explorations of a Norwegian named <span
-              class="text-purple-400 border-b border-purple-400/30 px-1 rounded bg-purple-400/10 transition-colors">Sigerson</span>,
-            but I am sure that it never occurred to you that you were receiving news of your friend."
-          </blockquote>
-        </div>
-
         <!-- His Last Bow -->
-        <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="4">
+        <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="3">
           <div
             class="text-[10px] font-bold text-red-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3 animate-pulse">
             <span class="w-8 h-px bg-red-800"></span> His Last Bow
@@ -443,7 +318,7 @@
         "I love stories, but tracking 50 characters across 1,400 chapters felt like homework. I built EnrichReader to
         hack my own brain, to handle the memory work so I could finally just feel the story."
       </blockquote>
-      <div class="text-[10px] font-bold tracking-[0.5em] text-purple-500 uppercase">- Rada, Founder</div>
+      <div class="text-[10px] font-bold tracking-[0.5em] text-purple-500 uppercase">- Radames Roriz, Founder</div>
     </div>
   </section>
 
@@ -491,13 +366,6 @@
           theme: "purple"
         },
         "3": {
-          name: "The Ghost of 221B",
-          desc: "Any attempt at recovering the bodies was absolutely hopeless, and there, deep down in that dreadful cauldron of swirling water and seething foam, will lie for all time the most dangerous criminal and the foremost champion of the law of their generation.",
-          tags: ["Norwegian Explorer", "Sigerson", "The Empty House"],
-          icon: "🕵️",
-          theme: "purple"
-        },
-        "4": {
           name: "The Master Sleuth",
           desc: "Here is the fruit of my leisured ease, the magnum opus of my latter years! 'Practical Handbook of Bee Culture, with some Observations upon the Segregation of the Queen.' Alone I did it.",
           tags: ["Apiarist", "Altamont", "Sussex Downs"],
