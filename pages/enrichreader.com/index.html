@@ -31,20 +31,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Optimized Fonts Loading -->
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap">
-  <link rel="stylesheet"
+  <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
-    media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap">
-  </noscript>
+    rel="stylesheet">
+
 
   <!-- Static Tailwind CSS -->
   <link rel="stylesheet" href="style.css">
 
 
+  <style>
+    .text-balance {
+      text-wrap: balance;
+    }
+  </style>
 </head>
 
 
@@ -70,8 +70,8 @@
   </nav>
 
   <!-- Hero Section -->
-  <header class="relative pt-40 pb-20 px-6 text-center max-w-5xl mx-auto min-h-screen flex flex-col justify-center">
-    <h1 class="text-6xl md:text-9xl font-bold mb-8 serif italic leading-tight">
+  <header class="relative pt-48 md:pt-64 pb-20 px-6 text-center max-w-5xl mx-auto min-h-screen flex flex-col">
+    <h1 class="text-6xl md:text-9xl font-bold mb-8 serif italic leading-tight text-balance">
       The End of <span class="text-gray-700 decoration-purple-500/30">Static Text</span>
     </h1>
     <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light mb-12">
