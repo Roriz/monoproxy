@@ -39,23 +39,16 @@
   <div class="void-bg" id="void" aria-hidden="true"></div>
 
   <!-- Nav -->
-  <nav
-    class="fixed top-0 w-full z-50 px-4 py-4 md:p-6 flex justify-between items-center max-w-7xl mx-auto left-0 right-0">
-    <a href="../" class="text-xl md:text-2xl font-bold tracking-tighter glow-text-purple shrink-0">
-      ENRICH<span class="text-purple-500">READER</span>
-    </a>
-    <div
-      class="flex items-center space-x-6 md:space-x-10 text-[10px] md:text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold shrink-0">
-      <a href="../#demo" class="hover:text-white transition whitespace-nowrap">Magic</a>
-      <a href="../#vision" class="hover:text-white transition whitespace-nowrap">Vision</a>
-      <a href="../#join-alpha"
-        class="px-4 py-2 bg-white text-black rounded-full font-bold hover:bg-purple-500 hover:text-white transition-all transform hover:scale-105 whitespace-nowrap">Join
-        Alpha</a>
+  <nav class="fixed top-0 w-full z-50 px-4 py-4 md:p-6 nav-scrolled">
+    <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+      <a href="../" class="text-xl md:text-2xl font-bold tracking-tighter glow-text-purple shrink-0">
+        ENRICH<span class="text-purple-500">READER</span>
+      </a>
     </div>
   </nav>
 
   <!-- Content Section -->
-  <main class="relative pt-32 md:pt-48 pb-20 px-6 max-w-4xl mx-auto">
+  <main class="relative pt-28 md:pt-40 pb-20 px-6 max-w-4xl mx-auto">
     <div class="glass p-8 md:p-16 rounded-[40px] border-purple-500/10">
       <header class="mb-16">
         <h1 class="text-4xl md:text-7xl font-bold mb-6 serif italic glow-text-purple leading-tight">
@@ -346,14 +339,6 @@
         </section>
       </div>
     </div>
-
-    <!-- Back Button -->
-    <div class="mt-12 text-center">
-      <a href="../" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors group">
-        <span class="group-hover:-translate-x-1 transition-transform">←</span>
-        <span>Return to Home</span>
-      </a>
-    </div>
   </main>
 
   <footer class="py-20 text-center px-6 border-t border-white/5">
@@ -361,23 +346,7 @@
     <div class="text-gray-500 text-[10px]">&copy; 2026 EnrichReader. All rights reserved.</div>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Particle Background Generator
-      const voidEl = document.getElementById('void');
-      for (let i = 0; i < 50; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const size = Math.random() * 2 + 1;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-        voidEl.appendChild(star);
-      }
-    });
-  </script>
+  <script src="../main.js" defer></script>
 </body>
 
 </html>

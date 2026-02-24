@@ -53,19 +53,21 @@
   <div class="void-bg" id="void" aria-hidden="true"></div>
 
   <!-- Nav -->
-  <nav
-    class="fixed top-0 w-full z-50 px-4 py-4 md:p-6 flex justify-between items-center max-w-7xl mx-auto left-0 right-0">
-    <div class="text-xl md:text-2xl font-bold tracking-tighter glow-text-purple shrink-0">
-      ENRICH<span class="text-purple-500">READER</span>
-    </div>
-    <div
-      class="flex items-center space-x-2 md:space-x-10 text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-gray-500 font-semibold shrink-0">
-      <a href="#demo" aria-label="Skip to interactive demo" class="hover:text-white transition whitespace-nowrap">The
-        Magic</a>
-      <a href="#vision" aria-label="Skip to our vision" class="hover:text-white transition whitespace-nowrap">Vision</a>
-      <a href="#join-alpha" aria-label="Join the Alpha waitlist"
-        class="px-3 py-2 md:px-5 md:py-2.5 bg-white text-black rounded-full font-bold hover:bg-purple-500 hover:text-white transition-all transform hover:scale-105 whitespace-nowrap">Join
-        Alpha</a>
+  <nav class="fixed top-0 w-full z-50 px-4 py-4 md:p-6">
+    <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+      <a href="./" class="text-xl md:text-2xl font-bold tracking-tighter glow-text-purple shrink-0">
+        ENRICH<span class="text-purple-500">READER</span>
+      </a>
+      <div
+        class="flex items-center space-x-2 md:space-x-10 text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-gray-500 font-semibold shrink-0">
+        <a href="#demo" aria-label="Skip to interactive demo" class="hover:text-white transition whitespace-nowrap">The
+          Magic</a>
+        <a href="#vision" aria-label="Skip to our vision"
+          class="hover:text-white transition whitespace-nowrap">Vision</a>
+        <a href="#join-alpha" aria-label="Join the Alpha waitlist"
+          class="px-3 py-2 md:px-5 md:py-2.5 bg-white text-black rounded-full font-bold hover:bg-purple-500 hover:text-white transition-all transform hover:scale-105 whitespace-nowrap">Join
+          Alpha</a>
+      </div>
     </div>
   </nav>
 
@@ -339,22 +341,9 @@
     </div>
   </footer>
 
+  <script src="main.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Particle Background Generator
-      const voidEl = document.getElementById('void');
-      for (let i = 0; i < 50; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const size = Math.random() * 2 + 1;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-        voidEl.appendChild(star);
-      }
-
       // Progressive scroll logic
       const profileData = {
         "1": {
