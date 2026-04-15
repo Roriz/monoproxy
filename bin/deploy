@@ -68,6 +68,8 @@ remote_deploy() {
     remote_info "Cleaning up remote archive..."
     rm "/tmp/$ARCHIVE"
 
+    cd "$REMOTE_DIR"
+
     # Environment Setup
     if [ -f .env.production ]; then
       remote_info "Sourcing .env.production..."

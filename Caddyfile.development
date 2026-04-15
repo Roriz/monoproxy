@@ -7,3 +7,13 @@ api.enrichreader.localhost {
 mail.localhost {
 	reverse_proxy 127.0.0.1:1080
 }
+
+enrichreader.localhost {
+	root * ./pages/enrichreader.com
+
+	try_files {path} {path}/ /index.html
+
+	encode zstd gzip
+
+	file_server
+}

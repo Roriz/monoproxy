@@ -1,0 +1,208 @@
+/* ═══════════════════════════════════════════════════════════════
+   LOTM Page Styles — Lord of the Mysteries data analysis page
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Chart sections ── */
+.chart-section {
+  position: relative;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.0) 0%, rgba(88, 28, 135, 0.04) 50%, rgba(10, 10, 10, 0.0) 100%);
+}
+
+.chart-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.4s ease;
+}
+
+.chart-card:hover {
+  border-color: rgba(168, 85, 247, 0.2);
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Section typography ── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(168, 85, 247, 0.5);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 700;
+  color: #f2f2f2;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+/* ── Legend ── */
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.04em;
+}
+
+/* ── Insight pills ── */
+.insight-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  font-size: 0.75rem;
+  color: rgba(168, 85, 247, 0.7);
+  letter-spacing: 0.02em;
+}
+
+/* ── Scroll reveal animation ── */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Time-series playback controls ── */
+.race-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.race-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: #a78bfa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.race-btn:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+}
+
+.race-btn.active {
+  background: rgba(168, 85, 247, 0.3);
+  border-color: rgba(168, 85, 247, 0.6);
+}
+
+.race-slider {
+  flex: 1;
+  min-width: 120px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  height: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+.race-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #a78bfa;
+  border: 2px solid #1a1a2e;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.4);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.race-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 18px rgba(167, 139, 250, 0.6);
+}
+
+.race-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #a78bfa;
+  border: 2px solid #1a1a2e;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.4);
+  cursor: pointer;
+}
+
+.speed-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.35);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.speed-btn:hover {
+  border-color: rgba(168, 85, 247, 0.3);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.speed-btn.active {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.4);
+  color: #a78bfa;
+}
+
+.chapter-display {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  min-width: 100px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.chapter-display strong {
+  color: #a78bfa;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+}
