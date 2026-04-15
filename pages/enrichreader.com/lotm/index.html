@@ -98,13 +98,13 @@
               <button class="speed-btn" data-speed="4">4×</button>
             </div>
             <div class="chapter-display">
-              Ch. <strong id="raceChapterNum">1</strong><span style="font-size:0.65rem;opacity:0.4">/140</span>
+              Ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters" style="font-size:0.65rem;opacity:0.4">/140</span>
             </div>
           </div>
 
           <!-- Chart -->
           <div class="chart-container" id="raceChartContainer">
-            <canvas id="raceChart"></canvas>
+            <div id="raceChart" class="race-chart"></div>
           </div>
         </div>
       </div>
@@ -144,12 +144,12 @@
               <button class="vanish-speed-btn speed-btn" data-speed="4">4×</button>
             </div>
             <div class="chapter-display">
-              Ch. <strong id="vanishChapterNum">1</strong><span style="font-size:0.65rem;opacity:0.4">/220</span>
+              Ch. <strong id="vanishChapterNum">1</strong><span id="vanishTotalChapters" style="font-size:0.65rem;opacity:0.4">/220</span>
             </div>
           </div>
 
           <!-- Chart -->
-          <div class="chart-container" style="max-width:100%">
+          <div class="chart-container" style="max-width:100%;">
             <canvas id="vanishChart"></canvas>
           </div>
 
@@ -173,7 +173,8 @@
     <p class="text-gray-600 text-[10px] uppercase tracking-widest">© 2026 EnrichReader</p>
   </footer>
 
-  <script src="charts.js"></script>
+  <script src="bar_chart_race.js"></script>
+  <script src="vanishing_characters.js"></script>
 </body>
 
 </html>
