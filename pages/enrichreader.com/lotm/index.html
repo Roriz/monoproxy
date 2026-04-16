@@ -98,7 +98,8 @@
               <button class="speed-btn" data-speed="4">4×</button>
             </div>
             <div class="chapter-display">
-              Ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters" style="font-size:0.65rem;opacity:0.4">/140</span>
+              Ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters"
+                style="font-size:0.65rem;opacity:0.4">/140</span>
             </div>
           </div>
 
@@ -144,7 +145,8 @@
               <button class="vanish-speed-btn speed-btn" data-speed="4">4×</button>
             </div>
             <div class="chapter-display">
-              Ch. <strong id="vanishChapterNum">1</strong><span id="vanishTotalChapters" style="font-size:0.65rem;opacity:0.4">/220</span>
+              Ch. <strong id="vanishChapterNum">1</strong><span id="vanishTotalChapters"
+                style="font-size:0.65rem;opacity:0.4">/220</span>
             </div>
           </div>
 
@@ -167,6 +169,146 @@
         </div>
       </div>
     </section>
+
+    <!-- Chart 4: Noise to Signal / Entity Journey -->
+    <section id="entity-journey" class="chart-section px-4 md:px-6 py-20 md:py-32">
+      <div class="max-w-5xl mx-auto fade-in-up">
+        <!-- Section header -->
+        <div class="mb-10 md:mb-14">
+          <p class="section-label">Chart 04</p>
+          <h2 class="section-title text-3xl md:text-5xl mb-4">Noise to Signal</h2>
+          <p class="section-subtitle">
+            How much of a book is actually one character? The journey from raw entity detection to 
+            genuinely distinct narrative pillars, across 419k words reviewed and 220 chapters.
+          </p>
+        </div>
+
+        <!-- Narrative Copy Card -->
+        <div class="mb-10 md:mb-16 max-w-2xl">
+          <p class="text-gray-400 leading-relaxed mb-6">
+            I went through all 220 chapters of Lord of the Mysteries tracking entities — characters, locations, 
+            factions, objects. Started with <span class="text-white font-semibold">250 detected</span>. 
+            Filtered out everything with fewer than 5 mentions. 
+          </p>
+          <p class="text-gray-400 leading-relaxed">
+            Then spent a lot of time collapsing duplicates: 
+            <span class="italic text-purple-400/80">"nighthawks"</span>, 
+            <span class="italic text-purple-400/80">"blackthorn security company"</span>, 
+            <span class="italic text-purple-400/80">"special operations department"</span> 
+            — same thing, four different names depending on who's talking.
+          </p>
+        </div>
+
+        <!-- Playback Controls -->
+        <div class="race-controls mb-10 md:mb-14">
+          <button id="journeyPlayBtn" class="race-btn" aria-label="Play">
+            <svg id="journeyPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="6,3 20,12 6,21" />
+            </svg>
+            <svg id="journeyPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+              style="display:none">
+              <rect x="5" y="3" width="4" height="18" />
+              <rect x="15" y="3" width="4" height="18" />
+            </svg>
+          </button>
+          <input type="range" id="journeySlider" class="race-slider" min="1" max="1" value="1">
+          <div class="flex gap-1">
+            <button class="journey-speed-btn speed-btn active" data-speed="1">1×</button>
+            <button class="journey-speed-btn speed-btn" data-speed="2">2×</button>
+            <button class="journey-speed-btn speed-btn" data-speed="4">4×</button>
+          </div>
+          <div class="chapter-display">
+            Ch. <strong id="journeyChapterNum">1</strong><span id="journeyTotalChapters"
+              style="font-size:0.65rem;opacity:0.4">/1</span>
+          </div>
+        </div>
+
+        <!-- Visualization Board -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+          
+          <!-- Funnel Column -->
+          <div class="funnel-display relative">
+            <div class="funnel-container">
+              <!-- Stage 1 -->
+              <div class="funnel-stage stage-1">
+                <div class="funnel-content">
+                  <span class="funnel-num" id="funnel-stage1-count">...</span>
+                  <span class="funnel-label" id="funnel-stage1-label">...</span>
+                </div>
+              </div>
+              
+              <!-- Arrow/Transition -->
+              <div class="funnel-connector">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/20">
+                  <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                </svg>
+              </div>
+
+              <!-- Stage 2 -->
+              <div class="funnel-stage stage-2">
+                <div class="funnel-content">
+                  <span class="funnel-num" id="funnel-stage2-count">...</span>
+                  <span class="funnel-label" id="funnel-stage2-label">...</span>
+                </div>
+              </div>
+
+              <!-- Arrow/Transition -->
+              <div class="funnel-connector">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/20">
+                  <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                </svg>
+              </div>
+
+              <!-- Stage 3 -->
+              <div class="funnel-stage stage-3">
+                <div class="funnel-content">
+                  <span class="funnel-num" id="funnel-stage3-count">...</span>
+                  <span class="funnel-label" id="funnel-stage3-label">...</span>
+                </div>
+              </div>
+            </div>
+            
+            <p class="text-[10px] uppercase tracking-widest text-gray-600 mt-10 text-center lg:text-left">
+              across <span id="stats-words">...</span> words · <span id="stats-chapters">...</span> chapters
+            </p>
+          </div>
+
+          <!-- Donut Column -->
+          <div class="chart-card p-6 md:p-8 relative">
+            <div class="relative h-[300px] md:h-[350px]">
+              <canvas id="entityDonutChart"></canvas>
+              <!-- Center text -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <span class="text-4xl font-bold" id="donut-total-count">...</span>
+                <span class="text-[10px] uppercase tracking-tighter text-gray-500">Entities</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Legend -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8" id="entityLegendGrid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Insight footer -->
+        <div class="mt-16 md:mt-24 pt-10 border-t border-white/5">
+          <div class="flex flex-col md:flex-row gap-8 items-start">
+            <div class="insight-pill bg-purple-500/10 border-purple-500/20 text-purple-300 py-3 px-6">
+              <span class="text-xl mr-2">🧐</span>
+              <div>
+                <strong class="block text-white mb-1">Decision: Klein and Fool never merged</strong>
+                <p class="text-sm opacity-70">Too different across too many dimensions. If you've read it, you know it tracks.</p>
+              </div>
+            </div>
+            <a href="#" class="text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-all border-b border-transparent hover:border-white/20 pb-1 mt-4 md:mt-6">
+              if you want to poke around all of this yourself →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="py-20 text-center border-t border-white/5">
@@ -175,6 +317,7 @@
 
   <script src="bar_chart_race.js"></script>
   <script src="vanishing_characters.js"></script>
+  <script src="entity_journey.js"></script>
 </body>
 
 </html>
