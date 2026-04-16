@@ -28,8 +28,9 @@ function renderVanishChart(canvas, ctx, state, maxChConfig) {
   if (!container) return;
   const width = container.clientWidth;
 
-  const ROW_HEIGHT = 44;
-  const LABEL_WIDTH = Math.min(170, width * 0.22);
+  const isMobile = width < 768;
+  const ROW_HEIGHT = isMobile ? 38 : 44;
+  const LABEL_WIDTH = isMobile ? width * 0.35 : Math.min(170, width * 0.22);
   const GAP_LABEL_WIDTH = 80;
   const CHART_LEFT = LABEL_WIDTH;
   const CHART_RIGHT = width - GAP_LABEL_WIDTH;
@@ -52,6 +53,11 @@ function renderVanishChart(canvas, ctx, state, maxChConfig) {
 
   const dotRadius = 5;
   const chToX = (ch) => CHART_LEFT + (ch / maxChConfig) * CHART_WIDTH;
+
+  // Retrieve theme colors from CSS
+  const style = getComputedStyle(document.documentElement);
+  const accentColor = style.getPropertyValue('--color-accent') || '#cab372';
+  const parchmentColor = style.getPropertyValue('--color-parchment') || '#ebebe1';
 
   // Grid and Axis
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
@@ -92,14 +98,16 @@ function renderVanishChart(canvas, ctx, state, maxChConfig) {
     const x2 = chToX(d.x2);
 
     // Entity name label
-    ctx.fillStyle = `rgba(235, 235, 225, ${0.6 * d.alpha})`; 
-    ctx.font = '500 12.5px Geologica, sans-serif';
+    ctx.fillStyle = parchmentColor;
+    ctx.globalAlpha = 0.6 * d.alpha;
+    ctx.font = `500 ${isMobile ? '10px' : '12.5px'} Geologica, sans-serif`;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
     ctx.fillText(name, CHART_LEFT - 14, y);
 
     // Dashed gap line
-    ctx.strokeStyle = `rgba(202, 179, 114, ${0.3 * d.alpha})`;
+    ctx.strokeStyle = accentColor;
+    ctx.globalAlpha = 0.3 * d.alpha;
     ctx.lineWidth = 2.5;
     ctx.setLineDash([4, 4]);
     ctx.beginPath();
@@ -109,14 +117,16 @@ function renderVanishChart(canvas, ctx, state, maxChConfig) {
     ctx.setLineDash([]);
 
     // Actual dots
-    ctx.fillStyle = `rgba(202, 179, 114, ${0.9 * d.alpha})`;
+    ctx.fillStyle = accentColor;
+    ctx.globalAlpha = 0.9 * d.alpha;
     ctx.beginPath();
     ctx.arc(x1, y, dotRadius, 0, Math.PI * 2);
     ctx.arc(x2, y, dotRadius, 0, Math.PI * 2);
     ctx.fill();
 
     // Gap label
-    ctx.fillStyle = `rgba(202, 179, 114, ${0.75 * d.alpha})`;
+    ctx.fillStyle = accentColor;
+    ctx.globalAlpha = 0.75 * d.alpha;
     ctx.font = '600 12px "JetBrains Mono", monospace';
     ctx.textAlign = 'left';
     ctx.fillText(Math.round(d.gap) + ' ch.', x2 + 14, y);
@@ -277,8 +287,12 @@ async function initVanishChart() {
   // Initial State
   player.goTo(totalFrames);
 
+  let resizeTimer;
   window.addEventListener('resize', () => {
-    if (!animationRunning) startAnimation(canvas, ctx);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (!animationRunning) startAnimation(canvas, ctx);
+    }, 150);
   });
 }
 
