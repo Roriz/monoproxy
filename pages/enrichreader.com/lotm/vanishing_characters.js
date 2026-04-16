@@ -30,10 +30,10 @@ function drawVanishChart(canvas, ctx, frameData, nowCh, maxCh) {
   ctx.scale(dpr, dpr);
   ctx.clearRect(0, 0, width, totalHeight);
 
-  const dotColor = 'rgba(129, 108, 219, 0.9)';
-  const lineColor = 'rgba(129, 108, 219, 0.35)';
-  const labelColor = 'rgba(255, 255, 255, 0.55)';
-  const gapLabelColor = 'rgba(129, 108, 219, 0.75)';
+  const dotColor = 'oklch(78% 0.16 85 / 0.9)';   /* Beyonder Gold */
+  const lineColor = 'oklch(78% 0.16 85 / 0.3)';
+  const labelColor = 'oklch(92% 0.01 85 / 0.6)'; /* Parchment tint */
+  const gapLabelColor = 'oklch(78% 0.16 85 / 0.75)';
   const dotRadius = 5;
 
   const chToX = (ch) => CHART_LEFT + (ch / maxCh) * CHART_WIDTH;
@@ -75,7 +75,7 @@ function drawVanishChart(canvas, ctx, frameData, nowCh, maxCh) {
 
     // Entity name label
     ctx.fillStyle = labelColor;
-    ctx.font = '500 12.5px Inter, sans-serif';
+    ctx.font = '500 12.5px Geologica, sans-serif';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
     ctx.fillText(d.name, CHART_LEFT - 14, y);
@@ -102,7 +102,7 @@ function drawVanishChart(canvas, ctx, frameData, nowCh, maxCh) {
 
     // Gap label
     ctx.fillStyle = gapLabelColor;
-    ctx.font = '600 12px Inter, sans-serif';
+    ctx.font = '600 12px "JetBrains Mono", monospace';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
     ctx.fillText(d.gap + ' ch.', x2 + 14, y);
@@ -110,7 +110,7 @@ function drawVanishChart(canvas, ctx, frameData, nowCh, maxCh) {
 
   // X-axis tick labels
   ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-  ctx.font = '10px Inter, sans-serif';
+  ctx.font = '10px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
   xTicks.forEach(ch => {
@@ -171,6 +171,10 @@ async function initVanishChart() {
       drawVanishChart(canvas, ctx, getFrame(currentFrameIdx), realCh, xMax);
     },
   });
+
+  window.playerRegistry = window.playerRegistry || [];
+  window.playerRegistry.push(player);
+
 
   const totalDisplay = document.getElementById('vanishTotalChapters');
   if (totalDisplay) totalDisplay.textContent = '/' + totalFrames;

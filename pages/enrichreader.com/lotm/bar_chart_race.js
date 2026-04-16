@@ -111,11 +111,11 @@ class TimeSeriesPlayer {
 const TOP_N = 12;
 const BAR_HEIGHT = 42; 
 const colorMap = {
-  person: 'rgba(167, 139, 250, 0.85)',
-  organization: 'rgba(45, 212, 191, 0.85)',
-  lore: 'rgba(245, 158, 11, 0.85)',
-  location: 'rgba(129, 108, 219, 0.85)',
-  other: 'rgba(156, 163, 175, 0.85)',
+  person: 'oklch(78% 0.16 85 / 0.85)',       /* Beyonder Gold */
+  organization: 'oklch(65% 0.12 180 / 0.85)', /* Alchemical Teal */
+  lore: 'oklch(58% 0.18 28 / 0.85)',         /* Ancient Crimson */
+  location: 'oklch(62% 0.1 250 / 0.85)',     /* Mystic Blue */
+  other: 'oklch(55% 0.05 285 / 0.85)',       /* Shadow Slate */
 };
 
 async function initBarChartRace() {
@@ -230,6 +230,9 @@ async function initBarChartRace() {
       updateChart(chapter - 1);
     },
   });
+
+  window.playerRegistry = window.playerRegistry || [];
+  window.playerRegistry.push(player);
 
   player.goTo(1);
   const slider = document.getElementById('raceSlider');

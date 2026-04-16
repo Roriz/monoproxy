@@ -3,13 +3,19 @@
  * Fetches timeline data and provides chapter-by-chapter playback.
  */
 
+// Set global Chart.js defaults for Impeccable typography
+if (typeof Chart !== 'undefined') {
+    Chart.defaults.font.family = "'Geologica', sans-serif";
+    Chart.defaults.color = 'rgba(255, 255, 255, 0.4)';
+}
+
 const COLOR_MAP = {
-    'person': '#8b5cf6',
-    'location': '#f97316',
-    'other': '#64748b',
-    'organization': '#10b981',
-    'object': '#f59e0b',
-    'event': '#ef4444'
+    'person': 'oklch(78% 0.16 85)',       /* Beyonder Gold */
+    'location': 'oklch(62% 0.1 250)',     /* Mystic Blue */
+    'other': 'oklch(55% 0.05 285)',       /* Shadow Slate */
+    'organization': 'oklch(65% 0.12 180)', /* Alchemical Teal */
+    'object': 'oklch(78% 0.08 85)',       /* Tarnished Gold */
+    'event': 'oklch(58% 0.18 28)'         /* Ancient Crimson */
 };
 
 let journeyChart = null;
@@ -41,6 +47,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 updateStep(chapterIndex - 1);
             }
         });
+
+        window.playerRegistry = window.playerRegistry || [];
+        window.playerRegistry.push(journeyPlayer);
 
         // Initialize at the LAST chapter
         journeyPlayer.goTo(totalChapters);
@@ -134,11 +143,15 @@ function updateLegend(breakdown) {
 
     legendGrid.innerHTML = '';
     Object.entries(breakdown).forEach(([type, count]) => {
+        if (count === 0) return; // Don't show inactive categories
+        
+        const color = COLOR_MAP[type] || 'var(--color-parchment-dim)';
         const item = document.createElement('div');
         item.className = 'legend-item';
+        item.style.color = color;
         item.innerHTML = `
-            <span class="legend-dot" style="background: ${COLOR_MAP[type] || '#fff'};"></span>
-            <span>${capitalize(type)} — ${count}</span>
+            <span class="w-1.5 h-1.5 rounded-full" style="background: ${color}; ${type === 'person' ? 'box-shadow: 0 0 10px ' + color : ''}"></span>
+            ${type} <span class="font-tech opacity-40 ml-1">${count}</span>
         `;
         legendGrid.appendChild(item);
     });
