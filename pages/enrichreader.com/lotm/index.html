@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lord of the Mysteries — Data Analysis | EnrichReader</title>
+  <title>Lord of the Mysteries, by the numbers | EnrichReader</title>
   <meta name="description"
-    content="Deep data-driven analysis of Lord of the Mysteries: entity mentions, character arcs, and narrative patterns visualized.">
+    content="Lord of the Mysteries, by the numbers. 220 chapters, 419,541 words, 39 characters worth knowing.">
 
   <!-- Resource Hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,34 +40,151 @@
   </nav>
 
   <main>
-    <section class="pt-48 pb-32 px-6 max-w-5xl mx-auto text-center relative">
-      <div class="absolute top-40 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-accent to-transparent opacity-20"></div>
-      <h1 class="text-6xl md:text-9xl font-bold mb-8 font-display italic tracking-tight fade-in-up leading-[0.85] editorial-title">
-        Lord of the <br class="hidden md:block"> Mysteries
+    <section class="pt-80 pb-32 px-6 max-w-5xl mx-auto relative">
+      <h1 class="text-5xl md:text-7xl font-bold mb-12 font-display italic tracking-tight fade-in-up leading-tight editorial-title">
+        Lord of the <br class="hidden md:block"> Mysteries, <br class="hidden md:block"> <span class="text-3xl md:text-5xl not-italic font-light opacity-30">by the numbers</span>
       </h1>
-      <p class="text-accent text-xs md:text-sm tracking-[0.4em] uppercase font-medium font-ui fade-in-up"
-        style="transition-delay:0.1s">
-        A Data-Driven Expedition through the Beyonder Realms
-      </p>
+      <div class="max-w-2xl fade-in-up" style="transition-delay:0.1s">
+        <p class="text-xl md:text-2xl font-serif mb-4 leading-relaxed">
+          220 chapters. 419,541 words. 39 characters worth knowing by name.
+        </p>
+        <p class="text-gray-500 font-serif italic text-lg">
+          This is what the first volume looks like when you slow down and count.
+        </p>
+
+        <div class="mt-16 flex items-center gap-4 font-ui text-xs tracking-[0.2em] text-gray-500">
+          <span>volume —</span>
+          <span class="text-white border-b border-white/20 pb-0.5">1</span>
+        </div>
+      </div>
     </section>
 
-    <!-- [01] Noise to Signal / Entity Journey -->
-    <section id="entity-journey" class="chart-section px-4 md:px-6 py-20 md:py-32">
+    <!-- [01] The Cast / Bar Chart Race -->
+    <section id="entity-race" class="chart-section px-4 md:px-6 py-20 md:py-32">
       <div class="max-w-5xl mx-auto fade-in-up">
-        <div class="mb-12 md:mb-20">
-          <p class="section-label">[01]</p>
-          <h2 class="section-title text-3xl md:text-5xl mb-6">Noise to Signal</h2>
-          <p class="section-subtitle">
-            The funnel from raw entity detection to distinct narrative pillars across 419k words.
-          </p>
+        <div class="mb-12">
+          <p class="font-ui text-xs tracking-[0.2em] text-gray-500">who appears, and how often</p>
         </div>
 
-        <div class="mb-12 md:mb-16 narrative-content">
-          <p>
-            Started with <span class="text-white font-semibold">250 detected</span> entities.
-            Collapsed duplicates like <span class="italic text-accent-soft">"nighthawks"</span> and
-            <span class="italic text-accent-soft">"blackthorn security company"</span> into single narrative threads.
+        <!-- Chart card -->
+        <div class="chart-card p-8 md:p-12">
+          <div class="flex flex-wrap gap-x-2 gap-y-2 mb-8 border-b border-white/5 pb-6">
+            <span class="legend-item" style="color: var(--color-person)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-person)"></span>
+              person
+            </span>
+            <span class="legend-item" style="color: var(--color-org)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-org)"></span>
+              organization
+            </span>
+            <span class="legend-item" style="color: var(--color-lore)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-lore)"></span>
+              lore
+            </span>
+            <span class="legend-item" style="color: var(--color-location)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-location)"></span>
+              location
+            </span>
+          </div>
+          <!-- Controls -->
+          <div class="race-controls mb-10">
+            <button id="racePlayBtn" class="race-btn" aria-label="Play">
+              <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6,3 20,12 6,21" />
+              </svg>
+              <svg id="pauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                <rect x="5" y="3" width="4" height="18" />
+                <rect x="15" y="3" width="4" height="18" />
+              </svg>
+            </button>
+            <input type="range" id="raceSlider" class="race-slider" min="1" max="220" value="1">
+            <div class="flex gap-1">
+              <button class="speed-btn active" data-speed="1">1×</button>
+              <button class="speed-btn" data-speed="2">2×</button>
+              <button class="speed-btn" data-speed="4">4×</button>
+            </div>
+            <div class="chapter-display">
+              ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters"
+                style="font-size:0.65rem;opacity:0.4">/220</span>
+            </div>
+          </div>
+
+          <!-- Chart -->
+          <div class="chart-container" id="raceChartContainer">
+            <div id="raceChart" class="race-chart"></div>
+          </div>
+        </div>
+
+        <div class="mt-12 max-w-2xl">
+          <p class="font-serif text-lg leading-relaxed text-gray-400">
+            Klein accounts for roughly 1 in 3 character mentions across the entire volume. Everyone else is fighting for the remainder.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- [02] The Gaps / Characters that Vanish -->
+    <section id="vanishing-characters" class="chart-section px-4 md:px-6 py-20 md:py-32 border-t border-white/5">
+      <div class="max-w-5xl mx-auto fade-in-up">
+        <div class="mb-12">
+          <p class="font-ui text-xs tracking-[0.2em] text-gray-500">who disappears, and for how long</p>
+        </div>
+
+        <!-- Chart card -->
+        <div class="chart-card p-8 md:p-12">
+          <!-- Controls -->
+          <div class="race-controls mb-10">
+            <button id="vanishPlayBtn" class="race-btn" aria-label="Play">
+              <svg id="vanishPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6,3 20,12 6,21" />
+              </svg>
+              <svg id="vanishPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+                style="display:none">
+                <rect x="5" y="3" width="4" height="18" />
+                <rect x="15" y="3" width="4" height="18" />
+              </svg>
+            </button>
+            <input type="range" id="vanishSlider" class="race-slider" min="1" max="220" value="1">
+            <div class="flex gap-1">
+              <button class="vanish-speed-btn speed-btn active" data-speed="1">1×</button>
+              <button class="vanish-speed-btn speed-btn" data-speed="2">2×</button>
+              <button class="vanish-speed-btn speed-btn" data-speed="4">4×</button>
+            </div>
+            <div class="chapter-display">
+              ch. <strong id="vanishChapterNum">1</strong><span id="vanishTotalChapters"
+                style="font-size:0.65rem;opacity:0.4">/220</span>
+            </div>
+          </div>
+
+          <!-- Chart -->
+          <div class="chart-container" style="max-width:100%;">
+            <canvas id="vanishChart"></canvas>
+          </div>
+
+          <!-- Insight pills (kept minimal) -->
+          <div class="flex flex-wrap gap-3 mt-8 md:mt-10 opacity-50">
+            <div class="insight-pill text-[10px]">
+              Klee: 166 chapters of narrative absence
+            </div>
+            <div class="insight-pill text-[10px]">
+              Conservative Party: 165 chapter gap
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 max-w-2xl">
+          <p class="font-serif text-lg leading-relaxed text-gray-400">
+            Some of these characters are introduced in the first ten chapters. Several won't reappear for a hundred more. The story remembers them even when you don't.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- [03] The Funnel / Entity Journey -->
+    <section id="entity-journey" class="chart-section px-4 md:px-6 py-20 md:py-32 border-t border-white/5">
+      <div class="max-w-5xl mx-auto fade-in-up">
+        <div class="mb-12">
+          <p class="font-ui text-xs tracking-[0.2em] text-gray-500">how many actually matter</p>
         </div>
 
         <!-- Playback Controls -->
@@ -89,7 +206,7 @@
             <button class="journey-speed-btn speed-btn" data-speed="4">4×</button>
           </div>
           <div class="chapter-display">
-            Ch. <strong id="journeyChapterNum">1</strong><span id="journeyTotalChapters"
+            ch. <strong id="journeyChapterNum">1</strong><span id="journeyTotalChapters"
               style="font-size:0.65rem;opacity:0.4">/1</span>
           </div>
         </div>
@@ -141,7 +258,7 @@
               </div>
             </div>
 
-            <p class="text-[10px] uppercase tracking-widest text-gray-600 mt-10 text-center lg:text-left">
+            <p class="text-[10px] tracking-widest text-gray-600 mt-10 text-center lg:text-left">
               across <span id="stats-words">...</span> words · <span id="stats-chapters">...</span> chapters
             </p>
           </div>
@@ -165,141 +282,28 @@
           </div>
         </div>
 
-        <!-- Insight footer -->
-        <div class="mt-16 md:mt-24 pt-10 border-t border-white/5">
-          <div class="flex flex-col md:flex-row gap-8 items-start">
-            <div class="insight-pill bg-accent-soft border-accent-soft text-accent py-3 px-6">
-              <div>
-                <strong class="block text-white mb-1">Observation: Klein and The Fool</strong>
-                <p class="text-sm opacity-70">Identities tracked separately due to distinct attribute signatures.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- [02] Bar Chart Race -->
-    <section id="entity-race" class="chart-section px-4 md:px-6 py-20 md:py-32">
-      <div class="max-w-5xl mx-auto fade-in-up">
-        <div class="mb-12 md:mb-20">
-          <p class="section-label">[02]</p>
-          <h2 class="section-title text-3xl md:text-5xl mb-6">The Tide of Entities</h2>
-          <p class="section-subtitle">
-            Watch characters rise, fade, and re-emerge as the narrative shifts chapter by chapter.
+        <div class="mt-16 md:mt-24 pt-10 border-t border-white/5 max-w-2xl">
+          <p class="font-serif text-lg leading-relaxed text-gray-400">
+            <span id="funnel-stage1-count-copy">250</span> detected. 
+            <span id="funnel-stage2-count-copy">86</span> recurring. 
+            <span id="funnel-stage3-count-copy">39</span> distinct.
           </p>
-        </div>
-
-        <!-- Chart card -->
-        <div class="chart-card p-8 md:p-12">
-          <div class="flex flex-wrap gap-x-2 gap-y-2 mb-8 border-b border-white/5 pb-6">
-            <span class="legend-item" style="color: var(--color-person)">
-              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-person)"></span>
-              Person
-            </span>
-            <span class="legend-item" style="color: var(--color-org)">
-              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-org)"></span>
-              Organization
-            </span>
-            <span class="legend-item" style="color: var(--color-lore)">
-              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-lore)"></span>
-              Lore
-            </span>
-            <span class="legend-item" style="color: var(--color-location)">
-              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-location)"></span>
-              Location
-            </span>
-          </div>
-          <!-- Controls -->
-          <div class="race-controls mb-10">
-            <button id="racePlayBtn" class="race-btn" aria-label="Play">
-              <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="6,3 20,12 6,21" />
-              </svg>
-              <svg id="pauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none">
-                <rect x="5" y="3" width="4" height="18" />
-                <rect x="15" y="3" width="4" height="18" />
-              </svg>
-            </button>
-            <input type="range" id="raceSlider" class="race-slider" min="1" max="140" value="1">
-            <div class="flex gap-1">
-              <button class="speed-btn active" data-speed="1">1×</button>
-              <button class="speed-btn" data-speed="2">2×</button>
-              <button class="speed-btn" data-speed="4">4×</button>
-            </div>
-            <div class="chapter-display">
-              Ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters"
-                style="font-size:0.65rem;opacity:0.4">/140</span>
-            </div>
-          </div>
-
-          <!-- Chart -->
-          <div class="chart-container" id="raceChartContainer">
-            <div id="raceChart" class="race-chart"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- [03] Characters that Vanish -->
-    <section id="vanishing-characters" class="chart-section px-4 md:px-6 py-20 md:py-32">
-      <div class="max-w-5xl mx-auto fade-in-up">
-        <div class="mb-12 md:mb-20">
-          <p class="section-label">[03]</p>
-          <h2 class="section-title text-3xl md:text-5xl mb-6">The Vanishing</h2>
-          <p class="section-subtitle">
-            The longest absences spanning hundreds of chapters of narrative silence.
+          <p class="font-serif text-lg leading-relaxed text-gray-500 mt-4">
+            The rest were noise — passing references, chapter-specific names, things that show up once and never again. Every book has more of those than you'd expect.
           </p>
-        </div>
-
-        <!-- Chart card -->
-        <div class="chart-card p-8 md:p-12">
-          <!-- Controls -->
-          <div class="race-controls mb-10">
-            <button id="vanishPlayBtn" class="race-btn" aria-label="Play">
-              <svg id="vanishPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="6,3 20,12 6,21" />
-              </svg>
-              <svg id="vanishPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
-                style="display:none">
-                <rect x="5" y="3" width="4" height="18" />
-                <rect x="15" y="3" width="4" height="18" />
-              </svg>
-            </button>
-            <input type="range" id="vanishSlider" class="race-slider" min="1" max="220" value="1">
-            <div class="flex gap-1">
-              <button class="vanish-speed-btn speed-btn active" data-speed="1">1×</button>
-              <button class="vanish-speed-btn speed-btn" data-speed="2">2×</button>
-              <button class="vanish-speed-btn speed-btn" data-speed="4">4×</button>
-            </div>
-            <div class="chapter-display">
-              Ch. <strong id="vanishChapterNum">1</strong><span id="vanishTotalChapters"
-                style="font-size:0.65rem;opacity:0.4">/220</span>
-            </div>
-          </div>
-
-          <!-- Chart -->
-          <div class="chart-container" style="max-width:100%;">
-            <canvas id="vanishChart"></canvas>
-          </div>
-
-          <!-- Insight pills -->
-          <div class="flex flex-wrap gap-3 mt-8 md:mt-10">
-            <div class="insight-pill">
-              Klee: 166 chapters of narrative absence
-            </div>
-            <div class="insight-pill">
-              Conservative Party: 165 chapter gap
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="py-20 text-center border-t border-white/5">
-    <p class="text-gray-600 text-[10px] uppercase tracking-widest">© 2026 EnrichReader</p>
+  <footer class="py-32 text-center border-t border-white/5">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="font-serif text-lg text-gray-400">
+        If you want to explore this for yourself — <a href="../" class="text-white border-b border-white/20 hover:border-white transition pb-0.5">open the beta</a>
+      </p>
+      <p class="mt-16 text-gray-700 text-[10px] uppercase tracking-[0.2em]">© 2026 EnrichReader</p>
+    </div>
   </footer>
 
   <script src="bar_chart_race.js"></script>

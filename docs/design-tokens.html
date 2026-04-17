@@ -211,6 +211,76 @@
             background: var(--color-brand-primary);
             border-radius: var(--border-radius-sm);
         }
+
+        /* Brand Identity Lockups */
+        .brand-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            padding: 60px;
+            background: var(--color-surface-sunken);
+            border-radius: var(--border-radius-lg);
+            align-items: center;
+        }
+
+        .lockup-h {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .lockup-h img {
+            height: 48px;
+            mix-blend-mode: screen;
+            transition: all 0.5s var(--ease-out);
+        }
+
+        .lockup-h:hover img {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 15px var(--color-brand-primary));
+        }
+
+        .lockup-h .text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lockup-v {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .lockup-v img {
+            height: 120px;
+            margin-bottom: 32px;
+            mix-blend-mode: screen;
+            transition: all 0.6s var(--ease-out);
+        }
+
+        .lockup-v:hover img {
+            transform: scale(1.05) translateY(-5px);
+            filter: drop-shadow(0 0 25px var(--color-brand-primary));
+        }
+
+        .brand-title {
+            font-family: var(--font-master);
+            font-size: 2.5rem;
+            line-height: 1;
+            color: var(--color-brand-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .brand-sub {
+            font-family: var(--font-interface);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--color-text-muted);
+            margin-top: 4px;
+        }
     </style>
 </head>
 
@@ -235,12 +305,15 @@
             <div class="type-item">
                 <div class="type-meta">Reading Body<br>18px / Baskerville</div>
                 <div>
-                    <p style="margin:0">The crimson moon hung high in the sky, casting an eerie glow over the desolate streets of Tingen. Klein Moretti stood by the window of his small apartment, the smell of cheap tobacco and damp wood clinging to the air.</p>
+                    <p style="margin:0">The crimson moon hung high in the sky, casting an eerie glow over the desolate
+                        streets of Tingen. Klein Moretti stood by the window of his small apartment, the smell of cheap
+                        tobacco and damp wood clinging to the air.</p>
                 </div>
             </div>
             <div class="type-item">
                 <div class="type-meta">Interface UI<br>14px / Inter 700</div>
-                <div class="font-ui" style="font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Confirm Sequence</div>
+                <div class="font-ui" style="font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Confirm
+                    Sequence</div>
             </div>
         </div>
     </section>
@@ -357,6 +430,29 @@
         </div>
     </section>
 
+    <!-- 06. Brand Identity -->
+    <section class="doc-section">
+        <div class="section-header">
+            <h2>06. Brand Identity Lockups</h2>
+        </div>
+        <div class="brand-demo">
+            <div class="lockup-h">
+                <img src="./logo.png" alt="Enrich Logo">
+                <div class="text">
+                    <span class="brand-title">ENRICH</span>
+                    <span class="brand-sub">Reader</span>
+                </div>
+            </div>
+
+            <div class="lockup-v">
+                <img src="./logo.png" alt="Enrich Logo">
+                <div class="text">
+                    <span class="brand-title">ENRICH</span>
+                    <span class="brand-sub">Reader</span>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>

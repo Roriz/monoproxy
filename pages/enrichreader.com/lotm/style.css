@@ -125,7 +125,6 @@ body {
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.3em;
-  text-transform: uppercase;
   color: var(--color-accent);
   opacity: 0.6;
   margin-bottom: 1rem;
@@ -495,7 +494,6 @@ body {
 .funnel-label {
   font-family: var(--font-ui);
   font-size: 0.65rem;
-  text-transform: uppercase;
   letter-spacing: 0.2em;
   color: rgba(167, 139, 250, 0.6);
   font-weight: 500;
@@ -549,7 +547,7 @@ body {
   h1.editorial-title {
     font-size: clamp(2rem, 10vw, 4.5rem) !important;
     margin-bottom: 1.5rem;
-    margin-top: 2rem; /* Added space from fixed nav */
+    margin-top: 4rem; /* Increased space from fixed nav */
   }
   
   .section-title {

@@ -105,25 +105,41 @@
       3. TYPOGRAPHY SYSTEM
       ==================================== */
 
-    /* Typography Tiering */
-   --font-master: 'Playfair Display', serif; /* Branding & Display */
-   --font-reading: 'Libre Baskerville', serif; /* Core Reading Experience */
-   --font-interface: 'Inter', sans-serif;    /* Functional UI Elements */
+    /* Typography Tiering - Distinctive & High-Character */
+   --font-master: 'Bona Nova', serif;    /* Branding & Display (Editorial) */
+   --font-reading: 'Spectral', serif;      /* Core Reading Experience (Longform) */
+   --font-interface: 'Manrope', sans-serif; /* Functional UI Elements (Modern) */
+
+   /* Reading Layout & Rhythm */
+   /* Fluid Type Scale (Modular 1.25 ratio)
+       Base: 18px (1.125rem) at 400px -> 20px (1.25rem) at 1440px
+    */
+   --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+   --text-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+   --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+   --text-lg: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+   --text-xl: clamp(1.563rem, 1.4rem + 0.8vw, 2rem);
+   --text-2xl: clamp(1.953rem, 1.7rem + 1.2vw, 2.75rem);
+   --text-3xl: clamp(2.441rem, 2.1rem + 1.8vw, 3.5rem);
+   --text-4xl: clamp(3.052rem, 2.5rem + 2.5vw, 4.5rem);
+   --text-5xl: clamp(3.815rem, 3rem + 4vw, 6rem);
 
    /* Reading Layout & Rhythm */
    --reading-measure: 65ch;
-   --reading-line-height: 1.75;
-   --reading-font-size: 1.15rem;
+   --reading-line-height: 1.7; /* Optimized for Spectral */
+   --reading-font-size: var(--text-base);
 
-   /* Spacing Scale */
-   --spacing-1: 4px;
-   --spacing-2: 8px;
-   --spacing-3: 12px;
-   --spacing-4: 16px;
-   --spacing-6: 24px;
-   --spacing-8: 32px;
-   --spacing-12: 48px;
-   --spacing-16: 64px;
+   /* Spacing Scale (4pt system) */
+   --spacing-1: 0.25rem;
+   --spacing-2: 0.5rem;
+   --spacing-3: 0.75rem;
+   --spacing-4: 1rem;
+   --spacing-6: 1.5rem;
+   --spacing-8: 2rem;
+   --spacing-12: 3rem;
+   --spacing-16: 4rem;
+   --spacing-24: 6rem;
+   --spacing-32: 8rem;
 
    /* Elevation & Depth */
    --shadow-opacity: 0.15; /* Re-declared in global as a variable */
