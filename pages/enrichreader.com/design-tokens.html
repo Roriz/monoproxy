@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnrichReader | Design System Documentation</title>
+    <link rel="stylesheet" href="./styles/design-tokens.css">
+    <link rel="stylesheet" href="./styles/global.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px 20px;
+            gap: 160px;
+        }
+
+        .doc-section {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+
+        .section-header {
+            border-bottom: 2px solid var(--color-surface-divider);
+            padding-bottom: 16px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--color-brand-primary);
+            opacity: 0.6;
+            font-weight: 700;
+        }
+
+        /* Hero / Philosophy */
+        .doc-hero {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .doc-hero h1 {
+            font-size: 5rem;
+            margin-bottom: 24px;
+        }
+
+        .doc-hero p {
+            margin: 0 auto;
+            max-width: 45ch;
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Color Grid */
+        .color-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 32px;
+        }
+
+        .color-card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .color-preview {
+            height: 120px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--color-surface-divider);
+            position: relative;
+        }
+
+        .color-preview::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            font-size: 0.65rem;
+            font-family: var(--font-interface);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-on-gold);
+            opacity: 0.8;
+        }
+
+        .color-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .color-name {
+            font-family: var(--font-interface);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .color-token {
+            font-family: var(--font-interface);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Typography Ladder */
+        .type-ladder {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+
+        .type-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 40px;
+            align-items: baseline;
+        }
+
+        .type-meta {
+            font-family: var(--font-interface);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+        }
+
+        /* UI Components */
+        .ui-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .ui-example {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .example-box {
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--color-surface-divider);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--color-surface-elevated);
+        }
+
+        /* Interactive Buttons (Mocking Global CSS if needed) */
+        .btn-enrich {
+            padding: 12px 28px;
+            font-family: var(--font-interface);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-brand-primary);
+            color: var(--color-text-on-gold);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-brand-gold-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--color-brand-primary);
+            color: var(--color-brand-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-brand-primary);
+            color: var(--color-text-on-gold);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-text-muted);
+        }
+
+        .btn-ghost:hover {
+            background: var(--color-surface-divider);
+            color: var(--color-brand-primary);
+        }
+
+        /* Spacing visualization */
+        .spacing-ring {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .spacing-box {
+            background: var(--color-brand-primary);
+            border-radius: var(--border-radius-sm);
+        }
+    </style>
+</head>
+
+<body class="theme-midnight">
+
+    <!-- Hero -->
+    <header class="doc-hero">
+        <h1 class="font-display">The Reading Soul</h1>
+        <p>A high-fidelity design system base built for deep immersion and long-form narrative excellence.</p>
+    </header>
+
+    <!-- 01. Typography -->
+    <section class="doc-section">
+        <div class="section-header">
+            <h2>01. Typography Ladder</h2>
+        </div>
+        <div class="type-ladder">
+            <div class="type-item">
+                <div class="type-meta">Display H1<br>64px / Playfair</div>
+                <h1 style="margin:0">Grand Narrative</h1>
+            </div>
+            <div class="type-item">
+                <div class="type-meta">Reading Body<br>18px / Baskerville</div>
+                <div>
+                    <p style="margin:0">The crimson moon hung high in the sky, casting an eerie glow over the desolate streets of Tingen. Klein Moretti stood by the window of his small apartment, the smell of cheap tobacco and damp wood clinging to the air.</p>
+                </div>
+            </div>
+            <div class="type-item">
+                <div class="type-meta">Interface UI<br>14px / Inter 700</div>
+                <div class="font-ui" style="font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Confirm Sequence</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02. Color Palette -->
+    <section class="doc-section">
+        <div class="section-header">
+            <h2>02. Core Palette</h2>
+        </div>
+        <div class="color-matrix">
+            <div class="color-card">
+                <div class="color-preview" style="background: var(--color-brand-primary);" data-label="Primary"></div>
+                <div class="color-info">
+                    <span class="color-name">Burnished Gold</span>
+                    <span class="color-token">--color-brand-primary</span>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-preview" style="background: var(--color-cream-300);" data-label="Neutral"></div>
+                <div class="color-info">
+                    <span class="color-name">Parchment 300</span>
+                    <span class="color-token">--color-cream-300</span>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-preview" style="background: var(--color-surface-base);" data-label="Void"></div>
+                <div class="color-info">
+                    <span class="color-name">The Void</span>
+                    <span class="color-token">--color-neutral-950</span>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-preview" style="background: var(--color-success-base);" data-label="Safe"></div>
+                <div class="color-info">
+                    <span class="color-name">Forest Green</span>
+                    <span class="color-token">--color-success-base</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03. Interactive UI -->
+    <section class="doc-section">
+        <div class="section-header">
+            <h2>03. Interactive Components</h2>
+        </div>
+        <div class="ui-grid">
+            <div class="ui-example">
+                <span class="type-meta">Primary Actions</span>
+                <div class="example-box">
+                    <button class="btn-enrich btn-primary">Begin Reading</button>
+                </div>
+            </div>
+            <div class="ui-example">
+                <span class="type-meta">Secondary Style</span>
+                <div class="example-box">
+                    <button class="btn-enrich btn-outline">Settings</button>
+                </div>
+            </div>
+            <div class="ui-example">
+                <span class="type-meta">Ghost Mode</span>
+                <div class="example-box">
+                    <button class="btn-enrich btn-ghost">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04. Reading Themes -->
+    <section class="doc-section">
+        <div class="section-header">
+            <h2>04. Reading Environments</h2>
+        </div>
+        <div class="ui-grid">
+            <div class="ui-example">
+                <span class="type-meta">Midnight</span>
+                <div class="example-box theme-midnight" style="height: 120px; text-align: center;">
+                    High Contrast Void
+                </div>
+            </div>
+            <div class="ui-example">
+                <span class="type-meta">Sepia</span>
+                <div class="example-box theme-sepia" style="height: 120px; text-align: center;">
+                    Parchment Comfort
+                </div>
+            </div>
+            <div class="ui-example">
+                <span class="type-meta">Solarized</span>
+                <div class="example-box theme-solarized" style="height: 120px; text-align: center;">
+                    Oceanic Focus
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05. Spacing System -->
+    <section class="doc-section">
+        <div class="section-header">
+            <h2>05. Visual Rhythm (Spacing)</h2>
+        </div>
+        <div class="spacing-ring">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div class="spacing-box" style="width: var(--spacing-4); height: var(--spacing-4);"></div>
+                <span class="type-meta">4 (16px)</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div class="spacing-box" style="width: var(--spacing-8); height: var(--spacing-8);"></div>
+                <span class="type-meta">8 (32px)</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div class="spacing-box" style="width: var(--spacing-12); height: var(--spacing-12);"></div>
+                <span class="type-meta">12 (48px)</span>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

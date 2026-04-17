@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* 
+  ========================================
+  ENRICH READER - GLOBAL STYLES
+  ======================================== 
+  Applies the design tokens to raw semantic elements, 
+  setting up the fundamental void canvas of the app.
+*/
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-interface);
+  line-height: var(--reading-line-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Base Semantic Layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Theme Applications */
+.theme-midnight {
+  --color-surface-base: var(--color-read-bg-midnight);
+  --color-text-primary: var(--color-read-text-midnight);
+  --color-brand-primary: var(--color-read-accent-midnight);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+.theme-sepia {
+  --color-surface-base: var(--color-read-bg-sepia);
+  --color-text-primary: var(--color-read-text-sepia);
+  --color-brand-primary: var(--color-read-accent-sepia);
+  --color-surface-elevated: oklch(91% 0.04 85);
+  --color-surface-divider: oklch(86% 0.03 85);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+.theme-solarized {
+  --color-surface-base: var(--color-read-bg-solarized);
+  --color-text-primary: var(--color-read-text-solarized);
+  --color-brand-primary: var(--color-read-accent-solarized);
+  --color-surface-elevated: oklch(16% 0.04 205);
+  --color-surface-divider: oklch(22% 0.04 205);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+body {
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-6); /* Increased for editorial flow */
+  font-family: var(--font-master);
+  color: var(--color-brand-primary);
+  line-height: 1.15;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.85rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-6);
+  font-family: var(--font-reading);
+  font-size: var(--reading-font-size);
+  line-height: var(--reading-line-height);
+  max-width: var(--reading-measure);
+  color: var(--color-text-primary);
+  opacity: 0.95;
+  /* Subtle reduction in glare */
+}
+
+/* Utility for UI vs Content */
+.font-ui {
+  font-family: var(--font-interface);
+}
+
+.font-display {
+  font-family: var(--font-master);
+}
+
+.font-reading {
+  font-family: var(--font-reading);
+}
+
+a {
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-brand-accent);
+  border-bottom-color: currentColor;
+}
+
+/* Utility classes for the full palette */
+.bg-subtle {
+  background-color: var(--color-surface-elevated);
+}
+
+.border-subtle {
+  border: 1px solid var(--color-surface-divider);
+}
+
+.text-gold {
+  color: var(--color-brand-primary);
+}
+
+.text-cream {
+  color: var(--color-brand-cream);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+/* Semantic indicators */
+.status-success {
+  color: var(--color-success-base);
+}
+
+.status-error {
+  color: var(--color-error-base);
+}
+
+.status-info {
+  color: var(--color-info-base);
+}
+
+/* Subtle utility rule for mixing JPG dark backgrounds into the charcoal surface */
+.util-mix-blend-screen {
+  mix-blend-mode: screen;
+}
