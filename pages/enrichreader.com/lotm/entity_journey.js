@@ -12,7 +12,7 @@ if (typeof Chart !== 'undefined') {
 const COLOR_MAP = {
     'person': 'oklch(78% 0.16 85)',       /* Beyonder Gold */
     'location': 'oklch(62% 0.1 250)',     /* Mystic Blue */
-    'other': 'oklch(55% 0.05 285)',       /* Shadow Slate */
+    'other': 'oklch(25% 0.01 285)',       /* Deeply Recessed Slate */
     'organization': 'oklch(65% 0.12 180)', /* Alchemical Teal */
     'object': 'oklch(78% 0.08 85)',       /* Tarnished Gold */
     'event': 'oklch(58% 0.18 28)'         /* Ancient Crimson */

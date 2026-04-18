@@ -11,8 +11,8 @@ function initScrollReveal() {
         observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in-up, .fade-in').forEach(el => observer.observe(el));
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -208,7 +208,7 @@ async function initBarChartRace() {
     const wrapper = document.createElement('div');
     wrapper.className = 'race-bar-wrapper';
     wrapper.innerHTML = `
-      <div class="race-bar-label">${data.name}</div>
+      <div class="race-bar-label" title="${data.name}">${data.name}</div>
       <div class="race-bar-outer">
         <div class="race-bar-inner" style="width: 0%; background-color: ${colorMap[data.type] || colorMap.other}">
           <div class="race-bar-value">0</div>

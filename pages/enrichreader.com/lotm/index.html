@@ -33,128 +33,279 @@
       <a href="../" class="shrink-0">
         <img src="../assets/logo-4x1-dark-transparent.png" class="logo" alt="EnrichReader">
       </a>
-      <div class="flex items-center gap-8 font-ui" style="font-size: var(--text-xs); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
-        <a href="../" style="transition: color 0.2s ease;" onmouseover="this.style.color='var(--color-text-primary)'" onmouseout="this.style.color='var(--color-text-dim)'">Home</a>
+      <div class="flex items-center gap-8 font-ui"
+        style="font-size: var(--text-xs); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
+        <a href="../" style="transition: color 0.2s ease;" onmouseover="this.style.color='var(--color-text-primary)'"
+          onmouseout="this.style.color='var(--color-text-dim)'">Home</a>
       </div>
     </div>
   </nav>
 
   <main>
-    <section class="hero-section relative">
-      <div class="max-w-5xl mx-auto px-6">
-        <h1 class="hero-title font-display italic fade-in-up editorial-title">
-          Lord of the <br> Mysteries,<br>
-          <span class="hero-subtitle">by the numbers</span>
-        </h1>
-        <div class="fade-in-up" style="transition-delay: 0.12s">
-          <p class="font-body mb-4" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-secondary);">
-            220 chapters. 419,541 words. 39 characters worth knowing by name.
-          </p>
-          <p class="font-body italic" style="font-size: var(--text-base); color: var(--color-text-muted);">
-            This is what the first volume looks like when you slow down and count.
-          </p>
+    <section class="hero-section relative overflow-hidden">
+      <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center min-h-[75vh]">
+        <div class="lg:col-span-7 z-10 py-12">
+          <h1 class="hero-title font-display italic fade-in-up editorial-title">
+            Lord of the <br> Mysteries,<br>
+            <span class="hero-subtitle">by the numbers</span>
+          </h1>
 
-          <div class="volume-indicator">
-            <span>vol.</span>
-            <span class="volume-current">01</span>
+          <div class="fade-in-up" style="transition-delay: 0.1s">
+            <div class="hero-stats-grid mb-12">
+              <div class="stat-item">
+                <span class="stat-value">220</span>
+                <span class="stat-label">chapters</span>
+              </div>
+              <div class="stat-divider" aria-hidden="true"></div>
+              <div class="stat-item">
+                <span class="stat-value">419,541</span>
+                <span class="stat-label">words</span>
+              </div>
+              <div class="stat-divider" aria-hidden="true"></div>
+              <div class="stat-item">
+                <span class="stat-value">39</span>
+                <span class="stat-label">characters</span>
+              </div>
+            </div>
+
+            <p class="font-body italic mb-16 hero-description">
+              This is what the first volume looks like when you slow down and count. A quantitative autopsy of
+              Cuttlefish&rsquo;s masterpiece.
+            </p>
           </div>
         </div>
+
+        <!-- Right Side Data Visual — Large Scale -->
+        <div class="lg:col-span-5 hidden lg:block fade-in-up" style="transition-delay: 0.2s">
+          <div class="hero-visual-wrapper">
+            <div class="chapter-constellation" aria-hidden="true">
+              <!-- Complex SVG visual representing chapter distribution -->
+              <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="w-full h-auto opacity-40">
+                <circle cx="200" cy="200" r="180" stroke="var(--color-accent)" stroke-width="0.5"
+                  stroke-dasharray="1 8" />
+                <circle cx="200" cy="200" r="140" stroke="var(--color-accent)" stroke-width="0.5"
+                  stroke-dasharray="1 12" />
+                <circle cx="200" cy="200" r="100" stroke="var(--color-accent)" stroke-width="0.5"
+                  stroke-dasharray="1 16" />
+
+                <!-- Random "data points" connected by lines -->
+                <path d="M200 20 L280 100 L350 200 L280 300 L200 380 L120 300 L50 200 L120 100 Z"
+                  stroke="var(--color-accent)" stroke-width="0.5" opacity="0.3" />
+
+                <circle cx="200" cy="20" r="3" fill="var(--color-accent)" class="pulse-point" />
+                <circle cx="350" cy="200" r="3" fill="var(--color-accent)" class="pulse-point"
+                  style="animation-delay: 0.5s" />
+                <circle cx="200" cy="380" r="3" fill="var(--color-accent)" class="pulse-point"
+                  style="animation-delay: 1s" />
+                <circle cx="50" cy="200" r="3" fill="var(--color-accent)" class="pulse-point"
+                  style="animation-delay: 1.5s" />
+              </svg>
+            </div>
+            <div class="hero-visual-metadata">
+              <span class="font-mono">ANALYSIS_VOL_01</span>
+              <span class="font-mono">RECURSION_DEPTH_39</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation Bar (Grounded) -->
+      <div class="hero-bottom-bar border-t border-white/5 z-20">
+        <div class="max-w-5xl mx-auto px-6 py-8 flex items-center justify-between">
+          <div class="volume-nav-item">
+            <div class="volume-indicator">
+              <span>vol.</span>
+              <span class="volume-current">01</span>
+            </div>
+          </div>
+
+          <a href="#" class="next-vol-teaser group">
+            <span class="teaser-label">Coming Next</span>
+            <span class="teaser-value">
+              Vol. 02: Voyage
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                class="inline-block transition-transform group-hover:translate-x-1">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator (Refined) -->
+      <div class="scroll-cue fade-in" style="transition-delay: 1s">
+        <div class="scroll-line"></div>
       </div>
     </section>
 
     <!-- [01] The Cast / Bar Chart Race -->
-    <section id="entity-race" class="chart-section" style="padding-block: clamp(4rem, 8vw, 8rem);">
+    <section id="entity-race" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
       <div class="max-w-5xl mx-auto px-6 fade-in-up">
-        <div style="margin-bottom: var(--spacing-12);">
-          <p class="section-label">who appears, and how often</p>
+        <div class="section-header mb-16">
+          <h2 class="section-title">Who appears, <br><em>and how often</em></h2>
         </div>
 
-        <!-- Chart card -->
-        <div class="chart-card p-8 md:p-12">
-          <div class="flex flex-wrap gap-x-2 gap-y-2 mb-8 border-b border-white/5 pb-6">
-            <span class="legend-item" style="color: var(--color-person)">
-              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-person)"></span>
-              person
-            </span>
-            <span class="legend-item" style="color: var(--color-org)">
-              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-org)"></span>
-              organization
-            </span>
-            <span class="legend-item" style="color: var(--color-lore)">
-              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-lore)"></span>
-              lore
-            </span>
-            <span class="legend-item" style="color: var(--color-location)">
-              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-location)"></span>
-              location
-            </span>
-          </div>
-          <!-- Controls -->
-          <div class="race-controls mb-10">
-            <button id="racePlayBtn" class="race-btn" aria-label="Play">
-              <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="6,3 20,12 6,21" />
-              </svg>
-              <svg id="pauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none">
-                <rect x="5" y="3" width="4" height="18" />
-                <rect x="15" y="3" width="4" height="18" />
-              </svg>
-            </button>
-            <input type="range" id="raceSlider" class="race-slider" min="1" max="220" value="1">
-            <div class="flex gap-1">
-              <button class="speed-btn active" data-speed="1">1×</button>
-              <button class="speed-btn" data-speed="2">2×</button>
-              <button class="speed-btn" data-speed="4">4×</button>
-            </div>
-            <div class="chapter-display">
-              ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters" class="chapter-total">/220</span>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div class="lg:col-span-9">
+            <!-- Chart card -->
+            <div class="chart-card p-8 md:p-12">
+              <div class="flex flex-wrap gap-x-2 gap-y-2 mb-8 border-b border-white/5 pb-6">
+                <span class="legend-item" style="color: var(--color-person)">
+                  <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-person)"></span>
+                  person
+                </span>
+                <span class="legend-item" style="color: var(--color-org)">
+                  <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-org)"></span>
+                  organization
+                </span>
+                <span class="legend-item" style="color: var(--color-lore)">
+                  <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-lore)"></span>
+                  lore
+                </span>
+                <span class="legend-item" style="color: var(--color-location)">
+                  <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-location)"></span>
+                  location
+                </span>
+              </div>
+              <!-- Controls -->
+              <div class="race-controls-container mb-10">
+                <div class="flex items-center gap-4 mb-6">
+                  <button id="racePlayBtn" class="race-btn" aria-label="Play">
+                    <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="6,3 20,12 6,21" />
+                    </svg>
+                    <svg id="pauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+                      style="display:none">
+                      <rect x="5" y="3" width="4" height="18" />
+                      <rect x="15" y="3" width="4" height="18" />
+                    </svg>
+                  </button>
+                  <div class="flex-1 flex flex-col gap-2 w-full">
+                    <div class="flex justify-between items-end">
+                      <label for="raceSlider" class="control-label">Chapter Scrubber</label>
+                      <div class="chapter-display">
+                        ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters"
+                          class="chapter-total">/220</span>
+                      </div>
+                    </div>
+                    <input type="range" id="raceSlider" class="race-slider" min="1" max="220" value="1">
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="control-label">Playback Speed</span>
+                  <div class="flex gap-1">
+                    <button class="speed-btn active" data-speed="1" title="Normal Speed">1×</button>
+                    <button class="speed-btn" data-speed="2" title="Double Speed">2×</button>
+                    <button class="speed-btn" data-speed="4" title="Quadruple Speed">4×</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chart -->
+              <div class="chart-container" id="raceChartContainer">
+                <div class="chart-grid-lines" aria-hidden="true"></div>
+                <div id="raceChart" class="race-chart"></div>
+              </div>
             </div>
           </div>
 
-          <!-- Chart -->
-          <div class="chart-container" id="raceChartContainer">
-            <div id="raceChart" class="race-chart"></div>
+          <!-- Secondary Callout / Stat -->
+          <div class="lg:col-span-3">
+            <div class="callout-card p-6 border border-white/5 rounded-xl bg-white/[0.02]">
+              <h3 class="font-ui text-[10px] uppercase tracking-widest text-gold-500 mb-4">Volume highlight</h3>
+              <p class="font-display italic text-xl text-cream-200 mb-2">The Klein Singularity</p>
+              <p class="text-sm text-neutral-400 leading-relaxed">
+                By Chapter 220, Klein's narrative presence is so dense that his mention frequency outpaces the combined
+                totals of the next three major organizations.
+              </p>
+              <div class="mt-6 pt-6 border-t border-white/5">
+                <span class="text-3xl font-display text-gold-500">33.4%</span>
+                <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Global Mention Share</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div style="margin-top: var(--spacing-12); max-width: 60ch;">
-          <p class="font-body" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-secondary);">
-            Klein accounts for roughly 1 in 3 character mentions across the entire volume. Everyone else is fighting for the remainder.
+        <div class="insight-area mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-white/5">
+          <p class="insight-text">
+            Klein accounts for roughly 1 in 3 character mentions across the entire volume. Everyone else is fighting for
+            the remainder, creating a narrative funnel that keeps the reader tethered to the protagonist's perspective.
           </p>
+          <div class="flex flex-col gap-4">
+            <div class="stat-pill">
+              <span class="pill-label">Most Active Org</span>
+              <span class="pill-value">Nighthawks</span>
+            </div>
+            <div class="stat-pill">
+              <span class="pill-label">Deepest Lore Mention</span>
+              <span class="pill-value">Beyonders</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- [02] The Gaps / Characters that Vanish -->
-    <section id="vanishing-characters" class="chart-section" style="padding-block: clamp(4rem, 8vw, 8rem);">
+    <section id="vanishing-characters" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
       <div class="max-w-5xl mx-auto px-6 fade-in-up">
-        <div style="margin-bottom: var(--spacing-12);">
-          <p class="section-label">who disappears, and for how long</p>
+        <div class="section-header mb-16">
+          <h2 class="section-title">Who disappears, <br><em>and for how long</em></h2>
+        </div>
+
+        <!-- Legend -->
+        <div class="flex flex-wrap gap-8 mb-8 border-b border-white/5 pb-6">
+          <div class="legend-item-minimal">
+            <span class="dot-marker" style="background: var(--color-accent)"></span>
+            <span class="legend-label">First Mention</span>
+          </div>
+          <div class="legend-item-minimal">
+            <span class="dot-marker" style="background: var(--color-accent)"></span>
+            <span class="legend-label">Reappearance</span>
+          </div>
+          <div class="legend-item-minimal">
+            <span class="dash-marker" style="border-bottom: 2px dashed var(--color-accent); opacity: 0.5;"></span>
+            <span class="legend-label">Absence Span</span>
+          </div>
+          <div class="legend-item-minimal">
+            <span class="dash-marker" style="border-bottom: 2px dashed rgba(255,255,255,0.3)"></span>
+            <span class="legend-label">Current Chapter</span>
+          </div>
         </div>
 
         <!-- Chart card -->
         <div class="chart-card p-8 md:p-12">
           <!-- Controls -->
-          <div class="race-controls mb-10">
-            <button id="vanishPlayBtn" class="race-btn" aria-label="Play">
-              <svg id="vanishPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="6,3 20,12 6,21" />
-              </svg>
-              <svg id="vanishPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
-                style="display:none">
-                <rect x="5" y="3" width="4" height="18" />
-                <rect x="15" y="3" width="4" height="18" />
-              </svg>
-            </button>
-            <input type="range" id="vanishSlider" class="race-slider" min="1" max="220" value="1">
-            <div class="flex gap-1">
-              <button class="vanish-speed-btn speed-btn active" data-speed="1">1×</button>
-              <button class="vanish-speed-btn speed-btn" data-speed="2">2×</button>
-              <button class="vanish-speed-btn speed-btn" data-speed="4">4×</button>
+          <div class="race-controls-container mb-12">
+            <div class="flex items-center gap-4 mb-6">
+              <button id="vanishPlayBtn" class="race-btn" aria-label="Play">
+                <svg id="vanishPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="6,3 20,12 6,21" />
+                </svg>
+                <svg id="vanishPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+                  style="display:none">
+                  <rect x="5" y="3" width="4" height="18" />
+                  <rect x="15" y="3" width="4" height="18" />
+                </svg>
+              </button>
+              <div class="flex-1 flex flex-col gap-2 w-full">
+                <div class="flex justify-between items-end">
+                  <label for="vanishSlider" class="control-label">Timeline Scrubber</label>
+                  <div class="chapter-display">
+                    ch. <strong id="vanishChapterNum">1</strong><span id="vanishTotalChapters"
+                      class="chapter-total">/220</span>
+                  </div>
+                </div>
+                <input type="range" id="vanishSlider" class="race-slider" min="1" max="220" value="1">
+              </div>
             </div>
-            <div class="chapter-display">
-              ch. <strong id="vanishChapterNum">1</strong><span id="vanishTotalChapters"
-                class="chapter-total">/220</span>
+            <div class="flex items-center gap-3">
+              <span class="control-label">Playback Speed</span>
+              <div class="flex gap-1">
+                <button class="vanish-speed-btn speed-btn active" data-speed="1" title="Normal Speed">1×</button>
+                <button class="vanish-speed-btn speed-btn" data-speed="2" title="Double Speed">2×</button>
+                <button class="vanish-speed-btn speed-btn" data-speed="4" title="Quadruple Speed">4×</button>
+              </div>
             </div>
           </div>
 
@@ -163,60 +314,82 @@
             <canvas id="vanishChart"></canvas>
           </div>
 
-          <!-- Insight pills (kept minimal) -->
-          <div class="flex flex-wrap gap-3 mt-8 md:mt-10 opacity-50">
-            <div class="insight-pill text-[10px]">
-              Klee: 166 chapters of narrative absence
-            </div>
-            <div class="insight-pill text-[10px]">
-              Conservative Party: 165 chapter gap
+          <!-- Insight pills (grounded) -->
+          <div class="mt-10 pt-8 border-t border-white/5">
+            <p class="control-label mb-4">Notable Absence Gaps</p>
+            <div class="flex flex-wrap gap-3">
+              <div class="insight-pill">
+                Klee: 166 chapters of narrative absence
+              </div>
+              <div class="insight-pill">
+                Conservative Party: 165 chapter gap
+              </div>
             </div>
           </div>
         </div>
 
-        <div style="margin-top: var(--spacing-12); max-width: 60ch;">
-          <p class="font-body" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-secondary);">
-            Some of these characters are introduced in the first ten chapters. Several won't reappear for a hundred more. The story remembers them even when you don't.
+        <div class="insight-area mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-white/5">
+          <p class="insight-text">
+            Some of these characters are introduced in the first ten chapters. Several won't reappear for a hundred
+            more. The story remembers them even when you don't, often bringing them back exactly when their previous
+            impact has faded into lore.
           </p>
+          <div class="flex flex-col gap-4">
+            <div class="callout-card p-4 border border-white/5 rounded-lg bg-white/[0.01]">
+              <p class="text-sm text-neutral-400 italic leading-relaxed">
+                "The persistence of minor characters is a hallmark of Cuttlefish's writing, no name is ever truly
+                discarded, only shelved for later use."
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- [03] The Funnel / Entity Journey -->
-    <section id="entity-journey" class="chart-section" style="padding-block: clamp(4rem, 8vw, 8rem);">
+    <section id="entity-journey" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
       <div class="max-w-5xl mx-auto px-6 fade-in-up">
-        <div style="margin-bottom: var(--spacing-12);">
-          <p class="section-label">how many actually matter</p>
+        <div class="section-header mb-16">
+          <h2 class="section-title">How many <br><em>actually matter</em></h2>
         </div>
 
-        <!-- Playback Controls -->
-        <div class="race-controls mb-10">
-          <button id="journeyPlayBtn" class="race-btn" aria-label="Play">
-            <svg id="journeyPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <polygon points="6,3 20,12 6,21" />
-            </svg>
-            <svg id="journeyPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
-              style="display:none">
-              <rect x="5" y="3" width="4" height="18" />
-              <rect x="15" y="3" width="4" height="18" />
-            </svg>
-          </button>
-          <input type="range" id="journeySlider" class="race-slider" min="1" max="1" value="1">
-          <div class="flex gap-1">
-            <button class="journey-speed-btn speed-btn active" data-speed="1">1×</button>
-            <button class="journey-speed-btn speed-btn" data-speed="2">2×</button>
-            <button class="journey-speed-btn speed-btn" data-speed="4">4×</button>
+        <!-- Controls (Restored to fix JS error) -->
+        <div class="race-controls-container mb-12">
+          <div class="flex items-center gap-4 mb-6">
+            <button id="journeyPlayBtn" class="race-btn" aria-label="Play">
+              <svg id="journeyPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6,3 20,12 6,21" />
+              </svg>
+              <svg id="journeyPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+                style="display:none">
+                <rect x="5" y="3" width="4" height="18" />
+                <rect x="15" y="3" width="4" height="18" />
+              </svg>
+            </button>
+            <div class="flex-1 flex flex-col gap-2 w-full">
+              <div class="flex justify-between items-end">
+                <label for="journeySlider" class="control-label">Narrative Scrubber</label>
+                <div class="chapter-display">
+                  ch. <strong id="journeyChapterNum">1</strong><span id="journeyTotalChapters"
+                    class="chapter-total">/220</span>
+                </div>
+              </div>
+              <input type="range" id="journeySlider" class="race-slider" min="1" max="220" value="1">
+            </div>
           </div>
-          <div class="chapter-display">
-            ch. <strong id="journeyChapterNum">1</strong><span id="journeyTotalChapters" class="chapter-total">/1</span>
+          <div class="flex items-center gap-3">
+            <span class="control-label">Playback Speed</span>
+            <div class="flex gap-1">
+              <button class="journey-speed-btn speed-btn active" data-speed="1" title="Normal Speed">1×</button>
+              <button class="journey-speed-btn speed-btn" data-speed="2" title="Double Speed">2×</button>
+              <button class="journey-speed-btn speed-btn" data-speed="4" title="Quadruple Speed">4×</button>
+            </div>
           </div>
         </div>
 
-        <!-- Visualization Board -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-
-          <!-- Funnel Column -->
-          <div class="funnel-display relative">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 items-start">
+          <!-- Funnel Column (7-cols) -->
+          <div class="md:col-span-7 funnel-display relative">
             <div class="funnel-container">
               <!-- Stage 1 -->
               <div class="funnel-stage stage-1">
@@ -226,12 +399,9 @@
                 </div>
               </div>
 
-              <!-- Arrow/Transition -->
+              <!-- Filter Indicator -->
               <div class="funnel-connector">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" class="text-white/20">
-                  <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-                </svg>
+                <div class="filter-line"></div>
               </div>
 
               <!-- Stage 2 -->
@@ -242,55 +412,62 @@
                 </div>
               </div>
 
-              <!-- Arrow/Transition -->
+              <!-- Filter Indicator -->
               <div class="funnel-connector">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" class="text-white/20">
-                  <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-                </svg>
+                <div class="filter-line"></div>
               </div>
 
               <!-- Stage 3 -->
-              <div class="funnel-stage stage-3">
+              <div class="funnel-stage stage-3 highlight">
                 <div class="funnel-content">
                   <span class="funnel-num" id="funnel-stage3-count">...</span>
-                  <span class="funnel-label" id="funnel-stage3-label">...</span>
+                  <span class="funnel-label" id="funnel-stage3-label">258 UNIQUE ENTITIES</span>
                 </div>
               </div>
             </div>
 
-            <p class="text-[10px] tracking-widest text-gray-600 mt-10 text-center lg:text-left">
-              across <span id="stats-words">...</span> words · <span id="stats-chapters">...</span> chapters
+            <p class="funnel-meta mt-12 text-center md:text-left">
+              tracked across <span id="stats-words" class="font-tech text-cream-200">...</span> words · <span
+                id="stats-chapters" class="font-tech text-cream-200">...</span> chapters
             </p>
           </div>
 
-          <!-- Donut Column -->
-          <div class="chart-card p-8 md:p-12 relative">
-            <div class="relative w-48 h-48 md:w-64 md:h-64 flex items-center justify-center">
-              <!-- Center Total Display -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none">
-                <span id="donut-total-count" class="text-4xl md:text-6xl font-bold font-display donut-count">0</span>
-                <span class="text-[10px] uppercase tracking-widest opacity-40 font-ui">unique</span>
+          <!-- Donut Column (5-cols) -->
+          <div class="md:col-span-5">
+            <div class="chart-card p-8 md:p-12 relative flex flex-col items-center">
+              <div class="relative w-full max-w-[240px] aspect-square mx-auto flex items-center justify-center">
+                <!-- Center Total Display -->
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none">
+                  <span id="donut-total-count" class="donut-total-value">0</span>
+                  <span class="donut-total-label">unique entities</span>
+                </div>
+                <canvas id="entityDonutChart"></canvas>
               </div>
-              <canvas id="entityDonutChart"></canvas>
-            </div>
-            <!-- Dynamic Legend (Synchronized with Chart 01) -->
-            <div class="flex flex-wrap gap-x-2 gap-y-2 mt-8 border-t border-white/5 pt-6" id="entityLegendGrid">
-              <!-- Dynamically populated -->
+              <!-- Dynamic Legend (Synchronized with Chart 01) -->
+              <div class="flex flex-wrap justify-center gap-x-3 gap-y-2 mt-10 border-t border-white/5 pt-8 w-full"
+                id="entityLegendGrid">
+                <!-- Dynamically populated -->
+              </div>
             </div>
           </div>
         </div>
 
-        <div style="margin-top: var(--spacing-16); padding-top: var(--spacing-8); border-top: var(--border-subtle); max-width: 60ch;">
-          <p class="font-body" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-secondary);">
-            <span id="funnel-stage1-count-copy">250</span> detected.
-            <span id="funnel-stage2-count-copy">86</span> recurring.
-            <span id="funnel-stage3-count-copy">39</span> distinct.
-          </p>
-          <p class="font-body" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-muted); margin-top: var(--spacing-4);">
-            The rest were noise — passing references, chapter-specific names, things that show up once and never again. Every book has more of those than you'd expect.
-          </p>
+        <!-- Reconciled Insight Area -->
+        <div class="insight-area mt-20 pt-12 border-t border-white/5">
+          <div class="max-w-4xl">
+            <p class="insight-text-bold mb-6">
+              <span id="funnel-stage1-count-copy">1,011</span> entities detected.
+              <span id="funnel-stage2-count-copy">306</span> recurring.
+              <span id="funnel-stage3-count-copy">258</span> unique.
+            </p>
+            <p class="insight-text">
+              The vast majority of names in the Tingen arc are atmospheric noise—passing references, chapter-specific
+              background characters, and one-off artifacts. By the end of Volume 1, only a quarter of the detected
+              entities have earned a permanent place in the narrative structure. Every great epic has more of these
+              "ghost mentions" than the average reader ever notices.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -300,10 +477,15 @@
   <footer style="padding-block: var(--spacing-32); text-align: center;">
     <div class="max-w-5xl mx-auto px-6">
       <p class="font-body" style="font-size: var(--text-lg); color: var(--color-text-secondary);">
-        If you want to explore this for yourself —
-        <a href="../" style="color: var(--color-text-primary); border-bottom: 1px solid oklch(75% 0.14 85 / 0.25); padding-bottom: 1px; transition: border-color 0.2s ease;" onmouseover="this.style.borderColor='oklch(75% 0.14 85 / 0.6)'" onmouseout="this.style.borderColor='oklch(75% 0.14 85 / 0.25)'">open the beta</a>
+        If you want to explore this for yourself, check out
+        <a href="../"
+          style="color: var(--color-text-primary); border-bottom: 1px solid oklch(75% 0.14 85 / 0.25); padding-bottom: 1px; transition: border-color 0.2s ease;"
+          onmouseover="this.style.borderColor='oklch(75% 0.14 85 / 0.6)'"
+          onmouseout="this.style.borderColor='oklch(75% 0.14 85 / 0.25)'">the beta</a>
       </p>
-      <p style="margin-top: var(--spacing-16); font-family: var(--font-ui); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">© 2026 EnrichReader</p>
+      <p
+        style="margin-top: var(--spacing-16); font-family: var(--font-ui); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
+        © 2026 EnrichReader</p>
     </div>
   </footer>
 

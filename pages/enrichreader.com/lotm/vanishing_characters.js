@@ -19,6 +19,11 @@ let visState = {
   targetEntities: new Map()
 };
 
+// Helper: Title Case
+function toTitleCase(str) {
+  return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+}
+
 /**
  * Main render function that draws the state at any given frame.
  */
@@ -29,14 +34,14 @@ function renderVanishChart(canvas, ctx, state, maxChConfig) {
   const width = container.clientWidth;
 
   const isMobile = width < 768;
-  const ROW_HEIGHT = isMobile ? 38 : 44;
-  const LABEL_WIDTH = isMobile ? width * 0.35 : Math.min(170, width * 0.22);
-  const GAP_LABEL_WIDTH = 80;
+  const ROW_HEIGHT = isMobile ? 42 : 50;
+  const LABEL_WIDTH = isMobile ? width * 0.35 : Math.min(200, width * 0.25);
+  const GAP_LABEL_WIDTH = 90;
   const CHART_LEFT = LABEL_WIDTH;
   const CHART_RIGHT = width - GAP_LABEL_WIDTH;
   const CHART_WIDTH = CHART_RIGHT - CHART_LEFT;
-  const TOP_PAD = 10;
-  const BOTTOM_PAD = 40;
+  const TOP_PAD = 20;
+  const BOTTOM_PAD = 50;
   const rowCount = VANISH_TOP_N;
   const totalHeight = TOP_PAD + rowCount * ROW_HEIGHT + BOTTOM_PAD;
 
@@ -51,18 +56,18 @@ function renderVanishChart(canvas, ctx, state, maxChConfig) {
 
   ctx.clearRect(0, 0, width, totalHeight);
 
-  const dotRadius = 5;
+  const dotRadius = 6;
   const chToX = (ch) => CHART_LEFT + (ch / maxChConfig) * CHART_WIDTH;
 
   // Retrieve theme colors from CSS
   const style = getComputedStyle(document.documentElement);
   const accentColor = style.getPropertyValue('--color-accent') || '#cab372';
-  const parchmentColor = style.getPropertyValue('--color-parchment') || '#ebebe1';
+  const parchmentColor = style.getPropertyValue('--color-text-primary') || '#ebebe1';
 
   // Grid and Axis
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
   ctx.lineWidth = 1;
-  const tickStep = maxChConfig <= 50 ? 10 : 50;
+  const tickStep = 50;
   for (let t = 0; t <= maxChConfig; t += tickStep) {
     const x = chToX(t);
     ctx.beginPath();
@@ -74,19 +79,26 @@ function renderVanishChart(canvas, ctx, state, maxChConfig) {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
     ctx.font = '10px "JetBrains Mono", monospace';
     ctx.textAlign = 'center';
-    ctx.fillText('ch.' + t, x, TOP_PAD + rowCount * ROW_HEIGHT + 20);
+    ctx.fillText('ch.' + t, x, TOP_PAD + rowCount * ROW_HEIGHT + 24);
   }
 
   // "Now" line
   const nowX = chToX(state.nowCh);
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-  ctx.lineWidth = 1;
-  ctx.setLineDash([2, 3]);
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 4]);
   ctx.beginPath();
-  ctx.moveTo(nowX, TOP_PAD - 5);
-  ctx.lineTo(nowX, TOP_PAD + rowCount * ROW_HEIGHT + 5);
+  ctx.moveTo(nowX, TOP_PAD - 10);
+  ctx.lineTo(nowX, TOP_PAD + rowCount * ROW_HEIGHT + 10);
   ctx.stroke();
+  
+  // "Now" label
   ctx.setLineDash([]);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+  ctx.font = '700 9px "Manrope", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'bottom';
+  ctx.fillText('CURRENT CHAPTER', nowX, TOP_PAD - 14);
 
   // ── Render Entities ──
   state.entities.forEach((d, name) => {
@@ -99,17 +111,17 @@ function renderVanishChart(canvas, ctx, state, maxChConfig) {
 
     // Entity name label
     ctx.fillStyle = parchmentColor;
-    ctx.globalAlpha = 0.6 * d.alpha;
-    ctx.font = `500 ${isMobile ? '10px' : '12.5px'} Geologica, sans-serif`;
+    ctx.globalAlpha = d.alpha; // High contrast
+    ctx.font = `600 ${isMobile ? '10px' : '13px'} "Spectral", serif`;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
-    ctx.fillText(name, CHART_LEFT - 14, y);
+    ctx.fillText(toTitleCase(name), CHART_LEFT - 18, y);
 
-    // Dashed gap line
+    // Absence span line (Thicker dotted)
     ctx.strokeStyle = accentColor;
-    ctx.globalAlpha = 0.3 * d.alpha;
-    ctx.lineWidth = 2.5;
-    ctx.setLineDash([4, 4]);
+    ctx.globalAlpha = 0.4 * d.alpha;
+    ctx.lineWidth = 3.5;
+    ctx.setLineDash([2, 4]);
     ctx.beginPath();
     ctx.moveTo(x1, y);
     ctx.lineTo(x2, y);
@@ -118,18 +130,20 @@ function renderVanishChart(canvas, ctx, state, maxChConfig) {
 
     // Actual dots
     ctx.fillStyle = accentColor;
-    ctx.globalAlpha = 0.9 * d.alpha;
+    ctx.globalAlpha = 1.0 * d.alpha;
     ctx.beginPath();
     ctx.arc(x1, y, dotRadius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
     ctx.arc(x2, y, dotRadius, 0, Math.PI * 2);
     ctx.fill();
 
     // Gap label
     ctx.fillStyle = accentColor;
-    ctx.globalAlpha = 0.75 * d.alpha;
-    ctx.font = '600 12px "JetBrains Mono", monospace';
+    ctx.globalAlpha = 1.0 * d.alpha;
+    ctx.font = '700 12px "JetBrains Mono", monospace';
     ctx.textAlign = 'left';
-    ctx.fillText(Math.round(d.gap) + ' ch.', x2 + 14, y);
+    ctx.fillText(Math.round(d.gap) + ' ch.', x2 + 18, y);
     
     ctx.globalAlpha = 1.0;
   });
