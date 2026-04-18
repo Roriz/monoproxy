@@ -21,24 +21,29 @@
    --color-neutral-600: oklch(30% 0.02 35);
    --color-neutral-700: oklch(20% 0.02 35);
    --color-neutral-800: oklch(14% 0.02 35);
-   --color-neutral-900: oklch(10% 0.02 35); /* Deepest Ink */
-   --color-neutral-950: oklch(7% 0.01 35);  /* The Void */
+   --color-neutral-900: oklch(10% 0.02 35);
+   /* Deepest Ink */
+   --color-neutral-950: oklch(7% 0.01 35);
+   /* The Void */
 
    /* Gold: Burnished Bronze to Sun-kissed Glow */
    --color-gold-100: oklch(95% 0.03 85);
    --color-gold-200: oklch(90% 0.06 85);
    --color-gold-300: oklch(85% 0.09 85);
    --color-gold-400: oklch(80% 0.12 85);
-   --color-gold-500: oklch(75% 0.14 85); /* Primary Brand Gold */
+   --color-gold-500: oklch(75% 0.14 85);
+   /* Primary Brand Gold */
    --color-gold-600: oklch(65% 0.12 85);
    --color-gold-700: oklch(50% 0.10 85);
    --color-gold-800: oklch(35% 0.08 85);
    --color-gold-900: oklch(20% 0.05 85);
 
    /* Cream: Midnight Parchment to Clean Ivory */
-   --color-cream-100: oklch(98% 0.02 85); /* Cleanest Ivory */
+   --color-cream-100: oklch(98% 0.02 85);
+   /* Cleanest Ivory */
    --color-cream-200: oklch(95% 0.03 85);
-   --color-cream-300: oklch(92% 0.05 85); /* Base Parchment */
+   --color-cream-300: oklch(92% 0.05 85);
+   /* Base Parchment */
    --color-cream-400: oklch(85% 0.04 85);
    --color-cream-500: oklch(75% 0.04 85);
    --color-cream-600: oklch(60% 0.03 85);
@@ -56,7 +61,7 @@
    --color-error-base: oklch(65% 0.14 15);
    --color-error-bold: oklch(40% 0.12 15);
 
-    /* Semantic - Info (Blue/Atmosphere) */
+   /* Semantic - Info (Blue/Atmosphere) */
    --color-info-soft: oklch(92% 0.03 240);
    --color-info-base: oklch(60% 0.14 240);
    --color-info-bold: oklch(35% 0.12 240);
@@ -73,11 +78,12 @@
 
    /* Typography (30% Domain) */
    --color-text-primary: var(--color-cream-200);
-   --color-text-secondary: var(--color-cream-400); /* Increased readability */
+   --color-text-secondary: var(--color-cream-400);
+   /* Increased readability */
    --color-text-muted: var(--color-neutral-400);
    --color-text-on-gold: var(--color-neutral-950);
 
-    /* Branding & Interface */
+   /* Branding & Interface */
    --color-brand-primary: var(--color-gold-500);
    --color-brand-accent: var(--color-gold-300);
    --color-brand-gold-hover: var(--color-gold-400);
@@ -92,12 +98,15 @@
    --color-read-bg-midnight: var(--color-neutral-950);
    --color-read-text-midnight: var(--color-cream-300);
    --color-read-accent-midnight: var(--color-gold-500);
-   
-   --color-read-bg-sepia: oklch(93% 0.04 85); /* Slightly grainier parchment */
-   --color-read-text-sepia: oklch(12% 0.03 40); /* Deep, crisp inky brown */
+
+   --color-read-bg-sepia: oklch(93% 0.04 85);
+   /* Slightly grainier parchment */
+   --color-read-text-sepia: oklch(12% 0.03 40);
+   /* Deep, crisp inky brown */
    --color-read-accent-sepia: oklch(35% 0.14 30);
 
-   --color-read-bg-solarized: oklch(10% 0.03 205); /* Deeper oceanic void */
+   --color-read-bg-solarized: oklch(10% 0.03 205);
+   /* Deeper oceanic void */
    --color-read-text-solarized: oklch(85% 0.05 195);
    --color-read-accent-solarized: oklch(60% 0.15 180);
 
@@ -105,10 +114,13 @@
       3. TYPOGRAPHY SYSTEM
       ==================================== */
 
-    /* Typography Tiering - Distinctive & High-Character */
-   --font-master: 'Bona Nova', serif;    /* Branding & Display (Editorial) */
-   --font-reading: 'Spectral', serif;      /* Core Reading Experience (Longform) */
-   --font-interface: 'Manrope', sans-serif; /* Functional UI Elements (Modern) */
+   /* Typography Tiering - Distinctive & High-Character */
+   --font-master: 'Bona Nova', serif;
+   /* Branding & Display (Editorial) */
+   --font-reading: 'Spectral', serif;
+   /* Core Reading Experience (Longform) */
+   --font-interface: 'Manrope', sans-serif;
+   /* Functional UI Elements (Modern) */
 
    /* Reading Layout & Rhythm */
    /* Fluid Type Scale (Modular 1.25 ratio)
@@ -126,7 +138,8 @@
 
    /* Reading Layout & Rhythm */
    --reading-measure: 65ch;
-   --reading-line-height: 1.7; /* Optimized for Spectral */
+   --reading-line-height: 1.7;
+   /* Optimized for Spectral */
    --reading-font-size: var(--text-base);
 
    /* Spacing Scale (4pt system) */
@@ -142,11 +155,12 @@
    --spacing-32: 8rem;
 
    /* Elevation & Depth */
-   --shadow-opacity: 0.15; /* Re-declared in global as a variable */
+   --shadow-opacity: 0.15;
+   /* Re-declared in global as a variable */
    --shadow-sm: 0 2px 4px rgba(0, 0, 0, var(--shadow-opacity));
    --shadow-md: 0 4px 12px rgba(0, 0, 0, calc(var(--shadow-opacity) * 1.6));
    --shadow-lg: 0 12px 32px rgba(0, 0, 0, calc(var(--shadow-opacity) * 2.3));
-   
+
    /* Layering */
    --z-index-base: 1;
    --z-index-nav: 100;
