@@ -6,7 +6,7 @@ function initParticles() {
   const voidEl = document.getElementById('void');
   if (!voidEl) return;
 
-  const starCount = 50;
+  const starCount = 120;
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < starCount; i++) {

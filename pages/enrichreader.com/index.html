@@ -33,7 +33,9 @@
   <!-- Optimized Fonts Loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
 
   <!-- Static Tailwind CSS -->
   <link rel="stylesheet" href="style/style.css">
@@ -47,60 +49,70 @@
   <div class="void-bg" id="void" aria-hidden="true"></div>
 
   <!-- Nav -->
-  <nav class="fixed top-0 w-full z-50 px-6 py-6 md:px-12 md:py-8 transition-all duration-500">
+  <nav class="fixed top-0 w-full z-50 px-6 py-4 md:px-12 md:py-6 transition-all duration-500">
     <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
-      <a href="./" class="text-xl md:text-2xl font-bold tracking-tighter shrink-0 flex items-center gap-3">
-        <span class="serif text-gold-500 glow-text-gold">ENRICH</span>
-        <span class="text-xs uppercase tracking-[0.4em] font-bold text-cream-300">Reader</span>
+      <a href="./" class="shrink-0 group" aria-label="EnrichReader home">
+        <img src="assets/logo-4x1-dark-transparent.png"
+          class="logo transition-transform duration-500 group-hover:scale-105" alt="EnrichReader"
+          style="height: 44px; width: auto;">
       </a>
       <div
-        class="flex items-center gap-4 md:gap-10 text-xs md:text-sm uppercase tracking-[0.2em] text-neutral-400 font-bold shrink-0">
-        <a href="#demo" aria-label="Skip to interactive demo"
-          class="hover:text-gold-500 transition">The
-          Magic</a>
+        class="flex items-center gap-6 md:gap-10 text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-bold shrink-0">
+        <a href="#demo" aria-label="Skip to interactive demo" class="hover:text-gold-500 transition">The Magic</a>
         <a href="#vision" aria-label="Skip to our vision"
-          class="hover:text-gold-500 transition">Vision</a>
+          class="hover:text-gold-500 transition hidden md:block">Vision</a>
         <a href="https://forms.gle/zgE9yhU3nig6gAKA9" aria-label="Join the Alpha waitlist"
-          class="px-5 py-2.5 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold">Join
+          class="px-4 py-2 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold">Join
           Alpha</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section: Asymmetric Editorial Layout -->
-  <header class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto min-h-screen flex flex-col justify-center">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-24 items-start">
-      
-      <!-- Primary Heading: Left-aligned, dominant -->
-      <div class="col-span-1 md:col-start-1 md:col-span-10 lg:col-span-9">
-        <h1 class="text-6xl md:text-8xl font-bold serif leading-[1.1] tracking-tight">
-          <span class="animate-ink-bleed block" style="animation-delay: 100ms;">The End of</span>
-          <span class="text-gold-500 italic md:ml-24 inline-block animate-ink-bleed hover-lift cursor-default" style="animation-delay: 300ms;">Static Text</span>
-        </h1>
-      </div>
+  <!-- Hero Section: MASSIVE Hierarchy Overhaul -->
+  <header
+    class="relative px-6 max-w-7xl mx-auto flex flex-col items-center pt-32 pb-24 md:pt-48 md:pb-32 text-center overflow-hidden">
 
-      <!-- Supporting Subtext: Offset to the right -->
-      <div class="col-span-1 md:col-start-6 md:col-span-6 lg:col-start-7 lg:col-span-5">
-        <p class="text-lg text-neutral-400 leading-relaxed font-light border-l border-gold-500/20 pl-8 md:pl-12 animate-reveal-up" style="animation-delay: 600ms;">
-          No more wikis. <span class="text-cream-200">No more spoilers.</span> <br>
-          Enjoy the story without ever leaving the page. Discover a living world that evolves with your progress.
+    <!-- Status Badge: Tiny & Muted -->
+    <div class="mb-12 animate-reveal-up" style="animation-delay: 100ms;">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gold-500/10 bg-gold-500/5 backdrop-blur-sm">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-gold-500"></span>
+        </span>
+        <span class="text-[10px] font-mono uppercase tracking-[0.3em] text-gold-500/60">Now in Alpha</span>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      <!-- Primary Heading: THE ABSOLUTE STAR -->
+      <h1 class="font-bold serif leading-[0.85] tracking-tighter mb-10 animate-ink-bleed"
+        style="font-size: clamp(3.5rem, 12vw, 9rem); animation-delay: 200ms;">
+        The End of<br>
+        <span class="text-gold-500 italic hover-lift cursor-default inline-block" style="animation-delay: 400ms;">Static
+          Text</span>
+      </h1>
+
+      <!-- Supporting Subtext: 18px, capped at 560px -->
+      <div class="max-w-[560px] mx-auto mb-12">
+        <p class="text-[18px] md:text-[20px] text-neutral-400 leading-relaxed font-light animate-reveal-up"
+          style="animation-delay: 600ms;">
+          No more wikis. No more spoilers. Experience a living world that evolves with your progress.
         </p>
       </div>
 
-      <!-- Action Group: Positioned to lead back to the center-left -->
-      <div class="col-span-1 md:col-start-1 md:col-span-12 lg:col-start-2 lg:col-span-10 flex flex-col md:flex-row items-center gap-10 mt-16 md:mt-8">
-        <div class="animate-reveal-up" style="animation-delay: 900ms;">
-          <a href="https://forms.gle/zgE9yhU3nig6gAKA9" aria-label="Get early access to EnrichReader"
-            class="px-12 py-5 bg-brand-primary text-neutral-950 rounded-full font-bold text-lg hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold inline-block">
-            Get Early Access
-          </a>
-        </div>
-        <div class="flex flex-col gap-2 animate-reveal-up" style="animation-delay: 1100ms;">
-          <div class="text-neutral-500 text-xs font-mono uppercase tracking-[0.4em]" aria-hidden="true">System Status</div>
-          <div class="text-gold-300 text-xs font-mono uppercase tracking-widest animate-pulse border-l border-gold-500/30 pl-4" aria-hidden="true">v1.1_alpha_leak</div>
+      <!-- Action Group: Refined, confident CTA -->
+      <div class="flex flex-col items-center gap-20 animate-reveal-up" style="animation-delay: 800ms;">
+        <a href="https://forms.gle/zgE9yhU3nig6gAKA9" aria-label="Get early access to EnrichReader"
+          class="px-8 py-3.5 bg-brand-primary text-neutral-950 rounded-full font-bold text-sm md:text-base hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold border border-gold-400/30">
+          Get Early Access
+        </a>
+
+        <!-- Product Visual: Anchor the Hero -->
+        <div class="relative w-full max-w-5xl animate-reveal-up" style="animation-delay: 1000ms;">
+          <div class="absolute inset-0 bg-gold-500/10 blur-[150px] rounded-full opacity-30"></div>
         </div>
       </div>
-
     </div>
   </header>
 
@@ -114,7 +126,8 @@
 
     <div class="relative flex flex-col md:flex-row gap-12 md:items-stretch">
       <!-- Left Column: Timeline Text -->
-      <div class="md:w-3/5 space-y-40 pb-40 w-full pt-[320px] md:pt-0 reveal-on-scroll" id="timeline-texts" style="transition-delay: 200ms;">
+      <div class="md:w-3/5 space-y-40 pb-40 w-full pt-[320px] md:pt-0 reveal-on-scroll" id="timeline-texts"
+        style="transition-delay: 200ms;">
         <!-- A Study in Scarlet -->
         <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="1">
           <div class="text-xs font-bold text-neutral-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
@@ -156,7 +169,8 @@
       </div>
 
       <!-- Right Column: Sticky Profile -->
-      <aside class="md:w-2/5 absolute inset-0 md:relative w-full pointer-events-none md:pointer-events-auto z-30 reveal-on-scroll"
+      <aside
+        class="md:w-2/5 absolute inset-0 md:relative w-full pointer-events-none md:pointer-events-auto z-30 reveal-on-scroll"
         aria-live="polite" style="transition-delay: 400ms;">
         <div
           class="sticky top-24 md:top-32 glass rounded-3xl md:rounded-[40px] p-6 md:p-10 border-gold-500/30 shadow-gold transition-all duration-500 z-40 pointer-events-auto"
@@ -226,10 +240,11 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative z-10">
-      
+
       <!-- Step 1: Baseline -->
       <article
-        class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 hover:border-neutral-500/50 bg-neutral-950/90 reveal-on-scroll" style="transition-delay: 100ms;">950/90">
+        class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 hover:border-neutral-500/50 bg-neutral-950/90 reveal-on-scroll"
+        style="transition-delay: 100ms;">
         <div
           class="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-700 flex items-center justify-center text-2xl mb-8 font-mono text-neutral-400 group-hover:text-cream-100 transition-colors duration-300 shadow-sm shrink-0"
           aria-hidden="true">1</div>
@@ -252,7 +267,8 @@
 
       <!-- Step 2: Offset Downward -->
       <article
-        class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 md:mt-24 hover:border-gold-500/50 hover:shadow-gold bg-neutral-950/90 reveal-on-scroll" style="transition-delay: 300ms;">
+        class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 md:mt-24 hover:border-gold-500/50 hover:shadow-gold bg-neutral-950/90 reveal-on-scroll"
+        style="transition-delay: 300ms;">
         <div
           class="w-16 h-16 rounded-full bg-gold-900/10 border border-gold-500/30 flex items-center justify-center text-2xl mb-8 font-mono text-gold-500 group-hover:text-gold-300 transition-colors duration-300 shadow-sm shrink-0"
           aria-hidden="true">2</div>
@@ -277,7 +293,8 @@
 
       <!-- Step 3: Slightly Offset -->
       <article
-        class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 md:mt-12 hover:border-gold-400/60 hover:shadow-gold bg-neutral-950/90 border-gold-500/20 z-20 reveal-on-scroll" style="transition-delay: 500ms;">
+        class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 md:mt-12 hover:border-gold-400/60 hover:shadow-gold bg-neutral-950/90 border-gold-500/20 z-20 reveal-on-scroll"
+        style="transition-delay: 500ms;">
         <div
           class="w-16 h-16 rounded-full bg-gold-500 border border-gold-300 flex items-center justify-center text-2xl mb-8 font-mono text-neutral-950 transition-colors duration-300 shadow-gold shrink-0"
           aria-hidden="true">3</div>
@@ -318,7 +335,8 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
       <!-- Feature 1: Baseline -->
       <article
-        class="glass p-10 rounded-3xl hover:translate-y-[-8px] transition-all duration-500 border-neutral-800 reveal-on-scroll" style="transition-delay: 100ms;">
+        class="glass p-10 rounded-3xl hover:translate-y-[-8px] transition-all duration-500 border-neutral-800 reveal-on-scroll"
+        style="transition-delay: 100ms;">
         <div class="text-gold-500 mb-6 font-mono text-xl tracking-tighter" aria-hidden="true">01/</div>
         <h3 class="text-2xl font-bold mb-4 serif italic">Character Profile</h3>
         <p class="text-neutral-400 leading-relaxed reading">A real-time RPG profile tracking everything known about a
@@ -328,7 +346,8 @@
 
       <!-- Feature 2: Offset -->
       <article
-        class="glass p-10 rounded-3xl border-gold-500/20 md:mt-12 hover:translate-y-[-8px] transition-all duration-500 hover:shadow-gold reveal-on-scroll" style="transition-delay: 300ms;">
+        class="glass p-10 rounded-3xl border-gold-500/20 md:mt-12 hover:translate-y-[-8px] transition-all duration-500 hover:shadow-gold reveal-on-scroll"
+        style="transition-delay: 300ms;">
         <div class="text-gold-500 mb-6 font-mono text-xl tracking-tighter" aria-hidden="true">02/</div>
         <h3 class="text-2xl font-bold mb-4 serif italic">The Directory</h3>
         <p class="text-neutral-400 leading-relaxed reading">Progressively unlock a living archive of plots, characters,
@@ -338,7 +357,8 @@
 
       <!-- Feature 3: Deep Offset -->
       <article
-        class="glass p-10 rounded-3xl md:mt-24 hover:translate-y-[-8px] transition-all duration-500 border-neutral-800 reveal-on-scroll" style="transition-delay: 500ms;">
+        class="glass p-10 rounded-3xl md:mt-24 hover:translate-y-[-8px] transition-all duration-500 border-neutral-800 reveal-on-scroll"
+        style="transition-delay: 500ms;">
         <div class="text-gold-500 mb-6 font-mono text-xl tracking-tighter" aria-hidden="true">03/</div>
         <h3 class="text-2xl font-bold mb-4 serif italic">Classified Images</h3>
         <p class="text-neutral-400 leading-relaxed reading">No more random appendices. Every piece of art is woven into
@@ -353,9 +373,12 @@
   <section class="py-40 px-6 bg-white/[0.01] border-y border-neutral-800 reveal-on-scroll">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-y-12 items-start">
       <div class="md:col-span-5 reveal-on-scroll" style="transition-delay: 200ms;">
-        <h2 class="text-2xl md:text-3xl font-bold serif italic text-neutral-400 leading-tight">I built this because <br>I hate reading.</h2>
+        <h2 class="text-2xl md:text-3xl font-bold serif italic text-neutral-400 leading-tight">I built this because
+          <br>I hate reading.
+        </h2>
       </div>
-      <div class="md:col-start-7 md:col-span-6 border-l border-gold-500/20 pl-8 md:pl-12 reveal-on-scroll" style="transition-delay: 400ms;">
+      <div class="md:col-start-7 md:col-span-6 border-l border-gold-500/20 pl-8 md:pl-12 reveal-on-scroll"
+        style="transition-delay: 400ms;">
         <blockquote class="text-xl md:text-2xl text-neutral-300 leading-relaxed font-light italic mb-8 reading">
           "I love stories, but tracking 50 characters across 1,400 chapters felt like homework. I built EnrichReader to
           hack my own brain, to handle the memory work so I could finally just feel the story."
@@ -367,10 +390,11 @@
 
   <!-- Footer / CTA -->
   <footer id="join-alpha" class="py-40 text-center px-6 reveal-on-scroll">
-    <h2 class="text-4xl md:text-6xl font-bold mb-12 serif italic animate-ink-bleed" style="animation-delay: 100ms;">Join the Alpha Leak.</h2>
+    <h2 class="text-4xl md:text-6xl font-bold mb-12 serif italic animate-ink-bleed" style="animation-delay: 100ms;">Join
+      the Alpha Leak.</h2>
     <div class="reveal-on-scroll" style="transition-delay: 300ms;">
       <a href="https://forms.gle/zgE9yhU3nig6gAKA9" aria-label="Request Alpha Invite via Email"
-        class="inline-block px-12 py-5 bg-brand-primary text-neutral-950 rounded-full font-bold text-xl hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold">
+        class="inline-block px-12 py-5 bg-brand-primary text-neutral-950 rounded-full font-bold text-xl hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold">
         Request Invite
       </a>
       <p class="mt-8 text-neutral-500 text-xs tracking-widest uppercase">Alpha: Very small amount of supported series &
@@ -495,6 +519,9 @@
       observer.observe(el);
     });
   </script>
+  <style>
+    /* Custom page-specific tweaks */
+  </style>
 </body>
 
 </html>

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Geologica:wght@100..900&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
     rel="stylesheet">
 
   <!-- Chart.js -->
@@ -24,46 +24,49 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="text-white font-sans overflow-x-hidden selection:bg-accent selection:text-ink">
+<body>
   <!-- Starfield background -->
   <div class="void-bg" aria-hidden="true"></div>
 
-  <nav class="fixed top-0 w-full z-50 px-4 py-4 md:p-6">
-    <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
-      <a href="../" class="text-xl md:text-2xl font-serif font-black tracking-tight editorial-title shrink-0">
-        ENRICH<span class="opacity-50 font-light">READER</span>
+  <nav class="fixed top-0 left-0 right-0 z-50" id="main-nav">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../" class="shrink-0">
+        <img src="../assets/logo-4x1-dark-transparent.png" class="logo" alt="EnrichReader">
       </a>
-      <div class="flex items-center space-x-6 text-xs uppercase tracking-widest text-gray-500 font-semibold font-ui">
-        <a href="../" class="hover:text-white transition">Home</a>
+      <div class="flex items-center gap-8 font-ui" style="font-size: var(--text-xs); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
+        <a href="../" style="transition: color 0.2s ease;" onmouseover="this.style.color='var(--color-text-primary)'" onmouseout="this.style.color='var(--color-text-dim)'">Home</a>
       </div>
     </div>
   </nav>
 
   <main>
-    <section class="pt-80 pb-32 px-6 max-w-5xl mx-auto relative">
-      <h1 class="text-5xl md:text-7xl font-bold mb-12 font-display italic tracking-tight fade-in-up leading-tight editorial-title">
-        Lord of the <br class="hidden md:block"> Mysteries, <br class="hidden md:block"> <span class="text-3xl md:text-5xl not-italic font-light opacity-30">by the numbers</span>
-      </h1>
-      <div class="max-w-2xl fade-in-up" style="transition-delay:0.1s">
-        <p class="text-xl md:text-2xl font-serif mb-4 leading-relaxed">
-          220 chapters. 419,541 words. 39 characters worth knowing by name.
-        </p>
-        <p class="text-gray-500 font-serif italic text-lg">
-          This is what the first volume looks like when you slow down and count.
-        </p>
+    <section class="hero-section relative">
+      <div class="max-w-5xl mx-auto px-6">
+        <h1 class="hero-title font-display italic fade-in-up editorial-title">
+          Lord of the <br> Mysteries,<br>
+          <span class="hero-subtitle">by the numbers</span>
+        </h1>
+        <div class="fade-in-up" style="transition-delay: 0.12s">
+          <p class="font-body mb-4" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-secondary);">
+            220 chapters. 419,541 words. 39 characters worth knowing by name.
+          </p>
+          <p class="font-body italic" style="font-size: var(--text-base); color: var(--color-text-muted);">
+            This is what the first volume looks like when you slow down and count.
+          </p>
 
-        <div class="mt-16 flex items-center gap-4 font-ui text-xs tracking-[0.2em] text-gray-500">
-          <span>volume —</span>
-          <span class="text-white border-b border-white/20 pb-0.5">1</span>
+          <div class="volume-indicator">
+            <span>vol.</span>
+            <span class="volume-current">01</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- [01] The Cast / Bar Chart Race -->
-    <section id="entity-race" class="chart-section px-4 md:px-6 py-20 md:py-32">
-      <div class="max-w-5xl mx-auto fade-in-up">
-        <div class="mb-12">
-          <p class="font-ui text-xs tracking-[0.2em] text-gray-500">who appears, and how often</p>
+    <section id="entity-race" class="chart-section" style="padding-block: clamp(4rem, 8vw, 8rem);">
+      <div class="max-w-5xl mx-auto px-6 fade-in-up">
+        <div style="margin-bottom: var(--spacing-12);">
+          <p class="section-label">who appears, and how often</p>
         </div>
 
         <!-- Chart card -->
@@ -104,8 +107,7 @@
               <button class="speed-btn" data-speed="4">4×</button>
             </div>
             <div class="chapter-display">
-              ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters"
-                style="font-size:0.65rem;opacity:0.4">/220</span>
+              ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters" class="chapter-total">/220</span>
             </div>
           </div>
 
@@ -115,8 +117,8 @@
           </div>
         </div>
 
-        <div class="mt-12 max-w-2xl">
-          <p class="font-serif text-lg leading-relaxed text-gray-400">
+        <div style="margin-top: var(--spacing-12); max-width: 60ch;">
+          <p class="font-body" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-secondary);">
             Klein accounts for roughly 1 in 3 character mentions across the entire volume. Everyone else is fighting for the remainder.
           </p>
         </div>
@@ -124,10 +126,10 @@
     </section>
 
     <!-- [02] The Gaps / Characters that Vanish -->
-    <section id="vanishing-characters" class="chart-section px-4 md:px-6 py-20 md:py-32 border-t border-white/5">
-      <div class="max-w-5xl mx-auto fade-in-up">
-        <div class="mb-12">
-          <p class="font-ui text-xs tracking-[0.2em] text-gray-500">who disappears, and for how long</p>
+    <section id="vanishing-characters" class="chart-section" style="padding-block: clamp(4rem, 8vw, 8rem);">
+      <div class="max-w-5xl mx-auto px-6 fade-in-up">
+        <div style="margin-bottom: var(--spacing-12);">
+          <p class="section-label">who disappears, and for how long</p>
         </div>
 
         <!-- Chart card -->
@@ -152,12 +154,12 @@
             </div>
             <div class="chapter-display">
               ch. <strong id="vanishChapterNum">1</strong><span id="vanishTotalChapters"
-                style="font-size:0.65rem;opacity:0.4">/220</span>
+                class="chapter-total">/220</span>
             </div>
           </div>
 
           <!-- Chart -->
-          <div class="chart-container" style="max-width:100%;">
+          <div class="chart-container">
             <canvas id="vanishChart"></canvas>
           </div>
 
@@ -172,8 +174,8 @@
           </div>
         </div>
 
-        <div class="mt-12 max-w-2xl">
-          <p class="font-serif text-lg leading-relaxed text-gray-400">
+        <div style="margin-top: var(--spacing-12); max-width: 60ch;">
+          <p class="font-body" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-secondary);">
             Some of these characters are introduced in the first ten chapters. Several won't reappear for a hundred more. The story remembers them even when you don't.
           </p>
         </div>
@@ -181,14 +183,14 @@
     </section>
 
     <!-- [03] The Funnel / Entity Journey -->
-    <section id="entity-journey" class="chart-section px-4 md:px-6 py-20 md:py-32 border-t border-white/5">
-      <div class="max-w-5xl mx-auto fade-in-up">
-        <div class="mb-12">
-          <p class="font-ui text-xs tracking-[0.2em] text-gray-500">how many actually matter</p>
+    <section id="entity-journey" class="chart-section" style="padding-block: clamp(4rem, 8vw, 8rem);">
+      <div class="max-w-5xl mx-auto px-6 fade-in-up">
+        <div style="margin-bottom: var(--spacing-12);">
+          <p class="section-label">how many actually matter</p>
         </div>
 
         <!-- Playback Controls -->
-        <div class="race-controls mb-12">
+        <div class="race-controls mb-10">
           <button id="journeyPlayBtn" class="race-btn" aria-label="Play">
             <svg id="journeyPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <polygon points="6,3 20,12 6,21" />
@@ -206,8 +208,7 @@
             <button class="journey-speed-btn speed-btn" data-speed="4">4×</button>
           </div>
           <div class="chapter-display">
-            ch. <strong id="journeyChapterNum">1</strong><span id="journeyTotalChapters"
-              style="font-size:0.65rem;opacity:0.4">/1</span>
+            ch. <strong id="journeyChapterNum">1</strong><span id="journeyTotalChapters" class="chapter-total">/1</span>
           </div>
         </div>
 
@@ -269,8 +270,7 @@
               <!-- Center Total Display -->
               <div
                 class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none">
-                <span id="donut-total-count" class="text-4xl md:text-6xl font-bold font-display"
-                  style="color: var(--color-accent)">0</span>
+                <span id="donut-total-count" class="text-4xl md:text-6xl font-bold font-display donut-count">0</span>
                 <span class="text-[10px] uppercase tracking-widest opacity-40 font-ui">unique</span>
               </div>
               <canvas id="entityDonutChart"></canvas>
@@ -282,13 +282,13 @@
           </div>
         </div>
 
-        <div class="mt-16 md:mt-24 pt-10 border-t border-white/5 max-w-2xl">
-          <p class="font-serif text-lg leading-relaxed text-gray-400">
-            <span id="funnel-stage1-count-copy">250</span> detected. 
-            <span id="funnel-stage2-count-copy">86</span> recurring. 
+        <div style="margin-top: var(--spacing-16); padding-top: var(--spacing-8); border-top: var(--border-subtle); max-width: 60ch;">
+          <p class="font-body" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-secondary);">
+            <span id="funnel-stage1-count-copy">250</span> detected.
+            <span id="funnel-stage2-count-copy">86</span> recurring.
             <span id="funnel-stage3-count-copy">39</span> distinct.
           </p>
-          <p class="font-serif text-lg leading-relaxed text-gray-500 mt-4">
+          <p class="font-body" style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-muted); margin-top: var(--spacing-4);">
             The rest were noise — passing references, chapter-specific names, things that show up once and never again. Every book has more of those than you'd expect.
           </p>
         </div>
@@ -297,12 +297,13 @@
 
   </main>
 
-  <footer class="py-32 text-center border-t border-white/5">
+  <footer style="padding-block: var(--spacing-32); text-align: center;">
     <div class="max-w-5xl mx-auto px-6">
-      <p class="font-serif text-lg text-gray-400">
-        If you want to explore this for yourself — <a href="../" class="text-white border-b border-white/20 hover:border-white transition pb-0.5">open the beta</a>
+      <p class="font-body" style="font-size: var(--text-lg); color: var(--color-text-secondary);">
+        If you want to explore this for yourself —
+        <a href="../" style="color: var(--color-text-primary); border-bottom: 1px solid oklch(75% 0.14 85 / 0.25); padding-bottom: 1px; transition: border-color 0.2s ease;" onmouseover="this.style.borderColor='oklch(75% 0.14 85 / 0.6)'" onmouseout="this.style.borderColor='oklch(75% 0.14 85 / 0.25)'">open the beta</a>
       </p>
-      <p class="mt-16 text-gray-700 text-[10px] uppercase tracking-[0.2em]">© 2026 EnrichReader</p>
+      <p style="margin-top: var(--spacing-16); font-family: var(--font-ui); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">© 2026 EnrichReader</p>
     </div>
   </footer>
 
