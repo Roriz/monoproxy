@@ -1,0 +1,210 @@
+#!/bin/bash
+
+# Exit on any error, unset variable, or pipe failure
+set -e
+set -u
+set -o pipefail
+
+# Source helpers
+# shellcheck source=bin/helpers/utils.sh
+source "$(dirname "$0")/helpers/utils.sh"
+
+# --- Configuration ---
+REMOTE_HOST="${REMOTE_HOST:-46.62.147.61}"
+REMOTE_USER="${REMOTE_USER:-root}"
+
+ENV_VARS=(
+  "PRODUCTION=true"
+  "RESTART_MODE=always"
+  "NODE_ENV=production"
+  "RAILS_ENV=production"
+  "READER_BACKEND_PATH=/apps/reader-backend"
+  "READER_APP_PATH=/apps/reader-app"
+)
+
+# ==========================================
+# REMOTE PAYLOAD (Executes on target server)
+# ==========================================
+
+add_caddy_repository() {
+  apt update
+  apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+  
+  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list
+  
+  chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+  chmod o+r /etc/apt/sources.list.d/caddy-stable.list
+}
+
+install_caddy() {
+  if command -v caddy &> /dev/null; then
+    info "Caddy is already installed. Skipping..."
+    return
+  fi
+
+  info "Installing Caddy..."
+  add_caddy_repository
+  apt update
+  apt install -y caddy
+  success "Caddy installed successfully."
+}
+
+add_docker_repository() {
+  apt install -y ca-certificates curl
+  install -m 0755 -d /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  chmod a+r /etc/apt/keyrings/docker.asc
+
+  echo "Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc" | tee /etc/apt/sources.list.d/docker.sources > /dev/null
+}
+
+setup_docker_group() {
+  if [ -n "${SUDO_USER:-}" ]; then
+    if ! getent group docker > /dev/null; then
+      groupadd docker
+      info "Docker group created."
+    fi
+
+    if ! groups "$SUDO_USER" | grep -q "\bdocker\b"; then
+      usermod -aG docker "$SUDO_USER"
+      warn "User $SUDO_USER added to docker group. Logout required for effect."
+    fi
+  fi
+}
+
+install_docker_packages() {
+  add_docker_repository
+  apt update
+  apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  
+  systemctl start docker
+  systemctl enable docker
+}
+
+install_docker() {
+  if command -v docker &> /dev/null; then
+    info "Docker is already installed. Skipping..."
+  else
+    info "Installing Docker..."
+    install_docker_packages
+    success "Docker installed successfully."
+  fi
+
+  setup_docker_group
+}
+
+inject_bashrc_variables() {
+  local target_home="$1"
+  local bashrc_path="$target_home/.bashrc"
+
+  for var_entry in "${ENV_VARS[@]}"; do
+    local var_name
+    var_name=$(echo "$var_entry" | cut -d'=' -f1)
+    
+    if grep -q "export $var_name=" "$bashrc_path"; then
+      sed -i "s|^export $var_name=.*|export $var_entry|" "$bashrc_path"
+    else
+      echo "export $var_entry" >> "$bashrc_path"
+    fi
+  done
+}
+
+setup_environment() {
+  info "Setting up environment variables..."
+  
+  local target_home=$HOME
+  if [ -n "${SUDO_USER:-}" ]; then
+    target_home=$(eval echo "~$SUDO_USER")
+  fi
+
+  inject_bashrc_variables "$target_home"
+  success "Environment variables configured in $target_home/.bashrc."
+}
+
+create_update_script_file() {
+  cat << 'UPDATE_SCRIPT' > /usr/local/bin/update-services
+#!/bin/bash
+set -e
+echo "[INFO] Updating Docker containers..."
+if [ -f "docker-compose.yml" ] || [ -f "docker-compose.yaml" ]; then
+  docker compose pull
+  docker compose up -d --remove-orphans
+  docker image prune -f
+  echo "[SUCCESS] Containers updated successfully!"
+else
+  echo "[ERROR] No docker-compose.yml found in the current directory."
+  exit 1
+fi
+UPDATE_SCRIPT
+}
+
+install_remote_update_utility() {
+  info "Installing remote update utility..."
+  create_update_script_file
+  chmod +x /usr/local/bin/update-services
+  success "Utility installed at /usr/local/bin/update-services."
+}
+
+execute_remote_payload() {
+  header "Starting Remote Bootstrap"
+  check_privileges
+  
+  apt update
+  install_caddy
+  install_docker
+  setup_environment
+  install_remote_update_utility
+  
+  success "Remote setup payload completed!"
+}
+
+# ==========================================
+# LOCAL EXECUTION (Orchestrates the upload)
+# ==========================================
+
+prepare_remote_directory() {
+  info "Connecting to $REMOTE_USER@$REMOTE_HOST to prepare directory..."
+  ssh "$REMOTE_USER@$REMOTE_HOST" "mkdir -p /tmp/monoproxy-setup"
+}
+
+upload_setup_scripts() {
+  info "Uploading setup scripts..."
+  scp -r bin/ "$REMOTE_USER@$REMOTE_HOST:/tmp/monoproxy-setup/bin"
+}
+
+trigger_remote_payload() {
+  info "Running remote setup payload..."
+  ssh "$REMOTE_USER@$REMOTE_HOST" "/tmp/monoproxy-setup/bin/setup-machine --remote-payload"
+}
+
+cleanup_remote_directory() {
+  info "Cleaning up remote temporary files..."
+  ssh "$REMOTE_USER@$REMOTE_HOST" "rm -rf /tmp/monoproxy-setup"
+}
+
+bootstrap_machine() {
+  prepare_remote_directory
+  upload_setup_scripts
+  trigger_remote_payload
+  cleanup_remote_directory
+}
+
+main() {
+  if [ "${1:-}" = "--remote-payload" ]; then
+    execute_remote_payload
+  else
+    check_project_root
+    header "Starting Machine Setup on $REMOTE_HOST"
+    bootstrap_machine
+    
+    success "Machine setup complete."
+    info "You can now run 'bin/deploy' to push the project code to the server."
+  fi
+}
+
+main "$@"

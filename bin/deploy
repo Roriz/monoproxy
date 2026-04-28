@@ -71,6 +71,11 @@ remote_deploy() {
     cd "$REMOTE_DIR"
 
     # Environment Setup
+    if [ -f "$HOME/.bashrc" ]; then
+      remote_info "Loading global environment variables from ~/.bashrc..."
+      eval "$(grep '^export ' "$HOME/.bashrc" || true)"
+    fi
+
     if [ -f .env.production ]; then
       remote_info "Sourcing .env.production..."
       set -a

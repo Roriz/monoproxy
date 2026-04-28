@@ -51,6 +51,11 @@ else
   info "App path not detected. Skipping app update."
 fi
 
+header "Finalizing Services"
+step "Waiting for backgrounded service updates to complete..."
+wait
+success "Service updates completed."
+
 header "Finalizing Caddy"
 CONF_FILE="Caddyfile.${RAILS_ENV:-development}"
 if [ -f "$CONF_FILE" ]; then
