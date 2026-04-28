@@ -10,7 +10,7 @@ set -o pipefail
 source "$(dirname "$0")/helpers/utils.sh"
 
 # --- Configuration ---
-REMOTE_HOST="${REMOTE_HOST:-46.62.147.61}"
+REMOTE_HOST="${REMOTE_HOST:-135.181.249.165}"
 REMOTE_USER="${REMOTE_USER:-root}"
 REMOTE_DIR="${REMOTE_DIR:-/apps/monoproxy}"
 ARCHIVE="${ARCHIVE:-monoproxy.tar.gz}"

@@ -66,8 +66,6 @@ function updateStep(index) {
     // 1. Update Funnel
     updateElement('funnel-stage1-count', frame.stage1.toLocaleString());
     updateElement('funnel-stage1-label', 'raw entities detected');
-    updateElement('funnel-stage2-count', frame.stage2.toLocaleString());
-    updateElement('funnel-stage2-label', 'mentioned 5+ times');
     updateElement('funnel-stage3-count', frame.stage3.toLocaleString());
     updateElement('funnel-stage3-label', 'unique entities');
 
