@@ -22,6 +22,35 @@
   <link rel="stylesheet" href="../style/style.css">
 
   <link rel="stylesheet" href="style.css">
+  <style>
+    .cta-button {
+      display: inline-block;
+      padding: var(--spacing-4) var(--spacing-12);
+      background-color: var(--color-accent);
+      color: var(--color-surface-sunken);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 0 oklch(75% 0.14 85 / 0);
+      border: 1px solid oklch(100% 0 0 / 0.1);
+    }
+
+    .cta-button:hover {
+      background-color: var(--color-accent-hover);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 32px var(--color-accent-glow);
+      border-color: oklch(100% 0 0 / 0.2);
+    }
+
+    .cta-button:active {
+      transform: translateY(0) scale(0.98);
+    }
+  </style>
 </head>
 
 <body>
@@ -461,14 +490,11 @@
   </main>
 
   <footer style="padding-block: var(--spacing-32); text-align: center;">
-    <div class="max-w-5xl mx-auto px-6">
-      <p class="font-body" style="font-size: var(--text-lg); color: var(--color-text-secondary);">
-        If you want to explore this for yourself, check out
-        <a href="../"
-          style="color: var(--color-text-primary); border-bottom: 1px solid oklch(75% 0.14 85 / 0.25); padding-bottom: 1px; transition: border-color 0.2s ease;"
-          onmouseover="this.style.borderColor='oklch(75% 0.14 85 / 0.6)'"
-          onmouseout="this.style.borderColor='oklch(75% 0.14 85 / 0.25)'">the beta</a>
-      </p>
+    <div class="max-w-5xl mx-auto px-6 fade-in-up">
+      <h2 class="font-display italic text-3xl md:text-4xl mb-12">Ready to see the story differently?</h2>
+      <a href="https://forms.gle/t7t9ZXirrz3fpqS66" class="cta-button">
+        Join the Beta
+      </a>
       <p
         style="margin-top: var(--spacing-16); font-family: var(--font-ui); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
         © 2026 EnrichReader</p>
@@ -479,6 +505,21 @@
   <script src="vanishing_characters.js"></script>
   <script src="entity_journey.js"></script>
   <script src="keyboard_shortcuts.js"></script>
+  <script>
+    // Intersection Observer for scroll reveals
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in-up, .fade-in').forEach(el => {
+      revealObserver.observe(el);
+    });
+  </script>
 </body>
 
 </html>

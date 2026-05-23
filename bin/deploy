@@ -51,43 +51,89 @@ remote_deploy() {
   
   ssh "$REMOTE_USER@$REMOTE_HOST" bash -s << BASH
     set -e
+    set -u
+    set -o pipefail
     
-    # We redefine colors inside the SSH session because the sourced file is local
+    # Redefine colors inside SSH session (sourced helpers file is local)
     CYAN='\033[0;36m'
     NC='\033[0m'
     remote_info() { echo -e "\${CYAN}[REMOTE]\${NC} \$1"; }
 
-    remote_info "Preparing target directory: $REMOTE_DIR"
-    rm -rf "$REMOTE_DIR"
-    mkdir -p "$REMOTE_DIR"
-    cd "$REMOTE_DIR"
+    STAGING_DIR="${REMOTE_DIR}.next"
+    BACKUP_DIR="${REMOTE_DIR}.old"
 
-    remote_info "Extracting archive..."
-    tar -xzf "/tmp/$ARCHIVE" -C "$REMOTE_DIR"
+    prepare_staging() {
+      remote_info "Preparing staging directory: \$STAGING_DIR"
+      rm -rf "\$STAGING_DIR"
+      mkdir -p "\$STAGING_DIR"
+    }
+
+    extract_archive() {
+      remote_info "Extracting archive to staging..."
+      tar -xzf "/tmp/$ARCHIVE" -C "\$STAGING_DIR"
+      rm "/tmp/$ARCHIVE"
+    }
+
+    load_env() {
+      if [ -f "\$HOME/.bashrc" ]; then
+        remote_info "Loading global environment variables..."
+        eval "\$(grep '^export ' "\$HOME/.bashrc" || true)"
+      fi
+      if [ -f .env.production ]; then
+        remote_info "Sourcing .env.production..."
+        set -a; source .env.production; set +a
+      fi
+    }
+
+    run_staging_up() {
+      remote_info "Running build/update script in staging..."
+      chmod +x "\$STAGING_DIR"/bin/*
+      (
+        cd "\$STAGING_DIR"
+        load_env
+        export SKIP_CADDY=true
+        ./bin/up
+      )
+    }
+
+    atomic_swap() {
+      remote_info "Performing atomic directory swap..."
+      rm -rf "\$BACKUP_DIR"
+      if [ -d "$REMOTE_DIR" ]; then
+        mv "$REMOTE_DIR" "\$BACKUP_DIR"
+      fi
+      mv "\$STAGING_DIR" "$REMOTE_DIR"
+    }
+
+    finalize_caddy() {
+      remote_info "Finalizing Caddy configuration..."
+      (
+        cd "$REMOTE_DIR"
+        load_env
+        sudo caddy trust
+        
+        local conf_file="Caddyfile.\${RAILS_ENV:-development}"
+        remote_info "Restarting Caddy with config: \$conf_file..."
+        sudo caddy stop 2>/dev/null || true
+        sudo caddy start --config "\$conf_file"
+      )
+    }
+
+    cleanup_old() {
+      if [ -d "\$BACKUP_DIR" ]; then
+        remote_info "Cleaning up old release directory..."
+        rm -rf "\$BACKUP_DIR"
+      fi
+    }
+
+    # --- Execution Flow ---
+    prepare_staging
+    extract_archive
+    run_staging_up
+    atomic_swap
+    finalize_caddy
+    cleanup_old
     
-    remote_info "Cleaning up remote archive..."
-    rm "/tmp/$ARCHIVE"
-
-    cd "$REMOTE_DIR"
-
-    # Environment Setup
-    if [ -f "$HOME/.bashrc" ]; then
-      remote_info "Loading global environment variables from ~/.bashrc..."
-      eval "$(grep '^export ' "$HOME/.bashrc" || true)"
-    fi
-
-    if [ -f .env.production ]; then
-      remote_info "Sourcing .env.production..."
-      set -a
-      source .env.production
-      set +a
-    fi
-
-    # Execute build/restart
-    remote_info "Running update script..."
-    chmod +x bin/*
-    ./bin/up
-
     remote_info "Ready to serve."
 BASH
 }
