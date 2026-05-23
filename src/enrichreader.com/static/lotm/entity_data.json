@@ -1,0 +1,3540 @@
+{
+  "metadata": {
+    "total_raw": 1011,
+    "total_relevant": 306,
+    "total_deduplicated": 258,
+    "total_words": 419541,
+    "total_story_chapters": 225
+  },
+  "timeline": [
+    {
+      "chapter": "chapter-002-2b1dec190779625c",
+      "cumulative_words": 1,
+      "story_chapter_index": 1,
+      "stage1": 0,
+      "stage2": 0,
+      "stage3": 0,
+      "breakdown": {}
+    },
+    {
+      "chapter": "chapter-003-2b1dec190779625c",
+      "cumulative_words": 2,
+      "story_chapter_index": 2,
+      "stage1": 0,
+      "stage2": 0,
+      "stage3": 0,
+      "breakdown": {}
+    },
+    {
+      "chapter": "chapter-004-2b1dec190779625c",
+      "cumulative_words": 3,
+      "story_chapter_index": 3,
+      "stage1": 0,
+      "stage2": 0,
+      "stage3": 0,
+      "breakdown": {}
+    },
+    {
+      "chapter": "chapter-005-2b1dec190779625c",
+      "cumulative_words": 4,
+      "story_chapter_index": 4,
+      "stage1": 0,
+      "stage2": 0,
+      "stage3": 0,
+      "breakdown": {}
+    },
+    {
+      "chapter": "chapter-007-025993192575e538",
+      "cumulative_words": 1700,
+      "story_chapter_index": 5,
+      "stage1": 17,
+      "stage2": 1,
+      "stage3": 1,
+      "breakdown": {
+        "person": 1
+      }
+    },
+    {
+      "chapter": "chapter-008-02d99a192575ed3a",
+      "cumulative_words": 3942,
+      "story_chapter_index": 6,
+      "stage1": 25,
+      "stage2": 2,
+      "stage3": 1,
+      "breakdown": {
+        "person": 1
+      }
+    },
+    {
+      "chapter": "chapter-009-02d992192575fd3a",
+      "cumulative_words": 6080,
+      "story_chapter_index": 7,
+      "stage1": 36,
+      "stage2": 6,
+      "stage3": 5,
+      "breakdown": {
+        "location": 1,
+        "other": 3,
+        "person": 1
+      }
+    },
+    {
+      "chapter": "chapter-010-02d993192575fd2b",
+      "cumulative_words": 8627,
+      "story_chapter_index": 8,
+      "stage1": 65,
+      "stage2": 7,
+      "stage3": 6,
+      "breakdown": {
+        "location": 1,
+        "other": 3,
+        "person": 1,
+        "organization": 1
+      }
+    },
+    {
+      "chapter": "chapter-011-02d19a192575f93a",
+      "cumulative_words": 11108,
+      "story_chapter_index": 9,
+      "stage1": 78,
+      "stage2": 7,
+      "stage3": 6,
+      "breakdown": {
+        "location": 1,
+        "other": 3,
+        "person": 1,
+        "organization": 1
+      }
+    },
+    {
+      "chapter": "chapter-012-02d19b192575f939",
+      "cumulative_words": 13281,
+      "story_chapter_index": 10,
+      "stage1": 88,
+      "stage2": 9,
+      "stage3": 8,
+      "breakdown": {
+        "location": 1,
+        "other": 3,
+        "person": 3,
+        "organization": 1
+      }
+    },
+    {
+      "chapter": "chapter-013-02d991196575ed3b",
+      "cumulative_words": 15396,
+      "story_chapter_index": 11,
+      "stage1": 99,
+      "stage2": 12,
+      "stage3": 11,
+      "breakdown": {
+        "location": 2,
+        "other": 4,
+        "person": 4,
+        "organization": 1
+      }
+    },
+    {
+      "chapter": "chapter-014-024999192575fd3d",
+      "cumulative_words": 18064,
+      "story_chapter_index": 12,
+      "stage1": 122,
+      "stage2": 16,
+      "stage3": 15,
+      "breakdown": {
+        "location": 2,
+        "other": 5,
+        "person": 7,
+        "organization": 1
+      }
+    },
+    {
+      "chapter": "chapter-015-42d998192475ed38",
+      "cumulative_words": 20429,
+      "story_chapter_index": 13,
+      "stage1": 145,
+      "stage2": 21,
+      "stage3": 19,
+      "breakdown": {
+        "other": 6,
+        "person": 7,
+        "location": 4,
+        "organization": 2
+      }
+    },
+    {
+      "chapter": "chapter-016-02f99a192475dd3d",
+      "cumulative_words": 22327,
+      "story_chapter_index": 14,
+      "stage1": 152,
+      "stage2": 26,
+      "stage3": 23,
+      "breakdown": {
+        "other": 8,
+        "person": 9,
+        "location": 4,
+        "organization": 2
+      }
+    },
+    {
+      "chapter": "chapter-017-42dd9a196475ed34",
+      "cumulative_words": 24375,
+      "story_chapter_index": 15,
+      "stage1": 156,
+      "stage2": 26,
+      "stage3": 23,
+      "breakdown": {
+        "other": 8,
+        "person": 9,
+        "location": 4,
+        "organization": 2
+      }
+    },
+    {
+      "chapter": "chapter-018-02d99b192575ed3c",
+      "cumulative_words": 26240,
+      "story_chapter_index": 16,
+      "stage1": 161,
+      "stage2": 28,
+      "stage3": 24,
+      "breakdown": {
+        "other": 8,
+        "person": 10,
+        "location": 4,
+        "organization": 2
+      }
+    },
+    {
+      "chapter": "chapter-019-02d19b192575fd3c",
+      "cumulative_words": 28066,
+      "story_chapter_index": 17,
+      "stage1": 164,
+      "stage2": 29,
+      "stage3": 25,
+      "breakdown": {
+        "other": 8,
+        "person": 10,
+        "location": 4,
+        "organization": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-020-02d99a192575ed7c",
+      "cumulative_words": 30446,
+      "story_chapter_index": 18,
+      "stage1": 172,
+      "stage2": 31,
+      "stage3": 27,
+      "breakdown": {
+        "other": 9,
+        "person": 11,
+        "location": 4,
+        "organization": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-021-02d993192575ed3c",
+      "cumulative_words": 32220,
+      "story_chapter_index": 19,
+      "stage1": 178,
+      "stage2": 36,
+      "stage3": 30,
+      "breakdown": {
+        "other": 11,
+        "person": 12,
+        "location": 4,
+        "organization": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-022-02d99b192575ed3d",
+      "cumulative_words": 35220,
+      "story_chapter_index": 20,
+      "stage1": 191,
+      "stage2": 41,
+      "stage3": 35,
+      "breakdown": {
+        "other": 12,
+        "person": 13,
+        "organization": 4,
+        "location": 5,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-023-02499b192575cd3d",
+      "cumulative_words": 37252,
+      "story_chapter_index": 21,
+      "stage1": 212,
+      "stage2": 46,
+      "stage3": 40,
+      "breakdown": {
+        "other": 14,
+        "person": 14,
+        "organization": 5,
+        "location": 6,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-024-02d99b196575dd7d",
+      "cumulative_words": 39371,
+      "story_chapter_index": 22,
+      "stage1": 230,
+      "stage2": 46,
+      "stage3": 40,
+      "breakdown": {
+        "other": 14,
+        "person": 14,
+        "organization": 5,
+        "location": 6,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-025-02d998192575cd3d",
+      "cumulative_words": 41614,
+      "story_chapter_index": 23,
+      "stage1": 239,
+      "stage2": 47,
+      "stage3": 41,
+      "breakdown": {
+        "other": 14,
+        "organization": 6,
+        "person": 14,
+        "location": 6,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-026-02d99b192575edb9",
+      "cumulative_words": 44286,
+      "story_chapter_index": 24,
+      "stage1": 251,
+      "stage2": 50,
+      "stage3": 44,
+      "breakdown": {
+        "other": 14,
+        "organization": 6,
+        "person": 16,
+        "location": 7,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-027-02d99a192575fd7d",
+      "cumulative_words": 46220,
+      "story_chapter_index": 25,
+      "stage1": 264,
+      "stage2": 51,
+      "stage3": 45,
+      "breakdown": {
+        "other": 15,
+        "organization": 6,
+        "person": 16,
+        "location": 7,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-028-02d99b192575cdf9",
+      "cumulative_words": 47975,
+      "story_chapter_index": 26,
+      "stage1": 267,
+      "stage2": 51,
+      "stage3": 45,
+      "breakdown": {
+        "other": 15,
+        "organization": 6,
+        "person": 16,
+        "location": 7,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-029-02f99b196475cd3f",
+      "cumulative_words": 50010,
+      "story_chapter_index": 27,
+      "stage1": 275,
+      "stage2": 52,
+      "stage3": 46,
+      "breakdown": {
+        "other": 16,
+        "organization": 6,
+        "person": 16,
+        "location": 7,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-030-02d99a192575ed39",
+      "cumulative_words": 52163,
+      "story_chapter_index": 28,
+      "stage1": 281,
+      "stage2": 57,
+      "stage3": 51,
+      "breakdown": {
+        "other": 18,
+        "location": 8,
+        "organization": 6,
+        "person": 18,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-031-02d99a192475ed3c",
+      "cumulative_words": 54324,
+      "story_chapter_index": 29,
+      "stage1": 293,
+      "stage2": 59,
+      "stage3": 53,
+      "breakdown": {
+        "other": 18,
+        "location": 10,
+        "organization": 6,
+        "person": 18,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-032-02f99b192575ed3a",
+      "cumulative_words": 56530,
+      "story_chapter_index": 30,
+      "stage1": 297,
+      "stage2": 61,
+      "stage3": 53,
+      "breakdown": {
+        "other": 18,
+        "location": 10,
+        "organization": 6,
+        "person": 18,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-033-02d99b192575ed36",
+      "cumulative_words": 58508,
+      "story_chapter_index": 31,
+      "stage1": 300,
+      "stage2": 62,
+      "stage3": 54,
+      "breakdown": {
+        "other": 18,
+        "location": 10,
+        "organization": 6,
+        "person": 19,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-034-02d99b192475cd7c",
+      "cumulative_words": 60364,
+      "story_chapter_index": 32,
+      "stage1": 302,
+      "stage2": 62,
+      "stage3": 54,
+      "breakdown": {
+        "other": 18,
+        "location": 10,
+        "organization": 6,
+        "person": 19,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-035-02599b192575edb9",
+      "cumulative_words": 62427,
+      "story_chapter_index": 33,
+      "stage1": 315,
+      "stage2": 66,
+      "stage3": 58,
+      "breakdown": {
+        "other": 19,
+        "location": 11,
+        "organization": 7,
+        "person": 20,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-036-02d99b192575edf8",
+      "cumulative_words": 64731,
+      "story_chapter_index": 34,
+      "stage1": 317,
+      "stage2": 68,
+      "stage3": 60,
+      "breakdown": {
+        "other": 19,
+        "location": 12,
+        "organization": 7,
+        "person": 21,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-037-02d999192575cd7c",
+      "cumulative_words": 67085,
+      "story_chapter_index": 35,
+      "stage1": 320,
+      "stage2": 69,
+      "stage3": 61,
+      "breakdown": {
+        "other": 20,
+        "location": 12,
+        "organization": 7,
+        "person": 21,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-038-02d19a192575ed79",
+      "cumulative_words": 69740,
+      "story_chapter_index": 36,
+      "stage1": 327,
+      "stage2": 69,
+      "stage3": 61,
+      "breakdown": {
+        "other": 20,
+        "location": 12,
+        "organization": 7,
+        "person": 21,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-039-02c99b192575c939",
+      "cumulative_words": 71717,
+      "story_chapter_index": 37,
+      "stage1": 330,
+      "stage2": 70,
+      "stage3": 62,
+      "breakdown": {
+        "other": 20,
+        "location": 12,
+        "organization": 7,
+        "person": 21,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-040-02599b192575fd71",
+      "cumulative_words": 73612,
+      "story_chapter_index": 38,
+      "stage1": 331,
+      "stage2": 71,
+      "stage3": 62,
+      "breakdown": {
+        "other": 20,
+        "location": 12,
+        "organization": 7,
+        "person": 21,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-041-02d99b192575cdb9",
+      "cumulative_words": 75479,
+      "story_chapter_index": 39,
+      "stage1": 336,
+      "stage2": 72,
+      "stage3": 62,
+      "breakdown": {
+        "other": 20,
+        "location": 12,
+        "organization": 7,
+        "person": 21,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-042-02d19b196575dd35",
+      "cumulative_words": 77490,
+      "story_chapter_index": 40,
+      "stage1": 337,
+      "stage2": 75,
+      "stage3": 63,
+      "breakdown": {
+        "other": 20,
+        "location": 13,
+        "organization": 7,
+        "person": 21,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-043-02d19b196575fdbc",
+      "cumulative_words": 79244,
+      "story_chapter_index": 41,
+      "stage1": 345,
+      "stage2": 76,
+      "stage3": 64,
+      "breakdown": {
+        "other": 21,
+        "location": 13,
+        "organization": 7,
+        "person": 21,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-044-02d99a192575ed3d",
+      "cumulative_words": 81105,
+      "story_chapter_index": 42,
+      "stage1": 349,
+      "stage2": 78,
+      "stage3": 66,
+      "breakdown": {
+        "other": 21,
+        "person": 23,
+        "location": 13,
+        "organization": 7,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-045-02599a192575ed39",
+      "cumulative_words": 83049,
+      "story_chapter_index": 43,
+      "stage1": 351,
+      "stage2": 80,
+      "stage3": 67,
+      "breakdown": {
+        "other": 21,
+        "person": 24,
+        "location": 13,
+        "organization": 7,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-046-02d998192575ed35",
+      "cumulative_words": 85076,
+      "story_chapter_index": 44,
+      "stage1": 355,
+      "stage2": 81,
+      "stage3": 68,
+      "breakdown": {
+        "other": 21,
+        "person": 24,
+        "location": 14,
+        "organization": 7,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-047-42c99b196575fd3c",
+      "cumulative_words": 87064,
+      "story_chapter_index": 45,
+      "stage1": 365,
+      "stage2": 82,
+      "stage3": 69,
+      "breakdown": {
+        "other": 21,
+        "person": 25,
+        "location": 14,
+        "organization": 7,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-048-02599b192575edfc",
+      "cumulative_words": 89069,
+      "story_chapter_index": 46,
+      "stage1": 379,
+      "stage2": 84,
+      "stage3": 70,
+      "breakdown": {
+        "other": 21,
+        "person": 26,
+        "location": 14,
+        "organization": 7,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-049-02d993192475ed39",
+      "cumulative_words": 90981,
+      "story_chapter_index": 47,
+      "stage1": 383,
+      "stage2": 87,
+      "stage3": 73,
+      "breakdown": {
+        "other": 23,
+        "person": 27,
+        "location": 14,
+        "organization": 7,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-050-02d99b192575cd38",
+      "cumulative_words": 93126,
+      "story_chapter_index": 48,
+      "stage1": 385,
+      "stage2": 87,
+      "stage3": 73,
+      "breakdown": {
+        "other": 23,
+        "person": 27,
+        "location": 14,
+        "organization": 7,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-051-02d99b192575ed3a",
+      "cumulative_words": 94943,
+      "story_chapter_index": 49,
+      "stage1": 386,
+      "stage2": 88,
+      "stage3": 74,
+      "breakdown": {
+        "other": 23,
+        "person": 28,
+        "location": 14,
+        "organization": 7,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-052-02d99b192575ed31",
+      "cumulative_words": 96985,
+      "story_chapter_index": 50,
+      "stage1": 388,
+      "stage2": 89,
+      "stage3": 75,
+      "breakdown": {
+        "other": 23,
+        "person": 29,
+        "location": 14,
+        "organization": 7,
+        "event": 1,
+        "object": 1
+      }
+    },
+    {
+      "chapter": "chapter-053-02d99b192575ed79",
+      "cumulative_words": 99073,
+      "story_chapter_index": 51,
+      "stage1": 389,
+      "stage2": 92,
+      "stage3": 78,
+      "breakdown": {
+        "other": 23,
+        "person": 30,
+        "location": 14,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-054-02d99a192575edb9",
+      "cumulative_words": 100988,
+      "story_chapter_index": 52,
+      "stage1": 398,
+      "stage2": 96,
+      "stage3": 82,
+      "breakdown": {
+        "other": 25,
+        "person": 31,
+        "location": 15,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-055-02e990192575edb8",
+      "cumulative_words": 102791,
+      "story_chapter_index": 53,
+      "stage1": 399,
+      "stage2": 97,
+      "stage3": 82,
+      "breakdown": {
+        "other": 25,
+        "person": 31,
+        "location": 15,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-056-02d99b192575ed3d",
+      "cumulative_words": 104680,
+      "story_chapter_index": 54,
+      "stage1": 405,
+      "stage2": 97,
+      "stage3": 82,
+      "breakdown": {
+        "other": 25,
+        "person": 31,
+        "location": 15,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-057-02d999192575ed7c",
+      "cumulative_words": 106680,
+      "story_chapter_index": 55,
+      "stage1": 409,
+      "stage2": 97,
+      "stage3": 82,
+      "breakdown": {
+        "other": 25,
+        "person": 31,
+        "location": 15,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-058-02d99a196575ddb8",
+      "cumulative_words": 108576,
+      "story_chapter_index": 56,
+      "stage1": 421,
+      "stage2": 98,
+      "stage3": 83,
+      "breakdown": {
+        "other": 26,
+        "person": 31,
+        "location": 15,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-059-02d99b192575fd39",
+      "cumulative_words": 110257,
+      "story_chapter_index": 57,
+      "stage1": 427,
+      "stage2": 100,
+      "stage3": 85,
+      "breakdown": {
+        "other": 27,
+        "person": 31,
+        "location": 16,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-060-02c99a192575ed29",
+      "cumulative_words": 112077,
+      "story_chapter_index": 58,
+      "stage1": 435,
+      "stage2": 100,
+      "stage3": 85,
+      "breakdown": {
+        "other": 27,
+        "person": 31,
+        "location": 16,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-061-42c199192575ed3c",
+      "cumulative_words": 113959,
+      "story_chapter_index": 59,
+      "stage1": 439,
+      "stage2": 102,
+      "stage3": 87,
+      "breakdown": {
+        "other": 28,
+        "person": 32,
+        "location": 16,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-062-02c99b192575edb0",
+      "cumulative_words": 115748,
+      "story_chapter_index": 60,
+      "stage1": 448,
+      "stage2": 105,
+      "stage3": 89,
+      "breakdown": {
+        "other": 28,
+        "person": 34,
+        "location": 16,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-063-42f19b192575f538",
+      "cumulative_words": 117792,
+      "story_chapter_index": 61,
+      "stage1": 451,
+      "stage2": 106,
+      "stage3": 90,
+      "breakdown": {
+        "other": 28,
+        "person": 34,
+        "location": 17,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-064-42d19b192575ed35",
+      "cumulative_words": 119857,
+      "story_chapter_index": 62,
+      "stage1": 458,
+      "stage2": 107,
+      "stage3": 91,
+      "breakdown": {
+        "other": 29,
+        "person": 34,
+        "location": 17,
+        "organization": 9,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-065-02d999196575ed7a",
+      "cumulative_words": 121844,
+      "story_chapter_index": 63,
+      "stage1": 472,
+      "stage2": 108,
+      "stage3": 92,
+      "breakdown": {
+        "other": 29,
+        "person": 34,
+        "location": 17,
+        "organization": 10,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-066-02d199192575fd39",
+      "cumulative_words": 123765,
+      "story_chapter_index": 64,
+      "stage1": 486,
+      "stage2": 110,
+      "stage3": 94,
+      "breakdown": {
+        "other": 30,
+        "person": 34,
+        "location": 17,
+        "organization": 11,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-067-02d19b196575edf9",
+      "cumulative_words": 125719,
+      "story_chapter_index": 65,
+      "stage1": 489,
+      "stage2": 111,
+      "stage3": 95,
+      "breakdown": {
+        "other": 30,
+        "person": 34,
+        "location": 18,
+        "organization": 11,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-068-02c99a192575edbc",
+      "cumulative_words": 127649,
+      "story_chapter_index": 66,
+      "stage1": 495,
+      "stage2": 114,
+      "stage3": 98,
+      "breakdown": {
+        "other": 31,
+        "person": 34,
+        "location": 20,
+        "organization": 11,
+        "object": 1,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-069-02d998192575edb0",
+      "cumulative_words": 129567,
+      "story_chapter_index": 67,
+      "stage1": 496,
+      "stage2": 117,
+      "stage3": 101,
+      "breakdown": {
+        "other": 32,
+        "person": 34,
+        "location": 21,
+        "organization": 11,
+        "object": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-070-02c19b196575ed3e",
+      "cumulative_words": 131632,
+      "story_chapter_index": 68,
+      "stage1": 499,
+      "stage2": 119,
+      "stage3": 103,
+      "breakdown": {
+        "other": 32,
+        "person": 35,
+        "location": 22,
+        "organization": 11,
+        "object": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-071-42f99b196475cd78",
+      "cumulative_words": 133443,
+      "story_chapter_index": 69,
+      "stage1": 505,
+      "stage2": 123,
+      "stage3": 107,
+      "breakdown": {
+        "other": 35,
+        "person": 36,
+        "location": 22,
+        "organization": 11,
+        "object": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-072-02d999196575cd3d",
+      "cumulative_words": 135447,
+      "story_chapter_index": 70,
+      "stage1": 522,
+      "stage2": 127,
+      "stage3": 110,
+      "breakdown": {
+        "other": 36,
+        "person": 36,
+        "location": 22,
+        "organization": 13,
+        "object": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-073-02c99a196575ed3a",
+      "cumulative_words": 137335,
+      "story_chapter_index": 71,
+      "stage1": 527,
+      "stage2": 128,
+      "stage3": 111,
+      "breakdown": {
+        "other": 36,
+        "person": 36,
+        "location": 22,
+        "organization": 14,
+        "object": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-074-02d99f192575cd39",
+      "cumulative_words": 139178,
+      "story_chapter_index": 72,
+      "stage1": 532,
+      "stage2": 129,
+      "stage3": 112,
+      "breakdown": {
+        "other": 37,
+        "person": 36,
+        "location": 22,
+        "organization": 14,
+        "object": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-075-02d198192575cd38",
+      "cumulative_words": 141409,
+      "story_chapter_index": 73,
+      "stage1": 534,
+      "stage2": 130,
+      "stage3": 113,
+      "breakdown": {
+        "other": 37,
+        "person": 37,
+        "location": 22,
+        "organization": 14,
+        "object": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-076-02599a192575ed39",
+      "cumulative_words": 143313,
+      "story_chapter_index": 74,
+      "stage1": 538,
+      "stage2": 133,
+      "stage3": 116,
+      "breakdown": {
+        "other": 37,
+        "location": 24,
+        "person": 38,
+        "organization": 14,
+        "object": 2,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-077-02d19b192575fd3d",
+      "cumulative_words": 145110,
+      "story_chapter_index": 75,
+      "stage1": 548,
+      "stage2": 137,
+      "stage3": 120,
+      "breakdown": {
+        "other": 38,
+        "location": 24,
+        "person": 40,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-078-42d99a192575ed38",
+      "cumulative_words": 146976,
+      "story_chapter_index": 76,
+      "stage1": 553,
+      "stage2": 140,
+      "stage3": 123,
+      "breakdown": {
+        "other": 40,
+        "location": 24,
+        "person": 41,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-079-42d998192575fd3c",
+      "cumulative_words": 148643,
+      "story_chapter_index": 77,
+      "stage1": 556,
+      "stage2": 141,
+      "stage3": 123,
+      "breakdown": {
+        "other": 40,
+        "location": 24,
+        "person": 41,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-080-02599b192575fd3e",
+      "cumulative_words": 150237,
+      "story_chapter_index": 78,
+      "stage1": 558,
+      "stage2": 142,
+      "stage3": 123,
+      "breakdown": {
+        "other": 40,
+        "location": 24,
+        "person": 41,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-081-42d990192575ed38",
+      "cumulative_words": 152337,
+      "story_chapter_index": 79,
+      "stage1": 561,
+      "stage2": 143,
+      "stage3": 124,
+      "breakdown": {
+        "other": 41,
+        "location": 24,
+        "person": 41,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-082-02d99a192575ed3e",
+      "cumulative_words": 154448,
+      "story_chapter_index": 80,
+      "stage1": 562,
+      "stage2": 144,
+      "stage3": 124,
+      "breakdown": {
+        "other": 41,
+        "location": 24,
+        "person": 41,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-083-02d998192575ed38",
+      "cumulative_words": 156314,
+      "story_chapter_index": 81,
+      "stage1": 563,
+      "stage2": 144,
+      "stage3": 124,
+      "breakdown": {
+        "other": 41,
+        "location": 24,
+        "person": 41,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-084-02d99b192575ed3d",
+      "cumulative_words": 158496,
+      "story_chapter_index": 82,
+      "stage1": 567,
+      "stage2": 145,
+      "stage3": 125,
+      "breakdown": {
+        "other": 42,
+        "location": 24,
+        "person": 41,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-085-02c999196475ed3c",
+      "cumulative_words": 160356,
+      "story_chapter_index": 83,
+      "stage1": 568,
+      "stage2": 145,
+      "stage3": 125,
+      "breakdown": {
+        "other": 42,
+        "location": 24,
+        "person": 41,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-086-02599a192575cd3d",
+      "cumulative_words": 162149,
+      "story_chapter_index": 84,
+      "stage1": 576,
+      "stage2": 146,
+      "stage3": 126,
+      "breakdown": {
+        "other": 43,
+        "location": 24,
+        "person": 41,
+        "organization": 14,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-087-02d998192575edb8",
+      "cumulative_words": 164020,
+      "story_chapter_index": 85,
+      "stage1": 582,
+      "stage2": 149,
+      "stage3": 129,
+      "breakdown": {
+        "other": 45,
+        "location": 24,
+        "person": 41,
+        "organization": 15,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-088-02c99a192575edb9",
+      "cumulative_words": 166077,
+      "story_chapter_index": 86,
+      "stage1": 587,
+      "stage2": 149,
+      "stage3": 129,
+      "breakdown": {
+        "other": 45,
+        "location": 24,
+        "person": 41,
+        "organization": 15,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-089-02c998192575edb9",
+      "cumulative_words": 167937,
+      "story_chapter_index": 87,
+      "stage1": 588,
+      "stage2": 150,
+      "stage3": 130,
+      "breakdown": {
+        "other": 45,
+        "location": 24,
+        "person": 41,
+        "organization": 16,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-090-02c99a192575ed39",
+      "cumulative_words": 169859,
+      "story_chapter_index": 88,
+      "stage1": 594,
+      "stage2": 154,
+      "stage3": 133,
+      "breakdown": {
+        "other": 46,
+        "location": 24,
+        "person": 43,
+        "organization": 16,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-091-02499a192575e938",
+      "cumulative_words": 171652,
+      "story_chapter_index": 89,
+      "stage1": 596,
+      "stage2": 154,
+      "stage3": 133,
+      "breakdown": {
+        "other": 46,
+        "location": 24,
+        "person": 43,
+        "organization": 16,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-092-02d99b196575ed38",
+      "cumulative_words": 173925,
+      "story_chapter_index": 90,
+      "stage1": 596,
+      "stage2": 154,
+      "stage3": 133,
+      "breakdown": {
+        "other": 46,
+        "location": 24,
+        "person": 43,
+        "organization": 16,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-093-02c998192575e9b8",
+      "cumulative_words": 175736,
+      "story_chapter_index": 91,
+      "stage1": 599,
+      "stage2": 155,
+      "stage3": 134,
+      "breakdown": {
+        "other": 47,
+        "location": 24,
+        "person": 43,
+        "organization": 16,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-094-02d99a192575e9b8",
+      "cumulative_words": 177701,
+      "story_chapter_index": 92,
+      "stage1": 599,
+      "stage2": 155,
+      "stage3": 134,
+      "breakdown": {
+        "other": 47,
+        "location": 24,
+        "person": 43,
+        "organization": 16,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-095-02d993192575fd38",
+      "cumulative_words": 179726,
+      "story_chapter_index": 93,
+      "stage1": 604,
+      "stage2": 156,
+      "stage3": 135,
+      "breakdown": {
+        "other": 47,
+        "location": 24,
+        "person": 44,
+        "organization": 16,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-096-025999196575ed38",
+      "cumulative_words": 181940,
+      "story_chapter_index": 94,
+      "stage1": 609,
+      "stage2": 157,
+      "stage3": 136,
+      "breakdown": {
+        "other": 48,
+        "location": 24,
+        "person": 44,
+        "organization": 16,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-097-025999192575e53d",
+      "cumulative_words": 183859,
+      "story_chapter_index": 95,
+      "stage1": 612,
+      "stage2": 158,
+      "stage3": 137,
+      "breakdown": {
+        "other": 48,
+        "location": 24,
+        "person": 45,
+        "organization": 16,
+        "object": 3,
+        "event": 1
+      }
+    },
+    {
+      "chapter": "chapter-098-02d993196575ed3c",
+      "cumulative_words": 185675,
+      "story_chapter_index": 96,
+      "stage1": 612,
+      "stage2": 161,
+      "stage3": 140,
+      "breakdown": {
+        "other": 49,
+        "location": 24,
+        "person": 46,
+        "event": 2,
+        "organization": 16,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-099-42c19a192575fd33",
+      "cumulative_words": 187602,
+      "story_chapter_index": 97,
+      "stage1": 615,
+      "stage2": 163,
+      "stage3": 142,
+      "breakdown": {
+        "other": 50,
+        "location": 24,
+        "person": 46,
+        "event": 2,
+        "organization": 17,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-100-02d19b192575dd31",
+      "cumulative_words": 189586,
+      "story_chapter_index": 98,
+      "stage1": 622,
+      "stage2": 165,
+      "stage3": 143,
+      "breakdown": {
+        "other": 50,
+        "location": 25,
+        "person": 46,
+        "event": 2,
+        "organization": 17,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-101-02d99b192575edb9",
+      "cumulative_words": 191397,
+      "story_chapter_index": 99,
+      "stage1": 625,
+      "stage2": 168,
+      "stage3": 145,
+      "breakdown": {
+        "other": 51,
+        "location": 25,
+        "person": 47,
+        "event": 2,
+        "organization": 17,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-102-02d198192575cdbb",
+      "cumulative_words": 193467,
+      "story_chapter_index": 100,
+      "stage1": 629,
+      "stage2": 169,
+      "stage3": 146,
+      "breakdown": {
+        "other": 52,
+        "location": 25,
+        "person": 47,
+        "event": 2,
+        "organization": 17,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-103-02d99b192475cdbd",
+      "cumulative_words": 195406,
+      "story_chapter_index": 101,
+      "stage1": 639,
+      "stage2": 170,
+      "stage3": 147,
+      "breakdown": {
+        "other": 52,
+        "location": 25,
+        "person": 48,
+        "event": 2,
+        "organization": 17,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-104-02d992192575e978",
+      "cumulative_words": 197599,
+      "story_chapter_index": 102,
+      "stage1": 642,
+      "stage2": 170,
+      "stage3": 147,
+      "breakdown": {
+        "other": 52,
+        "location": 25,
+        "person": 48,
+        "event": 2,
+        "organization": 17,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-105-02e99a192475ed2a",
+      "cumulative_words": 199332,
+      "story_chapter_index": 103,
+      "stage1": 643,
+      "stage2": 170,
+      "stage3": 147,
+      "breakdown": {
+        "other": 52,
+        "location": 25,
+        "person": 48,
+        "event": 2,
+        "organization": 17,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-106-02f19a192575fd3d",
+      "cumulative_words": 201402,
+      "story_chapter_index": 104,
+      "stage1": 644,
+      "stage2": 170,
+      "stage3": 147,
+      "breakdown": {
+        "other": 52,
+        "location": 25,
+        "person": 48,
+        "event": 2,
+        "organization": 17,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-107-02d99a192575edbc",
+      "cumulative_words": 203477,
+      "story_chapter_index": 105,
+      "stage1": 644,
+      "stage2": 173,
+      "stage3": 149,
+      "breakdown": {
+        "other": 52,
+        "location": 26,
+        "person": 49,
+        "event": 2,
+        "organization": 17,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-108-02d99a192575e938",
+      "cumulative_words": 205145,
+      "story_chapter_index": 106,
+      "stage1": 650,
+      "stage2": 176,
+      "stage3": 152,
+      "breakdown": {
+        "other": 52,
+        "location": 26,
+        "person": 50,
+        "event": 2,
+        "organization": 19,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-109-02599b192575fd38",
+      "cumulative_words": 207081,
+      "story_chapter_index": 107,
+      "stage1": 655,
+      "stage2": 177,
+      "stage3": 153,
+      "breakdown": {
+        "other": 52,
+        "location": 26,
+        "person": 51,
+        "event": 2,
+        "organization": 19,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-110-02c19a196475cd3c",
+      "cumulative_words": 208960,
+      "story_chapter_index": 108,
+      "stage1": 656,
+      "stage2": 178,
+      "stage3": 153,
+      "breakdown": {
+        "other": 52,
+        "location": 26,
+        "person": 51,
+        "event": 2,
+        "organization": 19,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-111-02d99b192575fd38",
+      "cumulative_words": 211166,
+      "story_chapter_index": 109,
+      "stage1": 660,
+      "stage2": 180,
+      "stage3": 155,
+      "breakdown": {
+        "other": 54,
+        "location": 26,
+        "person": 51,
+        "event": 2,
+        "organization": 19,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-112-02d99b192575e53b",
+      "cumulative_words": 213244,
+      "story_chapter_index": 110,
+      "stage1": 664,
+      "stage2": 183,
+      "stage3": 158,
+      "breakdown": {
+        "other": 55,
+        "location": 27,
+        "person": 52,
+        "event": 2,
+        "organization": 19,
+        "object": 3
+      }
+    },
+    {
+      "chapter": "chapter-113-02499b196575c938",
+      "cumulative_words": 215017,
+      "story_chapter_index": 111,
+      "stage1": 669,
+      "stage2": 186,
+      "stage3": 160,
+      "breakdown": {
+        "other": 55,
+        "location": 27,
+        "person": 53,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-114-42d198192575ed37",
+      "cumulative_words": 216957,
+      "story_chapter_index": 112,
+      "stage1": 678,
+      "stage2": 186,
+      "stage3": 160,
+      "breakdown": {
+        "other": 55,
+        "location": 27,
+        "person": 53,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-115-02d19a192575edb9",
+      "cumulative_words": 218703,
+      "story_chapter_index": 113,
+      "stage1": 684,
+      "stage2": 186,
+      "stage3": 160,
+      "breakdown": {
+        "other": 55,
+        "location": 27,
+        "person": 53,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-116-02d998192575cd3c",
+      "cumulative_words": 220508,
+      "story_chapter_index": 114,
+      "stage1": 684,
+      "stage2": 188,
+      "stage3": 162,
+      "breakdown": {
+        "other": 56,
+        "location": 27,
+        "person": 54,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-117-02699a192575e93c",
+      "cumulative_words": 222088,
+      "story_chapter_index": 115,
+      "stage1": 688,
+      "stage2": 188,
+      "stage3": 162,
+      "breakdown": {
+        "other": 56,
+        "location": 27,
+        "person": 54,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-118-02d99a192575fd39",
+      "cumulative_words": 224088,
+      "story_chapter_index": 116,
+      "stage1": 692,
+      "stage2": 189,
+      "stage3": 163,
+      "breakdown": {
+        "other": 56,
+        "location": 27,
+        "person": 55,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-119-02d99a192575e9d9",
+      "cumulative_words": 225557,
+      "story_chapter_index": 117,
+      "stage1": 693,
+      "stage2": 191,
+      "stage3": 164,
+      "breakdown": {
+        "other": 56,
+        "location": 28,
+        "person": 55,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-120-02f19a192575ed31",
+      "cumulative_words": 227409,
+      "story_chapter_index": 118,
+      "stage1": 701,
+      "stage2": 193,
+      "stage3": 165,
+      "breakdown": {
+        "other": 56,
+        "location": 29,
+        "person": 55,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-121-02f99a192575edb4",
+      "cumulative_words": 229425,
+      "story_chapter_index": 119,
+      "stage1": 704,
+      "stage2": 196,
+      "stage3": 168,
+      "breakdown": {
+        "other": 56,
+        "location": 30,
+        "person": 57,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-122-02599a192575fd78",
+      "cumulative_words": 231140,
+      "story_chapter_index": 120,
+      "stage1": 709,
+      "stage2": 198,
+      "stage3": 170,
+      "breakdown": {
+        "other": 57,
+        "location": 30,
+        "person": 58,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-123-02f99a192575cd38",
+      "cumulative_words": 232963,
+      "story_chapter_index": 121,
+      "stage1": 713,
+      "stage2": 199,
+      "stage3": 171,
+      "breakdown": {
+        "other": 57,
+        "location": 30,
+        "person": 59,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-124-42519b192575e938",
+      "cumulative_words": 234933,
+      "story_chapter_index": 122,
+      "stage1": 719,
+      "stage2": 202,
+      "stage3": 173,
+      "breakdown": {
+        "other": 58,
+        "location": 31,
+        "person": 59,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-125-02c99b196575edb9",
+      "cumulative_words": 236995,
+      "story_chapter_index": 123,
+      "stage1": 720,
+      "stage2": 203,
+      "stage3": 174,
+      "breakdown": {
+        "other": 58,
+        "location": 31,
+        "person": 60,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-126-02d998196575ed3c",
+      "cumulative_words": 239017,
+      "story_chapter_index": 124,
+      "stage1": 722,
+      "stage2": 205,
+      "stage3": 176,
+      "breakdown": {
+        "other": 59,
+        "location": 31,
+        "person": 61,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-127-02d99a196575edbd",
+      "cumulative_words": 240945,
+      "story_chapter_index": 125,
+      "stage1": 723,
+      "stage2": 205,
+      "stage3": 176,
+      "breakdown": {
+        "other": 59,
+        "location": 31,
+        "person": 61,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-128-02d99b196575ed38",
+      "cumulative_words": 242601,
+      "story_chapter_index": 126,
+      "stage1": 725,
+      "stage2": 207,
+      "stage3": 178,
+      "breakdown": {
+        "other": 60,
+        "location": 32,
+        "person": 61,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-129-02599b196475ed3c",
+      "cumulative_words": 244263,
+      "story_chapter_index": 127,
+      "stage1": 728,
+      "stage2": 208,
+      "stage3": 178,
+      "breakdown": {
+        "other": 60,
+        "location": 32,
+        "person": 61,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-130-42d99b196475fd7c",
+      "cumulative_words": 246282,
+      "story_chapter_index": 128,
+      "stage1": 729,
+      "stage2": 209,
+      "stage3": 178,
+      "breakdown": {
+        "other": 60,
+        "location": 32,
+        "person": 61,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-131-02d99a196475ed38",
+      "cumulative_words": 248196,
+      "story_chapter_index": 129,
+      "stage1": 729,
+      "stage2": 209,
+      "stage3": 178,
+      "breakdown": {
+        "other": 60,
+        "location": 32,
+        "person": 61,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-132-02c99b192575edb8",
+      "cumulative_words": 250266,
+      "story_chapter_index": 130,
+      "stage1": 731,
+      "stage2": 209,
+      "stage3": 178,
+      "breakdown": {
+        "other": 60,
+        "location": 32,
+        "person": 61,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-133-02d99a192575ed39",
+      "cumulative_words": 252279,
+      "story_chapter_index": 131,
+      "stage1": 736,
+      "stage2": 210,
+      "stage3": 179,
+      "breakdown": {
+        "other": 61,
+        "location": 32,
+        "person": 61,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-134-02d99b192575fdb9",
+      "cumulative_words": 254287,
+      "story_chapter_index": 132,
+      "stage1": 739,
+      "stage2": 211,
+      "stage3": 180,
+      "breakdown": {
+        "other": 61,
+        "location": 32,
+        "person": 62,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-135-02f99a192575cd39",
+      "cumulative_words": 257156,
+      "story_chapter_index": 133,
+      "stage1": 754,
+      "stage2": 211,
+      "stage3": 180,
+      "breakdown": {
+        "other": 61,
+        "location": 32,
+        "person": 62,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-136-02599a192575ed38",
+      "cumulative_words": 259096,
+      "story_chapter_index": 134,
+      "stage1": 757,
+      "stage2": 211,
+      "stage3": 180,
+      "breakdown": {
+        "other": 61,
+        "location": 32,
+        "person": 62,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-137-42d99a196475fd61",
+      "cumulative_words": 261047,
+      "story_chapter_index": 135,
+      "stage1": 760,
+      "stage2": 212,
+      "stage3": 180,
+      "breakdown": {
+        "other": 61,
+        "location": 32,
+        "person": 62,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-138-02c998192575fd38",
+      "cumulative_words": 263020,
+      "story_chapter_index": 136,
+      "stage1": 766,
+      "stage2": 212,
+      "stage3": 180,
+      "breakdown": {
+        "other": 61,
+        "location": 32,
+        "person": 62,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-139-02c998192575ed38",
+      "cumulative_words": 264934,
+      "story_chapter_index": 137,
+      "stage1": 769,
+      "stage2": 213,
+      "stage3": 181,
+      "breakdown": {
+        "other": 61,
+        "location": 33,
+        "person": 62,
+        "event": 2,
+        "organization": 19,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-140-42599b192575fd1c",
+      "cumulative_words": 267087,
+      "story_chapter_index": 138,
+      "stage1": 772,
+      "stage2": 215,
+      "stage3": 183,
+      "breakdown": {
+        "other": 62,
+        "location": 33,
+        "person": 62,
+        "event": 2,
+        "organization": 20,
+        "object": 4
+      }
+    },
+    {
+      "chapter": "chapter-141-42d99b192475ed3c",
+      "cumulative_words": 269049,
+      "story_chapter_index": 139,
+      "stage1": 773,
+      "stage2": 217,
+      "stage3": 185,
+      "breakdown": {
+        "other": 62,
+        "location": 33,
+        "person": 62,
+        "event": 2,
+        "organization": 20,
+        "object": 6
+      }
+    },
+    {
+      "chapter": "chapter-142-02d99b192575fd3c",
+      "cumulative_words": 270923,
+      "story_chapter_index": 140,
+      "stage1": 776,
+      "stage2": 218,
+      "stage3": 185,
+      "breakdown": {
+        "other": 62,
+        "location": 33,
+        "person": 62,
+        "event": 2,
+        "organization": 20,
+        "object": 6
+      }
+    },
+    {
+      "chapter": "chapter-143-02d999196475f534",
+      "cumulative_words": 272938,
+      "story_chapter_index": 141,
+      "stage1": 785,
+      "stage2": 221,
+      "stage3": 188,
+      "breakdown": {
+        "other": 62,
+        "location": 35,
+        "person": 63,
+        "event": 2,
+        "organization": 20,
+        "object": 6
+      }
+    },
+    {
+      "chapter": "chapter-144-02f99b196475dd31",
+      "cumulative_words": 274813,
+      "story_chapter_index": 142,
+      "stage1": 793,
+      "stage2": 222,
+      "stage3": 189,
+      "breakdown": {
+        "other": 62,
+        "location": 35,
+        "person": 63,
+        "event": 2,
+        "organization": 20,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-145-02d99b192575ed3e",
+      "cumulative_words": 276881,
+      "story_chapter_index": 143,
+      "stage1": 796,
+      "stage2": 223,
+      "stage3": 190,
+      "breakdown": {
+        "other": 63,
+        "location": 35,
+        "person": 63,
+        "event": 2,
+        "organization": 20,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-146-02e19b192575ed30",
+      "cumulative_words": 278954,
+      "story_chapter_index": 144,
+      "stage1": 802,
+      "stage2": 226,
+      "stage3": 192,
+      "breakdown": {
+        "other": 64,
+        "location": 35,
+        "person": 64,
+        "event": 2,
+        "organization": 20,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-147-42c19b192475ed38",
+      "cumulative_words": 280852,
+      "story_chapter_index": 145,
+      "stage1": 806,
+      "stage2": 226,
+      "stage3": 192,
+      "breakdown": {
+        "other": 64,
+        "location": 35,
+        "person": 64,
+        "event": 2,
+        "organization": 20,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-148-02d99b192575edbd",
+      "cumulative_words": 282729,
+      "story_chapter_index": 146,
+      "stage1": 806,
+      "stage2": 228,
+      "stage3": 194,
+      "breakdown": {
+        "other": 65,
+        "location": 35,
+        "person": 65,
+        "event": 2,
+        "organization": 20,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-149-02d19a192575ed31",
+      "cumulative_words": 284709,
+      "story_chapter_index": 147,
+      "stage1": 807,
+      "stage2": 229,
+      "stage3": 194,
+      "breakdown": {
+        "other": 65,
+        "location": 35,
+        "person": 65,
+        "event": 2,
+        "organization": 20,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-150-02d19b192575dd7e",
+      "cumulative_words": 286616,
+      "story_chapter_index": 148,
+      "stage1": 814,
+      "stage2": 230,
+      "stage3": 195,
+      "breakdown": {
+        "other": 65,
+        "location": 35,
+        "person": 65,
+        "organization": 21,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-151-02f19b192575dd78",
+      "cumulative_words": 288538,
+      "story_chapter_index": 149,
+      "stage1": 821,
+      "stage2": 231,
+      "stage3": 196,
+      "breakdown": {
+        "other": 66,
+        "location": 35,
+        "person": 65,
+        "organization": 21,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-152-02d99a196475ed31",
+      "cumulative_words": 290368,
+      "story_chapter_index": 150,
+      "stage1": 825,
+      "stage2": 235,
+      "stage3": 199,
+      "breakdown": {
+        "other": 68,
+        "location": 35,
+        "person": 66,
+        "organization": 21,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-153-42c199192475fdb0",
+      "cumulative_words": 292232,
+      "story_chapter_index": 151,
+      "stage1": 830,
+      "stage2": 236,
+      "stage3": 199,
+      "breakdown": {
+        "other": 68,
+        "location": 35,
+        "person": 66,
+        "organization": 21,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-154-02f99a196575ed78",
+      "cumulative_words": 294123,
+      "story_chapter_index": 152,
+      "stage1": 834,
+      "stage2": 236,
+      "stage3": 199,
+      "breakdown": {
+        "other": 68,
+        "location": 35,
+        "person": 66,
+        "organization": 21,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-155-02c999192575cdbc",
+      "cumulative_words": 295902,
+      "story_chapter_index": 153,
+      "stage1": 834,
+      "stage2": 236,
+      "stage3": 199,
+      "breakdown": {
+        "other": 68,
+        "location": 35,
+        "person": 66,
+        "organization": 21,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-156-02d99b192575ed7c",
+      "cumulative_words": 297728,
+      "story_chapter_index": 154,
+      "stage1": 834,
+      "stage2": 236,
+      "stage3": 199,
+      "breakdown": {
+        "other": 68,
+        "location": 35,
+        "person": 66,
+        "organization": 21,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-157-025998192575ed39",
+      "cumulative_words": 299526,
+      "story_chapter_index": 155,
+      "stage1": 835,
+      "stage2": 238,
+      "stage3": 200,
+      "breakdown": {
+        "other": 68,
+        "location": 35,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-158-42d99b192575fd78",
+      "cumulative_words": 301571,
+      "story_chapter_index": 156,
+      "stage1": 842,
+      "stage2": 241,
+      "stage3": 203,
+      "breakdown": {
+        "other": 71,
+        "location": 35,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-159-02d99a192575ed39",
+      "cumulative_words": 303252,
+      "story_chapter_index": 157,
+      "stage1": 844,
+      "stage2": 241,
+      "stage3": 203,
+      "breakdown": {
+        "other": 71,
+        "location": 35,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-160-02d19b192574cdb9",
+      "cumulative_words": 305306,
+      "story_chapter_index": 158,
+      "stage1": 846,
+      "stage2": 242,
+      "stage3": 203,
+      "breakdown": {
+        "other": 71,
+        "location": 35,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-161-02d99b192575cd38",
+      "cumulative_words": 307305,
+      "story_chapter_index": 159,
+      "stage1": 847,
+      "stage2": 243,
+      "stage3": 204,
+      "breakdown": {
+        "other": 72,
+        "location": 35,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-162-02599a192575ed38",
+      "cumulative_words": 309024,
+      "story_chapter_index": 160,
+      "stage1": 848,
+      "stage2": 243,
+      "stage3": 204,
+      "breakdown": {
+        "other": 72,
+        "location": 35,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-163-02499a192575ed39",
+      "cumulative_words": 310929,
+      "story_chapter_index": 161,
+      "stage1": 856,
+      "stage2": 244,
+      "stage3": 205,
+      "breakdown": {
+        "other": 73,
+        "location": 35,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-164-02d19b196475ed78",
+      "cumulative_words": 312774,
+      "story_chapter_index": 162,
+      "stage1": 860,
+      "stage2": 244,
+      "stage3": 205,
+      "breakdown": {
+        "other": 73,
+        "location": 35,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-165-02f199192575f539",
+      "cumulative_words": 314782,
+      "story_chapter_index": 163,
+      "stage1": 864,
+      "stage2": 244,
+      "stage3": 205,
+      "breakdown": {
+        "other": 73,
+        "location": 35,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 7
+      }
+    },
+    {
+      "chapter": "chapter-166-02d19b192575ed7c",
+      "cumulative_words": 316532,
+      "story_chapter_index": 164,
+      "stage1": 869,
+      "stage2": 246,
+      "stage3": 207,
+      "breakdown": {
+        "other": 73,
+        "location": 36,
+        "person": 66,
+        "organization": 22,
+        "event": 2,
+        "object": 8
+      }
+    },
+    {
+      "chapter": "chapter-167-02d19b192575e578",
+      "cumulative_words": 318642,
+      "story_chapter_index": 165,
+      "stage1": 875,
+      "stage2": 248,
+      "stage3": 209,
+      "breakdown": {
+        "other": 73,
+        "person": 68,
+        "location": 36,
+        "organization": 22,
+        "event": 2,
+        "object": 8
+      }
+    },
+    {
+      "chapter": "chapter-168-02d99b192575ed78",
+      "cumulative_words": 320921,
+      "story_chapter_index": 166,
+      "stage1": 879,
+      "stage2": 249,
+      "stage3": 210,
+      "breakdown": {
+        "other": 74,
+        "person": 68,
+        "location": 36,
+        "organization": 22,
+        "event": 2,
+        "object": 8
+      }
+    },
+    {
+      "chapter": "chapter-169-02599d192575ed38",
+      "cumulative_words": 322720,
+      "story_chapter_index": 167,
+      "stage1": 881,
+      "stage2": 250,
+      "stage3": 211,
+      "breakdown": {
+        "other": 75,
+        "person": 68,
+        "location": 36,
+        "organization": 22,
+        "event": 2,
+        "object": 8
+      }
+    },
+    {
+      "chapter": "chapter-170-02d99f192575cdbc",
+      "cumulative_words": 324439,
+      "story_chapter_index": 168,
+      "stage1": 884,
+      "stage2": 253,
+      "stage3": 213,
+      "breakdown": {
+        "other": 75,
+        "person": 69,
+        "location": 36,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-171-02d99a192575ed39",
+      "cumulative_words": 325944,
+      "story_chapter_index": 169,
+      "stage1": 886,
+      "stage2": 254,
+      "stage3": 214,
+      "breakdown": {
+        "other": 75,
+        "person": 69,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-172-02419b192575cd39",
+      "cumulative_words": 327793,
+      "story_chapter_index": 170,
+      "stage1": 890,
+      "stage2": 255,
+      "stage3": 215,
+      "breakdown": {
+        "other": 75,
+        "person": 70,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-173-02c19a192575cd3d",
+      "cumulative_words": 329494,
+      "story_chapter_index": 171,
+      "stage1": 892,
+      "stage2": 257,
+      "stage3": 216,
+      "breakdown": {
+        "other": 75,
+        "person": 71,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-174-02d193192575edbc",
+      "cumulative_words": 331364,
+      "story_chapter_index": 172,
+      "stage1": 894,
+      "stage2": 257,
+      "stage3": 216,
+      "breakdown": {
+        "other": 75,
+        "person": 71,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-175-02f19b192475cd39",
+      "cumulative_words": 333300,
+      "story_chapter_index": 173,
+      "stage1": 894,
+      "stage2": 258,
+      "stage3": 217,
+      "breakdown": {
+        "other": 76,
+        "person": 71,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-176-02d99a192575e931",
+      "cumulative_words": 335352,
+      "story_chapter_index": 174,
+      "stage1": 896,
+      "stage2": 260,
+      "stage3": 219,
+      "breakdown": {
+        "other": 78,
+        "person": 71,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-177-02d993192575ddb0",
+      "cumulative_words": 337384,
+      "story_chapter_index": 175,
+      "stage1": 898,
+      "stage2": 261,
+      "stage3": 220,
+      "breakdown": {
+        "other": 78,
+        "person": 72,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-178-025999192575ed38",
+      "cumulative_words": 339298,
+      "story_chapter_index": 176,
+      "stage1": 901,
+      "stage2": 264,
+      "stage3": 223,
+      "breakdown": {
+        "other": 80,
+        "person": 73,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-179-02d199192575edb8",
+      "cumulative_words": 341205,
+      "story_chapter_index": 177,
+      "stage1": 905,
+      "stage2": 265,
+      "stage3": 224,
+      "breakdown": {
+        "other": 81,
+        "person": 73,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-180-02c999192575ed39",
+      "cumulative_words": 343024,
+      "story_chapter_index": 178,
+      "stage1": 906,
+      "stage2": 266,
+      "stage3": 225,
+      "breakdown": {
+        "other": 81,
+        "person": 74,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-181-02599b192575cd39",
+      "cumulative_words": 344993,
+      "story_chapter_index": 179,
+      "stage1": 907,
+      "stage2": 266,
+      "stage3": 225,
+      "breakdown": {
+        "other": 81,
+        "person": 74,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-182-02d998196575ddfc",
+      "cumulative_words": 346897,
+      "story_chapter_index": 180,
+      "stage1": 910,
+      "stage2": 270,
+      "stage3": 227,
+      "breakdown": {
+        "other": 82,
+        "person": 75,
+        "location": 37,
+        "organization": 22,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-183-02599a196575f53d",
+      "cumulative_words": 348729,
+      "story_chapter_index": 181,
+      "stage1": 915,
+      "stage2": 274,
+      "stage3": 231,
+      "breakdown": {
+        "other": 83,
+        "person": 77,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-184-02d99a196575cd78",
+      "cumulative_words": 350524,
+      "story_chapter_index": 182,
+      "stage1": 920,
+      "stage2": 274,
+      "stage3": 231,
+      "breakdown": {
+        "other": 83,
+        "person": 77,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-185-02d19a192575fd31",
+      "cumulative_words": 352420,
+      "story_chapter_index": 183,
+      "stage1": 927,
+      "stage2": 275,
+      "stage3": 232,
+      "breakdown": {
+        "other": 84,
+        "person": 77,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-186-02d99a196575d535",
+      "cumulative_words": 354316,
+      "story_chapter_index": 184,
+      "stage1": 928,
+      "stage2": 277,
+      "stage3": 234,
+      "breakdown": {
+        "other": 85,
+        "person": 78,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-187-02d19b192575ed38",
+      "cumulative_words": 356215,
+      "story_chapter_index": 185,
+      "stage1": 929,
+      "stage2": 278,
+      "stage3": 234,
+      "breakdown": {
+        "other": 85,
+        "person": 78,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 9
+      }
+    },
+    {
+      "chapter": "chapter-188-02d19b192575e9b1",
+      "cumulative_words": 358155,
+      "story_chapter_index": 186,
+      "stage1": 929,
+      "stage2": 279,
+      "stage3": 235,
+      "breakdown": {
+        "other": 85,
+        "person": 78,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-189-02f19a192575fd38",
+      "cumulative_words": 360058,
+      "story_chapter_index": 187,
+      "stage1": 930,
+      "stage2": 280,
+      "stage3": 236,
+      "breakdown": {
+        "other": 86,
+        "person": 78,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-190-02d99b192575ed35",
+      "cumulative_words": 362330,
+      "story_chapter_index": 188,
+      "stage1": 935,
+      "stage2": 281,
+      "stage3": 237,
+      "breakdown": {
+        "other": 87,
+        "person": 78,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-191-02d999192575ed3c",
+      "cumulative_words": 364231,
+      "story_chapter_index": 189,
+      "stage1": 936,
+      "stage2": 281,
+      "stage3": 237,
+      "breakdown": {
+        "other": 87,
+        "person": 78,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-192-02499b192575cd34",
+      "cumulative_words": 366149,
+      "story_chapter_index": 190,
+      "stage1": 939,
+      "stage2": 281,
+      "stage3": 237,
+      "breakdown": {
+        "other": 87,
+        "person": 78,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-193-02d198192575ed38",
+      "cumulative_words": 368079,
+      "story_chapter_index": 191,
+      "stage1": 941,
+      "stage2": 283,
+      "stage3": 239,
+      "breakdown": {
+        "other": 89,
+        "person": 78,
+        "location": 37,
+        "organization": 23,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-194-02f19a192575dd78",
+      "cumulative_words": 370144,
+      "story_chapter_index": 192,
+      "stage1": 946,
+      "stage2": 285,
+      "stage3": 241,
+      "breakdown": {
+        "other": 89,
+        "person": 79,
+        "location": 37,
+        "organization": 24,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-195-02f99a192575ed38",
+      "cumulative_words": 372170,
+      "story_chapter_index": 193,
+      "stage1": 950,
+      "stage2": 286,
+      "stage3": 242,
+      "breakdown": {
+        "other": 89,
+        "person": 80,
+        "location": 37,
+        "organization": 24,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-196-02d998192475fd39",
+      "cumulative_words": 373993,
+      "story_chapter_index": 194,
+      "stage1": 953,
+      "stage2": 286,
+      "stage3": 242,
+      "breakdown": {
+        "other": 89,
+        "person": 80,
+        "location": 37,
+        "organization": 24,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-197-02f99a192575f979",
+      "cumulative_words": 375933,
+      "story_chapter_index": 195,
+      "stage1": 957,
+      "stage2": 288,
+      "stage3": 244,
+      "breakdown": {
+        "other": 90,
+        "person": 81,
+        "location": 37,
+        "organization": 24,
+        "event": 2,
+        "object": 10
+      }
+    },
+    {
+      "chapter": "chapter-198-02f998192575f9f9",
+      "cumulative_words": 377792,
+      "story_chapter_index": 196,
+      "stage1": 960,
+      "stage2": 290,
+      "stage3": 246,
+      "breakdown": {
+        "other": 91,
+        "person": 81,
+        "location": 37,
+        "organization": 24,
+        "event": 2,
+        "object": 11
+      }
+    },
+    {
+      "chapter": "chapter-199-02d99a192575fdf8",
+      "cumulative_words": 379635,
+      "story_chapter_index": 197,
+      "stage1": 960,
+      "stage2": 292,
+      "stage3": 248,
+      "breakdown": {
+        "other": 93,
+        "person": 81,
+        "location": 37,
+        "organization": 24,
+        "event": 2,
+        "object": 11
+      }
+    },
+    {
+      "chapter": "chapter-200-02599a192575ed38",
+      "cumulative_words": 381422,
+      "story_chapter_index": 198,
+      "stage1": 961,
+      "stage2": 293,
+      "stage3": 249,
+      "breakdown": {
+        "other": 93,
+        "person": 81,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 11
+      }
+    },
+    {
+      "chapter": "chapter-201-02599a192575edb8",
+      "cumulative_words": 383427,
+      "story_chapter_index": 199,
+      "stage1": 961,
+      "stage2": 295,
+      "stage3": 251,
+      "breakdown": {
+        "other": 94,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 11
+      }
+    },
+    {
+      "chapter": "chapter-202-02c998196575cd79",
+      "cumulative_words": 385276,
+      "story_chapter_index": 200,
+      "stage1": 963,
+      "stage2": 295,
+      "stage3": 251,
+      "breakdown": {
+        "other": 94,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 11
+      }
+    },
+    {
+      "chapter": "chapter-203-02d99b192575cd38",
+      "cumulative_words": 387269,
+      "story_chapter_index": 201,
+      "stage1": 963,
+      "stage2": 296,
+      "stage3": 252,
+      "breakdown": {
+        "other": 94,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-204-02c99a192575ed38",
+      "cumulative_words": 389107,
+      "story_chapter_index": 202,
+      "stage1": 965,
+      "stage2": 297,
+      "stage3": 253,
+      "breakdown": {
+        "other": 95,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-205-02499b192575ed38",
+      "cumulative_words": 391081,
+      "story_chapter_index": 203,
+      "stage1": 966,
+      "stage2": 297,
+      "stage3": 253,
+      "breakdown": {
+        "other": 95,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-206-02499a192575c538",
+      "cumulative_words": 393383,
+      "story_chapter_index": 204,
+      "stage1": 975,
+      "stage2": 298,
+      "stage3": 254,
+      "breakdown": {
+        "other": 96,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-207-02499b192575cd39",
+      "cumulative_words": 395199,
+      "story_chapter_index": 205,
+      "stage1": 976,
+      "stage2": 298,
+      "stage3": 254,
+      "breakdown": {
+        "other": 96,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-208-02d99b192575ed38",
+      "cumulative_words": 397086,
+      "story_chapter_index": 206,
+      "stage1": 978,
+      "stage2": 298,
+      "stage3": 254,
+      "breakdown": {
+        "other": 96,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-209-02f19b196575fd38",
+      "cumulative_words": 398925,
+      "story_chapter_index": 207,
+      "stage1": 980,
+      "stage2": 299,
+      "stage3": 255,
+      "breakdown": {
+        "other": 97,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-210-025999196575fd78",
+      "cumulative_words": 400807,
+      "story_chapter_index": 208,
+      "stage1": 983,
+      "stage2": 300,
+      "stage3": 255,
+      "breakdown": {
+        "other": 97,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-211-02d99a192575ed7c",
+      "cumulative_words": 402841,
+      "story_chapter_index": 209,
+      "stage1": 984,
+      "stage2": 300,
+      "stage3": 255,
+      "breakdown": {
+        "other": 97,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-212-42d19b192475c978",
+      "cumulative_words": 404514,
+      "story_chapter_index": 210,
+      "stage1": 987,
+      "stage2": 300,
+      "stage3": 255,
+      "breakdown": {
+        "other": 97,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-213-02d19a192575ed7d",
+      "cumulative_words": 406514,
+      "story_chapter_index": 211,
+      "stage1": 992,
+      "stage2": 300,
+      "stage3": 255,
+      "breakdown": {
+        "other": 97,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-214-02599b192575ed7c",
+      "cumulative_words": 408341,
+      "story_chapter_index": 212,
+      "stage1": 993,
+      "stage2": 300,
+      "stage3": 255,
+      "breakdown": {
+        "other": 97,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-215-02499b192575cd38",
+      "cumulative_words": 409959,
+      "story_chapter_index": 213,
+      "stage1": 994,
+      "stage2": 301,
+      "stage3": 255,
+      "breakdown": {
+        "other": 97,
+        "person": 82,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-216-42d99b192575dd3c",
+      "cumulative_words": 412449,
+      "story_chapter_index": 214,
+      "stage1": 999,
+      "stage2": 304,
+      "stage3": 257,
+      "breakdown": {
+        "other": 98,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-217-02599a196475ed3c",
+      "cumulative_words": 414375,
+      "story_chapter_index": 215,
+      "stage1": 1001,
+      "stage2": 305,
+      "stage3": 257,
+      "breakdown": {
+        "other": 98,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-218-42f99a192475fd3b",
+      "cumulative_words": 416472,
+      "story_chapter_index": 216,
+      "stage1": 1006,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-219-02d99b192575fd39",
+      "cumulative_words": 419533,
+      "story_chapter_index": 217,
+      "stage1": 1011,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-220-2b1dec190779625c",
+      "cumulative_words": 419534,
+      "story_chapter_index": 218,
+      "stage1": 1011,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-221-2b1dec190779625c",
+      "cumulative_words": 419535,
+      "story_chapter_index": 219,
+      "stage1": 1011,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-222-2b1dec190779625c",
+      "cumulative_words": 419536,
+      "story_chapter_index": 220,
+      "stage1": 1011,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-223-2b1dec190779625c",
+      "cumulative_words": 419537,
+      "story_chapter_index": 221,
+      "stage1": 1011,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-224-2b1dec190779625c",
+      "cumulative_words": 419538,
+      "story_chapter_index": 222,
+      "stage1": 1011,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-225-2b1dec190779625c",
+      "cumulative_words": 419539,
+      "story_chapter_index": 223,
+      "stage1": 1011,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-226-2b1dec190779625c",
+      "cumulative_words": 419540,
+      "story_chapter_index": 224,
+      "stage1": 1011,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    },
+    {
+      "chapter": "chapter-227-2b1dec190779625c",
+      "cumulative_words": 419541,
+      "story_chapter_index": 225,
+      "stage1": 1011,
+      "stage2": 306,
+      "stage3": 258,
+      "breakdown": {
+        "other": 99,
+        "person": 83,
+        "location": 38,
+        "organization": 24,
+        "event": 2,
+        "object": 12
+      }
+    }
+  ],
+  "final_breakdown": {
+    "other": 99,
+    "person": 83,
+    "location": 38,
+    "organization": 24,
+    "event": 2,
+    "object": 12
+  }
+}

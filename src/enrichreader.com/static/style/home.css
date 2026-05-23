@@ -1,0 +1,22 @@
+/* Custom page-specific tweaks */
+/* Transition adjustments for smart router modal */
+#router-modal.opacity-0 {
+  opacity: 0;
+}
+
+#router-modal:not(.opacity-0) {
+  opacity: 1;
+}
+
+/* Generous margins between progressive chapters */
+.timeline-step {
+  margin-bottom: 24rem;
+  /* Standalone step framing on desktop */
+}
+
+@media (max-width: 768px) {
+  .timeline-step {
+    margin-bottom: 12rem;
+    /* Clean layout spacing on mobile */
+  }
+}

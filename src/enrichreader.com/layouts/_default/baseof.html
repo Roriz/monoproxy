@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Primary Meta Tags -->
+  <title>{{ if .Title }}{{ .Title }}{{ else }}EnrichReader | The End of Static Text{{ end }}</title>
+  <meta name="title" content="{{ if .Title }}{{ .Title }}{{ else }}EnrichReader | The End of Static Text{{ end }}">
+  <meta name="description" content="{{ if .Params.description }}{{ .Params.description }}{{ else }}EnrichReader transforms static text into a living story. Discover progressive character profiles and dynamic reading experiences without spoilers.{{ end }}">
+  {{ if .Params.keywords }}
+  <meta name="keywords" content="{{ if reflect.IsSlice .Params.keywords }}{{ delimit .Params.keywords ", " }}{{ else }}{{ .Params.keywords }}{{ end }}">
+  {{ end }}
+  <meta name="author" content="EnrichReader">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}EnrichReader | The End of Static Text{{ end }}">
+  <meta property="og:description" content="{{ if .Params.description }}{{ .Params.description }}{{ else }}EnrichReader transforms static text into a living story.{{ end }}">
+  <meta property="og:image" content="{{ if .Params.og_image }}{{ .Params.og_image }}{{ else }}https://enrichreader.com/og-image.jpg{{ end }}">
+
+  <!-- Resource Hints for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Optimized Fonts Loading -->
+  {{ if .Params.fonts_override }}
+    {{ .Params.fonts_override | safeHTML }}
+  {{ else }}
+    <link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+  {{ end }}
+
+  <!-- Static Styling System -->
+  <link rel="stylesheet" href="/style/style.css">
+
+  <!-- Page-specific Stylesheets -->
+  {{ range .Params.stylesheets }}
+    <link rel="stylesheet" href="{{ . }}">
+  {{ end }}
+
+  <!-- Head Injection Block for specific scripts or CDNs -->
+  {{- block "head" . -}}{{- end -}}
+</head>
+
+<body>
+  <!-- Semantic background element -->
+  <div class="void-bg" id="void" aria-hidden="true"></div>
+
+  <!-- Persistent Navigation Bar -->
+  <nav class="fixed top-0 w-full z-50 px-6 py-4 md:px-12 md:py-6 transition-all duration-500 {{ if .Params.nav_bg_border }}bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900{{ end }}">
+    <div class="max-w-7xl mx-auto w-full flex justify-between items-center {{ if .Params.nav_max_width_4xl }}max-w-4xl{{ end }}">
+      <a href="/" class="shrink-0 group flex items-center gap-3" aria-label="EnrichReader home">
+        {{ if .Params.nav_back_arrow }}
+          <span class="text-neutral-500 group-hover:text-gold-500 transition-colors font-mono text-sm">&larr;</span>
+        {{ end }}
+        <img src="/assets/logo-4x1-dark-transparent.png"
+          class="logo transition-transform duration-500 group-hover:scale-105" alt="EnrichReader"
+          style="height: {{ if .Params.nav_logo_height }}{{ .Params.nav_logo_height }}{{ else }}44px{{ end }}; width: auto;">
+      </a>
+      {{ if not .Params.nav_minimal }}
+      <div class="flex items-center gap-6 md:gap-10 text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-bold shrink-0">
+        <a href="/#demo" aria-label="Skip to interactive demo" class="hover:text-gold-500 transition">The Magic</a>
+        <a href="/#vision" aria-label="Skip to our vision" class="hover:text-gold-500 transition hidden md:block">Vision</a>
+        {{ if ne .Section "download" }}
+        <a href="/download/" aria-label="Open the application download page"
+          class="px-4 py-2 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold">Launch App</a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </nav>
+
+  <!-- Main Content Block -->
+  <main>
+    {{- block "main" . -}}{{- end -}}
+  </main>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3N638TBS0S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-3N638TBS0S');
+  </script>
+
+  <!-- Page-specific Scripts -->
+  {{ range .Params.scripts }}
+    <script src="{{ . }}" {{ if $.Params.scripts_defer }}defer{{ end }}></script>
+  {{ end }}
+
+  <!-- Footer Script Injection Block -->
+  {{- block "footer_scripts" . -}}{{- end -}}
+</body>
+
+</html>

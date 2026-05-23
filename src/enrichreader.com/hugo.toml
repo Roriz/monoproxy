@@ -1,0 +1,9 @@
+baseURL = 'https://enrichreader.com/'
+languageCode = 'en-us'
+title = 'EnrichReader'
+
+# Publish compiled files directly to the Caddy-served directory
+publishDir = '../../pages/enrichreader.com'
+
+# Disable automatic RSS and taxonomies generation to keep output clean and strictly matching current files
+disableKinds = ["RSS", "taxonomy"]
