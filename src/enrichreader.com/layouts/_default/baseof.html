@@ -31,11 +31,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Optimized Fonts Loading -->
+  <!-- Preload Critical Styles -->
+  <link rel="preload" href="/style/style.css" as="style">
+
+  <!-- Non-Blocking Google Fonts Loading -->
   {{ if .Params.fonts_override }}
     {{ .Params.fonts_override | safeHTML }}
   {{ else }}
-    <link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+    </noscript>
   {{ end }}
 
   <!-- Static Styling System -->
@@ -63,6 +69,7 @@
         {{ end }}
         <img src="/assets/logo-4x1-dark-transparent.png"
           class="logo transition-transform duration-500 group-hover:scale-105" alt="EnrichReader"
+          width="176" height="44" fetchpriority="high"
           style="height: {{ if .Params.nav_logo_height }}{{ .Params.nav_logo_height }}{{ else }}44px{{ end }}; width: auto;">
       </a>
       {{ if not .Params.nav_minimal }}
@@ -83,14 +90,21 @@
     {{- block "main" . -}}{{- end -}}
   </main>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3N638TBS0S"></script>
+  <!-- Non-Blocking Google tag (gtag.js) -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-3N638TBS0S';
+        document.head.appendChild(script);
 
-    gtag('config', 'G-3N638TBS0S');
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function() { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', 'G-3N638TBS0S');
+      }, 1000); // 1s delay to move out of critical rendering path
+    });
   </script>
 
   <!-- Page-specific Scripts -->

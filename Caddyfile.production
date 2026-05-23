@@ -1,9 +1,17 @@
 app.enrichreader.com {
 	root * ../reader-app/build
 
-	try_files {path} {path}/ /index.html
-
+	# Enable compression
 	encode zstd gzip
+
+	# Cache headers for static assets
+	@static {
+		file
+		path *.ico *.css *.js *.png *.jpg *.jpeg *.svg *.gif *.woff *.woff2 *.webp *.json
+	}
+	header @static Cache-Control "public, max-age=31536000, immutable"
+
+	try_files {path} {path}/ /index.html
 
 	file_server
 }
@@ -11,9 +19,17 @@ app.enrichreader.com {
 enrichreader.com, www.enrichreader.com {
 	root * ./public/enrichreader.com
 
-	try_files {path} {path}/ /index.html
-
+	# Enable compression
 	encode zstd gzip
+
+	# Cache headers for static assets
+	@static {
+		file
+		path *.ico *.css *.js *.png *.jpg *.jpeg *.svg *.gif *.woff *.woff2 *.webp *.json
+	}
+	header @static Cache-Control "public, max-age=31536000, immutable"
+
+	try_files {path} {path}/ /index.html
 
 	file_server
 }
