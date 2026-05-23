@@ -7,3 +7,5 @@ node_modules/
 *.tar.gz
 
 caddy_ca.json
+
+public/

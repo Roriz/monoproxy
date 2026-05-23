@@ -9,7 +9,7 @@ mail.localhost {
 }
 
 enrichreader.localhost {
-	root * ./pages/enrichreader.com
+	root * ./public/enrichreader.com
 
 	try_files {path} {path}/ /index.html
 
