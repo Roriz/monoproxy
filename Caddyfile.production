@@ -8,8 +8,15 @@ app.enrichreader.com {
 	@static {
 		file
 		path *.ico *.css *.js *.png *.jpg *.jpeg *.svg *.gif *.woff *.woff2 *.webp *.json
+		not path /service-worker.js /version.txt
 	}
 	header @static Cache-Control "public, max-age=31536000, immutable"
+
+	# Cache headers for dynamic versioning and service worker updates
+	@no-cache {
+		path /service-worker.js /version.txt
+	}
+	header @no-cache Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
 
 	try_files {path} {path}/ /index.html
 
