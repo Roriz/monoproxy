@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# Exit on any error, unset variable, or pipe failure
+set -e
+set -u
+set -o pipefail
+
+# Source helpers
+# shellcheck source=bin/helpers/utils.sh
+source "$(dirname "$0")/helpers/utils.sh"
+
+# Ensure we are in the project root
+check_project_root
+
+main() {
+  header "Building All Projects in src/"
+
+  # Check if src folder is empty or exists
+  if [ ! -d "src" ]; then
+    error "The 'src' directory does not exist."
+  fi
+
+  local built_count=0
+
+  # Find all subdirectories in src/
+  for project_dir in src/*; do
+    if [ ! -d "$project_dir" ]; then
+      continue
+    fi
+
+    local project_name
+    project_name=$(basename "$project_dir")
+    step "Checking project: $project_name"
+
+    local built=false
+
+    # Case 1: Hugo Project
+    if [ -f "$project_dir/hugo.toml" ] || [ -f "$project_dir/hugo.yaml" ] || [ -f "$project_dir/hugo.json" ] || [ -f "$project_dir/config.toml" ]; then
+      info "Found Hugo configuration in $project_dir. Building..."
+      
+      # Use local hugo binary if available, fallback to system hugo
+      local hugo_cmd="hugo"
+      if [ -f "bin/hugo" ]; then
+        hugo_cmd="./bin/hugo"
+      fi
+
+      if $hugo_cmd -s "$project_dir"; then
+        success "Successfully built Hugo project: $project_name"
+        built=true
+      else
+        error "Failed to build Hugo project: $project_name"
+      fi
+    fi
+
+    # Case 2: Node.js / NPM Project
+    if [ -f "$project_dir/package.json" ]; then
+      info "Found package.json in $project_dir. Installing dependencies and building..."
+      (
+        cd "$project_dir"
+        npm ci || npm install
+        if npm run | grep -q "build"; then
+          npm run build
+        else
+          info "No build script found in package.json for $project_name"
+        fi
+      )
+      success "Successfully built Node/NPM project: $project_name"
+      built=true
+    fi
+
+    if [ "$built" = true ]; then
+      built_count=$((built_count + 1))
+    else
+      warn "No recognized build configuration found for project: $project_name"
+    fi
+  done
+
+  if [ "$built_count" -gt 0 ]; then
+    success "Finished building all ($built_count) recognized projects!"
+  else
+    warn "No projects were built."
+  fi
+}
+
+main "$@"

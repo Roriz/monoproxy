@@ -26,6 +26,9 @@ app.enrichreader.com {
 enrichreader.com, www.enrichreader.com {
 	root * ./public/enrichreader.com
 
+	# Redirect old download route to app route
+	redir /download* /app 302
+
 	# Enable compression
 	encode zstd gzip
 
