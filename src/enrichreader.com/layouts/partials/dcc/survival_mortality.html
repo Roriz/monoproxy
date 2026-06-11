@@ -1,0 +1,60 @@
+<!-- [03] Survival Curve & Mortality Feed -->
+<section id="character-mortality" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
+  <div class="max-w-5xl mx-auto px-6 fade-in-up">
+    <div class="section-header mb-12">
+      <h2 class="section-title">Series survival rate, <br><em>and the mortality feed</em></h2>
+      <p class="section-subtitle">
+        LitRPGs are brutal. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as floors get more difficult.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <!-- Survival Line Chart (8-cols) -->
+      <div class="lg:col-span-8">
+        <div class="chart-card p-8 md:p-12">
+          <div class="flex justify-between items-center mb-6">
+            <span class="control-label">Series Survival Curve (All Volumes)</span>
+            <div class="flex gap-4">
+              <span class="legend-item-minimal">
+                <span class="dot-marker" style="background: var(--color-person)"></span>
+                <span class="legend-label" style="color: var(--color-person)">Alive</span>
+              </span>
+              <span class="legend-item-minimal">
+                <span class="dot-marker" style="background: var(--color-lore)"></span>
+                <span class="legend-label" style="color: var(--color-lore)">Dead</span>
+              </span>
+            </div>
+          </div>
+          
+          <div class="chart-container" style="height: 350px;">
+            <canvas id="survivalChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mortality Feed Column (4-cols) -->
+      <div class="lg:col-span-4">
+        <div class="chart-card p-6 flex flex-col" style="height: 448px;">
+          <div class="border-b border-white/5 pb-4 mb-4 flex justify-between items-baseline">
+            <span class="control-label">Series Mortality Feed</span>
+            <span class="text-xs text-neutral-500 font-mono" id="feed-chapter-indicator">ch. 2</span>
+          </div>
+          
+          <!-- Live mortality events feed -->
+          <div class="flex-1 overflow-y-auto pr-2" id="mortality-feed-list" style="max-height: 290px;">
+            <!-- Dynamically populated -->
+            <p class="text-xs text-neutral-500 italic text-center py-12">Scrub timeline or press play to see character deaths feed live.</p>
+          </div>
+
+          <!-- Summary KPI inside card footer -->
+          <div class="border-t border-white/5 pt-4 mt-auto">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-neutral-500 uppercase tracking-wider font-ui" style="font-size: 9px;">Lethal Chapter</span>
+              <span class="font-mono text-gold-500 font-bold" id="most-lethal-chapter-label">Ch. 13 (5 deaths)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

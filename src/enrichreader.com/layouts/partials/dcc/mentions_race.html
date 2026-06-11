@@ -1,0 +1,123 @@
+<!-- [01] Species Mentions Tracker / Bar Chart Race -->
+<section id="entity-race" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
+  <div class="max-w-5xl mx-auto px-6 fade-in-up">
+    <div class="section-header mb-12">
+      <h2 class="section-title">Entity mentions, <br><em>and how they shift</em></h2>
+      <p class="section-subtitle">
+        Watch entity counts grow and transition as Carl and Donut descent down the floors. The main characters lead
+        early, but organizations, items, and events catch up in volume.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-9">
+        <!-- Chart card -->
+        <div class="chart-card p-8 md:p-12">
+          <!-- Legend -->
+          <div class="flex flex-wrap gap-x-3 gap-y-2 mb-8 border-b border-white/5 pb-6" id="race-legend">
+            <span class="legend-item" style="color: var(--color-person)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-person)"></span>
+              character
+            </span>
+            <span class="legend-item" style="color: var(--color-location)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-location)"></span>
+              location
+            </span>
+            <span class="legend-item" style="color: var(--color-org)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-org)"></span>
+              organization
+            </span>
+            <span class="legend-item" style="color: var(--color-item)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-item)"></span>
+              item
+            </span>
+            <span class="legend-item" style="color: var(--color-event)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-event)"></span>
+              event
+            </span>
+            <span class="legend-item" style="color: var(--color-other)">
+              <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-other)"></span>
+              other
+            </span>
+          </div>
+
+          <!-- Controls -->
+          <div class="race-controls-container mb-10">
+            <div class="flex items-center gap-4 mb-6">
+              <button id="racePlayBtn" class="race-btn" aria-label="Play">
+                <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="6,3 20,12 6,21" />
+                </svg>
+                <svg id="pauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                  <rect x="5" y="3" width="4" height="18" />
+                  <rect x="15" y="3" width="4" height="18" />
+                </svg>
+              </button>
+              <div class="flex-1 flex flex-col gap-2 w-full">
+                <div class="flex justify-between items-end">
+                  <label for="raceSlider" class="control-label">Chapter Scrubber</label>
+                  <div class="chapter-display" id="race-chapter-display">
+                    <strong id="raceChapterNum">Vol. 1, Ch. 2</strong>
+                  </div>
+                </div>
+                <input type="range" id="raceSlider" class="race-slider" min="2" max="515" value="2">
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <span class="control-label">Playback Speed</span>
+                <div class="flex gap-1">
+                  <button class="speed-btn active" data-speed="1" title="Normal Speed">1×</button>
+                  <button class="speed-btn" data-speed="2" title="Double Speed">2×</button>
+                  <button class="speed-btn" data-speed="4" title="Quadruple Speed">4×</button>
+                </div>
+              </div>
+
+              <!-- Category filtering toggles -->
+              <div class="flex flex-wrap items-center gap-2" id="filter-checkboxes">
+                <span class="control-label">Filter:</span>
+                <label class="filter-checkbox-label"><input type="checkbox" id="filter-person" checked> Person</label>
+                <label class="filter-checkbox-label"><input type="checkbox" id="filter-location" checked>
+                  Location</label>
+                <label class="filter-checkbox-label"><input type="checkbox" id="filter-org" checked> Org</label>
+                <label class="filter-checkbox-label"><input type="checkbox" id="filter-item" checked> Item</label>
+                <label class="filter-checkbox-label"><input type="checkbox" id="filter-event" checked> Event</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart Container -->
+          <div class="chart-container" id="raceChartContainer">
+            <div class="chart-grid-lines" aria-hidden="true"></div>
+            <div id="raceChart" class="race-chart"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Callout / Stat -->
+      <div class="lg:col-span-3">
+        <div class="callout-card p-6 border border-white/5 rounded-xl bg-white/[0.02]">
+          <h3 class="font-ui text-[10px] uppercase tracking-widest text-gold-500 mb-4">NLP extraction</h3>
+          <p class="font-display italic text-xl text-cream-200 mb-2">The Carl Domination</p>
+          <p class="text-sm text-neutral-400 leading-relaxed">
+            Individual characters constitute the primary focus, but as the crawl expands, organizations, events, and
+            game items grow rapidly, signifying the increasing complexity of the story.
+          </p>
+          <div class="mt-6 pt-6 border-t border-white/5">
+            <span class="text-3xl font-display text-gold-500" id="species-domination-stat">52.8%</span>
+            <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Top Entity Mentions Share</p>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-white/5">
+            <a href="https://forms.gle/t7t9ZXirrz3fpqS66" target="_blank" rel="noopener"
+              class="cta-link text-xs font-ui text-gold-500 uppercase tracking-wider block hover:underline"
+              id="race-callout-cta">
+              Audit My Manuscript &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

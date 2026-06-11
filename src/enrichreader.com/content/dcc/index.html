@@ -1,0 +1,31 @@
+---
+title: "Dungeon Crawler Carl, by the numbers | EnrichReader"
+description: "Dungeon Crawler Carl, by the numbers. 515 chapters, 1,245,618 words, 317 unique characters analyzed."
+fonts_override: '<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">'
+stylesheets:
+  - "/dcc/style.css"
+scripts:
+  - "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+  - "/dcc/bar_chart_race.js"
+  - "/dcc/character_mortality.js"
+  - "/dcc/entity_journey.js"
+  - "/dcc/keyboard_shortcuts.js"
+  - "/dcc/reveal.js"
+scripts_defer: false
+nav_logo_height: "44px"
+nav_bg_border: false
+nav_minimal: true
+---
+
+{{< partial "dcc/hero.html" >}}
+
+<main id="dcc-main-content">
+  {{< partial "dcc/mentions_race.html" >}}
+  {{< partial "dcc/absence_gaps.html" >}}
+  {{< partial "dcc/survival_mortality.html" >}}
+  {{< partial "dcc/funnel_breakdown.html" >}}
+  {{< partial "dcc/word_trends.html" >}}
+  {{< partial "dcc/contact.html" >}}
+</main>
+
+{{< partial "dcc/footer.html" >}}

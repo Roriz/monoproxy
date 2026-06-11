@@ -1005,3 +1005,52 @@ footer {
     min-width: unset;
   }
 }
+
+/* ── Premium CTA Buttons ── */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.primary-cta {
+  background: var(--color-accent);
+  color: var(--color-surface-base) !important;
+  box-shadow: 0 0 15px var(--color-accent-soft);
+}
+
+.primary-cta:hover {
+  background: oklch(82% 0.12 85);
+  box-shadow: 0 0 25px var(--color-accent-glow);
+  transform: translateY(-2px);
+}
+
+.outline-cta {
+  background: transparent;
+  color: var(--color-text-primary) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.outline-cta:hover {
+  border-color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.shadow-gold {
+  box-shadow: 0 4px 20px var(--color-accent-soft);
+}
+
+.glow-gold {
+  text-shadow: none;
+}

@@ -1,0 +1,105 @@
+<!-- [04] The Funnel & Breakdown -->
+<section id="entity-journey" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
+  <div class="max-w-5xl mx-auto px-6 fade-in-up">
+    <div class="section-header mb-16">
+      <h2 class="section-title">How many <br><em>actually matter</em></h2>
+      <p class="section-subtitle">
+        Dungeon Crawler Carl has thousands of text lines, but NLP entity extraction filters noise. Track the funnel from total name mentions to unique characters, and see their distribution.
+      </p>
+    </div>
+
+    <!-- Controls (Scrubber for Funnel & Donut) -->
+    <div class="race-controls-container mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <button id="journeyPlayBtn" class="race-btn" aria-label="Play">
+          <svg id="journeyPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="6,3 20,12 6,21" />
+          </svg>
+          <svg id="journeyPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+            <rect x="5" y="3" width="4" height="18" />
+            <rect x="15" y="3" width="4" height="18" />
+          </svg>
+        </button>
+        <div class="flex-1 flex flex-col gap-2 w-full">
+          <div class="flex justify-between items-end">
+            <label for="journeySlider" class="control-label">Narrative Scrubber</label>
+            <div class="chapter-display" id="journey-chapter-display">
+              <strong id="journeyChapterNum">Vol. 1, Ch. 2</strong>
+            </div>
+          </div>
+          <input type="range" id="journeySlider" class="race-slider" min="2" max="515" value="2">
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="control-label">Playback Speed</span>
+        <div class="flex gap-1">
+          <button class="journey-speed-btn speed-btn active" data-speed="1" title="Normal Speed">1×</button>
+          <button class="journey-speed-btn speed-btn" data-speed="2" title="Double Speed">2×</button>
+          <button class="journey-speed-btn speed-btn" data-speed="4" title="Quadruple Speed">4×</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 items-start">
+      <!-- Funnel Column (7-cols) -->
+      <div class="md:col-span-7 funnel-display relative">
+        <div class="funnel-container" id="funnel-display-container">
+          <!-- Stage 1 -->
+          <div class="funnel-stage stage-1">
+            <div class="funnel-content">
+              <span class="funnel-num" id="funnel-stage1-count">4,280</span>
+              <span class="funnel-label" id="funnel-stage1-label">raw mentions detected</span>
+            </div>
+          </div>
+
+          <!-- Filter Indicator -->
+          <div class="funnel-connector">
+            <div class="filter-line"></div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="funnel-stage stage-3 highlight">
+            <div class="funnel-content">
+              <span class="funnel-num" id="funnel-stage3-count">317</span>
+              <span class="funnel-label" id="funnel-stage3-label">unique characters</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="funnel-meta mt-12 text-center md:text-left">
+          tracked across <span id="stats-words" class="font-tech text-cream-200">1,245,618</span> words · <span id="stats-chapters" class="font-tech text-cream-200">515</span> chapters
+        </p>
+      </div>
+
+      <!-- Donut Column (5-cols) -->
+      <div class="md:col-span-5">
+        <div class="chart-card p-8 md:p-12 relative flex flex-col items-center">
+          <div class="relative w-full max-w-[240px] aspect-square mx-auto flex items-center justify-center">
+            <!-- Center Total Display -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none">
+              <span id="donut-total-count" class="donut-total-value">317</span>
+              <span class="donut-total-label">unique entities</span>
+            </div>
+            <canvas id="entityDonutChart"></canvas>
+          </div>
+          <!-- Dynamic Legend (Synchronized with timeline) -->
+          <div class="flex flex-wrap justify-center gap-x-3 gap-y-2 mt-10 border-t border-white/5 pt-8 w-full" id="entityLegendGrid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insight Area -->
+    <div class="insight-area mt-20 pt-12 border-t border-white/5" id="funnel-insight-block">
+      <div class="max-w-4xl">
+        <p class="insight-text-bold mb-6">
+          Entity extraction filters narrative noise.
+        </p>
+        <p class="insight-text">
+          LitRPGs are filled with atmospheric noise—passing dungeon callouts, system announcements, short-lived mob names, and one-off side characters. By analyzing the narrative funnel, we see that only a fraction of detected names represent permanent characters. This quantitative layout demonstrates the power of Enrich Reader's core extraction pipeline to map the narrative spine of any manuscript.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
