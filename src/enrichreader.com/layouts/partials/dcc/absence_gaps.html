@@ -11,14 +11,52 @@
     <!-- Chart card -->
     <div class="chart-card p-8 md:p-12">
       <span class="control-label mb-6 block">Longest narrative disappearance spans (chapters absent)</span>
-      
-      <div class="absence-bars-container" id="absence-chart-container">
-        <!-- Dynamically populated via javascript (horizontal bars) -->
+
+      <!-- Legend -->
+      <div class="flex flex-wrap gap-x-3 gap-y-2 mb-8 border-b border-white/5 pb-6" id="absence-legend">
+        <span class="legend-item" style="color: var(--color-person)">
+          <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-person)"></span>
+          character
+        </span>
+        <span class="legend-item" style="color: var(--color-location)">
+          <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-location)"></span>
+          location
+        </span>
+        <span class="legend-item" style="color: var(--color-org)">
+          <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-org)"></span>
+          organization
+        </span>
+        <span class="legend-item" style="color: var(--color-item)">
+          <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-item)"></span>
+          item
+        </span>
+        <span class="legend-item" style="color: var(--color-event)">
+          <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-event)"></span>
+          event
+        </span>
+        <span class="legend-item" style="color: var(--color-other)">
+          <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-other)"></span>
+          other
+        </span>
       </div>
 
+      <div class="absence-chart-outer-wrapper relative">
+        <!-- Vertical grid lines in the background -->
+        <div class="absence-grid-bg" id="absence-grid-bg"></div>
+
+        <!-- The rows container -->
+        <div class="absence-bars-container" id="absence-chart-container">
+          <!-- Dynamically populated via javascript -->
+        </div>
+      </div>
+
+      <!-- Ruler for ticks at the bottom -->
+      <div class="absence-ruler-container" id="absence-ruler-container"></div>
+
       <p class="text-xs text-neutral-500 mt-8 font-mono">
-        * Gaps represent segments where a character's name returns 0 mentions before their next appearance. Spoilers are hidden (no status or deaths are listed).
+        * Gaps represent segments where an entity is absent between its last appearance and its next re-appearance. Spoilers are hidden (no status or deaths are listed).
       </p>
     </div>
   </div>
 </section>
+

@@ -98,8 +98,11 @@ class TimeSeriesPlayer {
 window.TimeSeriesPlayer = TimeSeriesPlayer;
 
 // Fetch promise for cached data access
-window.dccDataPromise = window.dccDataPromise || fetch('dcc_data.json').then(res => {
-  if (!res.ok) throw new Error('Failed to load dcc_data.json');
+const dataContainer = document.querySelector('[data-series-data]');
+const dataUrl = dataContainer ? dataContainer.getAttribute('data-series-data') : 'dcc_data.json';
+
+window.dccDataPromise = window.dccDataPromise || fetch(dataUrl).then(res => {
+  if (!res.ok) throw new Error('Failed to load ' + dataUrl);
   return res.json();
 });
 
@@ -235,20 +238,6 @@ async function initBarChartRace() {
             disposalTimeouts.delete(id);
           }, 400);
           disposalTimeouts.set(id, timeoutId);
-        }
-      }
-      
-      // Update the main callout text stat
-      const statVal = document.getElementById('species-domination-stat');
-      if (statVal && sortedData.length > 0) {
-        const totalSum = sortedData.reduce((acc, curr) => acc + curr.mentions, 0);
-        const topVal = sortedData[0].mentions;
-        const percentage = ((topVal / totalSum) * 100).toFixed(1);
-        statVal.textContent = percentage + '%';
-        
-        const entityLabel = document.querySelector('.callout-card .font-display');
-        if (entityLabel) {
-          entityLabel.textContent = `The ${sortedData[0].entity} Domination`;
         }
       }
     }

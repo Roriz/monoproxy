@@ -15,11 +15,16 @@ scripts_defer: false
 nav_logo_height: "44px"
 nav_bg_border: false
 nav_minimal: true
+series_title_first: "Dungeon Crawler"
+series_title_second: "Carl"
+series_subtitle: "by the numbers"
+series_intro: "This is what the entire crawl looks like when you slow down and count. A quantitative autopsy of Matt Dinniman's LitRPG masterpiece, powered by Enrich Reader's semantic text engine."
+series_data: "/dcc/dcc_data.json"
 ---
 
 {{< partial "dcc/hero.html" >}}
 
-<main id="dcc-main-content">
+<main id="dcc-main-content" data-series-data="/dcc/dcc_data.json">
   {{< partial "dcc/mentions_race.html" >}}
   {{< partial "dcc/absence_gaps.html" >}}
   {{< partial "dcc/survival_mortality.html" >}}

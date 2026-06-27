@@ -15,8 +15,8 @@
   <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center min-h-[75vh]">
     <div class="lg:col-span-7 z-10 py-12">
       <h1 class="hero-title font-display italic fade-in-up editorial-title" id="hero-heading">
-        Dungeon Crawler <br> Carl,<br>
-        <span class="hero-subtitle" id="hero-sub">by the numbers</span>
+        {{ .Params.series_title_first | default "Dungeon Crawler" }} <br> {{ .Params.series_title_second | default "Carl" }},<br>
+        <span class="hero-subtitle" id="hero-sub">{{ .Params.series_subtitle | default "by the numbers" }}</span>
       </h1>
 
       <div class="fade-in-up" style="transition-delay: 0.1s" id="hero-intro-wrapper">
@@ -38,14 +38,14 @@
         </div>
 
         <p class="font-body italic mb-12 hero-description" id="hero-para">
-          This is what the entire crawl looks like when you slow down and count. A quantitative autopsy of Matt Dinniman's LitRPG masterpiece, powered by Enrich Reader's semantic text engine.
+          {{ .Params.series_intro | default "This is what the entire crawl looks like when you slow down and count. A quantitative autopsy of Matt Dinniman's LitRPG masterpiece, powered by Enrich Reader's semantic text engine." }}
         </p>
 
         <div class="flex flex-wrap gap-4 mt-8" id="hero-actions">
-          <a href="https://forms.gle/t7t9ZXirrz3fpqS66" target="_blank" rel="noopener" class="cta-button primary-cta" id="hero-cta-main">
+          <a href="mailto:sales@enrichreader.com" class="cta-button primary-cta" id="hero-cta-main">
             Get Insights for Your Book
           </a>
-          <a href="#entity-race" class="cta-button outline-cta" id="hero-cta-scroll">
+          <a href="/skins" class="cta-button outline-cta" id="hero-cta-scroll">
             Explore the Data
           </a>
         </div>
@@ -89,11 +89,11 @@
       <div class="volume-nav-item" id="volume-indicator-container">
         <div class="volume-indicator">
           <span>timeline scope</span>
-          <span class="volume-current">ALL VOLUMES</span>
+          <span class="volume-current" id="timeline-scope-value">ALL VOLUMES</span>
         </div>
       </div>
 
-      <a href="https://forms.gle/t7t9ZXirrz3fpqS66" target="_blank" rel="noopener" class="next-vol-teaser group" id="hero-teaser-link">
+      <a href="mailto:sales@enrichreader.com" class="next-vol-teaser group" id="hero-teaser-link">
         <span class="teaser-label">Publishers & Authors</span>
         <span class="teaser-value">
           Request Book Audit
