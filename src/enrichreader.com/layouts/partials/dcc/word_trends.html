@@ -12,12 +12,43 @@
       <!-- Word Cloud Card (7-cols) -->
       <div class="lg:col-span-7">
         <div class="chart-card p-8 md:p-12 flex flex-col justify-between h-full">
-          <div class="flex justify-between items-center mb-6">
-            <span class="control-label">Crawl Keyword Map (Categorized Colors)</span>
+          <div class="flex flex-col gap-3 mb-6 border-b border-white/5 pb-4">
+            <span class="control-label">Crawl Keyword Map</span>
+            <div class="flex flex-wrap gap-x-3 gap-y-1" style="font-family: var(--font-ui); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;">
+              <span class="flex items-center gap-1" style="color: var(--color-person)">
+                <span style="background: var(--color-person); width: 5px; height: 5px; display: inline-block; border-radius: 50%;"></span>
+                character
+              </span>
+              <span class="flex items-center gap-1" style="color: var(--color-location)">
+                <span style="background: var(--color-location); width: 5px; height: 5px; display: inline-block; border-radius: 50%;"></span>
+                location
+              </span>
+              <span class="flex items-center gap-1" style="color: var(--color-org)">
+                <span style="background: var(--color-org); width: 5px; height: 5px; display: inline-block; border-radius: 50%;"></span>
+                organization
+              </span>
+              <span class="flex items-center gap-1" style="color: var(--color-item)">
+                <span style="background: var(--color-item); width: 5px; height: 5px; display: inline-block; border-radius: 50%;"></span>
+                item
+              </span>
+              <span class="flex items-center gap-1" style="color: var(--color-event)">
+                <span style="background: var(--color-event); width: 5px; height: 5px; display: inline-block; border-radius: 50%;"></span>
+                event
+              </span>
+              <span class="flex items-center gap-1" style="color: var(--color-other)">
+                <span style="background: var(--color-other); width: 5px; height: 5px; display: inline-block; border-radius: 50%;"></span>
+                other
+              </span>
+            </div>
           </div>
           <div id="wordCloud" class="word-cloud-container flex-1 min-h-[320px]">
             <!-- Dynamically populated with safe elements -->
           </div>
+          <!-- Persistent Branding Watermark -->
+          <a href="/" class="card-branding-badge" target="_blank" rel="noopener">
+            <span>Powered by</span>
+            <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader">
+          </a>
         </div>
       </div>
 
@@ -29,8 +60,8 @@
             <div class="relative w-full max-w-[200px] aspect-square mx-auto mb-8 flex items-center justify-center">
               <!-- Center Total Display -->
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none">
-                <span id="pronoun-total-count" class="donut-total-value" style="font-size: clamp(2rem, 3.5vw, 2.5rem);">317</span>
-                <span class="donut-total-label" style="font-size: 8px;">characters</span>
+                <span id="pronoun-total-count" class="donut-total-value" style="font-size: clamp(2rem, 3.5vw, 2.5rem);">1,655</span>
+                <span class="donut-total-label" style="font-size: 8px; text-transform: uppercase; letter-spacing: 0.05em;">tagged mentions</span>
               </div>
               <canvas id="pronounsDonutChart"></canvas>
             </div>
@@ -52,6 +83,11 @@
               </table>
             </div>
           </div>
+          <!-- Persistent Branding Watermark -->
+          <a href="/" class="card-branding-badge" target="_blank" rel="noopener">
+            <span>Powered by</span>
+            <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader">
+          </a>
         </div>
       </div>
     </div>

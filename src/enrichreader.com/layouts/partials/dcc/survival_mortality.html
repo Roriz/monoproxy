@@ -14,7 +14,7 @@
         <div class="chart-card p-8 md:p-12">
           <div class="flex justify-between items-center mb-6">
             <span class="control-label">Series Survival Curve (All Volumes)</span>
-            <div class="flex gap-4">
+            <div class="flex flex-wrap gap-4">
               <span class="legend-item-minimal">
                 <span class="dot-marker" style="background: var(--color-person)"></span>
                 <span class="legend-label" style="color: var(--color-person)">Alive</span>
@@ -23,14 +23,80 @@
                 <span class="dot-marker" style="background: var(--color-lore)"></span>
                 <span class="legend-label" style="color: var(--color-lore)">Dead</span>
               </span>
+              <span class="legend-item-minimal">
+                <span class="dot-marker" style="background: var(--color-other); border-radius: 0; width: 10px; height: 2px;"></span>
+                <span class="legend-label" style="color: var(--color-other)">Mortality Rate (%)</span>
+              </span>
             </div>
           </div>
           
           <div class="chart-container" style="height: 350px;">
             <canvas id="survivalChart"></canvas>
           </div>
+          <!-- Persistent Branding Watermark -->
+          <a href="/" class="card-branding-badge" target="_blank" rel="noopener">
+            <span>Powered by</span>
+            <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader">
+          </a>
         </div>
       </div>
     </div>
+
+    <!-- Insights & Analysis Section -->
+    <div class="mt-16 pt-8 border-t border-white/5">
+      <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Survival Timeline & Mortality Analysis</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- The Early Floor Filter -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-person); font-weight: 700;">
+            The Early Floor Filter (Volume 1)
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            By the end of Volume 1, <strong>26 characters</strong> have died out of 120 introduced (a 21.6% initial mortality rate). Early floors serve as a rapid filter, quickly eliminating secondary and tertiary characters introduced in the panic of the initial collapse.
+          </p>
+        </div>
+
+        <!-- Steady Attrition vs. Endgame Drop -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-item); font-weight: 700;">
+            Steady Attrition to Plunge
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            While the survival rate hovers steadily around <strong>70%</strong> through Volume 6, it takes a sharp plunge to <strong>62.1%</strong> in Volume 7. This indicates that while intermediate floors have manageable attrition, transitioning into open system warfare collapses the safety margin.
+          </p>
+        </div>
+
+        <!-- The 9th Floor Massacre -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-event); font-weight: 700;">
+            The 9th Floor Massacre (Peak Lethality)
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            Volume 7, Chapter 13 is the single most lethal chapter in the series, recording <strong>5 key character deaths</strong> in a single sequence. This climactic battlefield clash of the Faction War represents the absolute peak of system lethality.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO & Accessibility Data (Exposing final state survival stats) -->
+    <div class="sr-only" aria-hidden="false">
+      <h3>Narrative Survival & Mortality Summary (Volume 7, Chapter 119)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Total Characters Introduced</td><td>317</td></tr>
+          <tr><td>Surviving Characters (Alive)</td><td>197</td></tr>
+          <tr><td>Eliminated Characters (Dead)</td><td>120</td></tr>
+          <tr><td>Survival Rate</td><td>62.15%</td></tr>
+          <tr><td>Mortality Rate</td><td>37.85%</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
+

@@ -92,7 +92,7 @@ async function initEntityJourney() {
     const metadata = rawData.metadata || {
       total_chapters: totalChapters,
       total_words: 1245618,
-      total_characters: window.categoryTotals.person || 317
+      total_characters: 317
     };
 
     // 0.1 Update Hero Stats dynamically
@@ -178,13 +178,13 @@ function updateNarrativeStep(seriesIndex, rawData) {
     labelEl.textContent = chapterInfo.label;
   }
 
-  // Calculate active totals based on series index (Series scale up to 515)
-  // Approximate a scaling growth for visual consistency
+  // Calculate active totals based on series index
   const totalSeriesChapters = (rawData.metadata && rawData.metadata.total_chapters) || rawData.chapters.length || 515;
   const progressRatio = seriesIndex / totalSeriesChapters;
 
   const rawMentions = Math.round((window.totalMentionsAtEnd || 4280) * progressRatio);
-  const uniqueChars = Math.round((window.categoryTotals.person || 317) * progressRatio);
+  const totalChars = (rawData.metadata && rawData.metadata.total_characters) || 317;
+  const uniqueChars = Math.round(totalChars * progressRatio);
 
   const funnel1 = document.getElementById('funnel-stage1-count');
   const funnel3 = document.getElementById('funnel-stage3-count');
@@ -193,7 +193,7 @@ function updateNarrativeStep(seriesIndex, rawData) {
 
   // 2. Update Donut Chart
   if (rawData.breakdowns) {
-    updateBreakdownDonut(progressRatio, rawData.breakdowns);
+    updateBreakdownDonut(progressRatio, rawData);
   }
 
   // 3. Update Mortality Feed in section 3 synchronously
@@ -202,18 +202,20 @@ function updateNarrativeStep(seriesIndex, rawData) {
   }
 }
 
-function updateBreakdownDonut(progressRatio, breakdowns) {
+function updateBreakdownDonut(progressRatio, rawData) {
   const ctx = document.getElementById('entityDonutChart')?.getContext('2d');
   if (!ctx) return;
 
+  const totalChars = (rawData && rawData.metadata && rawData.metadata.total_characters) || 317;
+
   // Approximate category distribution for active chapter (simulate data growth)
   const categories = {
-    person: Math.max(1, Math.round((window.categoryTotals.person || 317) * progressRatio)),
-    location: Math.max(1, Math.round((window.categoryTotals.location || 107) * progressRatio)),
-    organization: Math.max(1, Math.round((window.categoryTotals.organization || 125) * progressRatio)),
-    item: Math.max(1, Math.round((window.categoryTotals.item || 140) * progressRatio)),
-    event: Math.max(1, Math.round((window.categoryTotals.event || 98) * progressRatio)),
-    other: Math.max(1, Math.round((window.categoryTotals.other || 43) * progressRatio))
+    person: Math.max(1, Math.round(totalChars * progressRatio)),
+    location: Math.max(1, Math.round(107 * progressRatio)),
+    organization: Math.max(1, Math.round(125 * progressRatio)),
+    item: Math.max(1, Math.round(140 * progressRatio)),
+    event: Math.max(1, Math.round(98 * progressRatio)),
+    other: Math.max(1, Math.round(43 * progressRatio))
   };
 
   const total = Object.values(categories).reduce((a, b) => a + b, 0);

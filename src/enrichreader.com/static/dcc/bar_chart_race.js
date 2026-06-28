@@ -144,12 +144,16 @@ async function initBarChartRace() {
     const barElements = new Map();
     const disposalTimeouts = new Map();
 
-    // References to category filters
-    const filterPerson = document.getElementById('filter-person');
-    const filterLocation = document.getElementById('filter-location');
-    const filterOrg = document.getElementById('filter-org');
-    const filterItem = document.getElementById('filter-item');
-    const filterEvent = document.getElementById('filter-event');
+    // References to interactive legend chips
+    const filterChips = document.querySelectorAll('#race-legend .legend-item[data-filter]');
+    const activeFilters = {
+      person: true,
+      location: true,
+      org: true,
+      item: true,
+      event: true,
+      other: true
+    };
 
     function updateChart(seriesIndex) {
       // Find snapshot for active series_index
@@ -170,16 +174,11 @@ async function initBarChartRace() {
 
       // Filter active snapshot data based on toggles
       let filteredData = snapshot.data;
-      if (filterPerson || filterLocation || filterOrg || filterItem || filterEvent) {
-        filteredData = filteredData.filter(d => {
-          if (d.classification === 'person' && filterPerson && !filterPerson.checked) return false;
-          if (d.classification === 'location' && filterLocation && !filterLocation.checked) return false;
-          if (d.classification === 'organization' && filterOrg && !filterOrg.checked) return false;
-          if (d.classification === 'item' && filterItem && !filterItem.checked) return false;
-          if (d.classification === 'event' && filterEvent && !filterEvent.checked) return false;
-          return true;
-        });
-      }
+      filteredData = filteredData.filter(d => {
+        let cat = d.classification;
+        if (cat === 'organization') cat = 'org';
+        return activeFilters[cat] !== false;
+      });
 
       // Sort and slice top N
       const sortedData = filteredData
@@ -291,13 +290,18 @@ async function initBarChartRace() {
     // Initial render at max chapter to show final values on load
     player.goTo(maxCh);
 
-    // Re-render when checkboxes change
-    [filterPerson, filterLocation, filterOrg, filterItem, filterEvent].forEach(chk => {
-      if (chk) {
-        chk.addEventListener('change', () => {
-          updateChart(player.currentChapter);
-        });
-      }
+    // Re-render when chips are clicked
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const cat = chip.getAttribute('data-filter');
+        activeFilters[cat] = !activeFilters[cat];
+        if (activeFilters[cat]) {
+          chip.classList.remove('inactive');
+        } else {
+          chip.classList.add('inactive');
+        }
+        updateChart(player.currentChapter);
+      });
     });
 
   } catch (err) {

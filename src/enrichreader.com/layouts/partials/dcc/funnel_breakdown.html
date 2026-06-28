@@ -86,7 +86,72 @@
           <div class="flex flex-wrap justify-center gap-x-3 gap-y-2 mt-10 border-t border-white/5 pt-8 w-full" id="entityLegendGrid">
             <!-- Dynamically populated -->
           </div>
+          <!-- Persistent Branding Watermark -->
+          <a href="/" class="card-branding-badge" target="_blank" rel="noopener">
+            <span>Powered by</span>
+            <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader">
+          </a>
         </div>
       </div>
-    </div>  </div>
+    </div>
+
+    <!-- Insights & Analysis Section -->
+    <div class="mt-16 pt-8 border-t border-white/5">
+      <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Entity Distribution & Genre Analysis</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- LitRPG Mechanics Insight -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-item); font-weight: 700;">
+            Loot-Driven Narrative (Items vs. Locations)
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            Unique items (<strong>140</strong>) outnumber unique locations (<strong>107</strong>) by a significant margin. This reflects standard LitRPG genre priorities: the variety of gear, legendary weapons, and consumables used by Carl and Donut to progress is wider than the variety of settings they traverse.
+          </p>
+        </div>
+
+        <!-- Corporate Intrigue Insight -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-org); font-weight: 700;">
+            High Corporate Density (Organizations)
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            The database records <strong>125 unique organizations</strong> (syndicates, sponsorships, governing bodies, and galactic corporations). This confirms that the crawl is heavily political, showing the immense weight that outer galactic bureaucracy and sponsorships hold over the narrative.
+          </p>
+        </div>
+
+        <!-- Character Dominance Insight -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-person); font-weight: 700;">
+            Character-Driven Timeline (Persons)
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            With <strong>317 unique characters</strong>, individuals represent the largest entity category by far. Despite the high body count and fast-paced elimination rounds, the story remains deeply focused on individual actors, guides, show hosts, deities, and crawler allies.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO & Accessibility Data (Exposing final state entity breakdowns) -->
+    <div class="sr-only" aria-hidden="false">
+      <h3>Narrative Entity Classification Summary (Volume 7, Chapter 119)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Classification</th>
+            <th>Unique Entities Detected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Person / Character</td><td>317</td></tr>
+          <tr><td>Item / Gear</td><td>140</td></tr>
+          <tr><td>Organization</td><td>125</td></tr>
+          <tr><td>Location</td><td>107</td></tr>
+          <tr><td>Event</td><td>98</td></tr>
+          <tr><td>Other Categories</td><td>43</td></tr>
+          <tr><td>Total Unique Entities</td><td>830</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
+

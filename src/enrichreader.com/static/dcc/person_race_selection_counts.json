@@ -1,0 +1,821 @@
+{
+  "classification": "person",
+  "field": "race_selection",
+  "volumes": [
+    {
+      "volume": "v-dungeon_crawler_carl_1",
+      "counts": {
+        "Human": 4,
+        "Goblin": 2,
+        "Orc": 1,
+        "Frenzied Gerbil": 1,
+        "Kua-tin": 1
+      },
+      "examples": {
+        "Human": [
+          "brandon",
+          "carl",
+          "frank q"
+        ],
+        "Goblin": [
+          "lorelai",
+          "rory"
+        ],
+        "Orc": [
+          "maestro"
+        ],
+        "Frenzied Gerbil": [
+          "ralph"
+        ],
+        "Kua-tin": [
+          "zev"
+        ]
+      }
+    },
+    {
+      "volume": "v-dungeon_crawler_carl_2",
+      "counts": {
+        "Orc": 2,
+        "Human": 1,
+        "Cat": 1,
+        "Gnome": 1,
+        "Pestiferous Vine": 1,
+        "Amazonian": 1,
+        "Velociraptor": 1,
+        "Changeling": 1,
+        "Hobgoblin": 1,
+        "Fathom Dwarf": 1,
+        "Half-naiad": 1,
+        "Kua-tin": 1
+      },
+      "examples": {
+        "Human": [
+          "carl"
+        ],
+        "Cat": [
+          "donut"
+        ],
+        "Gnome": [
+          "gordo"
+        ],
+        "Pestiferous Vine": [
+          "grimaldi"
+        ],
+        "Orc": [
+          "gumgum",
+          "maestro"
+        ],
+        "Amazonian": [
+          "hekla"
+        ],
+        "Velociraptor": [
+          "mongo"
+        ],
+        "Changeling": [
+          "mordecai"
+        ],
+        "Hobgoblin": [
+          "pustule"
+        ],
+        "Fathom Dwarf": [
+          "ricky joe"
+        ],
+        "Half-naiad": [
+          "signet"
+        ],
+        "Kua-tin": [
+          "zev"
+        ]
+      }
+    },
+    {
+      "volume": "v-dungeon_crawler_carl_3",
+      "counts": {
+        "Human": 4,
+        "Tigran": 1,
+        "Demon": 1,
+        "nagini/orc hybrid": 1,
+        "Mantaur": 1,
+        "Centaur-minotaur hybrid": 1,
+        "Changbi": 1,
+        "Orc": 1,
+        "Changeling": 1,
+        "Dwarf": 1,
+        "Kua-tin": 1
+      },
+      "examples": {
+        "Tigran": [
+          "bautista"
+        ],
+        "Demon": [
+          "brandy"
+        ],
+        "Human": [
+          "carl",
+          "li jun",
+          "miriam dom"
+        ],
+        "nagini/orc hybrid": [
+          "eva"
+        ],
+        "Mantaur": [
+          "gore"
+        ],
+        "Centaur-minotaur hybrid": [
+          "grull"
+        ],
+        "Changbi": [
+          "li na"
+        ],
+        "Orc": [
+          "maestro"
+        ],
+        "Changeling": [
+          "mordecai"
+        ],
+        "Dwarf": [
+          "tizquick"
+        ],
+        "Kua-tin": [
+          "zev"
+        ]
+      }
+    },
+    {
+      "volume": "v-dungeon_crawler_carl_4",
+      "counts": {
+        "Changeling": 3,
+        "Gnome": 3,
+        "Human": 2,
+        "Kua-tin": 2,
+        "Dirigible Gnome": 1,
+        "nagini/orc hybrid": 1,
+        "Crocodilian": 1,
+        "Soother": 1,
+        "Centaur-minotaur hybrid": 1,
+        "Doppelganger": 1,
+        "Lajabless": 1,
+        "Orc": 1,
+        "Infiltrator": 1,
+        "Vampire": 1
+      },
+      "examples": {
+        "Dirigible Gnome": [
+          "bonnie"
+        ],
+        "Human": [
+          "carl",
+          "li jun"
+        ],
+        "nagini/orc hybrid": [
+          "eva"
+        ],
+        "Crocodilian": [
+          "florin"
+        ],
+        "Soother": [
+          "gravo"
+        ],
+        "Centaur-minotaur hybrid": [
+          "grull"
+        ],
+        "Changeling": [
+          "henrik",
+          "juice box",
+          "mordecai"
+        ],
+        "Gnome": [
+          "kane",
+          "skarn",
+          "wynne"
+        ],
+        "Doppelganger": [
+          "katia"
+        ],
+        "Kua-tin": [
+          "loita",
+          "zev"
+        ],
+        "Lajabless": [
+          "lucia mar"
+        ],
+        "Orc": [
+          "maestro"
+        ],
+        "Infiltrator": [
+          "maggie"
+        ],
+        "Vampire": [
+          "miriam dom"
+        ]
+      }
+    },
+    {
+      "volume": "v-dungeon_crawler_carl_5",
+      "counts": {
+        "Changeling": 2,
+        "Ursine": 2,
+        "Gnome": 1,
+        "Primal": 1,
+        "Mantis": 1,
+        "Moon Elf": 1,
+        "half-nagini, half-orc": 1,
+        "Crocodilian": 1,
+        "Were-castor": 1,
+        "High Elf": 1,
+        "Human": 1,
+        "Changbi": 1,
+        "Infiltrator": 1,
+        "Vampire": 1,
+        "Pocket Kuma": 1,
+        "Chee": 1,
+        "Naga": 1,
+        "Valtay": 1,
+        "Nodling": 1,
+        "Withering spirit": 1,
+        "Half-naiad": 1,
+        "Kua-tin": 1
+      },
+      "examples": {
+        "Gnome": [
+          "bonnie"
+        ],
+        "Primal": [
+          "carl"
+        ],
+        "Mantis": [
+          "circe took"
+        ],
+        "Moon Elf": [
+          "drick"
+        ],
+        "half-nagini, half-orc": [
+          "eva"
+        ],
+        "Crocodilian": [
+          "florin"
+        ],
+        "Were-castor": [
+          "holger"
+        ],
+        "High Elf": [
+          "imogen"
+        ],
+        "Changeling": [
+          "juice box",
+          "pearson"
+        ],
+        "Ursine": [
+          "kiwi",
+          "prudence"
+        ],
+        "Human": [
+          "li jun"
+        ],
+        "Changbi": [
+          "li na"
+        ],
+        "Infiltrator": [
+          "maggie"
+        ],
+        "Vampire": [
+          "miriam dom"
+        ],
+        "Pocket Kuma": [
+          "mordecai"
+        ],
+        "Chee": [
+          "nadine"
+        ],
+        "Naga": [
+          "nihit"
+        ],
+        "Valtay": [
+          "orren"
+        ],
+        "Nodling": [
+          "popov"
+        ],
+        "Withering spirit": [
+          "samantha"
+        ],
+        "Half-naiad": [
+          "signet"
+        ],
+        "Kua-tin": [
+          "zev"
+        ]
+      }
+    },
+    {
+      "volume": "v-dungeon_crawler_carl_6",
+      "counts": {
+        "Human": 3,
+        "skyfowl": 2,
+        "quarter-naga": 1,
+        "fairy": 1,
+        "Rock creature": 1,
+        "Primal": 1,
+        "Pterolykos": 1,
+        "Ifrit": 1,
+        "half-nagini, half-orc": 1,
+        "Crocodilian": 1,
+        "Havana brown cat-woman": 1,
+        "High Elf": 1,
+        "Changeling": 1,
+        "Hills Cyclops": 1,
+        "Valtay": 1,
+        "Curupira": 1,
+        "Hobbledehoy": 1,
+        "Naga": 1,
+        "Dwarf": 1,
+        "Half-naiad": 1,
+        "Troll": 1,
+        "Kua-tin": 1
+      },
+      "examples": {
+        "quarter-naga": [
+          "anaconda"
+        ],
+        "fairy": [
+          "astrid"
+        ],
+        "Rock creature": [
+          "bomo"
+        ],
+        "Primal": [
+          "carl"
+        ],
+        "Pterolykos": [
+          "chaco"
+        ],
+        "Ifrit": [
+          "damascus steel"
+        ],
+        "half-nagini, half-orc": [
+          "eva"
+        ],
+        "Crocodilian": [
+          "florin"
+        ],
+        "Havana brown cat-woman": [
+          "havana"
+        ],
+        "skyfowl": [
+          "hold steady",
+          "uzzi"
+        ],
+        "High Elf": [
+          "imogen"
+        ],
+        "Changeling": [
+          "juice box"
+        ],
+        "Human": [
+          "li jun",
+          "paulie",
+          "paz"
+        ],
+        "Hills Cyclops": [
+          "mordecai"
+        ],
+        "Valtay": [
+          "orren"
+        ],
+        "Curupira": [
+          "osvaldo"
+        ],
+        "Hobbledehoy": [
+          "pater coal"
+        ],
+        "Naga": [
+          "rishi"
+        ],
+        "Dwarf": [
+          "rosemarie"
+        ],
+        "Half-naiad": [
+          "signet"
+        ],
+        "Troll": [
+          "steve rowland"
+        ],
+        "Kua-tin": [
+          "zev"
+        ]
+      }
+    },
+    {
+      "volume": "v-dungeon_crawler_carl_7",
+      "counts": {
+        "Crocodilian": 3,
+        "Human": 3,
+        "Naga": 3,
+        "Elf": 2,
+        "Kua-tin": 2,
+        "Changeling": 2,
+        "High Elf": 2,
+        "Orc": 2,
+        "Tigran": 1,
+        "Goat dragon": 1,
+        "sluggalette": 1,
+        "Rock creature": 1,
+        "Gnome": 1,
+        "Primal": 1,
+        "Pterolykos": 1,
+        "lava rock crawler": 1,
+        "Chee": 1,
+        "Valtay worm": 1,
+        "Tortoise": 1,
+        "Cat": 1,
+        "Gnoll": 1,
+        "Were-castor": 1,
+        "Grixist": 1,
+        "fairy": 1,
+        "skyfowl": 1,
+        "Ursine": 1,
+        "Lemig Goblin": 1,
+        "Xenopus": 1,
+        "Valtay": 1,
+        "Curupira": 1,
+        "Spider": 1,
+        "Half-naiad": 1,
+        "ballerina dinosaur": 1,
+        "Bipedal rhinoceros": 1,
+        "Elf-like creature": 1,
+        "Tenodera": 1
+      },
+      "examples": {
+        "Tigran": [
+          "bautista"
+        ],
+        "Goat dragon": [
+          "bianca"
+        ],
+        "sluggalette": [
+          "bigs"
+        ],
+        "Rock creature": [
+          "bomo"
+        ],
+        "Gnome": [
+          "bonnie"
+        ],
+        "Elf": [
+          "boomer",
+          "epitome tagg"
+        ],
+        "Crocodilian": [
+          "bucket boy",
+          "dante",
+          "florin"
+        ],
+        "Primal": [
+          "carl"
+        ],
+        "Kua-tin": [
+          "cascadia",
+          "zev"
+        ],
+        "Pterolykos": [
+          "chaco"
+        ],
+        "lava rock crawler": [
+          "chris"
+        ],
+        "Chee": [
+          "clint"
+        ],
+        "Valtay worm": [
+          "drick"
+        ],
+        "Tortoise": [
+          "edgar"
+        ],
+        "Cat": [
+          "ferdinand"
+        ],
+        "Gnoll": [
+          "gary"
+        ],
+        "Were-castor": [
+          "holger"
+        ],
+        "Grixist": [
+          "huanxin jinx"
+        ],
+        "fairy": [
+          "imani c"
+        ],
+        "Changeling": [
+          "juice box",
+          "worgo"
+        ],
+        "skyfowl": [
+          "justice light"
+        ],
+        "High Elf": [
+          "kibben",
+          "porthus"
+        ],
+        "Ursine": [
+          "kiwi"
+        ],
+        "Human": [
+          "li jun",
+          "mordecai",
+          "paulie"
+        ],
+        "Lemig Goblin": [
+          "luke"
+        ],
+        "Xenopus": [
+          "milk"
+        ],
+        "Naga": [
+          "naga",
+          "rishi",
+          "vinata"
+        ],
+        "Valtay": [
+          "orren"
+        ],
+        "Curupira": [
+          "osvaldo"
+        ],
+        "Spider": [
+          "shi maria"
+        ],
+        "Half-naiad": [
+          "signet"
+        ],
+        "Orc": [
+          "stalwart",
+          "victory"
+        ],
+        "ballerina dinosaur": [
+          "tina"
+        ],
+        "Bipedal rhinoceros": [
+          "toyotomi"
+        ],
+        "Elf-like creature": [
+          "yarilo"
+        ],
+        "Tenodera": [
+          "york"
+        ]
+      }
+    }
+  ],
+  "series": {
+    "counts": {
+      "Gnome": 4,
+      "Changeling": 4,
+      "Human": 4,
+      "Naga": 4,
+      "Crocodilian": 3,
+      "Kua-tin": 3,
+      "Orc": 3,
+      "skyfowl": 3,
+      "High Elf": 3,
+      "fairy": 2,
+      "Elf": 2,
+      "Chee": 2,
+      "Ursine": 2,
+      "Goblin": 2,
+      "Dwarf": 2,
+      "quarter-naga": 1,
+      "Tigran": 1,
+      "Goat dragon": 1,
+      "sluggalette": 1,
+      "Rock creature": 1,
+      "Demon": 1,
+      "Primal": 1,
+      "Pterolykos": 1,
+      "lava rock crawler": 1,
+      "Mantis": 1,
+      "Ifrit": 1,
+      "Valtay worm": 1,
+      "Tortoise": 1,
+      "half-nagini, half-orc": 1,
+      "Cat": 1,
+      "Night Elf": 1,
+      "Gnoll": 1,
+      "Mantaur": 1,
+      "Soother": 1,
+      "Centaur-minotaur hybrid": 1,
+      "Havana brown cat-woman": 1,
+      "Were-castor": 1,
+      "Grixist": 1,
+      "Lemig Goblin": 1,
+      "Infiltrator": 1,
+      "Xenopus": 1,
+      "Vampire": 1,
+      "Valtay": 1,
+      "Curupira": 1,
+      "Hobbledehoy": 1,
+      "Nodling": 1,
+      "Hobgoblin": 1,
+      "Frenzied Gerbil": 1,
+      "Fathom Dwarf": 1,
+      "Half-naiad": 1,
+      "Troll": 1,
+      "ballerina dinosaur": 1,
+      "Bipedal rhinoceros": 1,
+      "Elf-like creature": 1,
+      "Tenodera": 1
+    },
+    "examples": {
+      "quarter-naga": [
+        "anaconda"
+      ],
+      "fairy": [
+        "astrid",
+        "imani c"
+      ],
+      "Tigran": [
+        "bautista"
+      ],
+      "Goat dragon": [
+        "bianca"
+      ],
+      "sluggalette": [
+        "bigs"
+      ],
+      "Rock creature": [
+        "bomo"
+      ],
+      "Gnome": [
+        "bonnie",
+        "gordo",
+        "kane"
+      ],
+      "Elf": [
+        "boomer",
+        "epitome tagg"
+      ],
+      "Demon": [
+        "brandy"
+      ],
+      "Crocodilian": [
+        "bucket boy",
+        "dante",
+        "florin"
+      ],
+      "Primal": [
+        "carl"
+      ],
+      "Kua-tin": [
+        "cascadia",
+        "loita",
+        "zev"
+      ],
+      "Pterolykos": [
+        "chaco"
+      ],
+      "lava rock crawler": [
+        "chris"
+      ],
+      "Mantis": [
+        "circe took"
+      ],
+      "Chee": [
+        "clint",
+        "nadine"
+      ],
+      "Ifrit": [
+        "damascus steel"
+      ],
+      "Valtay worm": [
+        "drick"
+      ],
+      "Tortoise": [
+        "edgar"
+      ],
+      "half-nagini, half-orc": [
+        "eva"
+      ],
+      "Cat": [
+        "ferdinand"
+      ],
+      "Night Elf": [
+        "frank q"
+      ],
+      "Gnoll": [
+        "gary"
+      ],
+      "Mantaur": [
+        "gore"
+      ],
+      "Soother": [
+        "gravo"
+      ],
+      "Centaur-minotaur hybrid": [
+        "grull"
+      ],
+      "Orc": [
+        "gumgum",
+        "stalwart",
+        "victory"
+      ],
+      "Havana brown cat-woman": [
+        "havana"
+      ],
+      "Changeling": [
+        "henrik",
+        "juice box",
+        "pearson"
+      ],
+      "skyfowl": [
+        "hold steady",
+        "justice light",
+        "uzzi"
+      ],
+      "Were-castor": [
+        "holger"
+      ],
+      "Grixist": [
+        "huanxin jinx"
+      ],
+      "High Elf": [
+        "imogen",
+        "kibben",
+        "porthus"
+      ],
+      "Ursine": [
+        "kiwi",
+        "prudence"
+      ],
+      "Human": [
+        "li jun",
+        "mordecai",
+        "paulie"
+      ],
+      "Goblin": [
+        "lorelai",
+        "rory"
+      ],
+      "Lemig Goblin": [
+        "luke"
+      ],
+      "Infiltrator": [
+        "maggie"
+      ],
+      "Xenopus": [
+        "milk"
+      ],
+      "Vampire": [
+        "miriam dom"
+      ],
+      "Naga": [
+        "naga",
+        "nihit",
+        "rishi"
+      ],
+      "Valtay": [
+        "orren"
+      ],
+      "Curupira": [
+        "osvaldo"
+      ],
+      "Hobbledehoy": [
+        "pater coal"
+      ],
+      "Nodling": [
+        "popov"
+      ],
+      "Hobgoblin": [
+        "pustule"
+      ],
+      "Frenzied Gerbil": [
+        "ralph"
+      ],
+      "Fathom Dwarf": [
+        "ricky joe"
+      ],
+      "Dwarf": [
+        "rosemarie",
+        "tizquick"
+      ],
+      "Half-naiad": [
+        "signet"
+      ],
+      "Troll": [
+        "steve rowland"
+      ],
+      "ballerina dinosaur": [
+        "tina"
+      ],
+      "Bipedal rhinoceros": [
+        "toyotomi"
+      ],
+      "Elf-like creature": [
+        "yarilo"
+      ],
+      "Tenodera": [
+        "york"
+      ]
+    }
+  }
+}

@@ -1,0 +1,122 @@
+<!-- [06] Race Selection Matrix -->
+<section id="race-selection-matrix-section" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
+  <div class="max-w-5xl mx-auto px-6 fade-in-up">
+    <div class="section-header mb-12">
+      <h2 class="section-title">Race selection matrix, <br><em>by volume</em></h2>
+      <p class="section-subtitle">
+        Track the distribution of character races selected across all books of the crawl. Hover over any active cell to see which characters chose that race in that volume.
+      </p>
+    </div>
+
+    <!-- Matrix Card -->
+    <div class="chart-card p-6 md:p-10">
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-6 mb-8 border-b border-white/5 pb-6">
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <label for="matrixSearch" class="control-label">Search Races</label>
+          <input type="text" id="matrixSearch" placeholder="Filter races..." class="matrix-search-input">
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="control-label">Sort By</span>
+          <div class="flex gap-1">
+            <button id="matrixSortTotal" class="speed-btn active" data-sort="total">Total Counts</button>
+            <button id="matrixSortAlpha" class="speed-btn" data-sort="alpha">Alphabetical</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Wrapper -->
+      <div class="matrix-table-container overflow-x-auto relative" style="margin-inline: -1.5rem; padding-inline: 1.5rem;">
+        <table class="matrix-table w-full text-left font-ui">
+          <thead>
+            <tr>
+              <th class="matrix-th-race">Race</th>
+              <th class="matrix-th">Vol 1</th>
+              <th class="matrix-th">Vol 2</th>
+              <th class="matrix-th">Vol 3</th>
+              <th class="matrix-th">Vol 4</th>
+              <th class="matrix-th">Vol 5</th>
+              <th class="matrix-th">Vol 6</th>
+              <th class="matrix-th">Vol 7</th>
+              <th class="matrix-th-total">Series Total</th>
+            </tr>
+          </thead>
+          <tbody id="matrixTableBody">
+            <!-- Dynamically populated via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-[10px] text-neutral-500 mt-4 font-mono" style="font-size: 10px; color: var(--color-text-dim);">
+        * Series Total represents unique characters across the entire series, not a simple sum of volume counts (since characters survive across volumes or undergo race selections).
+      </p>
+
+      <!-- Expand Toggle -->
+      <div class="flex justify-center mt-8 pt-4 border-t border-white/5" id="matrixToggleContainer">
+        <button id="matrixToggleBtn" class="speed-btn">Show all 57 races (yes, even Frenzied Gerbil)</button>
+      </div>
+
+      <!-- Insights & Analysis Section -->
+      <div class="mt-12 pt-8 border-t border-white/5">
+        <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Crawl Insights & Species Diversity Analysis</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Least Diversity Card -->
+          <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+            <h4 class="font-display italic text-sm mb-2" style="color: var(--color-person); font-weight: 700;">
+              Least Diverse Entry: Volume 1
+            </h4>
+            <p class="text-xs text-neutral-400 font-ui leading-relaxed" style="color: var(--color-text-secondary); margin-bottom: 6px;">
+              <strong>Data Insight:</strong> Only <strong>5 unique races</strong> detected (Human, Goblin, Orc, Frenzied Gerbil, Kua-tin). <strong>Humans (4)</strong> make up 44% of the early cast count.
+            </p>
+            <p class="text-xs font-ui leading-relaxed" style="color: var(--color-text-muted); font-style: italic;">
+              <strong>Lore Assumption:</strong> Early in the crawl, Earth survivors have just entered the dungeon and haven't had their first opportunities to purchase/select race change options (like Carl's eventual transition to Primal, or Mordecai's cyclical floor transformations).
+            </p>
+          </div>
+
+          <!-- Most Diversity Card -->
+          <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+            <h4 class="font-display italic text-sm mb-2" style="color: var(--color-location); font-weight: 700;">
+              Maximum Diversity: Volume 7
+            </h4>
+            <p class="text-xs text-neutral-400 font-ui leading-relaxed" style="color: var(--color-text-secondary); margin-bottom: 6px;">
+              <strong>Data Insight:</strong> A staggering <strong>36 unique races</strong> recorded across 47 active characters, with no single race claiming more than 3 representatives.
+            </p>
+            <p class="text-xs font-ui leading-relaxed" style="color: var(--color-text-muted); font-style: italic;">
+              <strong>Lore Assumption:</strong> Volume 7 centers around the Faction War on the 9th floor. At this stage, intergalactic military factions, mercenary corps, and alien citizens join the battle lines directly, resulting in an explosion of diverse species.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Persistent Branding Watermark -->
+      <a href="/" class="card-branding-badge" target="_blank" rel="noopener">
+        <span>Powered by</span>
+        <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader">
+      </a>
+    </div>
+
+    <!-- SEO & Accessibility Data (Exposing final state race selections) -->
+    <div class="sr-only" aria-hidden="false">
+      <h3>Narrative Race Selections Summary (Series Totals)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Race Selection</th>
+            <th>Characters Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Gnome</td><td>4</td></tr>
+          <tr><td>Changeling</td><td>4</td></tr>
+          <tr><td>Human</td><td>4</td></tr>
+          <tr><td>Naga</td><td>4</td></tr>
+          <tr><td>Crocodilian</td><td>3</td></tr>
+          <tr><td>Kua-tin</td><td>3</td></tr>
+          <tr><td>Orc</td><td>3</td></tr>
+          <tr><td>Skyfowl</td><td>3</td></tr>
+          <tr><td>High Elf</td><td>3</td></tr>
+          <tr><td>Fairy</td><td>2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

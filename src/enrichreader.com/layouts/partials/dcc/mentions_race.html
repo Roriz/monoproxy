@@ -15,27 +15,27 @@
         <div class="chart-card p-8 md:p-12">
           <!-- Legend -->
           <div class="flex flex-wrap gap-x-3 gap-y-2 mb-8 border-b border-white/5 pb-6" id="race-legend">
-            <span class="legend-item" style="color: var(--color-person)">
+            <span class="legend-item" data-filter="person" style="color: var(--color-person)">
               <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-person)"></span>
               character
             </span>
-            <span class="legend-item" style="color: var(--color-location)">
+            <span class="legend-item" data-filter="location" style="color: var(--color-location)">
               <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-location)"></span>
               location
             </span>
-            <span class="legend-item" style="color: var(--color-org)">
+            <span class="legend-item" data-filter="org" style="color: var(--color-org)">
               <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-org)"></span>
               organization
             </span>
-            <span class="legend-item" style="color: var(--color-item)">
+            <span class="legend-item" data-filter="item" style="color: var(--color-item)">
               <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-item)"></span>
               item
             </span>
-            <span class="legend-item" style="color: var(--color-event)">
+            <span class="legend-item" data-filter="event" style="color: var(--color-event)">
               <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-event)"></span>
               event
             </span>
-            <span class="legend-item" style="color: var(--color-other)">
+            <span class="legend-item" data-filter="other" style="color: var(--color-other)">
               <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-other)"></span>
               other
             </span>
@@ -73,17 +73,6 @@
                   <button class="speed-btn" data-speed="4" title="Quadruple Speed">4×</button>
                 </div>
               </div>
-
-              <!-- Category filtering toggles -->
-              <div class="flex flex-wrap items-center gap-2" id="filter-checkboxes">
-                <span class="control-label">Filter:</span>
-                <label class="filter-checkbox-label"><input type="checkbox" id="filter-person" checked> Person</label>
-                <label class="filter-checkbox-label"><input type="checkbox" id="filter-location" checked>
-                  Location</label>
-                <label class="filter-checkbox-label"><input type="checkbox" id="filter-org" checked> Org</label>
-                <label class="filter-checkbox-label"><input type="checkbox" id="filter-item" checked> Item</label>
-                <label class="filter-checkbox-label"><input type="checkbox" id="filter-event" checked> Event</label>
-              </div>
             </div>
           </div>
 
@@ -92,8 +81,75 @@
             <div class="chart-grid-lines" aria-hidden="true"></div>
             <div id="raceChart" class="race-chart"></div>
           </div>
+          <!-- Persistent Branding Watermark -->
+          <a href="/" class="card-branding-badge" target="_blank" rel="noopener">
+            <span>Powered by</span>
+            <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader">
+          </a>
         </div>
       </div>
+    </div>
+
+    <!-- Insights & Analysis Section -->
+    <div class="mt-16 pt-8 border-t border-white/5">
+      <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Entity Mentions & Narrative Dominance Analysis</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- The Central Duo -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-person); font-weight: 700;">
+            The Narrative Duo (Carl & Donut)
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            Carl (<strong>6,458 mentions</strong>) and Princess Donut (<strong>6,173 mentions</strong>) lead the entire text in a near-lockstep race. This tight alignment reflects their status as an inseparable duo, with Carl's minor lead representing his first-person narrative role.
+          </p>
+        </div>
+
+        <!-- The Sentient Game System -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-org); font-weight: 700;">
+            The Omnipresent System AI
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            The <strong>System AI</strong> registers <strong>4,170 mentions</strong>, outnumbering key supporting characters like Mordecai (2,680). This highlights how the game engine behaves as an active character, constantly feeding notifications, statistics, and flavor text to the crawlers.
+          </p>
+        </div>
+
+        <!-- LitRPG Loop Mechanics -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-item); font-weight: 700;">
+            Reward loop (Achievement Boxes)
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            The <strong>Achievement Box</strong> is the most mentioned object, racking up <strong>2,834 mentions</strong>. The gameplay feedback loop of completing challenges, receiving system notifications, and opening colored loot boxes serves as a core plot driver.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO & Accessibility Data (Exposing final state mentions) -->
+    <div class="sr-only" aria-hidden="false">
+      <h3>Final Entity Mentions Summary (Volume 7, Chapter 119)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Entity</th>
+            <th>Classification</th>
+            <th>Mentions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Carl</td><td>character</td><td>6,458</td></tr>
+          <tr><td>Donut</td><td>character</td><td>6,173</td></tr>
+          <tr><td>System AI</td><td>organization</td><td>4,170</td></tr>
+          <tr><td>Dungeon</td><td>location</td><td>3,076</td></tr>
+          <tr><td>Crawler</td><td>other</td><td>2,977</td></tr>
+          <tr><td>Achievement Box</td><td>item</td><td>2,834</td></tr>
+          <tr><td>Mordecai</td><td>character</td><td>2,680</td></tr>
+          <tr><td>Boss Fight</td><td>event</td><td>1,646</td></tr>
+          <tr><td>Goblin</td><td>other</td><td>1,630</td></tr>
+          <tr><td>Safe Room</td><td>location</td><td>1,620</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>

@@ -11,6 +11,7 @@ scripts:
   - "/dcc/entity_journey.js"
   - "/dcc/keyboard_shortcuts.js"
   - "/dcc/reveal.js"
+  - "/dcc/race_selection_matrix.js"
 scripts_defer: false
 nav_logo_height: "44px"
 nav_bg_border: false
@@ -24,13 +25,73 @@ series_data: "/dcc/dcc_data.json"
 
 {{< partial "dcc/hero.html" >}}
 
+<!-- Sticky Navigation Pill Bar -->
+<div class="report-nav-sticky-container" id="report-nav-sticky">
+  <nav class="report-nav-pill-wrapper" aria-label="Report section navigation">
+    <a href="#race-selection-matrix-section" class="report-nav-link">Races</a>
+    <a href="#entity-journey" class="report-nav-link">Funnel</a>
+    <a href="#character-mortality" class="report-nav-link">Survival</a>
+    <a href="#entity-race" class="report-nav-link">Mentions</a>
+    <a href="#vanishing-characters" class="report-nav-link">Absences</a>
+    <a href="#word-trends" class="report-nav-link">Demographics</a>
+  </nav>
+</div>
+
 <main id="dcc-main-content" data-series-data="/dcc/dcc_data.json">
+  {{< partial "dcc/race_selection_matrix.html" >}}
+  {{< partial "dcc/funnel_breakdown.html" >}}
+  {{< partial "dcc/survival_mortality.html" >}}
   {{< partial "dcc/mentions_race.html" >}}
   {{< partial "dcc/absence_gaps.html" >}}
-  {{< partial "dcc/survival_mortality.html" >}}
-  {{< partial "dcc/funnel_breakdown.html" >}}
   {{< partial "dcc/word_trends.html" >}}
   {{< partial "dcc/contact.html" >}}
 </main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Dungeon Crawler Carl Narrative Analysis Dataset",
+  "description": "Quantitative analysis of Matt Dinniman's LitRPG masterpiece Dungeon Crawler Carl. Covers character survival timelines, species selections, entity mentions, and pronoun counts across all 7 volumes.",
+  "creator": {
+    "@type": "Organization",
+    "name": "EnrichReader",
+    "url": "https://enrichreader.com"
+  },
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "variableMeasured": [
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Mentions",
+      "description": "Frequencies of entity mentions categorized into character (Carl: 6458, Donut: 6173), location, organization (System AI: 4170), item (Achievement Box: 2834), and event, tracked chapter by chapter."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Narrative Absence Spans",
+      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Zev: 285 chapters gap)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Character Survival",
+      "description": "Survival timeline of 317 characters with 197 alive and 120 dead (62.15% survival rate) at the end of Volume 7."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Funnel and Category Breakdown",
+      "description": "Filters raw entity mentions down to 830 unique entities categorized into Person (317), Item (140), Organization (125), Location (107), Event (98), and Other (43)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Crawl Keywords & Demographics",
+      "description": "Visual keyword mapping of crawl terminology and pronoun demographics of characters (They/Them, It/Its, He/Him, She/Her)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Race Selections",
+      "description": "Breakdown of crawler race selections per volume, showing 36 unique races selected in Volume 7 faction war."
+    }
+  ]
+}
+</script>
 
 {{< partial "dcc/footer.html" >}}
