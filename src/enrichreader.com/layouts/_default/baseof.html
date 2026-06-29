@@ -60,10 +60,18 @@
   <!-- Semantic background element -->
   <div class="void-bg" id="void" aria-hidden="true"></div>
 
+  <!-- Subtle Top Alert Ribbon for B2C readers -->
+  {{ if and (not .Params.nav_minimal) (ne .RelPermalink "/reader/") }}
+  <div class="fixed top-0 w-full z-50 bg-neutral-950/95 border-b border-gold-500/10 py-2.5 px-6 text-center text-[10px] uppercase tracking-[0.2em] transition-transform duration-300 backdrop-blur-md flex items-center justify-center gap-2" id="reader-ribbon" style="height: 36px; box-sizing: border-box;">
+    <span class="text-neutral-400">Looking for the spoiler-proof e-reader app?</span>
+    <a href="/reader/" class="text-gold-500 hover:text-gold-450 font-bold transition">Go to Reader Portal &rarr;</a>
+  </div>
+  {{ end }}
+
   <!-- Persistent Navigation Bar -->
-  <nav class="fixed top-0 w-full z-50 px-6 py-4 md:px-12 md:py-6 transition-all duration-500 {{ if .Params.nav_bg_border }}bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900{{ end }}">
+  <nav class="fixed w-full z-50 px-6 py-4 md:px-12 md:py-6 transition-all duration-500 {{ if and (not .Params.nav_minimal) (ne .RelPermalink "/reader/") }}top-[36px]{{ else }}top-0{{ end }} {{ if .Params.nav_bg_border }}bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900{{ end }}">
     <div class="max-w-7xl mx-auto w-full flex justify-between items-center {{ if .Params.nav_max_width_4xl }}max-w-4xl{{ end }}">
-      <a href="/" class="shrink-0 group flex items-center gap-3" aria-label="EnrichReader home">
+      <a href="/" class="shrink-0 group flex items-center gap-3" aria-label="EnrichReader home" style="position: relative; z-index: 60;">
         {{ if .Params.nav_back_arrow }}
           <span class="text-neutral-500 group-hover:text-gold-500 transition-colors font-mono text-sm">&larr;</span>
         {{ end }}
@@ -72,18 +80,43 @@
           width="176" height="44" fetchpriority="high"
           style="height: {{ if .Params.nav_logo_height }}{{ .Params.nav_logo_height }}{{ else }}44px{{ end }}; width: auto;">
       </a>
+      
       {{ if not .Params.nav_minimal }}
-      <div class="flex items-center gap-6 md:gap-10 text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-bold shrink-0">
-        <a href="/#demo" aria-label="Skip to interactive demo" class="hover:text-gold-500 transition">The Magic</a>
-        <a href="/#vision" aria-label="Skip to our vision" class="hover:text-gold-500 transition hidden md:block">Vision</a>
-        {{ if ne .Section "download" }}
-        <a href="/download/" aria-label="Open the application download page"
-          class="px-4 py-2 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold">Launch App</a>
-        {{ end }}
+      <!-- Desktop Navigation Menu -->
+      <div class="hidden md:flex items-center gap-6 md:gap-8 text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-bold shrink-0">
+        <a href="/" class="transition {{ if eq .RelPermalink "/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Home</a>
+        <a href="/reports/" class="transition {{ if eq .RelPermalink "/reports/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Reports</a>
+        <a href="/reader/" class="transition {{ if eq .RelPermalink "/reader/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Reader App</a>
+        <a href="/#how-it-works" class="hover:text-gold-500 transition">How It Works</a>
+        <a href="/#faq" class="hover:text-gold-500 transition">FAQ</a>
+        <a href="/#contact-form" aria-label="Request a Book Audit"
+          class="px-4 py-2 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold whitespace-nowrap">Request Book Audit</a>
       </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button id="mobile-menu-toggle" aria-label="Toggle Navigation Menu" class="md:hidden text-neutral-400 hover:text-gold-500 focus:outline-none cursor-pointer p-2" style="position: relative; z-index: 60;">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
       {{ end }}
     </div>
   </nav>
+
+  <!-- Mobile Menu Drawer (Slide-down overlay) -->
+  {{ if not .Params.nav_minimal }}
+  <div id="mobile-menu-drawer" class="fixed inset-0 z-40 bg-neutral-950/98 backdrop-blur-lg transition-all duration-300 transform -translate-y-full opacity-0 pointer-events-none md:hidden flex flex-col justify-center items-center px-6">
+    <div class="flex flex-col items-center gap-8 text-[11px] uppercase tracking-[0.3em] text-neutral-400 font-bold text-center">
+      <a href="/" class="mobile-nav-link transition {{ if eq .RelPermalink "/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Home</a>
+      <a href="/reports/" class="mobile-nav-link transition {{ if eq .RelPermalink "/reports/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Reports</a>
+      <a href="/reader/" class="mobile-nav-link transition {{ if eq .RelPermalink "/reader/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Reader App</a>
+      <a href="/#how-it-works" class="mobile-nav-link hover:text-gold-500 transition">How It Works</a>
+      <a href="/#faq" class="mobile-nav-link hover:text-gold-500 transition">FAQ</a>
+      <a href="/#contact-form" aria-label="Request a Book Audit"
+        class="mobile-nav-link px-6 py-3 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition shadow-gold glow-gold whitespace-nowrap mt-4">Request Book Audit</a>
+    </div>
+  </div>
+  {{ end }}
 
   <!-- Main Content Block -->
   <main>

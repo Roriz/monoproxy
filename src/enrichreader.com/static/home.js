@@ -125,8 +125,145 @@ function initScrollReveals() {
   targets.forEach(el => observer.observe(el));
 }
 
+function initContactForm() {
+  const form = document.querySelector('#contact-form form');
+  if (!form) return;
+
+  const showNotification = (type, message) => {
+    const notification = document.getElementById('form-notification');
+    if (!notification) return;
+
+    notification.className = 'p-4 rounded-xl border text-xs leading-relaxed font-light transition-all duration-300 mb-6';
+    
+    if (type === 'success') {
+      notification.classList.add('bg-emerald-950/20', 'border-emerald-500/20', 'text-emerald-450', 'shadow-[0_0_15px_rgba(16,185,129,0.05)]');
+    } else if (type === 'error') {
+      notification.classList.add('bg-red-950/20', 'border-red-500/20', 'text-red-400', 'shadow-[0_0_15px_rgba(239,68,68,0.05)]');
+    } else { // warning/rate-limit
+      notification.classList.add('bg-gold-950/20', 'border-gold-500/20', 'text-gold-450', 'shadow-[0_0_15px_rgba(201,168,76,0.05)]');
+    }
+
+    notification.innerHTML = message.replace(/\n/g, '<br>');
+    notification.classList.remove('hidden');
+    notification.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Hide previous notification
+    const notification = document.getElementById('form-notification');
+    if (notification) notification.classList.add('hidden');
+
+    // 1. Honeypot Bot Trap check
+    const botTrap = document.getElementById('form-bot-trap');
+    if (botTrap && botTrap.value) {
+      console.warn('Spam bot submission blocked.');
+      form.reset();
+      return;
+    }
+
+    // 2. Local Storage Rate Limiting / Throttling (3 minutes)
+    const lastSubmit = localStorage.getItem('enrich_last_submit');
+    const now = Date.now();
+    if (lastSubmit && (now - lastSubmit < 3 * 60 * 1000)) {
+      const remainingTime = Math.ceil((3 * 60 * 1000 - (now - lastSubmit)) / 1000 / 60);
+      showNotification('warning', `Submission rate limited. Please wait ${remainingTime} more minute(s) before resubmitting.`);
+      return;
+    }
+
+    // 3. String Trimming & Basic Validation
+    const nameInput = document.getElementById('user-name');
+    const emailInput = document.getElementById('user-email');
+    const orgInput = document.getElementById('user-org');
+    const interestInput = document.getElementById('user-interest');
+    const messageInput = document.getElementById('user-message');
+
+    if (nameInput) nameInput.value = nameInput.value.trim();
+    if (emailInput) emailInput.value = emailInput.value.trim();
+    if (orgInput) orgInput.value = orgInput.value.trim();
+    if (messageInput) messageInput.value = messageInput.value.trim();
+
+    if (!nameInput.value || !emailInput.value || !messageInput.value) {
+      showNotification('error', 'Please fill out all required fields.');
+      return;
+    }
+
+    // 4. Double Submission Prevention (Disable Button)
+    const submitBtn = form.querySelector('button[type="submit"]');
+    let originalBtnText = '';
+    if (submitBtn) {
+      originalBtnText = submitBtn.innerText;
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Sending...';
+      submitBtn.style.opacity = '0.5';
+      submitBtn.style.cursor = 'not-allowed';
+    }
+
+    // Live AJAX POST Submission
+    const payload = {
+      name: nameInput.value,
+      email: emailInput.value,
+      organization: orgInput ? orgInput.value : '',
+      interest: interestInput ? interestInput.value : 'Other',
+      message: messageInput.value
+    };
+
+    fetch('https://api.enrichreader.com/pub/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(async response => {
+      const contentType = response.headers.get('content-type');
+      const isJson = contentType && contentType.includes('application/json');
+      const data = isJson ? await response.json() : null;
+
+      if (!response.ok) {
+        if (data && data.status === 'error') {
+          if (data.errors) {
+            // Unpack Rails-style validation error hash: { errors: { email: ["is invalid"] } }
+            const errorList = Object.entries(data.errors)
+              .map(([field, msgs]) => `${field.charAt(0).toUpperCase() + field.slice(1)} ${msgs.join(', ')}`)
+              .join('\n');
+            throw new Error(`Validation Error:\n${errorList}`);
+          } else if (data.message) {
+            throw new Error(data.message);
+          }
+        }
+        throw new Error(`Server returned error status: ${response.status}`);
+      }
+      return data;
+    })
+    .then(data => {
+      // Save submission timestamp
+      localStorage.setItem('enrich_last_submit', Date.now());
+
+      showNotification('success', 'Thank you! Your request has been successfully submitted.');
+      form.reset();
+    })
+    .catch(error => {
+      console.error('Error submitting form:', error);
+      showNotification('error', error.message || 'There was a problem submitting your request. Please try again or email sales@enrichreader.com directly.');
+    })
+    .finally(() => {
+      // Restore submit button
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalBtnText;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.cursor = 'pointer';
+      }
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initProgressiveScroll();
   initScrollReveals();
   initDynamicCtas();
+  initContactForm();
 });
