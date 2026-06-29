@@ -1,0 +1,113 @@
+<nav class="fixed top-0 left-0 right-0 z-50" id="main-nav">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="/" class="shrink-0" id="nav-logo-link">
+      <img src="/assets/logo-4x1-dark-transparent.png" class="logo" alt="EnrichReader" style="height: 38px; width: auto;" id="nav-logo-img">
+    </a>
+    <div class="flex items-center gap-8 font-ui"
+      style="font-size: var(--text-xs); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
+      <a href="/" style="transition: color 0.2s ease;" onmouseover="this.style.color='var(--color-text-primary)'"
+        onmouseout="this.style.color='var(--color-text-dim)'" id="nav-home-link">Home</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero-section relative overflow-hidden" id="lotm-hero">
+  <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center min-h-[75vh]">
+    <div class="lg:col-span-7 z-10 py-12">
+      <h1 class="hero-title font-display italic fade-in-up editorial-title" id="hero-heading">
+        {{ .Params.series_title_first | default "Lord of the" }} <br> {{ .Params.series_title_second | default "Mysteries" }},<br>
+        <span class="hero-subtitle" id="hero-sub">{{ .Params.series_subtitle | default "by the numbers" }}</span>
+      </h1>
+
+      <div class="fade-in-up" style="transition-delay: 0.1s" id="hero-intro-wrapper">
+        <div class="hero-stats-grid mb-12" id="hero-stats">
+          <div class="stat-item" id="stat-chapters-card">
+            <span class="stat-value" id="val-chapters">1551</span>
+            <span class="stat-label">chapters</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item" id="stat-words-card">
+            <span class="stat-value" id="val-words">3,245,618</span>
+            <span class="stat-label">words</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item" id="stat-entities-card">
+            <span class="stat-value" id="val-entities">514</span>
+            <span class="stat-label">unique named characters</span>
+          </div>
+        </div>
+
+        <div class="methodology-badge -mt-6 mb-8 flex items-center gap-2 font-mono text-[10px] text-neutral-400 uppercase tracking-wider" id="methodology-disclosure" style="font-size: 9px; letter-spacing: 0.15em; color: var(--color-text-dim);">
+          <span class="inline-block w-4 h-4 rounded-full border border-neutral-500 flex items-center justify-center font-bold text-[8px] cursor-help" style="border: 1px solid var(--color-surface-divider); width: 14px; height: 14px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;" title="Semantic entity extraction via Enrich Reader NLP engine, cross-checked per chapter. Entities require minimum mention thresholds to filter narrative noise. Tags verified for pronoun and pathway selection confidence.">?</span>
+          <span>Methodology: Named-entity extraction, cross-checked per chapter</span>
+        </div>
+
+        <p class="font-body italic mb-12 hero-description" id="hero-para">
+          {{ .Params.series_intro | default "A quantitative narrative analysis of Cuttlefish That Loves Diving's fantasy masterpiece, Lord of the Mysteries. Track character survival, beyonder pathway choices, and name mentions across the first three volumes." }}
+        </p>
+
+        <div class="flex flex-wrap gap-4 mt-8" id="hero-actions">
+          <a href="mailto:sales@enrichreader.com" class="cta-button primary-cta shadow-gold glow-gold text-lg px-8 py-4" id="hero-cta-main">
+            Get Insights for Your Book
+          </a>
+          <a href="#race-selection-matrix-section" class="cta-button outline-cta text-lg px-8 py-4" id="hero-cta-scroll">
+            Explore the Data
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side Occult Visual -->
+    <div class="lg:col-span-5 hidden lg:block fade-in-up" style="transition-delay: 0.2s" id="hero-visual">
+      <div class="hero-visual-wrapper">
+        <div class="chapter-constellation" aria-hidden="true">
+          <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto opacity-45">
+            <!-- Grid lines representing Tarot or pathways -->
+            <path d="M 50 50 L 350 50 M 50 150 L 350 150 M 50 250 L 350 250 M 50 350 L 350 350" stroke="var(--color-accent)" stroke-width="0.5" opacity="0.2" />
+            <path d="M 50 50 L 50 350 M 150 50 L 150 350 M 250 50 L 250 350 M 350 50 L 350 350" stroke="var(--color-accent)" stroke-width="0.5" opacity="0.2" />
+            
+            <!-- Circular path representing the Sefirah Castle/Spirit World -->
+            <circle cx="200" cy="200" r="130" stroke="var(--color-accent)" stroke-width="0.5" stroke-dasharray="2 6" />
+            <circle cx="200" cy="200" r="80" stroke="var(--color-accent)" stroke-width="0.5" stroke-dasharray="1 8" />
+
+            <!-- Connected path representing Klein's travel and Tarot members -->
+            <path d="M50 50 L150 150 L250 150 L250 250 L350 350" stroke="var(--color-accent)" stroke-width="1" opacity="0.6" />
+
+            <!-- Pulse points representing volumes/major battles -->
+            <circle cx="50" cy="50" r="4" fill="var(--color-accent)" class="pulse-point" />
+            <circle cx="150" cy="150" r="4" fill="var(--color-accent)" class="pulse-point" style="animation-delay: 0.6s" />
+            <circle cx="250" cy="250" r="4" fill="var(--color-accent)" class="pulse-point" style="animation-delay: 1.2s" />
+            <circle cx="350" cy="350" r="4" fill="var(--color-accent)" class="pulse-point" style="animation-delay: 1.8s" />
+          </svg>
+        </div>
+        <div class="hero-visual-metadata">
+          <span class="font-mono">OCCULT_SERIES_TIMELINE</span>
+          <span class="font-mono">TOTAL_VOLUMES_ANALYZED_03</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Bar (Grounded) -->
+  <div class="hero-bottom-bar border-t border-white/5 z-20" id="hero-bottom">
+    <div class="max-w-5xl mx-auto px-6 py-8 flex items-center justify-between">
+      <div class="volume-nav-item" id="volume-indicator-container">
+        <div class="volume-indicator">
+          <span>timeline scope</span>
+          <span class="volume-current" id="timeline-scope-value">VOLUMES 1-8</span>
+        </div>
+      </div>
+
+      <a href="mailto:sales@enrichreader.com" class="next-vol-teaser group" id="hero-teaser-link">
+        <span class="teaser-label">Publishers & Authors</span>
+        <span class="teaser-value">
+          Request Book Audit
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            class="inline-block transition-transform group-hover:translate-x-1">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>

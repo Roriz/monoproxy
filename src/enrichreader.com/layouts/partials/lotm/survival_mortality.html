@@ -1,0 +1,101 @@
+<!-- [03] Survival Curve & Mortality Feed -->
+<section id="character-mortality" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
+  <div class="max-w-5xl mx-auto px-6 fade-in-up">
+    <div class="section-header mb-12">
+      <h2 class="section-title">Series survival rate, <br><em>over the timeline</em></h2>
+      <p class="section-subtitle">
+        Lord of the Mysteries features intense battles and sacrifices. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as the occult crisis escalates.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <!-- Survival Line Chart (12-cols) -->
+      <div class="lg:col-span-12">
+        <div class="chart-card p-8 md:p-12">
+          <div class="flex justify-between items-center mb-6">
+            <span class="control-label">Series Survival Curve (All Volumes)</span>
+            <div class="flex flex-wrap gap-4">
+              <span class="legend-item-minimal">
+                <span class="dot-marker" style="background: var(--color-person)"></span>
+                <span class="legend-label" style="color: var(--color-person)">Alive</span>
+              </span>
+              <span class="legend-item-minimal">
+                <span class="dot-marker" style="background: var(--color-lore)"></span>
+                <span class="legend-label" style="color: var(--color-lore)">Dead</span>
+              </span>
+              <span class="legend-item-minimal">
+                <span class="dot-marker" style="background: var(--color-other); border-radius: 0; width: 10px; height: 2px;"></span>
+                <span class="legend-label" style="color: var(--color-other)">Mortality Rate (%)</span>
+              </span>
+            </div>
+          </div>
+          
+          <div class="chart-container" style="height: 350px;">
+            <canvas id="survivalChart"></canvas>
+          </div>
+          <!-- Persistent Branding Watermark -->
+          <a href="/" class="card-branding-badge" target="_blank" rel="noopener">
+            <span>Powered by</span>
+            <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insights & Analysis Section -->
+    <div class="mt-16 pt-8 border-t border-white/5">
+      <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Survival Timeline &amp; Mortality Analysis</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- The Tingen Tragedy -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-person); font-weight: 700;">
+            The Tingen Tragedy (Volume 1)
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            By the end of Volume 1, <strong>26 characters</strong> have died out of 105 introduced (a 24.8% initial mortality rate). The climax of the Tingen volume is famous for its tragic events, where several beloved characters, including Captain Dunn Smith, meet their end.
+          </p>
+        </div>
+
+        <!-- Escalation to High Sequences -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-item); font-weight: 700;">
+            Escalation to High Sequences
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            As Klein advances, the survival rate drops to <strong>72.4%</strong> by the end of Volume 3. The stakes rise as high-sequence Beyonders and deities begin to intervene directly in the affairs of Backlund and the ruins of the battlefields.
+          </p>
+        </div>
+
+        <!-- The Backlund Great Smog -->
+        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-event); font-weight: 700;">
+            The Backlund Great Smog (Peak Lethality)
+          </h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
+            Volume 2 climaxes in the Backlund Great Smog (around Chapter 480), which stands as the peak lethality event of the early series, claiming numerous lives in a single, coordinated occult catastrophe.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO & Accessibility Data (Exposing final state survival stats) -->
+    <div class="sr-only" aria-hidden="false">
+      <h3>Narrative Survival &amp; Mortality Summary (Volume 8, Chapter 1551)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Total Characters Introduced</td><td>514</td></tr>
+          <tr><td>Surviving Characters (Alive)</td><td>364</td></tr>
+          <tr><td>Eliminated Characters (Dead)</td><td>150</td></tr>
+          <tr><td>Survival Rate</td><td>70.82%</td></tr>
+          <tr><td>Mortality Rate</td><td>29.18%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,920 @@
+{
+  "classification": "person",
+  "field": "pathway",
+  "volumes": [
+    {
+      "volume": "v-lotm-1",
+      "counts": {
+        "sleepless": 11,
+        "spectator": 6,
+        "sailor": 5,
+        "seer": 4,
+        "corpse collector": 3,
+        "secrets suppliant": 3,
+        "assassin": 3,
+        "bard": 2,
+        "lawyer": 1,
+        "apprentice": 1,
+        "apothecary": 1,
+        "marauder": 1,
+        "mystery pryer": 1,
+        "arbiter": 1
+      },
+      "examples": {
+        "sailor": [
+          "ace snake",
+          "alger wilson",
+          "lord of storms"
+        ],
+        "sleepless": [
+          "aiur harson",
+          "borgia",
+          "cesimir"
+        ],
+        "spectator": [
+          "audrey hall",
+          "daxter guderian",
+          "eugen"
+        ],
+        "corpse collector": [
+          "azik",
+          "frye",
+          "ince zangwill"
+        ],
+        "bard": [
+          "derrick berg",
+          "sun"
+        ],
+        "lawyer": [
+          "emperor roselle"
+        ],
+        "seer": [
+          "fool",
+          "hanass vincent",
+          "klein moretti"
+        ],
+        "apprentice": [
+          "fors"
+        ],
+        "apothecary": [
+          "glaint"
+        ],
+        "secrets suppliant": [
+          "hang",
+          "shepherd",
+          "sirius arapis"
+        ],
+        "marauder": [
+          "lanevus"
+        ],
+        "assassin": [
+          "mad",
+          "madam sharon",
+          "trissy"
+        ],
+        "mystery pryer": [
+          "neil"
+        ],
+        "arbiter": [
+          "xio"
+        ]
+      }
+    },
+    {
+      "volume": "v-lotm-2",
+      "counts": {
+        "spectator": 6,
+        "sleepless": 6,
+        "arbiter": 5,
+        "seer": 5,
+        "apprentice": 4,
+        "prisoner": 4,
+        "sailor": 3,
+        "lawyer": 3,
+        "bard": 3,
+        "apothecary": 3,
+        "secrets suppliant": 3,
+        "marauder": 2,
+        "corpse collector": 2,
+        "criminal": 2,
+        "monster": 1,
+        "warrior": 1,
+        "savant": 1,
+        "hunter": 1,
+        "reader": 1
+      },
+      "examples": {
+        "sailor": [
+          "ace snake",
+          "alger wilson",
+          "man"
+        ],
+        "spectator": [
+          "adam",
+          "aiflor",
+          "justice"
+        ],
+        "marauder": [
+          "amon",
+          "lanevus"
+        ],
+        "monster": [
+          "auceptin"
+        ],
+        "arbiter": [
+          "augustus",
+          "kaslana",
+          "katy"
+        ],
+        "apprentice": [
+          "aulisa",
+          "door",
+          "fors"
+        ],
+        "corpse collector": [
+          "azik",
+          "ince zangwill"
+        ],
+        "lawyer": [
+          "black emperor",
+          "emperor roselle",
+          "pound"
+        ],
+        "sleepless": [
+          "cesimir",
+          "daly",
+          "god"
+        ],
+        "warrior": [
+          "darc"
+        ],
+        "bard": [
+          "derrick berg",
+          "little sun",
+          "sun"
+        ],
+        "criminal": [
+          "desire apostle",
+          "jason beria"
+        ],
+        "apothecary": [
+          "emlyn white",
+          "father utravsky",
+          "glaint"
+        ],
+        "savant": [
+          "eye of wisdom"
+        ],
+        "seer": [
+          "fool",
+          "moriarty",
+          "rosago"
+        ],
+        "secrets suppliant": [
+          "hang",
+          "lovia",
+          "true creator"
+        ],
+        "prisoner": [
+          "mari",
+          "miss sharron",
+          "sharron"
+        ],
+        "hunter": [
+          "meursault"
+        ],
+        "reader": [
+          "stanton"
+        ]
+      }
+    },
+    {
+      "volume": "v-lotm-3",
+      "counts": {
+        "sailor": 9,
+        "seer": 8,
+        "sleepless": 6,
+        "apprentice": 5,
+        "arbiter": 5,
+        "bard": 5,
+        "apothecary": 5,
+        "hunter": 4,
+        "marauder": 4,
+        "lawyer": 4,
+        "prisoner": 4,
+        "secrets suppliant": 4,
+        "spectator": 3,
+        "assassin": 3,
+        "mystery pryer": 3,
+        "warrior": 3,
+        "monster": 2,
+        "corpse collector": 2,
+        "reader": 1,
+        "planter": 1,
+        "criminal": 1
+      },
+      "examples": {
+        "apprentice": [
+          "abraham",
+          "door",
+          "fors"
+        ],
+        "spectator": [
+          "adam",
+          "miss justice",
+          "susie"
+        ],
+        "assassin": [
+          "ailment tracy",
+          "helene",
+          "katarina pell\u00e8"
+        ],
+        "sailor": [
+          "alger wilson",
+          "hamilton",
+          "jahn kottman"
+        ],
+        "hunter": [
+          "alista tudor",
+          "anderson hood",
+          "medici"
+        ],
+        "marauder": [
+          "amon",
+          "flowery bow tie jodeson",
+          "lanevus"
+        ],
+        "arbiter": [
+          "amyrius rieveldt",
+          "hell",
+          "hell ludwell"
+        ],
+        "monster": [
+          "auceptin",
+          "ouroboros"
+        ],
+        "corpse collector": [
+          "azik",
+          "ince zangwill"
+        ],
+        "bard": [
+          "berg",
+          "little sun",
+          "orpheus"
+        ],
+        "lawyer": [
+          "black emperor",
+          "emperor roselle",
+          "mithor king"
+        ],
+        "prisoner": [
+          "blood senor",
+          "chained god",
+          "miss sharron"
+        ],
+        "mystery pryer": [
+          "cattleya",
+          "hidden sage",
+          "mystic"
+        ],
+        "warrior": [
+          "colin iliad",
+          "haim",
+          "joshua"
+        ],
+        "apothecary": [
+          "darkwill",
+          "emlyn white",
+          "lilith"
+        ],
+        "sleepless": [
+          "davy raymond",
+          "evernight",
+          "god"
+        ],
+        "reader": [
+          "edwina edwards... edwards"
+        ],
+        "seer": [
+          "fool",
+          "gehrman sparrow",
+          "klein moretti"
+        ],
+        "planter": [
+          "frank lee"
+        ],
+        "secrets suppliant": [
+          "heath doyle",
+          "man",
+          "snowman"
+        ],
+        "criminal": [
+          "kircheis"
+        ]
+      }
+    },
+    {
+      "volume": "v-lotm-4",
+      "counts": {
+        "sleepless": 9,
+        "seer": 6,
+        "apprentice": 5,
+        "prisoner": 5,
+        "spectator": 4,
+        "marauder": 4,
+        "hunter": 3,
+        "monster": 3,
+        "bard": 3,
+        "apothecary": 3,
+        "secrets suppliant": 3,
+        "sailor": 2,
+        "corpse collector": 2,
+        "lawyer": 2,
+        "arbiter": 2,
+        "savant": 1,
+        "mystery pryer": 1,
+        "planter": 1
+      },
+      "examples": {
+        "apprentice": [
+          "abraham",
+          "door",
+          "fors"
+        ],
+        "spectator": [
+          "adam",
+          "audrey hall",
+          "miss justice"
+        ],
+        "prisoner": [
+          "admiral of blood senor",
+          "chained god",
+          "maric"
+        ],
+        "sleepless": [
+          "albert",
+          "daly simone",
+          "dunn smith"
+        ],
+        "sailor": [
+          "alger wilson",
+          "lord of storms"
+        ],
+        "hunter": [
+          "alista tudor",
+          "anderson hood",
+          "danitz"
+        ],
+        "marauder": [
+          "amon",
+          "hazel macht",
+          "lanevus"
+        ],
+        "savant": [
+          "artisan cielf"
+        ],
+        "monster": [
+          "auceptin",
+          "enzo",
+          "ouroboros"
+        ],
+        "corpse collector": [
+          "azik",
+          "daly"
+        ],
+        "lawyer": [
+          "black emperor",
+          "emperor roselle"
+        ],
+        "mystery pryer": [
+          "cattleya"
+        ],
+        "seer": [
+          "dant\u00e8s",
+          "fool",
+          "gehrman sparrow"
+        ],
+        "bard": [
+          "derrick berg",
+          "little sun",
+          "sun"
+        ],
+        "apothecary": [
+          "emlyn white",
+          "rus b\u00e1thory",
+          "utravsky"
+        ],
+        "planter": [
+          "frank lee"
+        ],
+        "arbiter": [
+          "hell",
+          "xio"
+        ],
+        "secrets suppliant": [
+          "lovia",
+          "man",
+          "true creator"
+        ]
+      }
+    },
+    {
+      "volume": "v-lotm-5",
+      "counts": {
+        "apothecary": 8,
+        "spectator": 6,
+        "assassin": 6,
+        "corpse collector": 6,
+        "seer": 6,
+        "hunter": 5,
+        "sleepless": 5,
+        "apprentice": 4,
+        "marauder": 4,
+        "arbiter": 4,
+        "lawyer": 4,
+        "secrets suppliant": 4,
+        "prisoner": 3,
+        "warrior": 3,
+        "monster": 2,
+        "mystery pryer": 2,
+        "savant": 1,
+        "planter": 1,
+        "reader": 1,
+        "sailor": 1,
+        "bard": 1
+      },
+      "examples": {
+        "apprentice": [
+          "abraham",
+          "botis",
+          "door"
+        ],
+        "spectator": [
+          "adam",
+          "audrey",
+          "escalante"
+        ],
+        "assassin": [
+          "ailment tracy",
+          "demon",
+          "demoness trissy"
+        ],
+        "hunter": [
+          "alista tudor",
+          "danitz",
+          "egor"
+        ],
+        "marauder": [
+          "amon",
+          "jacob",
+          "macht"
+        ],
+        "arbiter": [
+          "amyrius rieveldt",
+          "augustus",
+          "ludwell"
+        ],
+        "sleepless": [
+          "arianna",
+          "evernight goddess",
+          "flegrea"
+        ],
+        "savant": [
+          "artisan cielf"
+        ],
+        "monster": [
+          "auceptin",
+          "ouroboros"
+        ],
+        "corpse collector": [
+          "azik",
+          "bryan",
+          "frye"
+        ],
+        "mystery pryer": [
+          "bernadette",
+          "cattleya"
+        ],
+        "lawyer": [
+          "black emperor",
+          "emperor roselle",
+          "kilgor"
+        ],
+        "prisoner": [
+          "charlie raker",
+          "maric",
+          "sharron"
+        ],
+        "warrior": [
+          "colin iliad",
+          "haim",
+          "joshua"
+        ],
+        "seer": [
+          "dant\u00e8s",
+          "dwayne dantes",
+          "fool"
+        ],
+        "apothecary": [
+          "earl mistral",
+          "emlyn white",
+          "ernes boyar"
+        ],
+        "planter": [
+          "frank lee"
+        ],
+        "secrets suppliant": [
+          "heath doyle",
+          "lovia",
+          "man"
+        ],
+        "reader": [
+          "lucca brewster"
+        ],
+        "sailor": [
+          "soniathrym"
+        ],
+        "bard": [
+          "sun"
+        ]
+      }
+    },
+    {
+      "volume": "v-lotm-6",
+      "counts": {
+        "seer": 7,
+        "apprentice": 5,
+        "spectator": 4,
+        "sailor": 4,
+        "sleepless": 4,
+        "apothecary": 4,
+        "prisoner": 3,
+        "marauder": 3,
+        "secrets suppliant": 3,
+        "mystery pryer": 2,
+        "hunter": 2,
+        "monster": 1,
+        "corpse collector": 1,
+        "warrior": 1,
+        "lawyer": 1,
+        "bard": 1,
+        "arbiter": 1
+      },
+      "examples": {
+        "prisoner": [
+          "abomination suah",
+          "maric",
+          "sharron"
+        ],
+        "apprentice": [
+          "abraham",
+          "botis",
+          "door"
+        ],
+        "spectator": [
+          "adam",
+          "audrey",
+          "justice"
+        ],
+        "sailor": [
+          "alger",
+          "jahn kottman",
+          "leodero"
+        ],
+        "marauder": [
+          "amon",
+          "jacob",
+          "pallez zoroast"
+        ],
+        "sleepless": [
+          "arianna",
+          "evernight goddess",
+          "god"
+        ],
+        "monster": [
+          "auceptin"
+        ],
+        "corpse collector": [
+          "azik"
+        ],
+        "mystery pryer": [
+          "bernadette",
+          "cattleya"
+        ],
+        "warrior": [
+          "colin iliad"
+        ],
+        "hunter": [
+          "danitz",
+          "medici"
+        ],
+        "seer": [
+          "dark demonic wolf",
+          "dwayne dant\u00e8s",
+          "ehrman sparrow"
+        ],
+        "apothecary": [
+          "emlyn white",
+          "klarman",
+          "lilith"
+        ],
+        "secrets suppliant": [
+          "lovia",
+          "steph",
+          "true creator"
+        ],
+        "lawyer": [
+          "roselle"
+        ],
+        "bard": [
+          "sun"
+        ],
+        "arbiter": [
+          "xio"
+        ]
+      }
+    },
+    {
+      "volume": "v-lotm-7",
+      "counts": {
+        "spectator": 8,
+        "sleepless": 6,
+        "seer": 5,
+        "sailor": 3,
+        "apprentice": 3,
+        "mystery pryer": 2,
+        "hunter": 2,
+        "marauder": 1,
+        "assassin": 1,
+        "lawyer": 1,
+        "warrior": 1,
+        "bard": 1,
+        "apothecary": 1,
+        "arbiter": 1
+      },
+      "examples": {
+        "spectator": [
+          "adam",
+          "ariehogg",
+          "audrey"
+        ],
+        "sailor": [
+          "alger",
+          "biles",
+          "lord of storms"
+        ],
+        "marauder": [
+          "amon"
+        ],
+        "sleepless": [
+          "arianna",
+          "eric",
+          "evernight goddess"
+        ],
+        "mystery pryer": [
+          "bernadette",
+          "cattleya"
+        ],
+        "hunter": [
+          "danitz",
+          "pasha"
+        ],
+        "apprentice": [
+          "door",
+          "fors",
+          "verdu"
+        ],
+        "seer": [
+          "fool",
+          "gehrman sparrow",
+          "klein"
+        ],
+        "assassin": [
+          "katarina"
+        ],
+        "lawyer": [
+          "roselle"
+        ],
+        "warrior": [
+          "roy"
+        ],
+        "bard": [
+          "sun"
+        ],
+        "apothecary": [
+          "utravsky"
+        ],
+        "arbiter": [
+          "xio"
+        ]
+      }
+    },
+    {
+      "volume": "v-lotm-8",
+      "counts": {
+        "spectator": 6,
+        "apprentice": 4,
+        "seer": 4,
+        "mystery pryer": 3,
+        "sleepless": 3,
+        "arbiter": 2,
+        "marauder": 2,
+        "monster": 2,
+        "corpse collector": 2,
+        "apothecary": 2,
+        "sailor": 1,
+        "hunter": 1,
+        "lawyer": 1
+      },
+      "examples": {
+        "apprentice": [
+          "abrahams",
+          "door",
+          "dorian gray abraham"
+        ],
+        "spectator": [
+          "adam",
+          "audrey",
+          "hermes"
+        ],
+        "arbiter": [
+          "alfred hall",
+          "xio"
+        ],
+        "sailor": [
+          "alger"
+        ],
+        "marauder": [
+          "amon",
+          "pallez zoroast"
+        ],
+        "monster": [
+          "auceptin",
+          "ouroboros"
+        ],
+        "corpse collector": [
+          "azik",
+          "gregrace"
+        ],
+        "mystery pryer": [
+          "bernadette",
+          "cattleya",
+          "hidden sage"
+        ],
+        "hunter": [
+          "danitz"
+        ],
+        "apothecary": [
+          "emlyn white",
+          "utravsky"
+        ],
+        "sleepless": [
+          "evernight goddess",
+          "god",
+          "leonard"
+        ],
+        "seer": [
+          "fool",
+          "gehrman sparrow",
+          "klein"
+        ],
+        "lawyer": [
+          "roselle"
+        ]
+      }
+    }
+  ],
+  "series": {
+    "counts": {
+      "sleepless": 20,
+      "spectator": 16,
+      "sailor": 13,
+      "seer": 13,
+      "apothecary": 12,
+      "apprentice": 10,
+      "assassin": 10,
+      "arbiter": 10,
+      "prisoner": 9,
+      "hunter": 9,
+      "secrets suppliant": 9,
+      "marauder": 8,
+      "corpse collector": 7,
+      "lawyer": 6,
+      "bard": 5,
+      "mystery pryer": 5,
+      "warrior": 5,
+      "savant": 3,
+      "monster": 3,
+      "criminal": 2,
+      "planter": 1,
+      "reader": 1
+    },
+    "examples": {
+      "prisoner": [
+        "abomination suah",
+        "admiral of blood senor",
+        "blood senor"
+      ],
+      "apprentice": [
+        "abraham",
+        "aulisa",
+        "botis"
+      ],
+      "sailor": [
+        "ace snake",
+        "alger",
+        "biles"
+      ],
+      "spectator": [
+        "adam",
+        "aiflor",
+        "ariehogg"
+      ],
+      "assassin": [
+        "ailment tracy",
+        "demon",
+        "demoness trissy"
+      ],
+      "sleepless": [
+        "aiur harson",
+        "albert",
+        "arianna"
+      ],
+      "arbiter": [
+        "alfred hall",
+        "amyrius rieveldt",
+        "augustus"
+      ],
+      "hunter": [
+        "alista tudor",
+        "anderson hood",
+        "danitz"
+      ],
+      "marauder": [
+        "amon",
+        "flowery bow tie jodeson",
+        "hazel macht"
+      ],
+      "savant": [
+        "artisan cielf",
+        "eye of wisdom",
+        "horamick haydn"
+      ],
+      "monster": [
+        "auceptin",
+        "enzo",
+        "ouroboros"
+      ],
+      "corpse collector": [
+        "azik",
+        "bryan",
+        "daly"
+      ],
+      "bard": [
+        "berg",
+        "little sun",
+        "orpheus"
+      ],
+      "mystery pryer": [
+        "bernadette",
+        "cattleya",
+        "hidden sage"
+      ],
+      "lawyer": [
+        "black emperor",
+        "emperor roselle",
+        "kilgor"
+      ],
+      "warrior": [
+        "colin iliad",
+        "darc",
+        "haim"
+      ],
+      "seer": [
+        "dant\u00e8s",
+        "dark demonic wolf",
+        "dwayne dantes"
+      ],
+      "apothecary": [
+        "darkwill",
+        "earl mistral",
+        "emlyn white"
+      ],
+      "planter": [
+        "frank lee"
+      ],
+      "secrets suppliant": [
+        "hang",
+        "heath doyle",
+        "lovia"
+      ],
+      "criminal": [
+        "jason beria",
+        "kircheis"
+      ],
+      "reader": [
+        "lucca brewster"
+      ]
+    }
+  }
+}

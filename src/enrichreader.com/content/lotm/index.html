@@ -1,462 +1,97 @@
 ---
-title: "Interactive Storytelling Case Study: Lord of the Mysteries | EnrichReader"
-description: "See how EnrichReader's semantic parsing engine extracts entity journeys, character absence gaps, and interactive narrative statistics from Lord of the Mysteries."
-fonts_override: '
-<link
-  href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
-  rel="stylesheet">'
+title: "Lord of the Mysteries, by the numbers | EnrichReader"
+description: "Lord of the Mysteries, by the numbers. 1551 chapters, 3,245,618 words, 514 unique characters analyzed."
+fonts_override: '<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">'
 stylesheets:
-- "/lotm/style.css"
+  - "/dcc/style.css"
 scripts:
-- "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
-- "/lotm/bar_chart_race.js"
-- "/lotm/vanishing_characters.js"
-- "/lotm/entity_journey.js"
-- "/lotm/keyboard_shortcuts.js"
-- "/lotm/reveal.js"
+  - "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+  - "/lotm/bar_chart_race.js"
+  - "/lotm/character_mortality.js"
+  - "/lotm/entity_journey.js"
+  - "/lotm/keyboard_shortcuts.js"
+  - "/lotm/reveal.js"
+  - "/lotm/race_selection_matrix.js"
 scripts_defer: false
 nav_logo_height: "44px"
 nav_bg_border: false
 nav_minimal: true
+series_title_first: "Lord of the"
+series_title_second: "Mysteries"
+series_subtitle: "by the numbers"
+series_intro: "A quantitative narrative autopsy of Cuttlefish That Loves Diving's fantasy masterpiece, Lord of the Mysteries. Track character survival, Beyonder pathway selections, and entity mentions across all eight volumes, powered by Enrich Reader's semantic text engine."
+series_data: "/lotm/lotm_data.json"
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50" id="main-nav">
-  <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="/" class="shrink-0">
-      <img src="/assets/logo-4x1-dark-transparent.png" class="logo" alt="EnrichReader"
-        style="height: 38px; width: auto;">
-    </a>
-    <div class="flex items-center gap-8 font-ui"
-      style="font-size: var(--text-xs); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
-      <a href="/" style="transition: color 0.2s ease;" onmouseover="this.style.color='var(--color-text-primary)'"
-        onmouseout="this.style.color='var(--color-text-dim)'">Home</a>
-    </div>
-  </div>
-</nav>
+{{< partial "lotm/hero.html" >}}
 
-<main>
-  <section class="hero-section relative overflow-hidden">
-    <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center min-h-[75vh]">
-      <div class="lg:col-span-7 z-10 py-12">
-        <h1 class="hero-title font-display italic fade-in-up editorial-title">
-          More Than <br> An E-Reader.<br>
-          <span class="hero-subtitle">We know how stories are told.</span>
-        </h1>
+<!-- Sticky Navigation Pill Bar -->
+<div class="report-nav-sticky-container" id="report-nav-sticky">
+  <nav class="report-nav-pill-wrapper" aria-label="Report section navigation">
+    <a href="#race-selection-matrix-section" class="report-nav-link">Pathways</a>
+    <a href="#entity-journey" class="report-nav-link">Funnel</a>
+    <a href="#character-mortality" class="report-nav-link">Survival</a>
+    <a href="#entity-race" class="report-nav-link">Mentions</a>
+    <a href="#vanishing-characters" class="report-nav-link">Absences</a>
+    <a href="#word-trends" class="report-nav-link">Demographics</a>
+  </nav>
+</div>
 
-        <div class="fade-in-up" style="transition-delay: 0.1s">
-          <div class="hero-stats-grid mb-12">
-            <div class="stat-item">
-              <span class="stat-value">227</span>
-              <span class="stat-label">chapters</span>
-            </div>
-            <div class="stat-divider" aria-hidden="true"></div>
-            <div class="stat-item">
-              <span class="stat-value">419,541</span>
-              <span class="stat-label">words</span>
-            </div>
-            <div class="stat-divider" aria-hidden="true"></div>
-            <div class="stat-item">
-              <span class="stat-value">258</span>
-              <span class="stat-label">unique entities</span>
-            </div>
-          </div>
-
-          <p class="font-body mb-16 hero-description" style="font-style: normal;">
-            EnrichReader is an intelligent narrative parsing engine. With more than 200 MAU already using our platform to read history-enriched stories, we bring your stories to life by mapping character arcs, presence gaps, and lore connections automatically.
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Side Data Visual — Large Scale -->
-      <div class="lg:col-span-5 hidden lg:block fade-in-up" style="transition-delay: 0.2s">
-        <div class="hero-visual-wrapper">
-          <div class="chapter-constellation" aria-hidden="true">
-            <!-- Complex SVG visual representing chapter distribution -->
-            <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto opacity-40">
-              <circle cx="200" cy="200" r="180" stroke="var(--color-accent)" stroke-width="0.5"
-                stroke-dasharray="1 8" />
-              <circle cx="200" cy="200" r="140" stroke="var(--color-accent)" stroke-width="0.5"
-                stroke-dasharray="1 12" />
-              <circle cx="200" cy="200" r="100" stroke="var(--color-accent)" stroke-width="0.5"
-                stroke-dasharray="1 16" />
-
-              <!-- Random "data points" connected by lines -->
-              <path d="M200 20 L280 100 L350 200 L280 300 L200 380 L120 300 L50 200 L120 100 Z"
-                stroke="var(--color-accent)" stroke-width="0.5" opacity="0.3" />
-
-              <circle cx="200" cy="20" r="3" fill="var(--color-accent)" class="pulse-point" />
-              <circle cx="350" cy="200" r="3" fill="var(--color-accent)" class="pulse-point"
-                style="animation-delay: 0.5s" />
-              <circle cx="200" cy="380" r="3" fill="var(--color-accent)" class="pulse-point"
-                style="animation-delay: 1s" />
-              <circle cx="50" cy="200" r="3" fill="var(--color-accent)" class="pulse-point"
-                style="animation-delay: 1.5s" />
-            </svg>
-          </div>
-          <div class="hero-visual-metadata">
-            <span class="font-mono">ANALYSIS_VOL_01</span>
-            <span class="font-mono">RECURSION_DEPTH_39</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Navigation Bar (Grounded) -->
-    <div class="hero-bottom-bar border-t border-white/5 z-20">
-      <div class="max-w-5xl mx-auto px-6 py-8 flex items-center justify-between">
-        <div class="volume-nav-item">
-          <div class="volume-indicator">
-            <span>vol.</span>
-            <span class="volume-current">01</span>
-          </div>
-        </div>
-
-        <a href="#" class="next-vol-teaser group">
-          <span class="teaser-label">Coming Next</span>
-          <span class="teaser-value">
-            Vol. 02: Voyage
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              class="inline-block transition-transform group-hover:translate-x-1">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Scroll Indicator (Refined) -->
-    <div class="scroll-cue fade-in" style="transition-delay: 1s">
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- [01] The Cast / Bar Chart Race -->
-  <section id="entity-race" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
-    <div class="max-w-5xl mx-auto px-6 fade-in-up">
-      <div class="section-header mb-16">
-        <h2 class="section-title">Who appears, <br><em>and how our engine tracks attention</em></h2>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div class="lg:col-span-9">
-          <!-- Chart card -->
-          <div class="chart-card p-8 md:p-12">
-            <div class="flex flex-wrap gap-x-2 gap-y-2 mb-8 border-b border-white/5 pb-6">
-              <span class="legend-item" style="color: var(--color-person)">
-                <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-person)"></span>
-                person
-              </span>
-              <span class="legend-item" style="color: var(--color-org)">
-                <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-org)"></span>
-                organization
-              </span>
-              <span class="legend-item" style="color: var(--color-lore)">
-                <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-lore)"></span>
-                lore
-              </span>
-              <span class="legend-item" style="color: var(--color-location)">
-                <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-location)"></span>
-                location
-              </span>
-            </div>
-            <!-- Controls -->
-            <div class="race-controls-container mb-10">
-              <div class="flex items-center gap-4 mb-6">
-                <button id="racePlayBtn" class="race-btn" aria-label="Play">
-                  <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="6,3 20,12 6,21" />
-                  </svg>
-                  <svg id="pauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
-                    style="display:none">
-                    <rect x="5" y="3" width="4" height="18" />
-                    <rect x="15" y="3" width="4" height="18" />
-                  </svg>
-                </button>
-                <div class="flex-1 flex flex-col gap-2 w-full">
-                  <div class="flex justify-between items-end">
-                    <label for="raceSlider" class="control-label">Chapter Scrubber</label>
-                    <div class="chapter-display">
-                      ch. <strong id="raceChapterNum">1</strong><span id="raceTotalChapters"
-                        class="chapter-total">/220</span>
-                    </div>
-                  </div>
-                  <input type="range" id="raceSlider" class="race-slider" min="1" max="220" value="1">
-                </div>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="control-label">Playback Speed</span>
-                <div class="flex gap-1">
-                  <button class="speed-btn active" data-speed="1" title="Normal Speed">1×</button>
-                  <button class="speed-btn" data-speed="2" title="Double Speed">2×</button>
-                  <button class="speed-btn" data-speed="4" title="Quadruple Speed">4×</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Chart -->
-            <div class="chart-container" id="raceChartContainer">
-              <div class="chart-grid-lines" aria-hidden="true"></div>
-              <div id="raceChart" class="race-chart"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Secondary Callout / Stat -->
-        <div class="lg:col-span-3">
-          <div class="callout-card p-6 border border-white/5 rounded-xl bg-white/[0.02]">
-            <h3 class="font-ui text-[10px] uppercase tracking-widest text-gold-500 mb-4">Platform Intelligence</h3>
-            <p class="font-display italic text-xl text-cream-200 mb-2">Pacing &amp; Focus Metrics</p>
-            <p class="text-sm text-neutral-400 leading-relaxed">
-              Our analyzer tracks character prominence in real-time. By understanding focus distribution (like Klein's 33.4% mention share), EnrichReader automatically customizes the interface to support the reader's focus.
-            </p>
-            <div class="mt-6 pt-6 border-t border-white/5">
-              <span class="text-3xl font-display text-gold-500">33.4%</span>
-              <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Character Dominance Score</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="insight-area mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-white/5">
-        <p class="insight-text">
-          EnrichReader maps narrative structures automatically. By recognizing that Klein accounts for roughly 1 in 3 character mentions, the reading interface is dynamically tailored to prioritize relevant relationships, reducing reader fatigue.
-        </p>
-        <div class="flex flex-col gap-4">
-          <div class="stat-pill">
-            <span class="pill-label">Automated Org Extraction</span>
-            <span class="pill-value">Nighthawks (Detected)</span>
-          </div>
-          <div class="stat-pill">
-            <span class="pill-label">Contextual Lore Triggers</span>
-            <span class="pill-value">Beyonders (Active)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- [02] The Gaps / Characters that Vanish -->
-  <section id="vanishing-characters" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
-    <div class="max-w-5xl mx-auto px-6 fade-in-up">
-      <div class="section-header mb-16">
-        <h2 class="section-title">Who disappears, <br><em>and how we handle character memory</em></h2>
-      </div>
-
-      <!-- Legend -->
-      <div class="flex flex-wrap gap-8 mb-8 border-b border-white/5 pb-6">
-        <div class="legend-item-minimal">
-          <span class="dot-marker" style="background: var(--color-accent)"></span>
-          <span class="legend-label">First Mention</span>
-        </div>
-        <div class="legend-item-minimal">
-          <span class="dot-marker" style="background: var(--color-accent)"></span>
-          <span class="legend-label">Reappearance</span>
-        </div>
-        <div class="legend-item-minimal">
-          <span class="dash-marker" style="border-bottom: 2px dashed var(--color-accent); opacity: 0.5;"></span>
-          <span class="legend-label">Absence Span</span>
-        </div>
-        <div class="legend-item-minimal">
-          <span class="dash-marker" style="border-bottom: 2px dashed rgba(255,255,255,0.3)"></span>
-          <span class="legend-label">Current Chapter</span>
-        </div>
-      </div>
-
-      <!-- Chart card -->
-      <div class="chart-card p-8 md:p-12">
-        <!-- Controls -->
-        <div class="race-controls-container mb-12">
-          <div class="flex items-center gap-4 mb-6">
-            <button id="vanishPlayBtn" class="race-btn" aria-label="Play">
-              <svg id="vanishPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="6,3 20,12 6,21" />
-              </svg>
-              <svg id="vanishPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
-                style="display:none">
-                <rect x="5" y="3" width="4" height="18" />
-                <rect x="15" y="3" width="4" height="18" />
-              </svg>
-            </button>
-            <div class="flex-1 flex flex-col gap-2 w-full">
-              <div class="flex justify-between items-end">
-                <label for="vanishSlider" class="control-label">Timeline Scrubber</label>
-                <div class="chapter-display">
-                  ch. <strong id="vanishChapterNum">1</strong><span id="vanishTotalChapters"
-                    class="chapter-total">/220</span>
-                </div>
-              </div>
-              <input type="range" id="vanishSlider" class="race-slider" min="1" max="220" value="1">
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="control-label">Playback Speed</span>
-            <div class="flex gap-1">
-              <button class="vanish-speed-btn speed-btn active" data-speed="1" title="Normal Speed">1×</button>
-              <button class="vanish-speed-btn speed-btn" data-speed="2" title="Double Speed">2×</button>
-              <button class="vanish-speed-btn speed-btn" data-speed="4" title="Quadruple Speed">4×</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chart -->
-        <div class="chart-container">
-          <canvas id="vanishChart"></canvas>
-        </div>
-
-        <!-- Insight pills (grounded) -->
-        <div class="mt-10 pt-8 border-t border-white/5">
-          <p class="control-label mb-4">Notable Absence Gaps</p>
-          <div class="flex flex-wrap gap-3">
-            <div class="insight-pill">
-              Klee: 166 chapters of narrative absence
-            </div>
-            <div class="insight-pill">
-              Conservative Party: 165 chapter gap
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="insight-area mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-white/5">
-        <p class="insight-text">
-          When characters reappear after hundreds of chapters, readers often lose track of who they are. EnrichReader automatically identifies these long absence gaps and offers context-sensitive, spoiler-free reminders at the exact moment of their return.
-        </p>
-        <div class="flex flex-col gap-4">
-          <div class="callout-card p-4 border border-white/5 rounded-lg bg-white/[0.01]">
-            <p class="text-sm text-neutral-400 leading-relaxed">
-              "By tracking presence gaps, EnrichReader prevents drop-offs in complex fantasy sagas where minor characters disappear for hundreds of chapters before returning."
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- [03] The Funnel / Entity Journey -->
-  <section id="entity-journey" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
-    <div class="max-w-5xl mx-auto px-6 fade-in-up">
-      <div class="section-header mb-16">
-        <h2 class="section-title">Semantic Filtering: <br><em>How many entities actually matter</em></h2>
-      </div>
-
-      <!-- Controls (Restored to fix JS error) -->
-      <div class="race-controls-container mb-12">
-        <div class="flex items-center gap-4 mb-6">
-          <button id="journeyPlayBtn" class="race-btn" aria-label="Play">
-            <svg id="journeyPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <polygon points="6,3 20,12 6,21" />
-            </svg>
-            <svg id="journeyPauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
-              style="display:none">
-              <rect x="5" y="3" width="4" height="18" />
-              <rect x="15" y="3" width="4" height="18" />
-            </svg>
-          </button>
-          <div class="flex-1 flex flex-col gap-2 w-full">
-            <div class="flex justify-between items-end">
-              <label for="journeySlider" class="control-label">Narrative Scrubber</label>
-              <div class="chapter-display">
-                ch. <strong id="journeyChapterNum">1</strong><span id="journeyTotalChapters"
-                  class="chapter-total">/220</span>
-              </div>
-            </div>
-            <input type="range" id="journeySlider" class="race-slider" min="1" max="220" value="1">
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="control-label">Playback Speed</span>
-          <div class="flex gap-1">
-            <button class="journey-speed-btn speed-btn active" data-speed="1" title="Normal Speed">1×</button>
-            <button class="journey-speed-btn speed-btn" data-speed="2" title="Double Speed">2×</button>
-            <button class="journey-speed-btn speed-btn" data-speed="4" title="Quadruple Speed">4×</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 items-start">
-        <!-- Funnel Column (7-cols) -->
-        <div class="md:col-span-7 funnel-display relative">
-          <div class="funnel-container">
-            <!-- Stage 1 -->
-            <div class="funnel-stage stage-1">
-              <div class="funnel-content">
-                <span class="funnel-num" id="funnel-stage1-count">...</span>
-                <span class="funnel-label" id="funnel-stage1-label">...</span>
-              </div>
-            </div>
-
-            <!-- Filter Indicator -->
-            <div class="funnel-connector">
-              <div class="filter-line"></div>
-            </div>
-
-            <!-- Stage 3 -->
-            <div class="funnel-stage stage-3 highlight">
-              <div class="funnel-content">
-                <span class="funnel-num" id="funnel-stage3-count">...</span>
-                <span class="funnel-label" id="funnel-stage3-label">258 UNIQUE ENTITIES</span>
-              </div>
-            </div>
-          </div>
-
-          <p class="funnel-meta mt-12 text-center md:text-left">
-            tracked across <span id="stats-words" class="font-tech text-cream-200">...</span> words · <span
-              id="stats-chapters" class="font-tech text-cream-200">...</span> chapters
-          </p>
-        </div>
-
-        <!-- Donut Column (5-cols) -->
-        <div class="md:col-span-5">
-          <div class="chart-card p-8 md:p-12 relative flex flex-col items-center">
-            <div class="relative w-full max-w-[240px] aspect-square mx-auto flex items-center justify-center">
-              <!-- Center Total Display -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none">
-                <span id="donut-total-count" class="donut-total-value">0</span>
-                <span class="donut-total-label">unique entities</span>
-              </div>
-              <canvas id="entityDonutChart"></canvas>
-            </div>
-            <!-- Dynamic Legend (Synchronized with Chart 01) -->
-            <div class="flex flex-wrap justify-center gap-x-3 gap-y-2 mt-10 border-t border-white/5 pt-8 w-full"
-              id="entityLegendGrid">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Reconciled Insight Area -->
-      <div class="insight-area mt-20 pt-12 border-t border-white/5">
-        <div class="max-w-4xl">
-          <p class="insight-text-bold mb-6">
-            Noise Filtering: <span id="funnel-stage1-count-copy">1,011</span> entities parsed, <span id="funnel-stage3-count-copy">258</span> qualified.
-          </p>
-          <p class="insight-text">
-            Massive fantasy worlds are filled with temporary background names and locations. Our NLP engine filters this atmospheric noise to isolate key recurring entities. This guarantees that your interactive maps and directories remain clean and high-value without requiring manual metadata curation.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+<main id="dcc-main-content" data-series-data="/lotm/lotm_data.json">
+  {{< partial "lotm/race_selection_matrix.html" >}}
+  {{< partial "lotm/funnel_breakdown.html" >}}
+  {{< partial "lotm/survival_mortality.html" >}}
+  {{< partial "lotm/mentions_race.html" >}}
+  {{< partial "lotm/absence_gaps.html" >}}
+  {{< partial "lotm/word_trends.html" >}}
+  {{< partial "lotm/contact.html" >}}
 </main>
 
-<footer style="padding-block: var(--spacing-32); text-align: center;">
-  <div class="max-w-3xl mx-auto px-6 fade-in-up">
-    <h2 class="font-display italic text-3xl md:text-5xl mb-6">Ready to bring your stories to life?</h2>
-    <p class="font-body text-cream-200 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-      If you want to bring life to your stories too, get in touch with us. We extract character timelines, presence gaps, and structural statistics to build immersive digital reading companions.
-    </p>
-    
-    <div class="flex justify-center items-center">
-      <a href="mailto:sales@enrichreader.com?subject=EnrichReader%20for%20Publishers" class="cta-button primary-cta shadow-gold glow-gold text-lg px-8 py-4">
-        Get in Touch
-      </a>
-    </div>
-    
-    <p
-      style="margin-top: var(--spacing-24); font-family: var(--font-ui); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
-      © 2026 EnrichReader</p>
-  </div>
-</footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Lord of the Mysteries Narrative Analysis Dataset",
+  "description": "Quantitative analysis of Cuttlefish That Loves Diving's fantasy masterpiece Lord of the Mysteries. Covers character survival timelines, Beyonder pathway selections, entity mentions, and pronoun counts across all eight volumes.",
+  "creator": {
+    "@type": "Organization",
+    "name": "EnrichReader",
+    "url": "https://enrichreader.com"
+  },
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "variableMeasured": [
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Mentions",
+      "description": "Frequencies of entity mentions categorized into character (Klein Moretti: 45818, Audrey Hall: 6216), location, organization (Tarot Club: 1348), item (Arrodes: 713), and event, tracked chapter by chapter."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Narrative Absence Spans",
+      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Azik Eggers: 320 chapters gap)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Character Survival",
+      "description": "Survival timeline of 514 characters with 364 alive and 150 dead (70.82% survival rate) at the end of Volume 8."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Funnel and Category Breakdown",
+      "description": "Filters raw entity mentions down to 954 unique entities categorized into Person (514), Location (175), Organization (100), Other (87), Item (38), and Event (40)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Occult Keywords & Demographics",
+      "description": "Visual keyword mapping of novel terminology and pronoun demographics of characters (He/Him, She/Her, It/Its, They/Them)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Pathway Selections",
+      "description": "Breakdown of Beyonder pathway selections per volume, showing Sleepless, Seer, Spectator, and Sailor pathway counts."
+    }
+  ]
+}
+</script>
+
+{{< partial "lotm/footer.html" >}}

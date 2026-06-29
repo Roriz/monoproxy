@@ -1,59 +1,47 @@
 // ═══════════════════════════════════════════════════════════════
-// Bar Chart Race — Lord of the Mysteries data visualizations
-// ═══════════════════════════════════════════════════════════════
-
-// ── Scroll reveal ────────────────────────────────────────────
-function initScrollReveal() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in-up, .fade-in').forEach(el => observer.observe(el));
-}
-
-// ═══════════════════════════════════════════════════════════════
-// Reusable time-series playback controller
+// Bar Chart Race — Lord of the Mysteries species visualizations
 // ═══════════════════════════════════════════════════════════════
 
 class TimeSeriesPlayer {
   constructor(opts) {
+    this.minChapter = opts.minChapter || 1;
     this.maxChapter = opts.maxChapter;
-    this.currentChapter = 1;
+    this.currentChapter = this.minChapter;
     this.isPlaying = false;
     this.interval = null;
-    this.speed = 1;
+    this.speed = opts.defaultSpeed || 4;
     this.onUpdate = opts.onUpdate;
-    this.startAt = opts.startAt || 0; // The point to restart from
+    this.startAt = opts.startAt || this.minChapter;
 
     this.playBtn = document.getElementById(opts.playBtnId);
     this.playIcon = document.getElementById(opts.playIconId);
     this.pauseIcon = document.getElementById(opts.pauseIconId);
     this.slider = document.getElementById(opts.sliderId);
     this.chapterNum = document.getElementById(opts.chapterNumId);
-    this.speedBtns = document.querySelectorAll(opts.speedBtnSelector);
+    this.speedBtns = opts.speedBtnSelector ? document.querySelectorAll(opts.speedBtnSelector) : [];
 
     this._bindEvents();
   }
 
   _bindEvents() {
-    this.playBtn.addEventListener('click', () => {
-      this.isPlaying ? this.stop() : this.play();
-    });
+    if (this.playBtn) {
+      this.playBtn.addEventListener('click', () => {
+        this.isPlaying ? this.stop() : this.play();
+      });
+    }
 
-    this.slider.addEventListener('input', () => {
-      if (this.isPlaying) this.stop();
-      this.goTo(parseInt(this.slider.value));
-    });
+    if (this.slider) {
+      this.slider.addEventListener('input', () => {
+        if (this.isPlaying) this.stop();
+        this.goTo(parseInt(this.slider.value, 10));
+      });
+    }
 
     this.speedBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         this.speedBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        this.speed = parseInt(btn.dataset.speed);
+        this.speed = parseInt(btn.dataset.speed, 10);
         if (this.isPlaying) {
           this._restartInterval();
         }
@@ -62,22 +50,22 @@ class TimeSeriesPlayer {
   }
 
   goTo(chapter) {
-    if (chapter < 1) chapter = 1;
+    if (chapter < this.minChapter) chapter = this.minChapter;
     if (chapter > this.maxChapter) chapter = this.maxChapter;
     this.currentChapter = chapter;
-    this.slider.value = chapter;
-    this.chapterNum.textContent = chapter;
+    if (this.slider) this.slider.value = chapter;
+    if (this.chapterNum) this.chapterNum.textContent = chapter;
     this.onUpdate(chapter);
   }
 
   play() {
     if (this.currentChapter >= this.maxChapter) {
-      this.currentChapter = this.startAt; 
+      this.currentChapter = this.startAt;
     }
     this.isPlaying = true;
-    this.playIcon.style.display = 'none';
-    this.pauseIcon.style.display = 'block';
-    this.playBtn.classList.add('active');
+    if (this.playIcon) this.playIcon.style.display = 'none';
+    if (this.pauseIcon) this.pauseIcon.style.display = 'block';
+    if (this.playBtn) this.playBtn.classList.add('active');
     this._restartInterval();
   }
 
@@ -85,9 +73,9 @@ class TimeSeriesPlayer {
     this.isPlaying = false;
     clearInterval(this.interval);
     this.interval = null;
-    this.playIcon.style.display = 'block';
-    this.pauseIcon.style.display = 'none';
-    this.playBtn.classList.remove('active');
+    if (this.playIcon) this.playIcon.style.display = 'block';
+    if (this.pauseIcon) this.pauseIcon.style.display = 'none';
+    if (this.playBtn) this.playBtn.classList.remove('active');
   }
 
   _restartInterval() {
@@ -97,149 +85,232 @@ class TimeSeriesPlayer {
         this.stop();
         return;
       }
-      this.currentChapter++;
+      this.currentChapter += 2; // Step by 2 in series scale for smoother play speed
+      if (this.currentChapter > this.maxChapter) {
+        this.currentChapter = this.maxChapter;
+      }
       this.goTo(this.currentChapter);
-    }, 400 / this.speed);
+    }, 250 / this.speed); // Slightly faster interval for 797 chapters
   }
 }
 
-// ═══════════════════════════════════════════════════════════════
-// Chart 02 — Bar Chart Race (DOM Version)
-// ═══════════════════════════════════════════════════════════════
+// Global player registry to share with other scripts
+window.TimeSeriesPlayer = TimeSeriesPlayer;
 
-// Configuration
+// Fetch promise for cached data access
+const dataContainer = document.querySelector('[data-series-data]');
+const dataUrl = dataContainer ? dataContainer.getAttribute('data-series-data') : 'lotm_data.json';
+
+window.dccDataPromise = window.dccDataPromise || fetch(dataUrl).then(res => {
+  if (!res.ok) throw new Error('Failed to load ' + dataUrl);
+  return res.json();
+});
+
+// Bar Chart Race configuration
 const TOP_N = 12;
 const BAR_HEIGHT = 42; 
 const colorMap = {
-  person: 'oklch(78% 0.16 85 / 0.85)',       /* Beyonder Gold */
-  organization: 'oklch(65% 0.12 180 / 0.85)', /* Alchemical Teal */
-  lore: 'oklch(58% 0.18 28 / 0.85)',         /* Ancient Crimson */
-  location: 'oklch(62% 0.1 250 / 0.85)',     /* Mystic Blue */
-  other: 'oklch(55% 0.05 285 / 0.85)',       /* Shadow Slate */
+  person: 'var(--color-person)',
+  location: 'var(--color-location)',
+  organization: 'var(--color-org)',
+  item: 'var(--color-item)',
+  event: 'var(--color-event)',
+  other: 'var(--color-other)',
 };
 
 async function initBarChartRace() {
-  const dataRes = await fetch('race_data.json');
-  const rawData = await dataRes.json();
-  
-  const snapshots = rawData.map(ch => {
-    return ch.data
-      .sort((a, b) => b.mentions - a.mentions)
-      .slice(0, TOP_N)
-      .map(d => ({
-        id: d.entity,
-        name: d.entity.charAt(0).toUpperCase() + d.entity.slice(1),
-        type: d.classification.toLowerCase(),
-        value: d.mentions
-      }));
-  });
+  try {
+    const rawData = await window.dccDataPromise;
+    const raceSnapshots = rawData.race_data;
+    
+    const totalChapters = raceSnapshots.length;
+    const minCh = raceSnapshots[0].series_index;
+    const maxCh = raceSnapshots[totalChapters - 1].series_index;
 
-  const totalChapters = snapshots.length;
-  const container = document.getElementById('raceChart');
-  container.style.height = (TOP_N * BAR_HEIGHT) + 'px';
+    const container = document.getElementById('raceChart');
+    if (!container) return;
+    container.style.height = (TOP_N * BAR_HEIGHT) + 'px';
 
-  // Update dynamic total label
-  const totalDisplay = document.getElementById('raceTotalChapters');
-  if (totalDisplay) totalDisplay.textContent = '/' + totalChapters;
+    // Update dynamic total label
+    const totalDisplay = document.getElementById('raceTotalChapters');
+    if (totalDisplay) totalDisplay.textContent = '/' + maxCh;
 
-  // Tracking state
-  const barElements = new Map();
-  const disposalTimeouts = new Map(); // Track pending removals
+    const slider = document.getElementById('raceSlider');
+    if (slider) {
+      slider.min = minCh;
+      slider.max = maxCh;
+    }
 
-  function updateChart(chapterIndex) {
-    const frame = snapshots[chapterIndex] || [];
-    if (frame.length === 0) return;
+    const barElements = new Map();
+    const disposalTimeouts = new Map();
 
-    const maxValue = frame[0].value || 1;
-    const currentIds = new Set(frame.map(d => d.id));
+    // References to interactive legend chips
+    const filterChips = document.querySelectorAll('#race-legend .legend-item[data-filter]');
+    const activeFilters = {
+      person: true,
+      location: true,
+      org: true,
+      item: true,
+      event: true,
+      other: true
+    };
 
-    // Update or create bars
-    frame.forEach((data, index) => {
-      let el = barElements.get(data.id);
-      
-      // If bar was about to be removed, rescue it
-      if (disposalTimeouts.has(data.id)) {
-        clearTimeout(disposalTimeouts.get(data.id));
-        disposalTimeouts.delete(data.id);
-        el.style.opacity = '1';
+    function updateChart(seriesIndex) {
+      // Find snapshot for active series_index
+      let snapshot = raceSnapshots.find(s => s.series_index === seriesIndex);
+      if (!snapshot) {
+        // Fallback to nearest series_index if needed
+        snapshot = raceSnapshots.reduce((prev, curr) => {
+          return (Math.abs(curr.series_index - seriesIndex) < Math.abs(prev.series_index - seriesIndex) ? curr : prev);
+        });
       }
 
-      if (!el) {
-        el = createBarElement(data);
-        container.appendChild(el);
-        barElements.set(data.id, el);
-        
-        // Initial state
-        el.style.transform = `translateY(${(index + 1) * BAR_HEIGHT}px) translateX(0)`;
-        el.style.opacity = '0';
-        requestAnimationFrame(() => el.style.opacity = '1');
+      if (!snapshot) return;
+
+      const labelEl = document.getElementById('raceChapterNum');
+      if (labelEl) {
+        labelEl.textContent = snapshot.label;
       }
 
-      // Explicitly set transform without additive strings
-      const widthPercent = (data.value / maxValue) * 100;
-      el.style.transform = `translateY(${index * BAR_HEIGHT}px) translateX(0)`;
-      
-      const innerBar = el.querySelector('.race-bar-inner');
-      innerBar.style.width = `${widthPercent}%`;
-      innerBar.style.backgroundColor = colorMap[data.type] || colorMap.other;
-      
-      el.querySelector('.race-bar-value').textContent = data.value.toLocaleString();
-    });
+      // Filter active snapshot data based on toggles
+      let filteredData = snapshot.data;
+      filteredData = filteredData.filter(d => {
+        let cat = d.classification;
+        if (cat === 'organization') cat = 'org';
+        return activeFilters[cat] !== false;
+      });
 
-    // Handle removals
-    for (const [id, el] of barElements.entries()) {
-      if (!currentIds.has(id) && !disposalTimeouts.has(id)) {
-        el.style.opacity = '0';
-        el.style.transform = `translateY(${parseInt(el.style.transform.match(/translateY\(([^)]+)\)/)[1])}px) translateX(-20px)`;
+      // Sort and slice top N
+      const sortedData = filteredData
+        .sort((a, b) => b.mentions - a.mentions)
+        .slice(0, TOP_N);
+
+      if (sortedData.length === 0) return;
+
+      const maxValue = sortedData[0].mentions || 1;
+      const currentIds = new Set(sortedData.map(d => d.entity));
+
+      // Update or create bars
+      sortedData.forEach((data, index) => {
+        let el = barElements.get(data.entity);
         
-        const timeoutId = setTimeout(() => {
-          if (el.parentNode === container) {
-            container.removeChild(el);
-          }
-          barElements.delete(id);
-          disposalTimeouts.delete(id);
-        }, 400);
-        disposalTimeouts.set(id, timeoutId);
+        if (disposalTimeouts.has(data.entity)) {
+          clearTimeout(disposalTimeouts.get(data.entity));
+          disposalTimeouts.delete(data.entity);
+          el.style.opacity = '1';
+        }
+
+        if (!el) {
+          el = createBarElement(data);
+          container.appendChild(el);
+          barElements.set(data.entity, el);
+          
+          el.style.transform = `translateY(${(index + 1) * BAR_HEIGHT}px) translateX(0)`;
+          el.style.opacity = '0';
+          requestAnimationFrame(() => el.style.opacity = '1');
+        }
+
+        const widthPercent = (data.mentions / maxValue) * 100;
+        el.style.transform = `translateY(${index * BAR_HEIGHT}px) translateX(0)`;
+        
+        const innerBar = el.querySelector('.race-bar-inner');
+        innerBar.style.width = `${widthPercent}%`;
+        innerBar.style.backgroundColor = colorMap[data.classification] || colorMap.other;
+        
+        el.querySelector('.race-bar-value').textContent = data.mentions.toLocaleString();
+      });
+
+      // Handle removals
+      for (const [id, el] of barElements.entries()) {
+        if (!currentIds.has(id) && !disposalTimeouts.has(id)) {
+          el.style.opacity = '0';
+          
+          const transformMatch = el.style.transform.match(/translateY\(([^p]+)px\)/);
+          const currentY = transformMatch ? parseInt(transformMatch[1], 10) : 0;
+          el.style.transform = `translateY(${currentY}px) translateX(-20px)`;
+          
+          const timeoutId = setTimeout(() => {
+            if (el.parentNode === container) {
+              container.removeChild(el);
+            }
+            barElements.delete(id);
+            disposalTimeouts.delete(id);
+          }, 400);
+          disposalTimeouts.set(id, timeoutId);
+        }
       }
     }
+
+    function createBarElement(data) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'race-bar-wrapper';
+      
+      const label = document.createElement('div');
+      label.className = 'race-bar-label';
+      label.title = data.entity;
+      label.textContent = data.entity;
+      
+      const outer = document.createElement('div');
+      outer.className = 'race-bar-outer';
+      
+      const inner = document.createElement('div');
+      inner.className = 'race-bar-inner';
+      inner.style.width = '0%';
+      inner.style.backgroundColor = colorMap[data.classification] || colorMap.other;
+      
+      const value = document.createElement('div');
+      value.className = 'race-bar-value';
+      value.textContent = '0';
+      
+      inner.appendChild(value);
+      outer.appendChild(inner);
+      wrapper.appendChild(label);
+      wrapper.appendChild(outer);
+      
+      return wrapper;
+    }
+
+    const player = new TimeSeriesPlayer({
+      playBtnId: 'racePlayBtn',
+      playIconId: 'playIcon',
+      pauseIconId: 'pauseIcon',
+      raceSlider: 'raceSlider',
+      sliderId: 'raceSlider',
+      chapterNumId: null, // Set to null to prevent integer updates override
+      speedBtnSelector: null,
+      defaultSpeed: 4,
+      minChapter: minCh,
+      maxChapter: maxCh,
+      onUpdate(seriesIndex) {
+        updateChart(seriesIndex);
+      },
+    });
+
+    window.playerRegistry = window.playerRegistry || [];
+    window.playerRegistry.push(player);
+
+    // Initial render at max chapter to show final values on load
+    player.goTo(maxCh);
+
+    // Re-render when chips are clicked
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const cat = chip.getAttribute('data-filter');
+        activeFilters[cat] = !activeFilters[cat];
+        if (activeFilters[cat]) {
+          chip.classList.remove('inactive');
+        } else {
+          chip.classList.add('inactive');
+        }
+        updateChart(player.currentChapter);
+      });
+    });
+
+  } catch (err) {
+    console.error('Error starting bar chart race:', err);
   }
-
-  function createBarElement(data) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'race-bar-wrapper';
-    wrapper.innerHTML = `
-      <div class="race-bar-label" title="${data.name}">${data.name}</div>
-      <div class="race-bar-outer">
-        <div class="race-bar-inner" style="width: 0%; background-color: ${colorMap[data.type] || colorMap.other}">
-          <div class="race-bar-value">0</div>
-        </div>
-      </div>
-    `;
-    return wrapper;
-  }
-
-  const player = new TimeSeriesPlayer({
-    playBtnId: 'racePlayBtn',
-    playIconId: 'playIcon',
-    pauseIconId: 'pauseIcon',
-    sliderId: 'raceSlider',
-    chapterNumId: 'raceChapterNum',
-    speedBtnSelector: '#entity-race .speed-btn',
-    maxChapter: totalChapters,
-    onUpdate(chapter) {
-      updateChart(chapter - 1);
-    },
-  });
-
-  window.playerRegistry = window.playerRegistry || [];
-  window.playerRegistry.push(player);
-
-  player.goTo(1);
-  const slider = document.getElementById('raceSlider');
-  if (slider) slider.max = totalChapters;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  initScrollReveal();
   await initBarChartRace();
 });
