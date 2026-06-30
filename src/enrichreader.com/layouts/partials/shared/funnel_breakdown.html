@@ -66,7 +66,26 @@
       <!-- Donut Column (5-cols) -->
       <div class="md:col-span-5">
         <div class="chart-card p-8 md:p-12 relative flex flex-col items-center">
-          <div class="relative w-full max-w-[240px] aspect-square mx-auto flex items-center justify-center">
+
+          <div class="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 pb-4 border-b border-white/5">
+            <span class="control-label">Entity Breakdown</span>
+            
+            <!-- Interactive Chart Actions -->
+            <div class="chart-actions-toolbar flex items-center gap-2">
+              <button type="button" class="chart-action-btn btn-share" id="btn-share-funnel" title="Copy link to this chart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share-2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                <span>Share</span>
+              </button>
+              <button type="button" class="chart-action-btn btn-download" id="btn-download-funnel" title="Download chart as PNG">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Export</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="relative w-full max-w-[240px] aspect-square mx-auto flex items-center justify-center" style="overflow: hidden;">
+            <!-- Repeating Watermark Background Overlay -->
+            <div class="chart-watermark-overlay-repeating" aria-hidden="true"></div>
             <!-- Center Total Display -->
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none">
               <span id="donut-total-count" class="donut-total-value">{{ .Params.funnel_breakdown.unique_entities }}</span>

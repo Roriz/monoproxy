@@ -9,7 +9,24 @@
     </div>
 
     <!-- Matrix Card -->
-    <div class="chart-card p-6 md:p-10">
+    <div class="chart-card p-6 md:p-10 relative">
+
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 pb-4 border-b border-white/5">
+        <span class="control-label">{{ .Params.matrix.noun_singular | title }} Selection Matrix</span>
+        
+        <!-- Interactive Chart Actions -->
+        <div class="chart-actions-toolbar flex items-center gap-2">
+          <button type="button" class="chart-action-btn btn-share" id="btn-share-matrix" title="Copy link to this chart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share-2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            <span>Share</span>
+          </button>
+          <button type="button" class="chart-action-btn btn-download" id="btn-download-matrix" title="Download chart as PNG">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Export</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Controls -->
       <div class="flex flex-wrap items-center justify-between gap-6 mb-8 border-b border-white/5 pb-6">
         <div class="flex items-center gap-3 w-full sm:w-auto">
@@ -27,6 +44,8 @@
 
       <!-- Table Wrapper -->
       <div class="matrix-table-container overflow-x-auto relative" style="margin-inline: -1.5rem; padding-inline: 1.5rem;">
+        <!-- Repeating Watermark Background Overlay -->
+        <div class="chart-watermark-overlay-repeating" aria-hidden="true"></div>
         <table class="matrix-table w-full text-left font-ui">
           <thead>
             <tr>

@@ -1299,3 +1299,162 @@ nav {
   width: auto;
 }
 
+/* ── Chart Action Controls & Watermarking ── */
+.chart-actions-toolbar {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.chart-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.chart-action-btn svg {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.chart-action-btn:hover svg {
+  opacity: 1;
+}
+
+/* Background Watermark Overlay styling (Option 2) */
+.chart-watermark-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 0.08;
+  user-select: none;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+/* When exporting or printing or hovering the container, highlight the watermark slightly */
+.chart-card:hover .chart-watermark-overlay {
+  opacity: 0.12;
+}
+
+.chart-watermark-logo {
+  width: 240px;
+  height: auto;
+  filter: grayscale(1) brightness(1.5);
+}
+
+.chart-watermark-url {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* Print/Screenshot optimizations */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .chart-card-print-target,
+  .chart-card-print-target * {
+    visibility: visible;
+  }
+  .chart-card-print-target {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #0a0a0c !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 2rem !important;
+    margin: 0 !important;
+    height: auto !important;
+  }
+  .chart-actions-toolbar {
+    display: none !important;
+  }
+  .chart-watermark-overlay {
+    opacity: 0.08 !important;
+    display: flex !important;
+  }
+  .chart-watermark-overlay-repeating {
+    z-index: 9999 !important;
+    overflow: hidden !important;
+  }
+  .chart-watermark-overlay-repeating::before {
+    background-image: url("/assets/logo-4x1-dark-transparent.png") !important;
+    opacity: 0.04 !important;
+  }
+  .card-branding-badge {
+    opacity: 0.8 !important;
+    display: inline-flex !important;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Repeating background watermark for larger/table charts */
+.chart-watermark-overlay-repeating {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.chart-watermark-overlay-repeating::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  background-image: url("/assets/logo-4x1-dark-transparent.png");
+  background-repeat: repeat;
+  background-size: 160px auto;
+  transform: rotate(-25deg);
+  opacity: 0.04; /* 0.04 transparency */
+}
+
