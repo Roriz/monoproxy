@@ -114,9 +114,20 @@ scripts:
         <span class="font-mono text-[9px] md:text-[10px] text-neutral-500 uppercase">STATUS: LIVE_DATASET</span>
       </div>
 
+      <!-- Chart Caption -->
+      <div class="mb-4 text-left">
+        <span class="text-xs font-serif italic text-gold-300">Dataset Preview: Character Pathway choices across Lord of the Mysteries, Vol. 1–8</span>
+      </div>
+
       <!-- Chart Image Component -->
       <div class="w-full rounded-2xl overflow-hidden bg-neutral-950/40 border border-neutral-900/80">
         <img src="/assets/enrichreader-pathway-selection-matrix.png" alt="Lord of the Mysteries Pathway Selection Matrix Chart" class="w-full h-auto object-contain block" fetchpriority="high">
+      </div>
+
+      <!-- Footnote & IP Disclaimer -->
+      <div class="mt-4 text-[10px] text-neutral-500 font-mono text-left flex flex-col gap-1.5 border-t border-neutral-900/80 pt-3">
+        <span>*Series Total represents unique characters across the entire series, not a simple sum of volume counts (since characters survive across volumes or undergo pathway selections).</span>
+        <span class="text-[9px] text-neutral-600 font-sans">Disclaimer: Independent narrative analysis. Lord of the Mysteries and all related terminology are property of Cuttlefish That Loves Diving / Qidian.</span>
       </div>
     </div>
   </div>
@@ -144,7 +155,33 @@ scripts:
       </div>
     </div>
   </div>
-</section><!-- Persona Value Props (3 Columns) -->
+</section>
+
+<!-- Section Divider -->
+<div class="w-full border-t border-neutral-900/80 max-w-7xl mx-auto" aria-hidden="true"></div>
+
+<!-- Our Vision (Founder Vision Quote - Relocated for Vision-Setting) -->
+<section class="py-16 px-6 max-w-4xl mx-auto text-center reveal-on-scroll">
+  <div class="relative p-8 md:p-12 rounded-[40px] border border-neutral-900 bg-neutral-950/20 backdrop-blur-md">
+    <div class="absolute inset-0 bg-gold-500/[0.02] blur-3xl pointer-events-none"></div>
+    <span class="text-[10px] font-mono uppercase text-gold-500 tracking-widest mb-6 block">Our Vision</span>
+    <blockquote class="text-xl md:text-2xl text-neutral-300 leading-relaxed font-light italic mb-8 serif">
+      "We are mapping the DNA of long-form fiction. By transforming sprawling narratives into structured, queryable data, we enable platforms and creators to scale their universes while keeping readers deeply engaged."
+    </blockquote>
+    <div class="flex items-center justify-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gold-900/20 border border-gold-500/30 flex items-center justify-center font-bold text-gold-500 text-xs">RR</div>
+      <div class="text-left">
+        <div class="text-xs font-bold text-cream-200">Radames Roriz</div>
+        <div class="text-[9px] font-mono uppercase text-gold-500 tracking-wider">Founder, EnrichReader</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Divider -->
+<div class="w-full border-t border-neutral-900/80 max-w-7xl mx-auto" aria-hidden="true"></div>
+
+<!-- Persona Value Props (3 Columns) -->
 <section id="features" class="py-32 px-6 border-t border-neutral-900 bg-neutral-950/20 w-full">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-20 reveal-on-scroll">
@@ -196,8 +233,10 @@ scripts:
       </div>
     </div>
   </div>
-</section></div>
 </section>
+
+<!-- Section Divider -->
+<div class="w-full border-t border-neutral-900/80 max-w-7xl mx-auto" aria-hidden="true"></div>
 
 <!-- How It Works Section -->
 <section id="how-it-works" class="py-32 px-6 border-t border-neutral-900 bg-neutral-900/10 relative">
@@ -320,6 +359,9 @@ scripts:
   </div>
 </section>
 
+<!-- Section Divider -->
+<div class="w-full border-t border-neutral-900/80 max-w-7xl mx-auto" aria-hidden="true"></div>
+
 <!-- Featured Reports (Teaser Section) -->
 <section class="py-32 px-6 border-t border-neutral-900 bg-neutral-950/20">
   <div class="max-w-7xl mx-auto">
@@ -357,12 +399,12 @@ scripts:
       <a href="/lotm/" class="glass p-8 md:p-10 rounded-[40px] border-neutral-800 hover:-translate-y-2 duration-500 flex flex-col justify-between group reveal-on-scroll" style="transition-delay: 300ms;">
         <div>
           <div class="flex justify-end items-start mb-6">
-            <span class="text-xs text-neutral-500 font-mono">419K Words</span>
+            <span class="text-xs text-neutral-550 font-mono">3.2M Words</span>
           </div>
           <h3 class="text-2xl font-bold serif italic text-cream-100 mb-2 group-hover:text-gold-300 transition-colors">Lord of the Mysteries</h3>
-          <p class="text-xs text-neutral-555 font-light mb-6">Vol 1</p>
+          <p class="text-xs text-neutral-555 font-light mb-6">Vols 1-8</p>
           <div class="flex items-baseline gap-2 mb-8">
-            <span class="text-4xl font-bold text-cream-200">258</span>
+            <span class="text-4xl font-bold text-cream-200">954</span>
             <span class="text-xs text-neutral-400 font-mono uppercase tracking-wider">Unique Entities Tracked</span>
           </div>
         </div>
@@ -372,52 +414,53 @@ scripts:
         </div>
       </a>
     </div>
+    <div class="text-[9px] text-neutral-600 text-center mt-8 font-sans italic reveal-on-scroll">
+      *Dungeon Crawler Carl and Lord of the Mysteries are the property of their respective creators and publishers. Case studies are independent, unaffiliated narrative analyses.
+    </div>
   </div>
 </section>
 
+<!-- Section Divider -->
+<div class="w-full border-t border-neutral-900/80 max-w-7xl mx-auto" aria-hidden="true"></div>
+
 <!-- The Validation Loop: Reader App & Community Skins -->
-<section class="py-32 px-6 bg-white/[0.005] border-y border-neutral-900 reveal-on-scroll">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-    <div class="lg:col-span-5">
+<section id="proven-in-use" class="py-32 px-6 bg-white/[0.005] border-y border-neutral-900 reveal-on-scroll">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-bold serif italic text-cream-100 mb-6">Proven in Use</h2>
-      <p class="text-neutral-400 font-light leading-relaxed text-sm mb-8">
+      <p class="text-neutral-400 font-light leading-relaxed text-sm max-w-2xl mx-auto">
         We prove our data works by showing it directly to readers in our app. Readers interact with it and submit corrections to help improve our engine.
       </p>
-      
-      <div class="space-y-6">
-        <div class="flex items-start gap-4">
-          <span class="text-gold-500 text-lg">✦</span>
-          <div>
-            <h4 class="text-sm font-bold text-cream-200 mb-1">Reader Corrections</h4>
-            <p class="text-xs text-neutral-555 font-light">Data accuracy improves every week as your users actively validate character and lore details, reducing editorial QA costs.</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4">
-          <span class="text-gold-500 text-lg">✦</span>
-          <div>
-            <h4 class="text-sm font-bold text-cream-200 mb-1">Better Book Completion</h4>
-            <p class="text-xs text-neutral-555 font-light">Readers with character guides finish long series at higher rates, directly improving platform retention metrics.</p>
-          </div>
-        </div>
-      </div>
     </div>
     
-    <div class="lg:col-start-7 lg:col-span-6 border-l border-gold-500/20 pl-8 md:pl-12">
-      <blockquote class="text-lg md:text-xl text-neutral-300 leading-relaxed font-light italic mb-8 reading">
-        "We are mapping the DNA of long-form fiction. By transforming sprawling narratives into structured, queryable data, we enable platforms and creators to scale their universes while keeping readers deeply engaged."
-      </blockquote>
-      <div class="flex items-center gap-4">
-        <div class="w-10 h-10 rounded-full bg-gold-900/20 border border-gold-500/30 flex items-center justify-center font-bold text-gold-500 text-xs">RR</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+      <!-- Proof Point 1 -->
+      <div class="glass p-8 rounded-[32px] border-neutral-850 bg-neutral-950/20 flex items-start gap-4">
+        <span class="text-gold-500 text-lg">✦</span>
         <div>
-          <div class="text-xs font-bold text-cream-200">Radames Roriz</div>
-          <div class="text-[9px] font-mono uppercase text-gold-500 tracking-wider">Founder, EnrichReader</div>
+          <h4 class="text-sm font-bold text-cream-200 mb-2">Reader Corrections</h4>
+          <p class="text-xs text-neutral-450 font-light leading-relaxed">
+            Data accuracy improves every week as your users actively validate character and lore details, reducing editorial QA costs.
+          </p>
+        </div>
+      </div>
+
+      <!-- Proof Point 2 -->
+      <div class="glass p-8 rounded-[32px] border-neutral-850 bg-neutral-950/20 flex items-start gap-4">
+        <span class="text-gold-500 text-lg">✦</span>
+        <div>
+          <h4 class="text-sm font-bold text-cream-200 mb-2">Better Book Completion</h4>
+          <p class="text-xs text-neutral-400 font-light leading-relaxed">
+            Readers with character guides finish long series at higher rates, directly improving platform retention metrics.
+          </p>
         </div>
       </div>
     </div>
   </div>
-</section>>
-  </div>
 </section>
+
+<!-- Section Divider -->
+<div class="w-full border-t border-neutral-900/80 max-w-7xl mx-auto" aria-hidden="true"></div>
 
 <!-- FAQ Section -->
 <section id="faq" class="py-32 px-6 border-t border-neutral-900 bg-neutral-900/10">
@@ -448,7 +491,7 @@ scripts:
           <span class="text-gold-500 font-mono text-sm faq-icon transition-transform duration-300">+</span>
         </label>
         <div class="faq-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 text-xs md:text-sm text-neutral-400 leading-relaxed font-light">
-          Web novel apps use our API to show character guides and lore indexes inside their apps. We also provide publishers and film studios with structured data exports and continuity reports.
+          Most clients integrate without writing code — we provide API access plus JSON/CSV exports for teams building custom tooling. Web novel apps use our API to show character guides and lore indexes inside their apps. We also provide publishers and film studios with structured data exports and continuity reports.
         </div>
       </div>
 
@@ -478,6 +521,9 @@ scripts:
     </div>
   </div>
 </section>
+
+<!-- Section Divider -->
+<div class="w-full border-t border-neutral-900/80 max-w-7xl mx-auto" aria-hidden="true"></div>
 
 <!-- Final CTA Band -->
 <section class="py-24 px-6 max-w-4xl mx-auto border-t border-neutral-900 text-center reveal-on-scroll">
@@ -582,6 +628,9 @@ scripts:
     <div class="flex flex-col items-center md:items-start gap-4">
       <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader" style="height: 32px; width: auto;">
       <p class="text-[10px] text-neutral-600 font-light">&copy; 2026 EnrichReader. All rights reserved.</p>
+      <p class="text-[9px] text-neutral-700 font-light max-w-md text-center md:text-left mt-2 leading-relaxed">
+        Disclaimer: EnrichReader is an independent NLP narrative analysis tool. Fictional series, characters, and terms (e.g., Lord of the Mysteries, Dungeon Crawler Carl, Beyonder pathways) are the property of their respective creators and publishers. Case studies are unaffiliated fan-focused quantitative analyses.
+      </p>
     </div>
     
     <div class="flex flex-wrap justify-center gap-8 text-[10px] font-bold uppercase tracking-wider text-neutral-500">

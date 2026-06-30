@@ -1,0 +1,1 @@
+If you are working in src/enrichreader.com/content/enterprise pages or a landing page focused in B2B, read docs/b2b_playbook.md to follow the best practices.
