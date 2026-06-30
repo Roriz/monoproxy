@@ -1,0 +1,579 @@
+---
+title: "EnrichReader | Narrative Intelligence Engine for Massive Fiction"
+description: "Automated narrative analysis and lore extraction for long-running fiction. Empowering web novel platforms, epic authors, and adaptation studios."
+keywords:
+  - "narrative engine"
+  - "NLP book analysis"
+  - "character tracking API"
+  - "web novel retention"
+  - "IP adaptation due diligence"
+stylesheets:
+  - "/style/home.css"
+scripts:
+  - "/main.js"
+  - "/home.js"
+---
+
+<style>
+  @keyframes draw-path {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .graph-path {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: draw-path 3.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  
+  .animate-marquee {
+    display: flex;
+    width: 200%;
+    animation: marquee 25s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  /* Focus and input styling overrides */
+  .form-input:focus {
+    border-color: var(--color-gold-500);
+    box-shadow: 0 0 15px oklch(74% 0.12 85 / 0.2);
+    outline: none;
+  }
+
+  /* FAQ Accordion Styling */
+  .faq-trigger:checked ~ .faq-content {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 1rem;
+  }
+  .faq-trigger:checked ~ label .faq-icon {
+    transform: rotate(45deg);
+    color: var(--color-cream-100);
+  }
+
+  /* Pipeline nodes styling */
+  @keyframes pulse-node {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px var(--color-gold-500)); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 8px var(--color-gold-500)); }
+  }
+  .pipeline-node:hover {
+    fill: var(--color-gold-300);
+    cursor: pointer;
+  }
+</style>
+
+<!-- Hero Section -->
+<header class="relative px-6 max-w-7xl mx-auto flex flex-col items-center pt-32 pb-16 md:pt-44 md:pb-24 text-center overflow-hidden">
+  <div class="absolute inset-0 bg-gold-500/5 blur-[150px] rounded-full opacity-30 pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto relative z-10">
+    <!-- Primary Heading -->
+    <h1 class="font-bold serif leading-[1.0] tracking-tighter mb-8 animate-ink-bleed text-cream-100"
+      style="font-size: clamp(2.3rem, 6vw, 4.8rem); animation-delay: 100ms;">
+      Automated Lore & Continuity <br> For <span class="text-gold-500 italic">Massive Fiction Series</span>
+    </h1>
+
+    <!-- Supporting Subtext -->
+    <div class="max-w-[760px] mx-auto mb-10">
+      <p class="text-[16px] md:text-[20px] text-neutral-400 leading-relaxed font-light animate-reveal-up"
+        style="animation-delay: 300ms;">
+        We extract characters, timelines, and lore from stories with more than one million words. Our narrative engine helps web novel platforms keep readers engaged and helps studios evaluate IP for adaptations.
+      </p>
+    </div>
+
+    <!-- Action Group -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16 animate-reveal-up" style="animation-delay: 500ms;">
+      <a href="#contact-form" id="hero-cta-demo"
+        class="w-full sm:w-auto px-8 py-4 bg-brand-primary text-neutral-950 rounded-full font-bold text-sm md:text-base hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold border border-gold-400/30">
+        Request Engine Demo
+      </a>
+      <a href="/reports/" id="hero-cta-catalog"
+        class="w-full sm:w-auto px-8 py-4 bg-neutral-900 text-cream-200 rounded-full font-bold text-sm md:text-base hover:bg-neutral-850 transition-all transform hover:scale-105 border border-neutral-800 hover:border-neutral-700">
+        Explore Case Studies
+      </a>
+    </div>
+
+    <!-- Visual Chart Component (17-Step Pipeline Extraction) -->
+    <div class="relative w-full max-w-4xl mx-auto rounded-[32px] border border-neutral-800 bg-neutral-950/60 p-4 md:p-8 backdrop-blur-md shadow-2xl overflow-hidden animate-reveal-up" style="animation-delay: 700ms;">
+      <div class="flex items-center justify-between border-b border-neutral-900 pb-4 mb-6">
+        <div class="flex items-center gap-3">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold-500"></span>
+          </span>
+          <span class="font-mono text-[10px] md:text-xs text-neutral-400 uppercase tracking-widest">Extraction Pipeline: Multi-Stage parsing</span>
+        </div>
+        <span class="font-mono text-[9px] md:text-[10px] text-neutral-500 uppercase hidden sm:block">STATUS: PARSING_COMPLETED</span>
+      </div>
+
+      <!-- Pipeline Step Visual -->
+      <div class="relative w-full overflow-x-auto py-4">
+        <div class="min-w-[650px] h-[150px] relative">
+          <svg viewBox="0 0 800 150" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+            <!-- Connecting Line -->
+            <path d="M 50 75 L 750 75" stroke="#1f2937" stroke-width="3" />
+            <path d="M 50 75 L 430 75" stroke="url(#goldGradientLine)" stroke-width="3" class="graph-path" />
+
+            <!-- Node 1: Ingest -->
+            <circle cx="90" cy="75" r="14" fill="#14151a" stroke="#C9A84C" stroke-width="3" class="pipeline-node" />
+            <text x="90" y="45" fill="#FAF6EE" font-family="Manrope" font-size="10" font-weight="bold" text-anchor="middle">1. Load Text</text>
+            <text x="90" y="115" fill="#6b7280" font-family="Manrope" font-size="9" text-anchor="middle">Bring Your Own Files</text>
+
+            <!-- Node 2: Discovery -->
+            <circle cx="260" cy="75" r="14" fill="#14151a" stroke="#C9A84C" stroke-width="3" class="pipeline-node" />
+            <text x="260" y="45" fill="#FAF6EE" font-family="Manrope" font-size="10" font-weight="bold" text-anchor="middle">2. Find Entities</text>
+            <text x="260" y="115" fill="#6b7280" font-family="Manrope" font-size="9" text-anchor="middle">Group Names & Aliases</text>
+
+            <!-- Node 3: Relation parsing -->
+            <circle cx="430" cy="75" r="14" fill="#14151a" stroke="#C9A84C" stroke-width="3" class="pipeline-node" style="animation: pulse-node 2s infinite;" />
+            <text x="430" y="45" fill="#C9A84C" font-family="Manrope" font-size="10" font-weight="bold" text-anchor="middle">3. Parse Pages</text>
+            <text x="430" y="115" fill="#6b7280" font-family="Manrope" font-size="9" text-anchor="middle">Scan Text & Relationships</text>
+
+            <!-- Node 4: Crowdsourced Skins -->
+            <circle cx="600" cy="75" r="14" fill="#14151a" stroke="#1f2937" stroke-width="3" class="pipeline-node" />
+            <text x="600" y="45" fill="#9ca3af" font-family="Manrope" font-size="10" text-anchor="middle">4. Community Skins</text>
+            <text x="600" y="115" fill="#6b7280" font-family="Manrope" font-size="9" text-anchor="middle">Reader Edits & Corrections</text>
+
+            <!-- Node 5: Output -->
+            <circle cx="730" cy="75" r="14" fill="#14151a" stroke="#1f2937" stroke-width="3" class="pipeline-node" />
+            <text x="730" y="45" fill="#9ca3af" font-family="Manrope" font-size="10" text-anchor="middle">5. Database & API</text>
+            <text x="730" y="115" fill="#6b7280" font-family="Manrope" font-size="9" text-anchor="middle">Export Lore Data</text>
+
+            <defs>
+              <linearGradient id="goldGradientLine" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#8A7240" />
+                <stop offset="100%" stop-color="#C9A84C" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Option 3: B2C Proof-of-Concept Card -->
+<section class="max-w-4xl mx-auto px-6 mb-16 animate-reveal-up" style="animation-delay: 900ms;">
+  <div class="glass p-6 md:p-8 rounded-[32px] border-gold-500/10 flex flex-col md:flex-row items-center justify-between gap-6 bg-neutral-950/40 hover:border-gold-500/30 transition shadow-gold">
+    <div class="flex items-center gap-4 text-left">
+      <span class="text-3xl" aria-hidden="true">📲</span>
+      <div>
+        <h4 class="text-sm font-bold text-cream-200 uppercase tracking-wider mb-1">Looking to read? Try the EnrichReader App</h4>
+        <p class="text-xs text-neutral-400 font-light leading-relaxed max-w-xl">
+          Experience our engine as a reader. Bring your own files to read offline with spoiler-proof character bios and timeline tracking.
+        </p>
+      </div>
+    </div>
+    <a href="/" class="w-full md:w-auto px-6 py-3 bg-neutral-900 hover:bg-neutral-850 text-gold-300 rounded-full text-xs font-bold transition border border-neutral-800 hover:border-neutral-755 whitespace-nowrap text-center">
+      Launch Reader App &rarr;
+    </a>
+  </div>
+</section>
+
+<!-- Momentum Bar -->
+<section class="w-full border-y border-neutral-900 bg-neutral-950/40 py-6 overflow-hidden relative">
+  <div class="max-w-7xl mx-auto px-6 relative z-10 flex items-center gap-6">
+    <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-widest shrink-0 font-bold border-r border-neutral-800 pr-6">Engine Parsing Status</span>
+    <div class="overflow-hidden relative w-full">
+      <div class="animate-marquee flex gap-12 whitespace-nowrap text-xs md:text-sm font-light text-neutral-400">
+        <span>Active Parsing: <strong class="text-gold-300">Dungeon Crawler Carl (Vols 1-7)</strong></span>
+        <span class="text-neutral-700">·</span>
+        <span>Parsing Progress: <strong class="text-neutral-300">[Primal Hunter Book 2: Ingestion Stage 11/32]</strong></span>
+        <span class="text-neutral-700">·</span>
+        <span>Ingestion Queue: <strong class="text-neutral-500">[Defiance of the Fall Book 3]</strong></span>
+        <span class="text-neutral-700">·</span>
+        <span>Active Parsing: <strong class="text-gold-300">Dungeon Crawler Carl (Vols 1-7)</strong></span>
+        <span class="text-neutral-700">·</span>
+        <span>Parsing Progress: <strong class="text-neutral-300">[Primal Hunter Book 2: Ingestion Stage 11/32]</strong></span>
+        <span class="text-neutral-700">·</span>
+        <span>Ingestion Queue: <strong class="text-neutral-500">[Defiance of the Fall Book 3]</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Persona Value Props (3 Columns) -->
+<section id="features" class="py-32 px-6 max-w-7xl mx-auto">
+  <div class="text-center mb-20 reveal-on-scroll">
+    <h2 class="text-3xl md:text-4xl font-bold serif italic text-cream-100 mb-4">How We Help Businesses</h2>
+    <p class="text-neutral-400 max-w-lg mx-auto font-light text-sm">We build structured lore databases to help platforms keep readers engaged and help studios evaluate story value.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+    <!-- Persona 1: Serialized Platforms -->
+    <div class="glass p-10 rounded-[32px] border-neutral-850 flex flex-col justify-between hover:-translate-y-2 duration-500 reveal-on-scroll" style="transition-delay: 100ms;">
+      <div>
+        <div class="w-12 h-12 rounded-2xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-xl mb-6 text-gold-300">🌐</div>
+        <h3 class="text-xl font-bold serif italic text-cream-200 mb-4">Serialized Platforms</h3>
+        <p class="text-neutral-400 text-sm font-light leading-relaxed mb-6">
+          License our engine to add interactive character guides and timelines to your app. Helping readers remember characters reduces drop-offs on long web novels.
+        </p>
+      </div>
+      <div class="border-t border-neutral-900 pt-4">
+        <span class="text-[10px] font-mono uppercase text-neutral-550 tracking-wider">Goal: Keep readers on your platform</span>
+      </div>
+    </div>
+
+    <!-- Persona 2: Authors & Publishers -->
+    <div class="glass p-10 rounded-[32px] border-gold-500/10 flex flex-col justify-between hover:-translate-y-2 duration-500 reveal-on-scroll shadow-gold" style="transition-delay: 300ms;">
+      <div>
+        <div class="w-12 h-12 rounded-2xl bg-gold-900/10 border border-gold-500/30 flex items-center justify-center text-xl mb-6 text-gold-500">📚</div>
+        <h3 class="text-xl font-bold serif italic text-gold-300 mb-4">Saga Authors & Publishers</h3>
+        <p class="text-neutral-300 text-sm font-light leading-relaxed mb-6">
+          Turn your book catalogs into interactive reading experiences. The system builds spoiler-free directories automatically, and readers can help correct lore details.
+        </p>
+      </div>
+      <div class="border-t border-neutral-900 pt-4">
+        <span class="text-[10px] font-mono uppercase text-gold-500 tracking-wider">Goal: Auto-create lore guides and engage fans</span>
+      </div>
+    </div>
+
+    <!-- Persona 3: IP Scouts & Studios -->
+    <div class="glass p-10 rounded-[32px] border-neutral-850 flex flex-col justify-between hover:-translate-y-2 duration-500 reveal-on-scroll" style="transition-delay: 500ms;">
+      <div>
+        <div class="w-12 h-12 rounded-2xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-xl mb-6 text-gold-300">🎬</div>
+        <h3 class="text-xl font-bold serif italic text-cream-200 mb-4">Adaptation Scouts & Studios</h3>
+        <p class="text-neutral-400 text-sm font-light leading-relaxed mb-6">
+          Evaluate stories quickly for television, film, or game adaptations. The engine audits cast size, how often characters appear, and plot complexity in seconds.
+        </p>
+      </div>
+      <div class="border-t border-neutral-900 pt-4">
+        <span class="text-[10px] font-mono uppercase text-neutral-550 tracking-wider">Goal: Speed up story audits</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="py-32 px-6 max-w-7xl mx-auto relative border-t border-neutral-900">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+    <div class="lg:col-span-5 reveal-on-scroll">
+      <h2 class="text-3xl md:text-5xl font-bold serif italic text-cream-100 leading-tight mb-6">How the Engine Works</h2>
+      <p class="text-neutral-400 text-lg font-light leading-relaxed mb-8">
+        We replace slow manual work. The engine reads massive novels and turns them into organized, searchable databases.
+      </p>
+      <div class="glass p-8 rounded-3xl border-neutral-800">
+        <h4 class="text-gold-300 font-bold text-sm mb-2">Massive Narrative Scaling</h4>
+        <p class="text-xs text-neutral-550 leading-relaxed font-light mb-4">
+          The engine runs code directly on the book's text. It extracts detailed relationship data for every chapter. The resulting database is often larger than the original book text.
+        </p>
+        <h4 class="text-gold-300 font-bold text-sm mb-2">Human Validation</h4>
+        <p class="text-xs text-neutral-550 leading-relaxed font-light">
+          Although the engine works automatically, our editors double-check the final data. This step catches mistakes and helps us improve our rules every week.
+        </p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7 space-y-8">
+      <!-- Step 1 -->
+      <div class="flex gap-6 items-start p-6 rounded-3xl hover:bg-neutral-950/60 transition duration-355 border border-transparent hover:border-neutral-900 reveal-on-scroll" style="transition-delay: 100ms;">
+        <span class="w-10 h-10 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center font-mono font-bold text-neutral-400 shrink-0">1</span>
+        <div>
+          <h3 class="text-lg font-bold text-cream-200 mb-2">Name & Alias Groups</h3>
+          <p class="text-xs md:text-sm text-neutral-400 leading-relaxed font-light">
+            The engine scans the entire book to find names, group aliases, and track characters, items, and locations.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="flex gap-6 items-start p-6 rounded-3xl hover:bg-neutral-950/60 transition duration-355 border border-transparent hover:border-neutral-900 reveal-on-scroll" style="transition-delay: 300ms;">
+        <span class="w-10 h-10 rounded-xl bg-gold-950/20 border border-gold-500/20 flex items-center justify-center font-mono font-bold text-gold-400 shrink-0">2</span>
+        <div>
+          <h3 class="text-lg font-bold text-gold-300 mb-2">Page-by-Page Timelines</h3>
+          <p class="text-xs md:text-sm text-neutral-400 leading-relaxed font-light">
+            Our system reads page-by-page to track timelines, when characters disappear, and events like deaths or faction changes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="flex gap-6 items-start p-6 rounded-3xl hover:bg-neutral-950/60 transition duration-355 border border-transparent hover:border-neutral-900 reveal-on-scroll" style="transition-delay: 500ms;">
+        <span class="w-10 h-10 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center font-mono font-bold text-neutral-400 shrink-0">3</span>
+        <div>
+          <h3 class="text-lg font-bold text-cream-200 mb-2">Traceable Context</h3>
+          <p class="text-xs md:text-sm text-neutral-400 leading-relaxed font-light">
+            We link every data point back to the exact sentence and chapter in the book. You can click any character detail to see the original context and verify it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Reports (Teaser Section) -->
+<section class="py-32 px-6 max-w-7xl mx-auto border-t border-neutral-900">
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 reveal-on-scroll">
+    <div>
+      <h2 class="text-3xl md:text-4xl font-bold serif italic text-cream-100 mb-4">Narrative Datasets</h2>
+      <p class="text-neutral-400 font-light text-sm max-w-md">Explore how the engine parses millions of words to compile structural datasets.</p>
+    </div>
+    <a href="/reports/" class="text-xs uppercase tracking-widest text-gold-500 hover:text-gold-400 transition font-bold mt-4 md:mt-0 flex items-center gap-2">
+      View All Catalog Reports <span>&rarr;</span>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+    <!-- Card 1: DCC -->
+    <a href="/dcc/" class="glass p-8 md:p-10 rounded-[40px] border-neutral-800 hover:-translate-y-2 duration-500 flex flex-col justify-between group reveal-on-scroll" style="transition-delay: 100ms;">
+      <div>
+        <div class="flex justify-end items-start mb-6">
+          <span class="text-xs text-neutral-500 font-mono">1.2M Words</span>
+        </div>
+        <h3 class="text-2xl font-bold serif italic text-cream-100 mb-2 group-hover:text-gold-300 transition-colors">Dungeon Crawler Carl</h3>
+        <p class="text-xs text-neutral-550 font-light mb-6">Vols 1-7</p>
+        <div class="flex items-baseline gap-2 mb-8">
+          <span class="text-4xl font-bold text-cream-200">317</span>
+          <span class="text-xs text-neutral-400 font-mono uppercase tracking-wider">Characters Tracked</span>
+        </div>
+      </div>
+      <div class="flex justify-between items-center border-t border-neutral-900 pt-6">
+        <span class="text-[11px] uppercase tracking-wider text-neutral-400">Explore Case Study</span>
+        <span class="text-gold-500 group-hover:translate-x-2 transition-transform duration-300">&rarr;</span>
+      </div>
+    </a>
+
+    <!-- Card 2: LOTM -->
+    <a href="/lotm/" class="glass p-8 md:p-10 rounded-[40px] border-neutral-800 hover:-translate-y-2 duration-500 flex flex-col justify-between group reveal-on-scroll" style="transition-delay: 300ms;">
+      <div>
+        <div class="flex justify-end items-start mb-6">
+          <span class="text-xs text-neutral-500 font-mono">419K Words</span>
+        </div>
+        <h3 class="text-2xl font-bold serif italic text-cream-100 mb-2 group-hover:text-gold-300 transition-colors">Lord of the Mysteries</h3>
+        <p class="text-xs text-neutral-555 font-light mb-6">Vol 1</p>
+        <div class="flex items-baseline gap-2 mb-8">
+          <span class="text-4xl font-bold text-cream-200">258</span>
+          <span class="text-xs text-neutral-400 font-mono uppercase tracking-wider">Unique Entities</span>
+        </div>
+      </div>
+      <div class="flex justify-between items-center border-t border-neutral-900 pt-6">
+        <span class="text-[11px] uppercase tracking-wider text-neutral-400">Explore Case Study</span>
+        <span class="text-gold-500 group-hover:translate-x-2 transition-transform duration-300">&rarr;</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- The Validation Loop: Reader App & Community Skins -->
+<section class="py-32 px-6 bg-white/[0.005] border-y border-neutral-900 reveal-on-scroll">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+    <div class="lg:col-span-5">
+      <h2 class="text-3xl md:text-4xl font-bold serif italic text-cream-100 mb-6">Proven in Use</h2>
+      <p class="text-neutral-400 font-light leading-relaxed text-sm mb-8">
+        We prove our data works by showing it directly to readers in our app. Readers interact with it and submit corrections to help improve our engine.
+      </p>
+      
+      <div class="space-y-6">
+        <div class="flex items-start gap-4">
+          <span class="text-gold-500 text-lg">✦</span>
+          <div>
+            <h4 class="text-sm font-bold text-cream-200 mb-1">Reader Corrections</h4>
+            <p class="text-xs text-neutral-500 font-light">Readers submit corrections on timelines or names inside the app. This feedback cleans up any remaining errors in the data.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="text-gold-500 text-lg">✦</span>
+          <div>
+            <h4 class="text-sm font-bold text-cream-200 mb-1">Better Book Completion</h4>
+            <p class="text-xs text-neutral-500 font-light">Adding spoiler-free guides to the app helps readers remember the cast. This increases engagement and helps them finish long books.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lg:col-start-7 lg:col-span-6 border-l border-gold-500/20 pl-8 md:pl-12">
+      <blockquote class="text-lg md:text-xl text-neutral-300 leading-relaxed font-light italic mb-8 reading">
+        "Our readers are highly critical and will not tolerate errors. The fact that thousands of people use our data every day proves our system keeps the story details accurate."
+      </blockquote>
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-gold-900/20 border border-gold-500/30 flex items-center justify-center font-bold text-gold-500 text-xs">RR</div>
+        <div>
+          <div class="text-xs font-bold text-cream-200">Radames Roriz</div>
+          <div class="text-[9px] font-mono uppercase text-gold-500 tracking-wider">Founder, EnrichReader</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="py-32 px-6 max-w-5xl mx-auto">
+  <div class="text-center mb-20 reveal-on-scroll">
+    <h2 class="text-3xl font-bold serif italic text-cream-100 mb-4">FAQ</h2>
+    <p class="text-neutral-400 font-light text-sm max-w-md mx-auto">Answers about our parsing engine, database APIs, and feedback loops.</p>
+  </div>
+
+  <div class="space-y-4">
+    <!-- FAQ 1 -->
+    <div class="glass p-6 rounded-[24px] border-neutral-900 reveal-on-scroll">
+      <input type="checkbox" id="faq-1" class="faq-trigger sr-only">
+      <label for="faq-1" class="flex justify-between items-center cursor-pointer select-none">
+        <span class="font-bold text-sm md:text-base text-cream-200 serif italic">How does the engine maintain accuracy without humans in the middle?</span>
+        <span class="text-gold-500 font-mono text-sm faq-icon transition-transform duration-300">+</span>
+      </label>
+      <div class="faq-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 text-xs md:text-sm text-neutral-400 leading-relaxed font-light">
+        The engine reads text page-by-page using parsing algorithms instead of generic AI prompts. After that, our editors review the data to spot errors. We combine this review with corrections submitted by readers in the app to improve our rules every week.
+      </div>
+    </div>
+
+    <!-- FAQ 2 -->
+    <div class="glass p-6 rounded-[24px] border-neutral-900 reveal-on-scroll">
+      <input type="checkbox" id="faq-2" class="faq-trigger sr-only">
+      <label for="faq-2" class="flex justify-between items-center cursor-pointer select-none">
+        <span class="font-bold text-sm md:text-base text-cream-200 serif italic">How do B2B clients integrate this narrative data?</span>
+        <span class="text-gold-500 font-mono text-sm faq-icon transition-transform duration-300">+</span>
+      </label>
+      <div class="faq-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 text-xs md:text-sm text-neutral-400 leading-relaxed font-light">
+        Web novel apps use our API to show character guides and lore indexes inside their apps. We also provide publishers and film studios with structured data exports and continuity reports.
+      </div>
+    </div>
+
+    <!-- FAQ 3 -->
+    <div class="glass p-6 rounded-[24px] border-neutral-900 reveal-on-scroll">
+      <input type="checkbox" id="faq-3" class="faq-trigger sr-only">
+      <label for="faq-3" class="flex justify-between items-center cursor-pointer select-none">
+        <span class="font-bold text-sm md:text-base text-cream-200 serif italic">What is the scale limit of the engine?</span>
+        <span class="text-gold-500 font-mono text-sm faq-icon transition-transform duration-300">+</span>
+      </label>
+      <div class="faq-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 text-xs md:text-sm text-neutral-400 leading-relaxed font-light">
+        We built the engine to parse very long stories. It easily processes series with over 1,000 chapters (two million words), where tracking characters manually is too difficult.
+      </div>
+    </div>
+
+    <!-- FAQ 4 -->
+    <div class="glass p-6 rounded-[24px] border-neutral-900 reveal-on-scroll">
+      <input type="checkbox" id="faq-4" class="faq-trigger sr-only">
+      <label for="faq-4" class="flex justify-between items-center cursor-pointer select-none">
+        <span class="font-bold text-sm md:text-base text-cream-200 serif italic">How does B2B licensing and pricing work?</span>
+        <span class="text-gold-500 font-mono text-sm faq-icon transition-transform duration-300">+</span>
+      </label>
+      <div class="faq-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 text-xs md:text-sm text-neutral-400 leading-relaxed font-light">
+        We license our technology and customize pricing based on what you need. Email our team at sales@enrichreader.com to discuss integrating the engine or requesting a catalog audit.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Suggest Title Module (What should we count next?) -->
+<section class="py-24 px-6 max-w-4xl mx-auto border-t border-neutral-900 text-center reveal-on-scroll">
+  <div class="glass p-10 md:p-12 rounded-[40px] border-neutral-900 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gold-500/5 blur-3xl pointer-events-none"></div>
+    <div class="relative z-10 space-y-6">
+      <h3 class="text-2xl font-bold serif italic text-cream-100">Suggest a Parsing Target</h3>
+      <p class="text-neutral-400 text-sm max-w-lg mx-auto font-light leading-relaxed">
+        Help us grow our public database. Let us know which web novel or fantasy series our engine should parse next.
+      </p>
+      <div>
+        <a href="https://x.com/EnrichReader" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-3 px-6 py-3 bg-neutral-900 text-cream-200 hover:text-gold-400 rounded-full font-bold text-xs uppercase tracking-widest border border-neutral-800 hover:border-neutral-700 transition">
+          <span>Suggest Series on X</span>
+          <span class="font-sans">𝕏</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA Form & Band -->
+<section id="contact-form" class="py-32 px-6 max-w-4xl mx-auto border-t border-neutral-900 reveal-on-scroll">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+    <div class="md:col-span-5">
+      <h2 class="text-3xl font-bold serif italic text-cream-100 mb-6">Contact Us</h2>
+      <p class="text-neutral-400 text-sm font-light leading-relaxed mb-8">
+        Get in touch to request a demo of the engine, get API access, or schedule an audit for your book catalog.
+      </p>
+      <div class="p-6 rounded-2xl bg-neutral-950 border border-neutral-900">
+        <h4 class="text-xs font-mono uppercase text-gold-500 tracking-wider mb-2">Schedule a call</h4>
+        <p class="text-[11px] text-neutral-550 leading-relaxed font-light mb-4">
+          Want to discuss integration? Book a 15-minute call with our founding engineer.
+        </p>
+        <a href="mailto:sales@enrichreader.com?subject=EnrichReader%2520API%2520Integration" 
+           class="inline-block text-[11px] font-mono text-gold-500 hover:text-gold-450 transition font-bold underline">
+          Book discovery call &rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- Lead Gen Form -->
+    <div class="md:col-span-7">
+      <form class="glass p-8 rounded-[32px] border-neutral-900 space-y-6">
+        <!-- Honeypot Bot Trap (Hidden from users) -->
+        <div class="sr-only" aria-hidden="true">
+          <label for="form-bot-trap">Do not fill this field</label>
+          <input type="text" id="form-bot-trap" name="bot_trap" tabindex="-1" autocomplete="off">
+        </div>
+        <!-- Inline Notification Container -->
+        <div id="form-notification" class="hidden"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-[10px] font-mono uppercase text-neutral-550 tracking-wider mb-2" for="user-name">Your Name</label>
+            <input type="text" id="user-name" name="name" required placeholder="Jane Doe"
+              class="form-input w-full px-4 py-3 bg-neutral-950/60 border border-neutral-800 rounded-xl text-cream-200 text-sm font-light transition">
+          </div>
+          <div>
+            <label class="block text-[10px] font-mono uppercase text-neutral-550 tracking-wider mb-2" for="user-email">Email Address</label>
+            <input type="email" id="user-email" name="email" required placeholder="jane@company.com"
+              class="form-input w-full px-4 py-3 bg-neutral-950/60 border border-neutral-800 rounded-xl text-cream-200 text-sm font-light transition">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-[10px] font-mono uppercase text-neutral-550 tracking-wider mb-2" for="user-org">Organization</label>
+            <input type="text" id="user-org" name="organization" required placeholder="e.g. Webnovel / Netflix"
+              class="form-input w-full px-4 py-3 bg-neutral-950/60 border border-neutral-800 rounded-xl text-cream-200 text-sm font-light transition">
+          </div>
+          <div>
+            <label class="block text-[10px] font-mono uppercase text-neutral-550 tracking-wider mb-2" for="user-interest">Primary Interest</label>
+            <select id="user-interest" name="interest" required
+              class="form-input w-full px-4 py-3 bg-neutral-950/60 border border-neutral-800 rounded-xl text-cream-200 text-sm font-light transition appearance-none cursor-pointer">
+              <option value="" disabled selected>Select integration focus...</option>
+              <option value="Platform">Platform Reader Integration</option>
+              <option value="Catalog">Author Catalog Lore Skins</option>
+              <option value="Studio">Studio Adaptation IP Audit</option>
+              <option value="API">Developer Sandbox API Access</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-mono uppercase text-neutral-550 tracking-wider mb-2" for="user-message">Message</label>
+          <textarea id="user-message" name="message" rows="4" placeholder="Tell us about the series or platform catalogs you want to parse..."
+            class="form-input w-full px-4 py-3 bg-neutral-950/60 border border-neutral-800 rounded-xl text-cream-200 text-sm font-light transition resize-none" required></textarea>
+        </div>
+
+        <button type="submit"
+          class="w-full py-4 bg-brand-primary text-neutral-950 rounded-xl font-bold text-sm hover:bg-gold-400 transition shadow-gold glow-gold border border-gold-400/30 cursor-pointer">
+          Request Engine Demo
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-20 border-t border-neutral-900/60 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <div class="flex flex-col items-center md:items-start gap-4">
+      <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader" style="height: 32px; width: auto;">
+      <p class="text-[10px] text-neutral-600 font-light">&copy; 2026 EnrichReader. All rights reserved.</p>
+    </div>
+    
+    <div class="flex flex-wrap justify-center gap-8 text-[10px] font-bold uppercase tracking-wider text-neutral-500">
+      <a href="/" class="hover:text-gold-500 transition-colors">Home</a>
+      <a href="/reports/" class="hover:text-gold-500 transition-colors">Reports</a>
+      <a href="/enterprise/" class="hover:text-gold-500 transition-colors">Enterprise</a>
+      <a href="/privacy-policy/" class="hover:text-gold-500 transition-colors">Privacy Policy</a>
+      <a href="mailto:hello@enrichreader.com" class="hover:text-gold-500 transition-colors">Contact</a>
+    </div>
+  </div>
+</footer>
