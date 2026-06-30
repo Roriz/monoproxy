@@ -4,7 +4,7 @@
     <div class="section-header mb-12">
       <h2 class="section-title">Series survival rate, <br><em>over the timeline</em></h2>
       <p class="section-subtitle">
-        LitRPGs are brutal. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as floors get more difficult.
+        {{ .Params.survival_mortality.section_subtitle }}
       </p>
     </div>
 
@@ -46,41 +46,20 @@
     <div class="mt-16 pt-8 border-t border-white/5">
       <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Survival Timeline & Mortality Analysis</span>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- The Early Floor Filter -->
+        {{ range .Params.survival_mortality.insights }}
         <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-person); font-weight: 700;">
-            The Early Floor Filter (Volume 1)
-          </h4>
+          <h4 class="font-display italic text-sm mb-2" style="color: {{ .color }}; font-weight: 700;">{{ .title }}</h4>
           <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            By the end of Volume 1, <strong>26 characters</strong> have died out of 120 introduced (a 21.6% initial mortality rate). Early floors serve as a rapid filter, quickly eliminating secondary and tertiary characters introduced in the panic of the initial collapse.
+            {{ .text | safeHTML }}
           </p>
         </div>
-
-        <!-- Steady Attrition vs. Endgame Drop -->
-        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-item); font-weight: 700;">
-            Steady Attrition to Plunge
-          </h4>
-          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            While the survival rate hovers steadily around <strong>70%</strong> through Volume 6, it takes a sharp plunge to <strong>62.1%</strong> in Volume 7. This indicates that while intermediate floors have manageable attrition, transitioning into open system warfare collapses the safety margin.
-          </p>
-        </div>
-
-        <!-- The 9th Floor Massacre -->
-        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-event); font-weight: 700;">
-            The 9th Floor Massacre (Peak Lethality)
-          </h4>
-          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            Volume 7, Chapter 13 is the single most lethal chapter in the series, recording <strong>5 key character deaths</strong> in a single sequence. This climactic battlefield clash of the Faction War represents the absolute peak of system lethality.
-          </p>
-        </div>
+        {{ end }}
       </div>
     </div>
 
     <!-- SEO & Accessibility Data (Exposing final state survival stats) -->
     <div class="sr-only" aria-hidden="false">
-      <h3>Narrative Survival & Mortality Summary (Volume 7, Chapter 119)</h3>
+      <h3>Narrative Survival & Mortality Summary ({{ .Params.survival_mortality.summary_title }})</h3>
       <table>
         <thead>
           <tr>
@@ -89,14 +68,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Total Characters Introduced</td><td>317</td></tr>
-          <tr><td>Surviving Characters (Alive)</td><td>197</td></tr>
-          <tr><td>Eliminated Characters (Dead)</td><td>120</td></tr>
-          <tr><td>Survival Rate</td><td>62.15%</td></tr>
-          <tr><td>Mortality Rate</td><td>37.85%</td></tr>
+          {{ range .Params.survival_mortality.table }}
+          <tr>
+            <td>{{ .metric }}</td>
+            <td>{{ .value }}</td>
+          </tr>
+          {{ end }}
         </tbody>
       </table>
     </div>
   </div>
 </section>
-

@@ -1,0 +1,100 @@
+<!-- [06] Race Selection Matrix -->
+<section id="race-selection-matrix-section" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
+  <div class="max-w-5xl mx-auto px-6 fade-in-up">
+    <div class="section-header mb-12">
+      <h2 class="section-title">{{ .Params.matrix.noun_singular | title }} selection matrix, <br><em>by volume</em></h2>
+      <p class="section-subtitle">
+        Track the distribution of character {{ .Params.matrix.noun_plural }} selected across all books. Hover over any active cell to see which characters chose that {{ .Params.matrix.noun_singular }} in that volume.
+      </p>
+    </div>
+
+    <!-- Matrix Card -->
+    <div class="chart-card p-6 md:p-10">
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-6 mb-8 border-b border-white/5 pb-6">
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <label for="matrixSearch" class="control-label">Search {{ .Params.matrix.noun_plural_capital }}</label>
+          <input type="text" id="matrixSearch" placeholder="Filter {{ .Params.matrix.noun_plural }}..." class="matrix-search-input">
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="control-label">Sort By</span>
+          <div class="flex gap-1">
+            <button id="matrixSortTotal" class="speed-btn active" data-sort="total">Total Counts</button>
+            <button id="matrixSortAlpha" class="speed-btn" data-sort="alpha">Alphabetical</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Wrapper -->
+      <div class="matrix-table-container overflow-x-auto relative" style="margin-inline: -1.5rem; padding-inline: 1.5rem;">
+        <table class="matrix-table w-full text-left font-ui">
+          <thead>
+            <tr>
+              <th class="matrix-th-race">{{ .Params.matrix.noun_singular | title }}</th>
+              {{ range .Params.matrix.columns }}
+              <th class="matrix-th">{{ . }}</th>
+              {{ end }}
+              <th class="matrix-th-total">Series Total</th>
+            </tr>
+          </thead>
+          <tbody id="matrixTableBody">
+            <!-- Dynamically populated via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-[10px] text-neutral-500 mt-4 font-mono" style="font-size: 10px; color: var(--color-text-dim);">
+        * Series Total represents unique characters across the entire series, not a simple sum of volume counts (since characters survive across volumes or undergo {{ .Params.matrix.noun_singular }} selections).
+      </p>
+
+      <!-- Expand Toggle -->
+      <div class="flex justify-center mt-8 pt-4 border-t border-white/5" id="matrixToggleContainer">
+        <button id="matrixToggleBtn" class="speed-btn">Show {{ .Params.matrix.toggle_count_text }}</button>
+      </div>
+
+      <!-- Insights & Analysis Section -->
+      <div class="mt-12 pt-8 border-t border-white/5">
+        <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Crawl Insights & Species Diversity Analysis</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {{ range .Params.matrix.insights }}
+          <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
+            <h4 class="font-display italic text-sm mb-2" style="color: {{ .color }}; font-weight: 700;">{{ .title }}</h4>
+            <p class="text-xs text-neutral-400 font-ui leading-relaxed" style="color: var(--color-text-secondary); margin-bottom: 6px;">
+              <strong>Data Insight:</strong> {{ .insight | safeHTML }}
+            </p>
+            <p class="text-xs font-ui leading-relaxed" style="color: var(--color-text-muted); font-style: italic;">
+              <strong>Lore Assumption:</strong> {{ .lore | safeHTML }}
+            </p>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      <!-- Persistent Branding Watermark -->
+      <a href="/" class="card-branding-badge" target="_blank" rel="noopener">
+        <span>Powered by</span>
+        <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader">
+      </a>
+    </div>
+
+    <!-- SEO & Accessibility Data (Exposing final state selections) -->
+    <div class="sr-only" aria-hidden="false">
+      <h3>Narrative {{ .Params.matrix.noun_plural_capital }} Summary (Series Totals)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>{{ .Params.matrix.noun_singular | title }} Selection</th>
+            <th>Characters Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range .Params.matrix.table }}
+          <tr>
+            <td>{{ .name }}</td>
+            <td>{{ .count }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

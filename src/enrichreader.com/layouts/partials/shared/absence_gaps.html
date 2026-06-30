@@ -67,41 +67,23 @@
     <div class="mt-16 pt-8 border-t border-white/5">
       <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Narrative Absence & Perspective Analysis</span>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- The Perspective Anchors -->
+        {{ range .Params.absence_gaps.insights }}
         <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-person); font-weight: 700;">
-            The Perspective Anchors
-          </h4>
-          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            Carl and Donut have maximum disappearance gaps of only <strong>4</strong> and <strong>8 chapters</strong> respectively. As the central narrative engines, their near-constant presence forms the structural spine of the text, with gaps occurring only during solo trials or cutscenes.
+          <h4 class="font-display italic text-sm mb-2" style="color: {{ .color }}; font-weight: 700;">{{ .title }}</h4>
+          <p class="text-xs text-neutral-400 font-ui leading-relaxed" style="color: var(--color-text-secondary); margin-bottom: 6px;">
+            <strong>Data Insight:</strong> {{ .insight | safeHTML }}
+          </p>
+          <p class="text-xs font-ui leading-relaxed" style="color: var(--color-text-muted); font-style: italic;">
+            <strong>Lore Assumption:</strong> {{ .lore | safeHTML }}
           </p>
         </div>
-
-        <!-- The Demotion & Return -->
-        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-location); font-weight: 700;">
-            The Demotion and Return (Zev)
-          </h4>
-          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            Zev holds the record for the largest absence, vanishing for a staggering <strong>285 chapters</strong> (Ch. 82 to 367). This corresponds to her early syndicate demotion/removal as manager and her eventual re-appearance as part of the underground rebellion.
-          </p>
-        </div>
-
-        <!-- Parallel Dungeon Paths -->
-        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-item); font-weight: 700;">
-            Divergent Dungeon Paths
-          </h4>
-          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            Crawlers like Prepotente (<strong>165 ch. gap</strong>) and managers like Juice Box (<strong>188 ch. gap</strong>) have massive absences. Because crawlers traverse separate floor zones, they vanish from the core perspective until paths merge at central events.
-          </p>
-        </div>
+        {{ end }}
       </div>
     </div>
 
     <!-- SEO & Accessibility Data (Exposing final state absence gaps) -->
     <div class="sr-only" aria-hidden="false">
-      <h3>Narrative Disappearance Gaps Summary (Volume 7)</h3>
+      <h3>Narrative Disappearance Gaps Summary ({{ .Params.absence_gaps.summary_title }})</h3>
       <table>
         <thead>
           <tr>
@@ -112,14 +94,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Zev</td><td>285</td><td>82</td><td>367</td></tr>
-          <tr><td>Juice Box</td><td>188</td><td>210</td><td>398</td></tr>
-          <tr><td>Prepotente</td><td>165</td><td>120</td><td>285</td></tr>
-          <tr><td>Ferdinand</td><td>120</td><td>100</td><td>220</td></tr>
-          <tr><td>Bautista</td><td>118</td><td>82</td><td>200</td></tr>
+          {{ range .Params.absence_gaps.table }}
+          <tr>
+            <td>{{ .character }}</td>
+            <td>{{ .gap }}</td>
+            <td>{{ .from }}</td>
+            <td>{{ .to }}</td>
+          </tr>
+          {{ end }}
         </tbody>
       </table>
     </div>
   </div>
 </section>
-

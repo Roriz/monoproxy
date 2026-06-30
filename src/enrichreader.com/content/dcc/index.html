@@ -21,9 +21,201 @@ series_title_second: "Carl"
 series_subtitle: "by the numbers"
 series_intro: "This is what the entire crawl looks like when you slow down and count. A quantitative autopsy of Matt Dinniman's LitRPG masterpiece, powered by Enrich Reader's semantic text engine."
 series_data: "/dcc/dcc_data.json"
+stat_chapters: 515
+stat_words: "1,245,618"
+stat_characters: 317
+hero_visual_metadata_1: "CRAWL_SERIES_TIMELINE"
+hero_visual_metadata_2: "TOTAL_FLOORS_ANALYZED_09"
+timeline_scope: "ALL VOLUMES"
+funnel_breakdown:
+  min_chapter: 2
+  max_chapter: 515
+  raw_mentions: "4,280"
+  unique_characters: 317
+  unique_entities: "317"
+  summary_title: "Volume 7, Chapter 119"
+  insights:
+    - title: "Loot-Driven Narrative (Items vs. Locations)"
+      color: "var(--color-item)"
+      text: "Unique items (<strong>140</strong>) outnumber unique locations (<strong>107</strong>) by a significant margin. This reflects standard LitRPG genre priorities: the variety of gear, legendary weapons, and consumables used by Carl and Donut to progress is wider than the variety of settings they traverse."
+    - title: "High Corporate Density (Organizations)"
+      color: "var(--color-org)"
+      text: "The database records <strong>125 unique organizations</strong> (syndicates, sponsorships, governing bodies, and galactic corporations). This confirms that the crawl is heavily political, showing the immense weight that outer galactic bureaucracy and sponsorships hold over the narrative."
+    - title: "Character-Driven Timeline (Persons)"
+      color: "var(--color-person)"
+      text: "With <strong>317 unique characters</strong>, individuals represent the largest entity category by far. Despite the high body count and fast-paced elimination rounds, the story remains deeply focused on individual actors, guides, show hosts, deities, and crawler allies."
+  table:
+    - category: "Person / Character"
+      count: 317
+    - category: "Item / Gear"
+      count: 140
+    - category: "Organization"
+      count: 125
+    - category: "Location"
+      count: 107
+    - category: "Event"
+      count: 98
+    - category: "Other Categories"
+      count: 43
+    - category: "Total Unique Entities"
+      count: 830
+mentions_race:
+  min_chapter: 2
+  max_chapter: 515
+  table_title: "Volume 7, Chapter 119"
+  insights:
+    - title: "The Narrative Duo (Carl & Donut)"
+      color: "var(--color-person)"
+      text: "Carl (<strong>6,458 mentions</strong>) and Princess Donut (<strong>6,173 mentions</strong>) lead the entire text in a near-lockstep race. This tight alignment reflects their status as an inseparable duo, with Carl's minor lead representing his first-person narrative role."
+    - title: "The Omnipresent System AI"
+      color: "var(--color-org)"
+      text: "The <strong>System AI</strong> registers <strong>4,170 mentions</strong>, outnumbering key supporting characters like Mordecai (2,680). This highlights how the game engine behaves as an active character, constantly feeding notifications, statistics, and flavor text to the crawlers."
+    - title: "Reward loop (Achievement Boxes)"
+      color: "var(--color-item)"
+      text: "The <strong>Achievement Box</strong> is the most mentioned object, racking up <strong>2,834 mentions</strong>. The gameplay feedback loop of completing challenges, receiving system notifications, and opening colored loot boxes serves as a core plot driver."
+  table:
+    - entity: "Carl"
+      classification: "character"
+      mentions: "6,458"
+    - entity: "Donut"
+      classification: "character"
+      mentions: "6,173"
+    - entity: "System AI"
+      classification: "organization"
+      mentions: "4,170"
+    - entity: "Dungeon"
+      classification: "location"
+      mentions: "3,076"
+    - entity: "Crawler"
+      classification: "other"
+      mentions: "2,977"
+    - entity: "Achievement Box"
+      classification: "item"
+      mentions: "2,834"
+    - entity: "Mordecai"
+      classification: "character"
+      mentions: "2,680"
+    - entity: "Boss Fight"
+      classification: "event"
+      mentions: "1,646"
+    - entity: "Goblin"
+      classification: "other"
+      mentions: "1,630"
+    - entity: "Safe Room"
+      classification: "location"
+      mentions: "1,620"
+matrix:
+  noun_singular: "race"
+  noun_plural: "races"
+  noun_plural_capital: "Races"
+  columns:
+    - "Vol 1"
+    - "Vol 2"
+    - "Vol 3"
+    - "Vol 4"
+    - "Vol 5"
+    - "Vol 6"
+    - "Vol 7"
+  toggle_count_text: "all 57 races (yes, even Frenzied Gerbil)"
+  insights:
+    - title: "Least Diverse Entry: Volume 1"
+      color: "var(--color-person)"
+      insight: "Only <strong>5 unique races</strong> detected (Human, Goblin, Orc, Frenzied Gerbil, Kua-tin). <strong>Humans (4)</strong> make up 44% of the early cast count."
+      lore: "Early in the crawl, Earth survivors have just entered the dungeon and haven't had their first opportunities to purchase/select race change options (like Carl's eventual transition to Primal, or Mordecai's cyclical floor transformations)."
+    - title: "Maximum Diversity: Volume 7"
+      color: "var(--color-location)"
+      insight: "A staggering <strong>36 unique races</strong> recorded across 47 active characters, with no single race claiming more than 3 representatives."
+      lore: "Volume 7 centers around the Faction War on the 9th floor. At this stage, intergalactic military factions, mercenary corps, and alien citizens join the battle lines directly, resulting in an explosion of diverse species."
+  table:
+    - name: "Gnome"
+      count: 4
+    - name: "Changeling"
+      count: 4
+    - name: "Human"
+      count: 4
+    - name: "Naga"
+      count: 4
+    - name: "Crocodilian"
+      count: 3
+    - name: "Kua-tin"
+      count: 3
+    - name: "Orc"
+      count: 3
+    - name: "Skyfowl"
+      count: 3
+    - name: "High Elf"
+      count: 3
+    - name: "Fairy"
+      count: 2
+survival_mortality:
+  section_subtitle: "LitRPGs are brutal. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as floors get more difficult."
+  summary_title: "Volume 7, Chapter 119"
+  insights:
+    - title: "The Early Floor Filter (Volume 1)"
+      color: "var(--color-person)"
+      text: "By the end of Volume 1, <strong>26 characters</strong> have died out of 120 introduced (a 21.6% initial mortality rate). Early floors serve as a rapid filter, quickly eliminating secondary and tertiary characters introduced in the panic of the initial collapse."
+    - title: "Steady Attrition to Plunge"
+      color: "var(--color-item)"
+      text: "While the survival rate hovers steadily around <strong>70%</strong> through Volume 6, it takes a sharp plunge to <strong>62.1%</strong> in Volume 7. This indicates that while intermediate floors have manageable attrition, transitioning into open system warfare collapses the safety margin."
+    - title: "The 9th Floor Massacre (Peak Lethality)"
+      color: "var(--color-event)"
+      text: "Volume 7, Chapter 13 is the single most lethal chapter in the series, recording <strong>5 key character deaths</strong> in a single sequence. This climactic battlefield clash of the Faction War represents the absolute peak of system lethality."
+  table:
+    - metric: "Total Characters Introduced"
+      value: "317"
+    - metric: "Surviving Characters (Alive)"
+      value: "197"
+    - metric: "Eliminated Characters (Dead)"
+      value: "120"
+    - metric: "Survival Rate"
+      value: "62.15%"
+    - metric: "Mortality Rate"
+      value: "37.85%"
+word_trends:
+  section_subtitle: "Explore the keywords that define the crawl, alongside a clear demographic breakdown of character pronouns."
+  cloud_title: "Crawl Keyword Map"
+  total_pronouns: "1,655"
+  total_pronouns_label: "tagged mentions"
+  table_count_header: "Mentions"
+absence_gaps:
+  summary_title: "Volume 7"
+  insights:
+    - title: "The Perspective Anchors"
+      color: "var(--color-person)"
+      insight: "Carl and Donut have maximum disappearance gaps of only <strong>4</strong> and <strong>8 chapters</strong> respectively. As the central narrative engines, their near-constant presence forms the structural spine of the text, with gaps occurring only during solo trials or cutscenes."
+      lore: "As the central narrative engines, their near-constant presence forms the structural spine of the text, with gaps occurring only during solo trials or cutscenes."
+    - title: "The Demotion and Return (Zev)"
+      color: "var(--color-location)"
+      insight: "Zev holds the record for the largest absence, vanishing for a staggering <strong>285 chapters</strong> (Ch. 82 to 367)."
+      lore: "This corresponds to her early syndicate demotion/removal as manager and her eventual re-appearance as part of the underground rebellion."
+    - title: "Divergent Dungeon Paths"
+      color: "var(--color-item)"
+      insight: "Crawlers like Prepotente (<strong>165 ch. gap</strong>) and managers like Juice Box (<strong>188 ch. gap</strong>) have massive absences."
+      lore: "Because crawlers traverse separate floor zones, they vanish from the core perspective until paths merge at central events."
+  table:
+    - character: "Zev"
+      gap: 285
+      from: 82
+      to: 367
+    - character: "Juice Box"
+      gap: 188
+      from: 210
+      to: 398
+    - character: "Prepotente"
+      gap: 165
+      from: 120
+      to: 285
+    - character: "Ferdinand"
+      gap: 120
+      from: 100
+      to: 220
+    - character: "Bautista"
+      gap: 118
+      from: 82
+      to: 200
 ---
 
-{{< partial "dcc/hero.html" >}}
+{{< partial "shared/hero.html" >}}
 
 <!-- Sticky Navigation Pill Bar -->
 <div class="report-nav-sticky-container" id="report-nav-sticky">
@@ -38,13 +230,13 @@ series_data: "/dcc/dcc_data.json"
 </div>
 
 <main id="dcc-main-content" data-series-data="/dcc/dcc_data.json">
-  {{< partial "dcc/race_selection_matrix.html" >}}
-  {{< partial "dcc/funnel_breakdown.html" >}}
-  {{< partial "dcc/survival_mortality.html" >}}
-  {{< partial "dcc/mentions_race.html" >}}
-  {{< partial "dcc/absence_gaps.html" >}}
-  {{< partial "dcc/word_trends.html" >}}
-  {{< partial "dcc/contact.html" >}}
+  {{< partial "shared/race_selection_matrix.html" >}}
+  {{< partial "shared/funnel_breakdown.html" >}}
+  {{< partial "shared/survival_mortality.html" >}}
+  {{< partial "shared/mentions_race.html" >}}
+  {{< partial "shared/absence_gaps.html" >}}
+  {{< partial "shared/word_trends.html" >}}
+  {{< partial "shared/contact.html" >}}
 </main>
 
 <script type="application/ld+json">
@@ -94,4 +286,4 @@ series_data: "/dcc/dcc_data.json"
 }
 </script>
 
-{{< partial "dcc/footer.html" >}}
+{{< partial "shared/footer.html" >}}

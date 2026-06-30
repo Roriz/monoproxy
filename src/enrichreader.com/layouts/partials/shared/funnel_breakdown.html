@@ -4,7 +4,7 @@
     <div class="section-header mb-16">
       <h2 class="section-title">How many <br><em>actually matter</em></h2>
       <p class="section-subtitle">
-        Lord of the Mysteries has thousands of text lines, but NLP entity extraction filters noise. Track the funnel from total name mentions to unique characters, and see their distribution.
+        {{ printf "%s %s" .Params.series_title_first .Params.series_title_second }} has thousands of text lines, but NLP entity extraction filters noise. Track the funnel from total name mentions to unique characters, and see their distribution.
       </p>
     </div>
 
@@ -27,10 +27,9 @@
               <strong id="journeyChapterNum">Vol. 1, Ch. 2</strong>
             </div>
           </div>
-          <input type="range" id="journeySlider" class="race-slider" min="1" max="1551" value="1">
+          <input type="range" id="journeySlider" class="race-slider" min="{{ .Params.funnel_breakdown.min_chapter | default 1 }}" max="{{ .Params.funnel_breakdown.max_chapter | default 100 }}" value="{{ .Params.funnel_breakdown.min_chapter | default 1 }}">
         </div>
       </div>
-
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 items-start">
@@ -40,7 +39,7 @@
           <!-- Stage 1 -->
           <div class="funnel-stage stage-1">
             <div class="funnel-content">
-              <span class="funnel-num" id="funnel-stage1-count">20,000</span>
+              <span class="funnel-num" id="funnel-stage1-count">{{ .Params.funnel_breakdown.raw_mentions }}</span>
               <span class="funnel-label" id="funnel-stage1-label">raw mentions detected</span>
             </div>
           </div>
@@ -53,14 +52,14 @@
           <!-- Stage 3 -->
           <div class="funnel-stage stage-3 highlight">
             <div class="funnel-content">
-              <span class="funnel-num" id="funnel-stage3-count">514</span>
+              <span class="funnel-num" id="funnel-stage3-count">{{ .Params.funnel_breakdown.unique_characters }}</span>
               <span class="funnel-label" id="funnel-stage3-label">unique characters</span>
             </div>
           </div>
         </div>
 
         <p class="funnel-meta mt-12 text-center md:text-left">
-          tracked across <span id="stats-words" class="font-tech text-cream-200">3,245,618</span> words · <span id="stats-chapters" class="font-tech text-cream-200">1551</span> chapters
+          tracked across <span id="stats-words" class="font-tech text-cream-200">{{ .Params.stat_words }}</span> words · <span id="stats-chapters" class="font-tech text-cream-200">{{ .Params.stat_chapters }}</span> chapters
         </p>
       </div>
 
@@ -70,7 +69,7 @@
           <div class="relative w-full max-w-[240px] aspect-square mx-auto flex items-center justify-center">
             <!-- Center Total Display -->
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none">
-              <span id="donut-total-count" class="donut-total-value">1,044</span>
+              <span id="donut-total-count" class="donut-total-value">{{ .Params.funnel_breakdown.unique_entities }}</span>
               <span class="donut-total-label">unique entities</span>
             </div>
             <canvas id="entityDonutChart"></canvas>
@@ -92,41 +91,20 @@
     <div class="mt-16 pt-8 border-t border-white/5">
       <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Entity Distribution & Genre Analysis</span>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Fantasy Setting Depth -->
+        {{ range .Params.funnel_breakdown.insights }}
         <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-location); font-weight: 700;">
-            Fantasy Setting Depth (Locations vs. Items)
-          </h4>
+          <h4 class="font-display italic text-sm mb-2" style="color: {{ .color }}; font-weight: 700;">{{ .title }}</h4>
           <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            Unique settings and locations (<strong>175</strong>) outnumber unique mystical items (<strong>38</strong>). This reflects the setting-heavy nature of Lord of the Mysteries, which features detailed urban environments, harbor towns, kingdoms, and seas, in contrast to LitRPG gear-heavy systems.
+            {{ .text | safeHTML }}
           </p>
         </div>
-
-        <!-- Factions & Secret Societies -->
-        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-org); font-weight: 700;">
-            Factions &amp; Secret Societies (Organizations)
-          </h4>
-          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            We track <strong>100 unique organizations</strong> (churches, secret organizations like the Tarot Club, the Aurora Order, and national departments like the Nighthawks). This underscores the heavy emphasis on occult politics, faction wars, and secret society hierarchies in the story.
-          </p>
-        </div>
-
-        <!-- Character Dominance -->
-        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: var(--color-person); font-weight: 700;">
-            Character-Driven Timeline (Persons)
-          </h4>
-          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            With <strong>514 unique characters</strong> analyzed, persons are the largest category. The narrative tracks a huge cast of beyonders, gods, civilians, and historical figures, keeping the complex progression web deeply character-focused.
-          </p>
-        </div>
+        {{ end }}
       </div>
     </div>
 
     <!-- SEO & Accessibility Data (Exposing final state entity breakdowns) -->
     <div class="sr-only" aria-hidden="false">
-      <h3>Narrative Entity Classification Summary (Volume 8, Chapter 1551)</h3>
+      <h3>Narrative Entity Classification Summary ({{ .Params.funnel_breakdown.summary_title }})</h3>
       <table>
         <thead>
           <tr>
@@ -135,13 +113,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Person / Character</td><td>514</td></tr>
-          <tr><td>Location</td><td>175</td></tr>
-          <tr><td>Organization</td><td>100</td></tr>
-          <tr><td>Other Categories</td><td>87</td></tr>
-          <tr><td>Item / Object</td><td>38</td></tr>
-          <tr><td>Event</td><td>40</td></tr>
-          <tr><td>Total Unique Entities</td><td>954</td></tr>
+          {{ range .Params.funnel_breakdown.table }}
+          <tr>
+            <td>{{ .category }}</td>
+            <td>{{ .count }}</td>
+          </tr>
+          {{ end }}
         </tbody>
       </table>
     </div>

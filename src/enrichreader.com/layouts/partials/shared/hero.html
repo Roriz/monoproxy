@@ -11,28 +11,28 @@
   </div>
 </nav>
 
-<section class="hero-section relative overflow-hidden" id="dcc-hero">
+<section class="hero-section relative overflow-hidden" id="series-hero">
   <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center min-h-[75vh]">
     <div class="lg:col-span-7 z-10 py-12">
       <h1 class="hero-title font-display italic fade-in-up editorial-title" id="hero-heading">
-        {{ .Params.series_title_first | default "Dungeon Crawler" }} <br> {{ .Params.series_title_second | default "Carl" }},<br>
+        {{ .Params.series_title_first }} <br> {{ .Params.series_title_second }},<br>
         <span class="hero-subtitle" id="hero-sub">{{ .Params.series_subtitle | default "by the numbers" }}</span>
       </h1>
 
       <div class="fade-in-up" style="transition-delay: 0.1s" id="hero-intro-wrapper">
         <div class="hero-stats-grid mb-12" id="hero-stats">
           <div class="stat-item" id="stat-chapters-card">
-            <span class="stat-value" id="val-chapters">515</span>
+            <span class="stat-value" id="val-chapters">{{ .Params.stat_chapters }}</span>
             <span class="stat-label">chapters</span>
           </div>
           <div class="stat-divider" aria-hidden="true"></div>
           <div class="stat-item" id="stat-words-card">
-            <span class="stat-value" id="val-words">1,245,618</span>
+            <span class="stat-value" id="val-words">{{ .Params.stat_words }}</span>
             <span class="stat-label">words</span>
           </div>
           <div class="stat-divider" aria-hidden="true"></div>
           <div class="stat-item" id="stat-entities-card">
-            <span class="stat-value" id="val-entities">317</span>
+            <span class="stat-value" id="val-entities">{{ .Params.stat_characters }}</span>
             <span class="stat-label">unique named characters</span>
           </div>
         </div>
@@ -43,7 +43,7 @@
         </div>
 
         <p class="font-body italic mb-12 hero-description" id="hero-para">
-          {{ .Params.series_intro | default "This is what the entire crawl looks like when you slow down and count. A quantitative autopsy of Matt Dinniman's LitRPG masterpiece, powered by Enrich Reader's semantic text engine." }}
+          {{ .Params.series_intro }}
         </p>
 
         <div class="flex flex-wrap gap-4 mt-8" id="hero-actions">
@@ -80,9 +80,9 @@
             <circle cx="350" cy="350" r="4" fill="var(--color-accent)" class="pulse-point" style="animation-delay: 1.8s" />
           </svg>
         </div>
-        <div class="hero-visual-metadata">
-          <span class="font-mono">CRAWL_SERIES_TIMELINE</span>
-          <span class="font-mono">TOTAL_FLOORS_ANALYZED_09</span>
+        <div class="hero-visual-wrapper-meta-lines" style="display: flex; flex-direction: column; gap: 4px; margin-top: 12px; font-size: 10px; opacity: 0.6; font-weight: bold; border-top: 1px solid var(--color-surface-divider); padding-top: 12px;">
+          <span class="font-mono" style="letter-spacing: 0.1em; color: var(--color-accent);">{{ .Params.hero_visual_metadata_1 | default "SERIES_TIMELINE" }}</span>
+          <span class="font-mono" style="letter-spacing: 0.1em; color: var(--color-text-dim);">{{ .Params.hero_visual_metadata_2 | default "VOLUMES_ANALYZED" }}</span>
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@
       <div class="volume-nav-item" id="volume-indicator-container">
         <div class="volume-indicator">
           <span>timeline scope</span>
-          <span class="volume-current" id="timeline-scope-value">ALL VOLUMES</span>
+          <span class="volume-current" id="timeline-scope-value">{{ .Params.timeline_scope | default "ALL VOLUMES" }}</span>
         </div>
       </div>
 
