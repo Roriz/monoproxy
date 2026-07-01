@@ -1,0 +1,247 @@
+---
+title: "The Beginning After The End, by the numbers | EnrichReader"
+description: "The Beginning After The End, by the numbers. 520 chapters, 1,633,595 words, 267 unique characters analyzed."
+fonts_override: '<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">'
+stylesheets:
+  - "/tbate/style.css"
+scripts:
+  - "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+  - "/tbate/bar_chart_race.js"
+  - "/tbate/character_mortality.js"
+  - "/tbate/entity_journey.js"
+  - "/tbate/keyboard_shortcuts.js"
+  - "/tbate/reveal.js"
+  - "/main.js"
+scripts_defer: false
+nav_logo_height: "44px"
+nav_bg_border: false
+nav_minimal: true
+series_title_first: "The Beginning"
+series_title_second: "After The End"
+series_subtitle: "by the numbers"
+series_intro: "A quantitative narrative autopsy of TurtleMe's epic fantasy masterpiece, The Beginning After The End. Track character survival, mana core progression, and entity mentions across 520 chapters, powered by Enrich Reader's semantic text engine."
+series_data: "/tbate/tbate_data.json"
+stat_chapters: 520
+stat_words: "1,633,595"
+stat_characters: 267
+hero_visual_metadata_1: "MANA_CORE_TIMELINE"
+hero_visual_metadata_2: "TOTAL_CHAPTERS_ANALYZED_520"
+timeline_scope: "ALL VOLUMES"
+funnel_breakdown:
+  min_chapter: 1
+  max_chapter: 520
+  raw_mentions: "124,415"
+  unique_characters: 267
+  unique_entities: 45
+  summary_title: "Chapter 520"
+  insights:
+    - title: "Fighter & Mage Cast"
+      color: "var(--color-person)"
+      text: "With <strong>39 unique key characters/classes</strong> analyzed, persons are the largest category. The narrative tracks Arthur's family, the Lances, and his Alacryan companions."
+    - title: "Dicathen & Alacrya Domains"
+      color: "var(--color-item)"
+      text: "Three major organizations (such as the <em>Alacryans</em>) map out the factions engaged in the intercontinental war."
+  table:
+    - category: "Person / Character"
+      count: 39
+    - category: "Location"
+      count: 3
+    - category: "Organization"
+      count: 3
+    - category: "Total Unique Entities"
+      count: 45
+mentions_race:
+  min_chapter: 1
+  max_chapter: 520
+  table_title: "Chapter 520"
+  insights:
+    - title: "The Reincarnated King (Arthur Leywin)"
+      color: "var(--color-person)"
+      text: "Arthur Leywin dominates the narrative with <strong>18,624 mentions</strong>. Reincarnated from King Grey, his perspective drives the entire plot of Dicathen and his subsequent infiltration of Alacrya."
+    - title: "The Hostile Factions"
+      color: "var(--color-item)"
+      text: "The collective class of <em>Alacryans</em> registers <strong>8,054 mentions</strong>, tracking the central war that divides the two main continents."
+    - title: "Arthur's Companions"
+      color: "var(--color-person)"
+      text: "Arthur's companion weapons and bonds lead secondary counts: his aether companion <em>Regis</em> records <strong>7,879 mentions</strong> and his dragon bond <em>Sylvie</em> records <strong>7,511 mentions</strong>."
+  table:
+    - entity: "Arthur"
+      classification: "character"
+      mentions: "18,624"
+    - entity: "Alacryans"
+      classification: "organization"
+      mentions: "8,054"
+    - entity: "Regis"
+      classification: "character"
+      mentions: "7,879"
+    - entity: "Sylviee"
+      classification: "character"
+      mentions: "7,511"
+    - entity: "Caera"
+      classification: "character"
+      mentions: "6,399"
+    - entity: "Nico"
+      classification: "character"
+      mentions: "4,867"
+    - entity: "Tessia"
+      classification: "character"
+      mentions: "4,865"
+    - entity: "Virion"
+      classification: "character"
+      mentions: "4,741"
+    - entity: "Agrona"
+      classification: "character"
+      mentions: "4,696"
+    - entity: "Ellie"
+      classification: "character"
+      mentions: "4,371"
+survival_mortality:
+  section_subtitle: "The war between Dicathen and Alacrya is unforgiving. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as scythes invade and battles intensify."
+  summary_title: "Chapter 520"
+  insights:
+    - title: "The Xyrus Academy Invasion"
+      color: "var(--color-person)"
+      text: "The invasion of Xyrus Academy serves as the first major lethal peak, killing off classmates and instructors and setting a darker, war-torn tone."
+    - title: "Continental War Casualties"
+      color: "var(--color-event)"
+      text: "Dicathen resistance, Alacryan assaults, and asura clashes result in a <strong>21.72% mortality rate</strong>, recording <strong>58 permanently dead key characters</strong>."
+  table:
+    - metric: "Total Characters Introduced"
+      value: "267"
+    - metric: "Surviving Characters (Alive)"
+      value: "209"
+    - metric: "Eliminated Characters (Dead)"
+      value: "58"
+    - metric: "Survival Rate"
+      value: "78.28%"
+    - metric: "Mortality Rate"
+      value: "21.72%"
+word_trends:
+  section_subtitle: "Explore the keywords that define the novel, alongside a clear demographic breakdown of character pronouns."
+  cloud_title: "Mana Core Keyword Map"
+  total_pronouns: 253
+  total_pronouns_label: "tagged characters"
+  table_count_header: "Count"
+absence_gaps:
+  summary_title: "Chapter 520"
+  insights:
+    - title: "Lost Xyrus Academy Classmates"
+      color: "var(--color-person)"
+      insight: "Jarrod Redner is absent for a massive <strong>442 chapters</strong> (Ch. 47 to 489)."
+      lore: "Following the Xyrus Academy fall, minor classmates vanish as Arthur moves into active military duty, only reappearing when resistance cells reunite much later."
+    - title: "The Disappeared Instructors"
+      color: "var(--color-location)"
+      insight: "Professor Glory disappears for <strong>401 chapters</strong> (Ch. 103 to 504)."
+      lore: "She vanishes during the middle portion of the war and Arthur's isolation on the Alacryan continent, returning to the narrative only in the final stages."
+    - title: "Elijah's Reincarnation Gap"
+      color: "var(--color-item)"
+      insight: "Elijah Knight vanishes for <strong>325 chapters</strong> (Ch. 102 to 427)."
+      lore: "Elijah is captured during the academy arc and remains completely absent from the text, only reappearing under his reincarnated identity as Nico Sever."
+  table:
+    - character: "Jarrod Redner"
+      gap: 442
+      from: 47
+      to: 489
+    - character: "Professor Glory"
+      gap: 401
+      from: 103
+      to: 504
+    - character: "Sun"
+      gap: 397
+      from: 97
+      to: 494
+    - character: "Avier"
+      gap: 368
+      from: 89
+      to: 457
+    - character: "Feyrith Ivsaar Iii"
+      gap: 361
+      from: 56
+      to: 417
+    - character: "Elijah Knight"
+      gap: 325
+      from: 102
+      to: 427
+    - character: "Agrona Vritra"
+      gap: 303
+      from: 117
+      to: 420
+    - character: "Taci"
+      gap: 290
+      from: 125
+      to: 415
+    - character: "Jona"
+      gap: 270
+      from: 170
+      to: 440
+    - character: "Cedry"
+      gap: 270
+      from: 170
+      to: 440
+---
+
+{{< partial "shared/hero.html" >}}
+
+<!-- Sticky Navigation Pill Bar -->
+<div class="report-nav-sticky-container" id="report-nav-sticky">
+  <nav class="report-nav-pill-wrapper" aria-label="Report section navigation">
+    <a href="#entity-journey" class="report-nav-link">Funnel</a>
+    <a href="#character-mortality" class="report-nav-link">Survival</a>
+    <a href="#entity-race" class="report-nav-link">Mentions</a>
+    <a href="#vanishing-characters" class="report-nav-link">Absences</a>
+    <a href="#word-trends" class="report-nav-link">Demographics</a>
+  </nav>
+</div>
+
+<main id="dcc-main-content" data-series-data="/tbate/tbate_data.json">
+  {{< partial "shared/funnel_breakdown.html" >}}
+  {{< partial "shared/survival_mortality.html" >}}
+  {{< partial "shared/mentions_race.html" >}}
+  {{< partial "shared/absence_gaps.html" >}}
+  {{< partial "shared/word_trends.html" >}}
+  {{< partial "shared/contact.html" >}}
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Beginning After The End Narrative Analysis Dataset",
+  "description": "Quantitative analysis of TurtleMe's epic fantasy masterpiece The Beginning After The End. Covers character survival timelines, entity mentions, and pronoun counts across 520 chapters.",
+  "creator": {
+    "@type": "Organization",
+    "name": "EnrichReader",
+    "url": "https://enrichreader.com"
+  },
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "variableMeasured": [
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Mentions",
+      "description": "Frequencies of entity mentions categorized into character (Arthur: 18624, Caera: 6399), location (Dicathen), and organization (Alacryans), tracked chapter by chapter."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Narrative Absence Spans",
+      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Jarrod Redner: 442 chapters gap)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Character Survival",
+      "description": "Survival timeline of 267 characters with 209 alive and 58 dead (78.28% survival rate) at the end of Chapter 520."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Funnel and Category Breakdown",
+      "description": "Filters raw entity mentions down to 45 unique entities categorized into Person (39), Location (3), and Organization (3)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Mana Core Keywords & Demographics",
+      "description": "Visual keyword mapping of novel terminology and pronoun demographics of characters (He/Him, She/Her, It/Its, They/Them)."
+    }
+  ]
+}
+</script>
+
+{{< partial "shared/footer.html" >}}

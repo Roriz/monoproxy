@@ -1,0 +1,245 @@
+---
+title: "A Song of Ice and Fire, by the numbers | EnrichReader"
+description: "A Song of Ice and Fire, by the numbers. 559 chapters, 1,793,052 words, 1,286 unique characters analyzed."
+fonts_override: '<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">'
+stylesheets:
+  - "/game_of_thrones/style.css"
+scripts:
+  - "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+  - "/game_of_thrones/bar_chart_race.js"
+  - "/game_of_thrones/character_mortality.js"
+  - "/game_of_thrones/entity_journey.js"
+  - "/game_of_thrones/keyboard_shortcuts.js"
+  - "/game_of_thrones/reveal.js"
+  - "/main.js"
+scripts_defer: false
+nav_logo_height: "44px"
+nav_bg_border: false
+nav_minimal: true
+series_title_first: "A Song of"
+series_title_second: "Ice and Fire"
+series_subtitle: "by the numbers"
+series_intro: "A quantitative narrative autopsy of George R.R. Martin's epic fantasy masterpiece, A Song of Ice and Fire. Track character survival, point-of-view distribution, and entity mentions across 559 chapters, powered by Enrich Reader's semantic text engine."
+series_data: "/game_of_thrones/got_data.json"
+stat_chapters: 559
+stat_words: "1,793,052"
+stat_characters: 1286
+hero_visual_metadata_1: "WESTEROS_POLITICAL_TIMELINE"
+hero_visual_metadata_2: "TOTAL_CHAPTERS_ANALYZED_559"
+timeline_scope: "ALL VOLUMES"
+funnel_breakdown:
+  min_chapter: 1
+  max_chapter: 559
+  raw_mentions: "33,801"
+  unique_characters: 1286
+  unique_entities: 45
+  summary_title: "Chapter 559"
+  insights:
+    - title: "Point of View Cast"
+      color: "var(--color-person)"
+      text: "With <strong>44 unique key characters</strong> analyzed, persons are the largest category, mapping out the wide network of Pov characters across Westeros and Essos."
+    - title: "Westeros Strongholds"
+      color: "var(--color-item)"
+      text: "Major locations like <em>Winterfell</em> anchor the narrative structure, acting as focal points for regional conflicts."
+  table:
+    - category: "Person / Character"
+      count: 44
+    - category: "Location"
+      count: 1
+    - category: "Total Unique Entities"
+      count: 45
+mentions_race:
+  min_chapter: 1
+  max_chapter: 559
+  table_title: "Chapter 559"
+  insights:
+    - title: "The Imp (Tyrion Lannister)"
+      color: "var(--color-person)"
+      text: "Tyrion Lannister leads all entities with <strong>2,714 mentions</strong>. As a primary point-of-view character present across all books, Tyrion's high count reflects his central involvement in King's Landing politics and subsequent eastern journeys."
+    - title: "The Bastard of Winterfell (Jon Snow)"
+      color: "var(--color-person)"
+      text: "Jon Snow records <strong>2,499 mentions</strong>. His storyline at the Wall and beyond acts as the primary anchor for the northern threat, making him central to the series' macro-narrative."
+    - title: "The Kingslayer (Jaime Lannister)"
+      color: "var(--color-person)"
+      text: "Jaime Lannister records <strong>1,686 mentions</strong>, reflecting his transformation from a secondary antagonist in early volumes into a primary point-of-view commander in later chapters."
+  table:
+    - entity: "Tyrion Lannister"
+      classification: "character"
+      mentions: "2,714"
+    - entity: "Jon"
+      classification: "character"
+      mentions: "2,499"
+    - entity: "Jaime Lannister"
+      classification: "character"
+      mentions: "1,686"
+    - entity: "Arya"
+      classification: "character"
+      mentions: "1,585"
+    - entity: "Sansa Stark"
+      classification: "character"
+      mentions: "1,527"
+    - entity: "Cersei Lannister"
+      classification: "character"
+      mentions: "1,456"
+    - entity: "Bran"
+      classification: "character"
+      mentions: "1,434"
+    - entity: "Dany"
+      classification: "character"
+      mentions: "1,417"
+    - entity: "Stannis Baratheon"
+      classification: "character"
+      mentions: "1,290"
+    - entity: "Robert Baratheon"
+      classification: "character"
+      mentions: "1,236"
+survival_mortality:
+  section_subtitle: "Valar Morghulis—all men must die. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as the War of the Five Kings unfolds and winter arrives."
+  summary_title: "Chapter 559"
+  insights:
+    - title: "The Red Wedding Peak"
+      color: "var(--color-person)"
+      text: "The betrayal at the Twins (Chapter 254) acts as the most lethal event in the timeline, recording 7 key character deaths in a single chapter, including Robb Stark."
+    - title: "High Attrition Rate"
+      color: "var(--color-event)"
+      text: "George R.R. Martin's lethal world yields a **29.39% mortality rate**, with **378 permanently dead characters** by the end of A Dance with Dragons."
+  table:
+    - metric: "Total Characters Introduced"
+      value: "1,286"
+    - metric: "Surviving Characters (Alive)"
+      value: "908"
+    - metric: "Eliminated Characters (Dead)"
+      value: "378"
+    - metric: "Survival Rate"
+      value: "70.61%"
+    - metric: "Mortality Rate"
+      value: "29.39%"
+word_trends:
+  section_subtitle: "Explore the keywords that define the novel, alongside a clear demographic breakdown of character pronouns."
+  cloud_title: "Westeros Keyword Map"
+  total_pronouns: 1091
+  total_pronouns_label: "tagged characters"
+  table_count_header: "Count"
+absence_gaps:
+  summary_title: "Chapter 559"
+  insights:
+    - title: "Baratheon Legacy absences"
+      color: "var(--color-person)"
+      insight: "House Barat is absent for a massive <strong>431 chapters</strong>."
+      lore: "Following King Robert's death in Volume 1, direct references to the core Baratheon line vanish from many localized POVs, only returning in large-scale political summaries later."
+    - title: "The Exile of Targaryen Allies"
+      color: "var(--color-location)"
+      insight: "Viserys Targaryen disappears for <strong>381 chapters</strong>."
+      lore: "Viserys is killed early in the first book, but Daenerys and other characters reflect on his legacy or lineage in the final volumes (A Dance with Dragons) after a long absence."
+    - title: "Regional Crossroad Figures"
+      color: "var(--color-item)"
+      insight: "Masha Heddle vanishes for <strong>348 chapters</strong>."
+      lore: "The innkeeper of the Inn at the Crossroads disappears after Catelyn Stark captures Tyrion Lannister there, only re-emerging in late-series retrospectives."
+  table:
+    - character: "House Barat"
+      gap: 431
+      from: 105
+      to: 536
+    - character: "Sealord Of Braavos"
+      gap: 382
+      from: 111
+      to: 493
+    - character: "Viserys Targaryen"
+      gap: 381
+      from: 103
+      to: 484
+    - character: "Flowers"
+      gap: 369
+      from: 115
+      to: 484
+    - character: "Hardin"
+      gap: 364
+      from: 131
+      to: 495
+    - character: "Quaro"
+      gap: 363
+      from: 147
+      to: 510
+    - character: "Quent"
+      gap: 349
+      from: 117
+      to: 466
+    - character: "Masha Heddle"
+      gap: 348
+      from: 67
+      to: 415
+    - character: "Giant ’ S Lance"
+      gap: 346
+      from: 79
+      to: 425
+    - character: "Tooth"
+      gap: 323
+      from: 41
+      to: 364
+---
+
+{{< partial "shared/hero.html" >}}
+
+<!-- Sticky Navigation Pill Bar -->
+<div class="report-nav-sticky-container" id="report-nav-sticky">
+  <nav class="report-nav-pill-wrapper" aria-label="Report section navigation">
+    <a href="#entity-journey" class="report-nav-link">Funnel</a>
+    <a href="#character-mortality" class="report-nav-link">Survival</a>
+    <a href="#entity-race" class="report-nav-link">Mentions</a>
+    <a href="#vanishing-characters" class="report-nav-link">Absences</a>
+    <a href="#word-trends" class="report-nav-link">Demographics</a>
+  </nav>
+</div>
+
+<main id="dcc-main-content" data-series-data="/game_of_thrones/got_data.json">
+  {{< partial "shared/funnel_breakdown.html" >}}
+  {{< partial "shared/survival_mortality.html" >}}
+  {{< partial "shared/mentions_race.html" >}}
+  {{< partial "shared/absence_gaps.html" >}}
+  {{< partial "shared/word_trends.html" >}}
+  {{< partial "shared/contact.html" >}}
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "A Song of Ice and Fire Narrative Analysis Dataset",
+  "description": "Quantitative analysis of George R.R. Martin's epic fantasy masterpiece A Song of Ice and Fire. Covers character survival timelines, entity mentions, and pronoun counts across 559 chapters.",
+  "creator": {
+    "@type": "Organization",
+    "name": "EnrichReader",
+    "url": "https://enrichreader.com"
+  },
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "variableMeasured": [
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Mentions",
+      "description": "Frequencies of entity mentions categorized into character (Tyrion Lannister: 2714, Jon Snow: 2499), location (Winterfell), and organization, tracked chapter by chapter."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Narrative Absence Spans",
+      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. House Barat: 431 chapters gap)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Character Survival",
+      "description": "Survival timeline of 1286 characters with 908 alive and 378 dead (70.61% survival rate) at the end of Chapter 559."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Funnel and Category Breakdown",
+      "description": "Filters raw entity mentions down to 45 unique entities categorized into Person (44) and Location (1)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "ASOIAF Keywords & Demographics",
+      "description": "Visual keyword mapping of novel terminology and pronoun demographics of characters (He/Him, She/Her, It/Its, They/Them)."
+    }
+  ]
+}
+</script>
+
+{{< partial "shared/footer.html" >}}
