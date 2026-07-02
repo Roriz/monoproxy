@@ -242,58 +242,6 @@ async function downloadCardAsImage(card, filename) {
       ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
       ctx.drawImage(canvas, 0, 0);
 
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      const base64Logo = await getBase64Image('/assets/logo-4x1-dark-transparent.png');
-      
-      await new Promise((resolve) => {
-        img.onload = () => {
-          // Create repeating watermark pattern using the loaded image
-          const patternCanvas = document.createElement('canvas');
-          const pCtx = patternCanvas.getContext('2d');
-          const tileW = 200;
-          const tileH = 100;
-          patternCanvas.width = tileW;
-          patternCanvas.height = tileH;
-          
-          pCtx.clearRect(0, 0, tileW, tileH);
-          pCtx.save();
-          pCtx.translate(tileW / 2, tileH / 2);
-          pCtx.rotate(-25 * Math.PI / 180);
-          const logoW = 120;
-          const logoH = (img.height / img.width) * logoW;
-          pCtx.drawImage(img, -logoW / 2, -logoH / 2, logoW, logoH);
-          pCtx.restore();
-          
-          const pattern = ctx.createPattern(patternCanvas, 'repeat');
-          
-          // Draw watermark pattern on top of the chart plots
-          ctx.save();
-          ctx.globalAlpha = 0.04; // 0.04 transparency
-          ctx.fillStyle = pattern;
-          ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-          ctx.restore();
-
-          // Draw bottom-right branding logo badge
-          ctx.save();
-          ctx.globalAlpha = 1.0;
-          const pad = 20;
-          const w = 120;
-          const h = (img.height / img.width) * w;
-          ctx.drawImage(img, tempCanvas.width - w - pad, tempCanvas.height - h - pad);
-          ctx.restore();
-          
-          resolve();
-        };
-        img.onerror = () => {
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-          ctx.font = 'bold 12px monospace';
-          ctx.textAlign = 'right';
-          ctx.fillText('ENRICHREADER.COM', tempCanvas.width - 20, tempCanvas.height - 20);
-          resolve();
-        };
-        img.src = base64Logo;
-      });
       triggerDownload(tempCanvas.toDataURL('image/png'), filename);
     } catch (e) {
       console.error('Canvas export failed, downloading raw canvas:', e);
@@ -314,89 +262,29 @@ async function downloadCardAsImage(card, filename) {
       const toolbar = clone.querySelector('.chart-actions-toolbar');
       if (toolbar) toolbar.remove();
 
-      const base64Logo = await getBase64Image('/assets/logo-4x1-dark-transparent.png');
-
-      // If we are exporting only the matrix, wrap it in a padded card frame with watermark & logo
       let finalWidth = width;
       let finalHeight = height;
 
       if (matrixContainer) {
         const padding = 24;
         finalWidth = width + (padding * 2);
-        finalHeight = height + (padding * 2) + 32; // Extra space at bottom for the logo
+        finalHeight = height + (padding * 2);
 
         clone.style.background = '#0a0a0c';
         clone.style.borderRadius = '1rem';
         clone.style.width = finalWidth + 'px';
         clone.style.height = finalHeight + 'px';
-        clone.style.padding = `${padding}px ${padding}px ${padding + 32}px ${padding}px`;
+        clone.style.padding = `${padding}px`;
         clone.style.boxSizing = 'border-box';
         clone.style.overflow = 'hidden';
         clone.style.position = 'relative';
 
-        // Ensure table lies above background watermark
         const table = clone.querySelector('table');
         if (table) {
           table.style.position = 'relative';
           table.style.zIndex = '2';
           table.style.width = '100%';
         }
-
-        // Append repeating watermark pattern
-        const repeatingWatermark = document.createElement('div');
-        repeatingWatermark.style.position = 'absolute';
-        repeatingWatermark.style.top = '0';
-        repeatingWatermark.style.left = '0';
-        repeatingWatermark.style.width = '100%';
-        repeatingWatermark.style.height = '100%';
-        repeatingWatermark.style.pointerEvents = 'none';
-        repeatingWatermark.style.zIndex = '9999';
-        repeatingWatermark.style.overflow = 'hidden';
-
-        const innerWatermark = document.createElement('div');
-        innerWatermark.style.position = 'absolute';
-        innerWatermark.style.top = '-50%';
-        innerWatermark.style.left = '-50%';
-        innerWatermark.style.width = '200%';
-        innerWatermark.style.height = '200%';
-        innerWatermark.style.backgroundImage = `url("${base64Logo}")`;
-        innerWatermark.style.backgroundRepeat = 'repeat';
-        innerWatermark.style.backgroundSize = '160px auto';
-        innerWatermark.style.transform = 'rotate(-25deg)';
-        innerWatermark.style.opacity = '0.04'; // 0.04 transparency
-        innerWatermark.style.pointerEvents = 'none';
-
-        repeatingWatermark.appendChild(innerWatermark);
-        clone.appendChild(repeatingWatermark);
-
-        // Append logo badge
-        const logoBadge = document.createElement('div');
-        logoBadge.style.position = 'absolute';
-        logoBadge.style.bottom = '14px';
-        logoBadge.style.right = '24px';
-        logoBadge.style.opacity = '1';
-        logoBadge.style.display = 'inline-flex';
-        logoBadge.style.alignItems = 'center';
-        logoBadge.style.gap = '8px';
-        logoBadge.style.fontFamily = 'monospace';
-        logoBadge.style.fontSize = '10px';
-        logoBadge.style.textTransform = 'uppercase';
-        logoBadge.style.letterSpacing = '0.15em';
-        logoBadge.style.color = '#ffffff';
-        logoBadge.style.zIndex = '10000';
-
-        const logoText = document.createElement('span');
-        logoText.textContent = 'Powered by';
-        logoText.style.opacity = '0.5';
-
-        const logoImg = document.createElement('img');
-        logoImg.src = base64Logo;
-        logoImg.style.height = '16px';
-        logoImg.style.width = 'auto';
-
-        logoBadge.appendChild(logoText);
-        logoBadge.appendChild(logoImg);
-        clone.appendChild(logoBadge);
       } else {
         clone.style.background = '#0a0a0c';
         clone.style.borderRadius = '1rem';
@@ -404,39 +292,6 @@ async function downloadCardAsImage(card, filename) {
         clone.style.height = height + 'px';
         clone.style.boxSizing = 'border-box';
         clone.style.overflow = 'hidden';
-
-        const repeatingWatermark = clone.querySelector('.chart-watermark-overlay-repeating');
-        if (repeatingWatermark) {
-          repeatingWatermark.style.position = 'absolute';
-          repeatingWatermark.style.top = '0';
-          repeatingWatermark.style.left = '0';
-          repeatingWatermark.style.width = '100%';
-          repeatingWatermark.style.height = '100%';
-          repeatingWatermark.style.overflow = 'hidden';
-          repeatingWatermark.style.zIndex = '9999';
-          repeatingWatermark.innerHTML = ''; // clear text SVG
-
-          const innerWatermark = document.createElement('div');
-          innerWatermark.style.position = 'absolute';
-          innerWatermark.style.top = '-50%';
-          innerWatermark.style.left = '-50%';
-          innerWatermark.style.width = '200%';
-          innerWatermark.style.height = '200%';
-          innerWatermark.style.backgroundImage = `url("${base64Logo}")`;
-          innerWatermark.style.backgroundRepeat = 'repeat';
-          innerWatermark.style.backgroundSize = '160px auto';
-          innerWatermark.style.transform = 'rotate(-25deg)';
-          innerWatermark.style.opacity = '0.04'; // 0.04 transparency
-          innerWatermark.style.pointerEvents = 'none';
-
-          repeatingWatermark.appendChild(innerWatermark);
-        }
-
-        const badge = clone.querySelector('.card-branding-badge');
-        if (badge) {
-          badge.style.opacity = '0.8';
-          badge.style.display = 'inline-flex';
-        }
       }
 
       // Force all descendants to hide scrollbars to avoid rendering them in the image
