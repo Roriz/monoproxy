@@ -99,7 +99,7 @@ window.TimeSeriesPlayer = TimeSeriesPlayer;
 
 // Fetch promise for cached data access
 const dataContainer = document.querySelector('[data-series-data]');
-const dataUrl = dataContainer ? dataContainer.getAttribute('data-series-data') : 'ri_data.json';
+const dataUrl = dataContainer ? dataContainer.getAttribute('data-series-data') : 'series_data.json';
 
 window.dccDataPromise = window.dccDataPromise || fetch(dataUrl).then(res => {
   if (!res.ok) throw new Error('Failed to load ' + dataUrl);

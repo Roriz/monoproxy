@@ -171,8 +171,14 @@ function renderMatrixRows(races, data) {
 // Fetch and load the race selection counts data
 async function initRaceSelectionMatrix() {
   try {
-    const res = await fetch('/dcc/person_race_selection_counts.json');
-    if (!res.ok) throw new Error('Failed to load race selection data');
+    const dataContainer = document.querySelector('[data-series-data]');
+    const seriesDataUrl = dataContainer ? dataContainer.getAttribute('data-series-data') : '/dcc/dcc_data.json';
+    const lastSlashIdx = seriesDataUrl.lastIndexOf('/');
+    const folderPath = lastSlashIdx !== -1 ? seriesDataUrl.substring(0, lastSlashIdx) : '/dcc';
+    const matrixUrl = folderPath + '/person_race_selection_counts.json';
+
+    const res = await fetch(matrixUrl);
+    if (!res.ok) throw new Error('Failed to load race selection data from ' + matrixUrl);
     matrixData = await res.json();
     
     setupMatrixControls();
