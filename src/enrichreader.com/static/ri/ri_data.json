@@ -2,12 +2,12 @@
   "metadata": {
     "total_chapters": 2342,
     "total_words": 4894710,
-    "total_characters": 1497,
-    "survival_rate": 0.6333,
-    "total_dead": 549,
-    "total_survived": 948,
+    "total_characters": 732,
+    "survival_rate": 0.6175,
+    "total_dead": 280,
+    "total_survived": 452,
     "most_lethal_chapter": 0,
-    "max_deaths_single_chapter": 6
+    "max_deaths_single_chapter": 3
   },
   "chapters": [
     {

@@ -64,12 +64,14 @@
   {{ if not .Params.nav_minimal }}
     {{ if eq .RelPermalink "/enterprise/" }}
     <div class="fixed top-0 w-full z-50 bg-neutral-950/80 border-b border-neutral-900 py-1.5 px-6 text-center text-[10px] tracking-wider transition-transform duration-300 backdrop-blur-md flex items-center justify-center gap-2" id="reader-ribbon" style="height: 28px; box-sizing: border-box;">
-      <span class="text-neutral-500 font-light">Looking to read? Try the spoiler-proof app</span>
+      <span class="text-neutral-500 font-light desktop-only-text">Looking to read? Try the spoiler-proof app</span>
+      <span class="text-neutral-500 font-light mobile-only-text">Reader:</span>
       <a href="/" class="text-neutral-400 hover:text-gold-500 transition underline font-normal">Go to Reader Portal &rarr;</a>
     </div>
     {{ else }}
     <div class="fixed top-0 w-full z-50 bg-neutral-950/80 border-b border-neutral-900 py-1.5 px-6 text-center text-[10px] tracking-wider transition-transform duration-300 backdrop-blur-md flex items-center justify-center gap-2" id="enterprise-ribbon" style="height: 28px; box-sizing: border-box;">
-      <span class="text-neutral-500 font-light">Are you a platform, author, or adaptation studio?</span>
+      <span class="text-neutral-500 font-light desktop-only-text">Are you a platform, author, or adaptation studio?</span>
+      <span class="text-neutral-500 font-light mobile-only-text">Publishers & Authors:</span>
       <a href="/enterprise/" class="text-neutral-400 hover:text-gold-500 transition underline font-normal">Explore Enterprise Engine &rarr;</a>
     </div>
     {{ end }}
@@ -119,7 +121,7 @@
 
   <!-- Mobile Menu Drawer (Slide-down overlay) -->
   {{ if not .Params.nav_minimal }}
-  <div id="mobile-menu-drawer" class="fixed inset-0 z-40 bg-neutral-950/98 backdrop-blur-lg transition-all duration-300 transform -translate-y-full opacity-0 pointer-events-none md:hidden flex flex-col justify-center items-center px-6">
+  <div id="mobile-menu-drawer">
     <div class="flex flex-col items-center gap-8 text-[11px] uppercase tracking-[0.3em] text-neutral-400 font-bold text-center">
       <a href="/" class="mobile-nav-link transition {{ if eq .RelPermalink "/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Home</a>
       <a href="/reports/" class="mobile-nav-link transition {{ if eq .RelPermalink "/reports/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Reports</a>

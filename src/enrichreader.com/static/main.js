@@ -64,23 +64,18 @@ function initMobileMenu() {
   function toggleMenu() {
     isOpen = !isOpen;
     if (isOpen) {
-      // Open state
-      drawer.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
-      drawer.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      drawer.classList.add('open');
       iconPath.setAttribute('d', closeIcon);
-      document.body.style.overflow = 'hidden'; // Stop background scrolling
+      document.body.style.overflow = 'hidden';
     } else {
-      // Closed state
-      drawer.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
-      drawer.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+      drawer.classList.remove('open');
       iconPath.setAttribute('d', openIcon);
-      document.body.style.overflow = ''; // Re-enable background scrolling
+      document.body.style.overflow = '';
     }
   }
 
   toggleBtn.addEventListener('click', toggleMenu);
 
-  // Close drawer when a link is clicked
   const navLinks = drawer.querySelectorAll('.mobile-nav-link');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {

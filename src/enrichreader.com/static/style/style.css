@@ -2401,6 +2401,9 @@ nav {
 :root {
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-translate-z: 0;
 }
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -2738,5 +2741,63 @@ nav {
       --tw-scale-y: 1;
       --tw-scale-z: 1;
     }
+  }
+}
+
+/* Mobile menu drawer from-scratch styling (pure CSS layout and transition controls) */
+#mobile-menu-drawer {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 40 !important;
+  background-color: rgba(10, 10, 10, 0.98) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 24px !important;
+  box-sizing: border-box !important;
+  
+  /* Transition settings */
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
+  
+  /* Closed State (Default) */
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-20px) !important;
+  pointer-events: none !important;
+}
+
+#mobile-menu-drawer.open {
+  /* Open State */
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+@media (min-width: 768px) {
+  #mobile-menu-drawer {
+    display: none !important;
+  }
+}
+
+/* Responsive Ribbon helper classes */
+.desktop-only-text {
+  display: inline;
+}
+.mobile-only-text {
+  display: none;
+}
+@media (max-width: 767px) {
+  .desktop-only-text {
+    display: none;
+  }
+  .mobile-only-text {
+    display: inline;
   }
 }

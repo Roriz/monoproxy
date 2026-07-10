@@ -1,0 +1,245 @@
+---
+title: "The Wandering Inn, by the numbers | EnrichReader"
+description: "The Wandering Inn, by the numbers. 713 chapters, 7,131,157 words, 592 unique characters analyzed."
+fonts_override: '<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">'
+stylesheets:
+  - "/the_wandering_inn/style.css"
+scripts:
+  - "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+  - "/the_wandering_inn/bar_chart_race.js"
+  - "/the_wandering_inn/character_mortality.js"
+  - "/the_wandering_inn/entity_journey.js"
+  - "/the_wandering_inn/keyboard_shortcuts.js"
+  - "/the_wandering_inn/reveal.js"
+  - "/main.js"
+scripts_defer: false
+nav_logo_height: "44px"
+nav_bg_border: false
+nav_minimal: true
+series_title_first: "The Wandering"
+series_title_second: "Inn"
+series_subtitle: "by the numbers"
+series_intro: "A quantitative narrative autopsy of pirateaba's portal fantasy epic, The Wandering Inn. Track character survival, perspective shifts, and entity mentions across 11 volumes, powered by Enrich Reader's semantic text engine."
+series_data: "/the_wandering_inn/twi_data.json"
+stat_chapters: 713
+stat_words: "7,131,157"
+stat_characters: 592
+hero_visual_metadata_1: "PORTAL_FANTASY_TIMELINE"
+hero_visual_metadata_2: "TOTAL_VOLUMES_ANALYZED_11"
+timeline_scope: "VOLUMES 1-11"
+funnel_breakdown:
+  min_chapter: 1
+  max_chapter: 713
+  raw_mentions: "175,787"
+  unique_characters: 592
+  unique_entities: 45
+  summary_title: "Volume 11, Chapter 24"
+  insights:
+    - title: "A Massive Cast of Inn Guests"
+      color: "var(--color-person)"
+      text: "With <strong>40 unique key characters</strong> analyzed, persons dominate the text. The narrative follows Erin Solstice, Ryoka Griffin, and the diverse patrons of the Wandering Inn."
+    - title: "The Hub of Liscor"
+      color: "var(--color-location)"
+      text: "Key locations like the city of <em>Liscor</em> anchor the narrative's structure, serving as the interface between human and drakes and the focal point of early volume conflicts."
+  table:
+    - category: "Person / Character"
+      count: 40
+    - category: "Location"
+      count: 1
+    - category: "Organization"
+      count: 3
+    - category: "Other"
+      count: 1
+    - category: "Total Unique Entities"
+      count: 45
+mentions_race:
+  min_chapter: 1
+  max_chapter: 713
+  table_title: "Volume 11, Chapter 24"
+  insights:
+    - title: "The Magical Innkeeper (Erin Solstice)"
+      color: "var(--color-person)"
+      text: "Erin leads all entities by an overwhelming margin with <strong>32,207 mentions</strong>. As the heart of the series and the innkeeper who unites disparate races, her presence dominates the narrative."
+    - title: "The Wandering Runner (Ryoka Griffin)"
+      color: "var(--color-person)"
+      text: "Ryoka Griffin accumulates <strong>11,849 mentions</strong>. As the second primary point of view character, her journey as a City Runner across Izril provides a key perspective outside Liscor."
+    - title: "The Horns of Hammerad (Ceria & Pisces)"
+      color: "var(--color-person)"
+      text: "Ceria Springart (<strong>10,813 mentions</strong>) and Pisces Dahli (<strong>7,617 mentions</strong>) form the core of the Horns of Hammerad, tracking the progression of Liscor's resident silver-rank team."
+  table:
+    - entity: "Erin"
+      classification: "character"
+      mentions: "32,207"
+    - entity: "Ryoka"
+      classification: "character"
+      mentions: "11,849"
+    - entity: "Drake"
+      classification: "character"
+      mentions: "11,187"
+    - entity: "Ceria"
+      classification: "character"
+      mentions: "10,813"
+    - entity: "Pisces"
+      classification: "character"
+      mentions: "7,617"
+    - entity: "Lyonette"
+      classification: "character"
+      mentions: "7,130"
+    - entity: "Rags"
+      classification: "character"
+      mentions: "6,629"
+    - entity: "Liscor"
+      classification: "location"
+      mentions: "5,291"
+    - entity: "Mrsha"
+      classification: "character"
+      mentions: "5,101"
+    - entity: "Klbkch"
+      classification: "character"
+      mentions: "4,870"
+survival_mortality:
+  section_subtitle: "Portal fantasy introduces characters to a world of levels, monsters, and war. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as major wars and sieges unfold."
+  summary_title: "Volume 11, Chapter 24"
+  insights:
+    - title: "A Brutal World"
+      color: "var(--color-person)"
+      text: "In the dangerous lands of Izril, characters face constant threats. Out of 592 characters introduced, <strong>122 deaths</strong> are recorded, representing a 20.61% mortality rate."
+    - title: "Lethal Milestones"
+      color: "var(--color-event)"
+      text: "The most lethal event occurs at Chapter 26, where a single battle registers <strong>7 key character deaths</strong>, highlighting pirateaba's willingness to eliminate main cast members in major conflicts."
+  table:
+    - metric: "Total Characters Introduced"
+      value: "592"
+    - metric: "Surviving Characters (Alive)"
+      value: "470"
+    - metric: "Eliminated Characters (Dead)"
+      value: "122"
+    - metric: "Survival Rate"
+      value: "79.39%"
+    - metric: "Mortality Rate"
+      value: "20.61%"
+word_trends:
+  section_subtitle: "Explore the keywords that define the novel, alongside a clear demographic breakdown of character pronouns."
+  cloud_title: "The Wandering Inn Keyword Map"
+  total_pronouns: 538
+  total_pronouns_label: "tagged characters"
+  table_count_header: "Count"
+absence_gaps:
+  summary_title: "Volume 11, Chapter 24"
+  insights:
+    - title: "The Long Absence of Gregor"
+      color: "var(--color-person)"
+      insight: "Gregor disappears for a massive <strong>643 chapters</strong> (Ch. 52 to 695)."
+      lore: "As a secondary Antinium character introduced in the early volumes, Gregor's long gap reflects the focus shifting away from the early Liscor barracks to regional and global conflicts, before returning in the late-stage Antinium arcs."
+    - title: "Early Cast Dispersal"
+      color: "var(--color-location)"
+      insight: "Characters like Cervial and Blake have gaps of <strong>425</strong> and <strong>400 chapters</strong>."
+      lore: "With the story expanding to Baleros, Wistram, and other continents, many early residents of Liscor or Izril are left behind for hundreds of chapters as major world events take center stage."
+  table:
+    - character: "Gregor"
+      gap: 643
+      from: 52
+      to: 695
+    - character: "Warsh"
+      gap: 641
+      from: 53
+      to: 694
+    - character: "Cervial"
+      gap: 425
+      from: 270
+      to: 695
+    - character: "Blake"
+      gap: 400
+      from: 275
+      to: 675
+    - character: "Siri"
+      gap: 374
+      from: 300
+      to: 674
+    - character: "Lizardwoman"
+      gap: 370
+      from: 307
+      to: 677
+    - character: "Wailant"
+      gap: 331
+      from: 371
+      to: 702
+    - character: "Fox"
+      gap: 324
+      from: 346
+      to: 670
+    - character: "Erma"
+      gap: 324
+      from: 346
+      to: 670
+    - character: "Bishop"
+      gap: 322
+      from: 384
+      to: 706
+---
+
+{{< partial "shared/hero.html" >}}
+
+<!-- Sticky Navigation Pill Bar -->
+<div class="report-nav-sticky-container" id="report-nav-sticky">
+  <nav class="report-nav-pill-wrapper" aria-label="Report section navigation">
+    <a href="#entity-journey" class="report-nav-link">Funnel</a>
+    <a href="#character-mortality" class="report-nav-link">Survival</a>
+    <a href="#entity-race" class="report-nav-link">Mentions</a>
+    <a href="#vanishing-characters" class="report-nav-link">Absences</a>
+    <a href="#word-trends" class="report-nav-link">Demographics</a>
+  </nav>
+</div>
+
+<main id="dcc-main-content" data-series-data="/the_wandering_inn/twi_data.json">
+  {{< partial "shared/funnel_breakdown.html" >}}
+  {{< partial "shared/survival_mortality.html" >}}
+  {{< partial "shared/mentions_race.html" >}}
+  {{< partial "shared/absence_gaps.html" >}}
+  {{< partial "shared/word_trends.html" >}}
+  {{< partial "shared/contact.html" >}}
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Wandering Inn Narrative Analysis Dataset",
+  "description": "Quantitative analysis of pirateaba's portal fantasy epic The Wandering Inn. Covers character survival timelines, entity mentions, and pronoun counts across 713 chapters.",
+  "creator": {
+    "@type": "Organization",
+    "name": "EnrichReader",
+    "url": "https://enrichreader.com"
+  },
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "variableMeasured": [
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Mentions",
+      "description": "Frequencies of entity mentions categorized into character (Erin: 32207, Ryoka: 11849), location (Liscor), and organization (Antinium), tracked chapter by chapter."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Narrative Absence Spans",
+      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Gregor: 643 chapters gap)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Character Survival",
+      "description": "Survival timeline of 592 characters with 470 alive and 122 dead (79.39% survival rate) at the end of Chapter 713."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Entity Funnel and Category Breakdown",
+      "description": "Filters raw entity mentions down to 45 unique entities categorized into Person (40), Location (1), Organization (3), and Other (1)."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "TWI Keywords & Demographics",
+      "description": "Visual keyword mapping of novel terminology and pronoun demographics of characters (He/Him, She/Her, It/Its, They/Them)."
+    }
+  ]
+}
+</script>
+
+{{< partial "shared/footer.html" >}}
