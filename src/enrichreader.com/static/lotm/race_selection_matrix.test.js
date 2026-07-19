@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert');
 
 // Load the JavaScript code
-const codePath = path.join(__dirname, 'race_selection_matrix.js');
+const codePath = path.join(__dirname, '../shared/js/race_selection_matrix.js');
 const code = fs.readFileSync(codePath, 'utf8');
 
 // Set up minimal globals for execution

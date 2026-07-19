@@ -63,12 +63,14 @@ function renderMatrixRows(races, data) {
 
   tbody.innerHTML = '';
 
+  const numVolumes = (data && Array.isArray(data.volumes)) ? data.volumes.length : 7;
+
   if (races.length === 0) {
     const tr = document.createElement('tr');
     const td = document.createElement('td');
-    td.setAttribute('colspan', '9');
+    td.setAttribute('colspan', String(numVolumes + 2));
     td.className = 'text-center py-8 text-neutral-500 font-mono';
-    td.textContent = 'No matching race selections found';
+    td.textContent = 'No matching selections found';
     tr.appendChild(td);
     tbody.appendChild(tr);
     return;
@@ -86,8 +88,8 @@ function renderMatrixRows(races, data) {
     tdRace.textContent = displayRaceName;
     tr.appendChild(tdRace);
 
-    // 2. Volume Columns (1 to 7)
-    for (let i = 0; i < 7; i++) {
+    // 2. Volume Columns
+    for (let i = 0; i < numVolumes; i++) {
       const volObj = data.volumes[i] || {};
       const volNum = i + 1;
       const count = (volObj.counts && volObj.counts[race]) || 0;
@@ -171,14 +173,24 @@ function renderMatrixRows(races, data) {
 // Fetch and load the race selection counts data
 async function initRaceSelectionMatrix() {
   try {
-    const dataContainer = document.querySelector('[data-series-data]');
-    const seriesDataUrl = dataContainer ? dataContainer.getAttribute('data-series-data') : '/dcc/dcc_data.json';
-    const lastSlashIdx = seriesDataUrl.lastIndexOf('/');
-    const folderPath = lastSlashIdx !== -1 ? seriesDataUrl.substring(0, lastSlashIdx) : '/dcc';
-    const matrixUrl = folderPath + '/person_race_selection_counts.json';
+    const matrixContainer = document.querySelector('[data-matrix-data]');
+    let matrixUrl = matrixContainer ? matrixContainer.getAttribute('data-matrix-data') : null;
 
-    const res = await fetch(matrixUrl);
-    if (!res.ok) throw new Error('Failed to load race selection data from ' + matrixUrl);
+    if (!matrixUrl) {
+      const dataContainer = document.querySelector('[data-series-data]');
+      const seriesDataUrl = dataContainer ? dataContainer.getAttribute('data-series-data') : '/dcc/dcc_data.json';
+      const lastSlashIdx = seriesDataUrl.lastIndexOf('/');
+      const folderPath = lastSlashIdx !== -1 ? seriesDataUrl.substring(0, lastSlashIdx) : '/dcc';
+      matrixUrl = folderPath + '/person_race_selection_counts.json';
+    }
+
+    let res = await fetch(matrixUrl);
+    if (!res.ok) {
+      const altUrl = matrixUrl.replace('person_race_selection_counts.json', 'person_pathway_counts.json');
+      res = await fetch(altUrl);
+      if (res.ok) matrixUrl = altUrl;
+    }
+    if (!res.ok) throw new Error('Failed to load matrix data from ' + matrixUrl);
     matrixData = await res.json();
     
     setupMatrixControls();
@@ -207,9 +219,10 @@ function renderMatrix() {
       toggleContainer.style.display = 'none';
     } else {
       toggleContainer.style.display = 'flex';
+      const nounPlural = (matrixData && matrixData.field) ? matrixData.field + 's' : 'races';
       toggleBtn.textContent = matrixShowAll 
         ? 'Show Less' 
-        : `Show all ${totalRaces.length} races (yes, even Frenzied Gerbil)`;
+        : `Show all ${totalRaces.length} ${nounPlural}`;
     }
   }
 }
