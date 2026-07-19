@@ -170,28 +170,49 @@ function renderMatrixRows(races, data) {
   setupTooltipEvents();
 }
 
+async function safeFetchJson(url) {
+  if (!url || typeof url !== 'string' || !url.trim()) return null;
+  try {
+    const res = await fetch(url.trim());
+    if (!res.ok) return null;
+    const text = await res.text();
+    if (!text || text.trim().startsWith('<')) return null;
+    return JSON.parse(text);
+  } catch (e) {
+    return null;
+  }
+}
+
 // Fetch and load the race selection counts data
 async function initRaceSelectionMatrix() {
   try {
     const matrixContainer = document.querySelector('[data-matrix-data]');
     let matrixUrl = matrixContainer ? matrixContainer.getAttribute('data-matrix-data') : null;
+    if (matrixUrl) matrixUrl = matrixUrl.trim();
 
     if (!matrixUrl) {
       const dataContainer = document.querySelector('[data-series-data]');
-      const seriesDataUrl = dataContainer ? dataContainer.getAttribute('data-series-data') : '/dcc/dcc_data.json';
-      const lastSlashIdx = seriesDataUrl.lastIndexOf('/');
-      const folderPath = lastSlashIdx !== -1 ? seriesDataUrl.substring(0, lastSlashIdx) : '/dcc';
-      matrixUrl = folderPath + '/person_race_selection_counts.json';
+      const seriesDataUrl = dataContainer ? dataContainer.getAttribute('data-series-data') : '';
+      if (seriesDataUrl) {
+        const lastSlashIdx = seriesDataUrl.lastIndexOf('/');
+        const folderPath = lastSlashIdx !== -1 ? seriesDataUrl.substring(0, lastSlashIdx) : '';
+        if (folderPath) {
+          matrixUrl = folderPath + '/person_race_selection_counts.json';
+        }
+      }
     }
 
-    let res = await fetch(matrixUrl);
-    if (!res.ok) {
-      const altUrl = matrixUrl.replace('person_race_selection_counts.json', 'person_pathway_counts.json');
-      res = await fetch(altUrl);
-      if (res.ok) matrixUrl = altUrl;
+    if (!matrixUrl) return;
+
+    let data = await safeFetchJson(matrixUrl);
+    if (!data && matrixUrl.includes('person_race_selection_counts.json')) {
+      data = await safeFetchJson(matrixUrl.replace('person_race_selection_counts.json', 'person_pathway_counts.json'));
+    } else if (!data && matrixUrl.includes('person_pathway_counts.json')) {
+      data = await safeFetchJson(matrixUrl.replace('person_pathway_counts.json', 'person_race_selection_counts.json'));
     }
-    if (!res.ok) throw new Error('Failed to load matrix data from ' + matrixUrl);
-    matrixData = await res.json();
+
+    if (!data) return;
+    matrixData = data;
     
     setupMatrixControls();
     renderMatrix();
