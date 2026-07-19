@@ -27,7 +27,7 @@ function initParticles() {
 // Transparent to Solid Nav on Scroll
 function initHeaderScroll() {
   const nav = document.querySelector('nav');
-  const ribbon = document.getElementById('reader-ribbon');
+  const ribbon = document.getElementById('reader-ribbon') || document.getElementById('enterprise-ribbon');
   if (!nav) return;
 
   window.addEventListener('scroll', () => {
