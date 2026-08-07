@@ -82341,70 +82341,64 @@
   ],
   "absence_gaps": [
     {
-      "character": "Zev",
+      "character": "Randall",
+      "gap_chapters": 324,
+      "from_chapter": 46,
+      "to_chapter": 370
+    },
+    {
+      "character": "Mukta",
+      "gap_chapters": 304,
+      "from_chapter": 138,
+      "to_chapter": 443
+    },
+    {
+      "character": "York",
       "gap_chapters": 285,
+      "from_chapter": 128,
+      "to_chapter": 413
+    },
+    {
+      "character": "Geraldo",
+      "gap_chapters": 237,
       "from_chapter": 82,
-      "to_chapter": 367
-    },
-    {
-      "character": "Juice Box",
-      "gap_chapters": 188,
-      "from_chapter": 210,
-      "to_chapter": 398
-    },
-    {
-      "character": "Prepotente",
-      "gap_chapters": 165,
-      "from_chapter": 120,
-      "to_chapter": 285
+      "to_chapter": 320
     },
     {
       "character": "Ferdinand",
-      "gap_chapters": 120,
-      "from_chapter": 100,
-      "to_chapter": 220
+      "gap_chapters": 85,
+      "from_chapter": 90,
+      "to_chapter": 176
+    },
+    {
+      "character": "Juice Box",
+      "gap_chapters": 40,
+      "from_chapter": 349,
+      "to_chapter": 390
+    },
+    {
+      "character": "Prepotente",
+      "gap_chapters": 38,
+      "from_chapter": 390,
+      "to_chapter": 429
     },
     {
       "character": "Bautista",
-      "gap_chapters": 118,
-      "from_chapter": 82,
-      "to_chapter": 200
-    },
-    {
-      "character": "Odette",
-      "gap_chapters": 105,
-      "from_chapter": 180,
-      "to_chapter": 285
-    },
-    {
-      "character": "Katia",
-      "gap_chapters": 98,
-      "from_chapter": 140,
-      "to_chapter": 238
-    },
-    {
-      "character": "Mordecai",
-      "gap_chapters": 88,
-      "from_chapter": 210,
-      "to_chapter": 298
-    },
-    {
-      "character": "Samantha",
-      "gap_chapters": 76,
-      "from_chapter": 210,
-      "to_chapter": 286
+      "gap_chapters": 25,
+      "from_chapter": 388,
+      "to_chapter": 414
     },
     {
       "character": "Donut",
-      "gap_chapters": 8,
-      "from_chapter": 12,
-      "to_chapter": 20
+      "gap_chapters": 16,
+      "from_chapter": 199,
+      "to_chapter": 216
     },
     {
       "character": "Carl",
-      "gap_chapters": 4,
-      "from_chapter": 42,
-      "to_chapter": 46
+      "gap_chapters": 8,
+      "from_chapter": 97,
+      "to_chapter": 106
     }
   ],
   "breakdowns": {

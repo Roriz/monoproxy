@@ -182,37 +182,57 @@ absence_gaps:
   insights:
     - title: "The Perspective Anchors"
       color: "var(--color-person)"
-      insight: "Carl and Donut have maximum disappearance gaps of only <strong>4</strong> and <strong>8 chapters</strong> respectively. As the central narrative engines, their near-constant presence forms the structural spine of the text, with gaps occurring only during solo trials or cutscenes."
+      insight: "Carl and Donut have maximum disappearance gaps of only <strong>8</strong> and <strong>16 chapters</strong> respectively. As the central narrative engines, their near-constant presence forms the structural spine of the text, with gaps occurring only during solo trials or cutscenes."
       lore: "As the central narrative engines, their near-constant presence forms the structural spine of the text, with gaps occurring only during solo trials or cutscenes."
-    - title: "The Demotion and Return (Zev)"
+    - title: "The Long Disappearances (Randall & York)"
       color: "var(--color-location)"
-      insight: "Zev holds the record for the largest absence, vanishing for a staggering <strong>285 chapters</strong> (Ch. 82 to 367)."
-      lore: "This corresponds to her early syndicate demotion/removal as manager and her eventual re-appearance as part of the underground rebellion."
+      insight: "Randall holds the record for the largest absence gap, vanishing for <strong>324 chapters</strong> (Ch. 46 to 370), while York vanishes for <strong>285 chapters</strong> (Ch. 128 to 413)."
+      lore: "Secondary crawlers and outer floor figures disappear for hundreds of chapters until floor progressions or syndicate events force narrative paths to cross again."
     - title: "Divergent Dungeon Paths"
       color: "var(--color-item)"
-      insight: "Crawlers like Prepotente (<strong>165 ch. gap</strong>) and managers like Juice Box (<strong>188 ch. gap</strong>) have massive absences."
-      lore: "Because crawlers traverse separate floor zones, they vanish from the core perspective until paths merge at central events."
+      insight: "Crawlers like Ferdinand (<strong>85 ch. gap</strong>), Juice Box (<strong>40 ch. gap</strong>), and Prepotente (<strong>38 ch. gap</strong>) experience notable absence spans."
+      lore: "Because crawlers traverse separate floor zones and floor trials, they vanish from the core perspective until paths merge at central events."
   table:
-    - character: "Zev"
+    - character: "Randall"
+      gap: 324
+      from: 46
+      to: 370
+    - character: "Mukta"
+      gap: 304
+      from: 138
+      to: 443
+    - character: "York"
       gap: 285
+      from: 128
+      to: 413
+    - character: "Geraldo"
+      gap: 237
       from: 82
-      to: 367
-    - character: "Juice Box"
-      gap: 188
-      from: 210
-      to: 398
-    - character: "Prepotente"
-      gap: 165
-      from: 120
-      to: 285
+      to: 320
     - character: "Ferdinand"
-      gap: 120
-      from: 100
-      to: 220
+      gap: 85
+      from: 90
+      to: 176
+    - character: "Juice Box"
+      gap: 40
+      from: 349
+      to: 390
+    - character: "Prepotente"
+      gap: 38
+      from: 390
+      to: 429
     - character: "Bautista"
-      gap: 118
-      from: 82
-      to: 200
+      gap: 25
+      from: 388
+      to: 414
+    - character: "Donut"
+      gap: 16
+      from: 199
+      to: 216
+    - character: "Carl"
+      gap: 8
+      from: 97
+      to: 106
 ---
 
 {{< partial "shared/hero.html" >}}
@@ -260,7 +280,7 @@ absence_gaps:
     {
       "@type": "PropertyValue",
       "name": "Narrative Absence Spans",
-      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Zev: 285 chapters gap)."
+      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Randall: 324 chapters gap)."
     },
     {
       "@type": "PropertyValue",
