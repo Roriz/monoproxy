@@ -247,7 +247,7 @@ function initContactForm() {
     })
     .catch(error => {
       console.error('Error submitting form:', error);
-      showNotification('error', error.message || 'There was a problem submitting your request. Please try again or email sales@enrichreader.com directly.');
+      showNotification('error', error.message || 'There was a problem submitting your request. Please try again or email hello@enrichreader.com directly.');
     })
     .finally(() => {
       // Restore submit button

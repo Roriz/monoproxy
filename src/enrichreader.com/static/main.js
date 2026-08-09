@@ -27,24 +27,13 @@ function initParticles() {
 // Transparent to Solid Nav on Scroll
 function initHeaderScroll() {
   const nav = document.querySelector('nav');
-  const ribbon = document.getElementById('reader-ribbon') || document.getElementById('enterprise-ribbon');
   if (!nav) return;
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       nav.classList.add('nav-scrolled');
-      nav.style.top = '0';
-      if (ribbon) {
-        ribbon.style.transform = 'translateY(-100%)';
-      }
     } else {
       nav.classList.remove('nav-scrolled');
-      if (ribbon) {
-        nav.style.top = '28px';
-        ribbon.style.transform = 'translateY(0)';
-      } else {
-        nav.style.top = '0';
-      }
     }
   }, { passive: true });
 }
