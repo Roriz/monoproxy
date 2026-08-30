@@ -1,0 +1,286 @@
+#!/bin/bash
+# ==============================================================================
+# EnrichReader Multi-Repository Pipeline Orchestrator
+# ==============================================================================
+# Thin coordinator CLI that delegates tasks to native scripts in sibling repos:
+#   - reader-app:     Volume Parser & Benchmark verification
+#   - skin-maker:     NLP & LLM Skin Generation
+#   - reader-backend: Catalog DB & ActiveStorage sync
+#   - enrichreader-lfs: Shared Data Hub (raws, volumes, skins)
+# ==============================================================================
+
+set -e
+set -u
+set -o pipefail
+
+# Sourcing helper styles from monoproxy
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MONOPROXY_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# shellcheck source=bin/helpers/utils.sh
+if [ -f "$SCRIPT_DIR/helpers/utils.sh" ]; then
+  source "$SCRIPT_DIR/helpers/utils.sh"
+else
+  header() { echo -e "\n=== $1 ==="; }
+  step() { echo -e "  ➜ $1"; }
+  info() { echo -e "[INFO] $1"; }
+  success() { echo -e "[SUCCESS] $1"; }
+  warn() { echo -e "[WARN] $1"; }
+  error() { echo -e "[ERROR] $1" >&2; exit 1; }
+fi
+
+# Repository Paths
+PROJECTS_ROOT="${PROJECTS_ROOT:-$(cd "$MONOPROXY_DIR/.." && pwd)}"
+READER_APP_DIR="${READER_APP_DIR:-$PROJECTS_ROOT/reader-app}"
+SKIN_MAKER_DIR="${SKIN_MAKER_DIR:-$PROJECTS_ROOT/skin-maker}"
+READER_BACKEND_DIR="${READER_BACKEND_DIR:-$PROJECTS_ROOT/reader-backend}"
+LFS_DIR="${ENRICHREADER_LFS_DIR:-$PROJECTS_ROOT/enrichreader-lfs}"
+
+# Ensure sibling directories exist
+verify_repositories() {
+  local missing=()
+  [ ! -d "$READER_APP_DIR" ] && missing+=("reader-app ($READER_APP_DIR)")
+  [ ! -d "$SKIN_MAKER_DIR" ] && missing+=("skin-maker ($SKIN_MAKER_DIR)")
+  [ ! -d "$READER_BACKEND_DIR" ] && missing+=("reader-backend ($READER_BACKEND_DIR)")
+  [ ! -d "$LFS_DIR" ] && missing+=("enrichreader-lfs ($LFS_DIR)")
+
+  if [ ${#missing[@]} -gt 0 ]; then
+    error "Missing required repository directories:\n  - $(IFS=$'\n  - '; echo "${missing[*]}")"
+  fi
+}
+
+usage() {
+  cat << EOF
+Usage: bin/pipeline <command> [options]
+
+Commands:
+  run <rawUuid>         Run the full end-to-end pipeline (parse -> skin -> backend -> benchmark)
+  parse <rawUuid>       Parse EPUB raw into Volume JSON (in enrichreader-lfs/volumes)
+  generate <volumeUuid> Generate Skin from Volume using skin-maker
+  sync [uuid] [file]    Sync skin .ers with reader-backend DB / ActiveStorage (or all via db:seed)
+  benchmark [rawUuid]   Run verification benchmark in reader-app
+
+Options for 'run':
+  --theme <theme>           Series theme (e.g. lotm, dungeon_crawler_carl, mistborn)
+  --client <client>         LLM client (default: vertex, options: vertex, gemini, openai, grok, llama, agy)
+  --output-name <name>      Consolidated skin output name (e.g. skin-dungeon_crawler_carl)
+  --prev-volume <volUuid>   Previous volume namespace for multi-volume series
+  --skip-parse              Skip EPUB parsing if volume already exists
+  --skip-skin               Skip LLM skin generation
+  --skip-backend            Skip backend database sync
+  --skip-benchmark          Skip reader-app benchmark verification
+
+Examples:
+  bin/pipeline run dungeon_crawler_carl_1 --theme dungeon_crawler_carl --client vertex
+  bin/pipeline parse lotm-1
+  bin/pipeline generate v-lotm-1 --theme lotm --client gemini
+  bin/pipeline sync
+  bin/pipeline benchmark mistborn-1.1
+EOF
+  exit 1
+}
+
+# ------------------------------------------------------------------------------
+# Action: Parse (EPUB -> Volume JSON)
+# ------------------------------------------------------------------------------
+action_parse() {
+  local raw_uuid="$1"
+  local volume_uuid="v-${raw_uuid#v-}"
+  local raw_path="$LFS_DIR/raws/raw-${raw_uuid}.epub"
+
+  step "Parsing raw '$raw_uuid' -> '$volume_uuid' in enrichreader-lfs..."
+  if [ ! -f "$raw_path" ]; then
+    error "Raw EPUB not found at: $raw_path"
+  fi
+
+  (
+    cd "$READER_APP_DIR"
+    node lib/rbook/playground/volume_install.worker.js \
+      --rawUuid "$raw_uuid" \
+      --volumeUuid "$volume_uuid"
+  )
+  success "Volume parsed and saved to: $LFS_DIR/volumes/$volume_uuid"
+}
+
+# ------------------------------------------------------------------------------
+# Action: Generate Skin (Volume JSON -> .ers)
+# ------------------------------------------------------------------------------
+action_generate() {
+  local volume_uuid="$1"
+  local theme="${2:-}"
+  local client="${3:-vertex}"
+  local output_name="${4:-}"
+  local prev_volume="${5:-}"
+
+  local python_bin="$SKIN_MAKER_DIR/.venv/bin/python"
+  if [ ! -f "$python_bin" ]; then
+    python_bin="python3"
+  fi
+
+  step "Running skin-maker pipeline for volume '$volume_uuid' (client: $client)..."
+  
+  local cmd=("$python_bin" "process_volume.py" "--volume" "$volume_uuid" "--client" "$client")
+  [ -n "$theme" ] && cmd+=("--theme" "$theme")
+  [ -n "$output_name" ] && cmd+=("--output-name" "$output_name")
+  [ -n "$prev_volume" ] && cmd+=("--prev-volume" "$prev_volume")
+
+  (
+    cd "$SKIN_MAKER_DIR"
+    "${cmd[@]}"
+  )
+  success "Skin generated and saved to: $LFS_DIR/skins/"
+}
+
+# ------------------------------------------------------------------------------
+# Action: Sync Backend (Catalog & ActiveStorage)
+# ------------------------------------------------------------------------------
+action_sync() {
+  local uuid="${1:-}"
+  local file_path="${2:-}"
+
+  step "Syncing skins with reader-backend..."
+  (
+    cd "$READER_BACKEND_DIR"
+    if [ -n "$uuid" ] && [ -n "$file_path" ]; then
+      docker compose exec -T api bin/rake "skins:update[$uuid,$file_path]"
+    else
+      docker compose exec -T api bin/rails db:seed
+    fi
+  )
+  success "Backend skins catalog synced!"
+}
+
+# ------------------------------------------------------------------------------
+# Action: Benchmark (Reader Verification)
+# ------------------------------------------------------------------------------
+action_benchmark() {
+  local only="${1:-}"
+
+  step "Running verification benchmark in reader-app..."
+  (
+    cd "$READER_APP_DIR"
+    if [ -n "$only" ]; then
+      node lib/rbook/playground/run_benchmark.js --only "$only"
+    else
+      node lib/rbook/playground/run_benchmark.js
+    fi
+  )
+  success "Benchmark completed!"
+}
+
+# ------------------------------------------------------------------------------
+# Action: Full End-to-End Run
+# ------------------------------------------------------------------------------
+action_run() {
+  local raw_uuid="$1"
+  shift
+
+  local theme=""
+  local client="vertex"
+  local output_name=""
+  local prev_volume=""
+  local skip_parse=false
+  local skip_skin=false
+  local skip_backend=false
+  local skip_benchmark=false
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --theme) theme="$2"; shift 2 ;;
+      --client) client="$2"; shift 2 ;;
+      --output-name) output_name="$2"; shift 2 ;;
+      --prev-volume) prev_volume="$2"; shift 2 ;;
+      --skip-parse) skip_parse=true; shift ;;
+      --skip-skin) skip_skin=true; shift ;;
+      --skip-backend) skip_backend=true; shift ;;
+      --skip-benchmark) skip_benchmark=true; shift ;;
+      *) error "Unknown option: $1" ;;
+    esac
+  done
+
+  local volume_uuid="v-${raw_uuid#v-}"
+
+  header "Starting Pipeline Run for: $raw_uuid"
+  info "Raw UUID:      $raw_uuid"
+  info "Volume UUID:   $volume_uuid"
+  info "Theme:         ${theme:-<auto/none>}"
+  info "Client:        $client"
+  info "Output Name:   ${output_name:-<default>}"
+
+  # Step 1: Parse
+  if [ "$skip_parse" = true ]; then
+    info "Skipping parser step (--skip-parse)."
+  else
+    header "Step 1: Volume Parsing (reader-app)"
+    action_parse "$raw_uuid"
+  fi
+
+  # Step 2: Skin Generation
+  if [ "$skip_skin" = true ]; then
+    info "Skipping skin generation step (--skip-skin)."
+  else
+    header "Step 2: Skin Generation (skin-maker)"
+    action_generate "$volume_uuid" "$theme" "$client" "$output_name" "$prev_volume"
+  fi
+
+  # Step 3: Backend Sync
+  if [ "$skip_backend" = true ]; then
+    info "Skipping backend sync step (--skip-backend)."
+  else
+    header "Step 3: Backend Sync (reader-backend)"
+    action_sync
+  fi
+
+  # Step 4: Verification Benchmark
+  if [ "$skip_benchmark" = true ]; then
+    info "Skipping benchmark step (--skip-benchmark)."
+  else
+    header "Step 4: Reader Verification Benchmark (reader-app)"
+    action_benchmark "$raw_uuid"
+  fi
+
+  header "Pipeline Execution Completed Successfully!"
+}
+
+# ------------------------------------------------------------------------------
+# Main Dispatcher
+# ------------------------------------------------------------------------------
+main() {
+  verify_repositories
+
+  if [ $# -lt 1 ]; then
+    usage
+  fi
+
+  local command="$1"
+  shift
+
+  case "$command" in
+    run)
+      if [ $# -lt 1 ]; then error "Missing rawUuid for 'run' command."; fi
+      action_run "$@"
+      ;;
+    parse)
+      if [ $# -lt 1 ]; then error "Missing rawUuid for 'parse' command."; fi
+      action_parse "$1"
+      ;;
+    generate)
+      if [ $# -lt 1 ]; then error "Missing volumeUuid for 'generate' command."; fi
+      action_generate "$@"
+      ;;
+    sync)
+      action_sync "$@"
+      ;;
+    benchmark)
+      action_benchmark "${1:-}"
+      ;;
+    -h|--help|help)
+      usage
+      ;;
+    *)
+      error "Unknown command: $command. Run 'bin/pipeline --help' for usage."
+      ;;
+  esac
+}
+
+main "$@"
