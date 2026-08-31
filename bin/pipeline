@@ -60,11 +60,25 @@ Commands:
   sync [uuid] [file]    Sync skin .ers with reader-backend DB / ActiveStorage (or all via db:seed)
   benchmark [rawUuid]   Run verification benchmark in reader-app
 
-Options for 'run':
+Options for 'run' (--theme, --client, --output-name, --prev-volume and --force
+are also accepted by 'generate'):
   --theme <theme>           Series theme (e.g. lotm, dungeon_crawler_carl, mistborn)
   --client <client>         LLM client (default: vertex, options: vertex, gemini, openai, grok, llama, agy)
   --output-name <name>      Consolidated skin output name (e.g. skin-dungeon_crawler_carl)
   --prev-volume <volUuid>   Previous volume namespace for multi-volume series
+  --force                   Re-run cached steps instead of skipping completed work
+  --tier <high|low>         Extraction depth for build/sample (default: high).
+                            high narrates every character; low narrates the main
+                            cast only. Both keep facts current. A preview skin
+                            comes from --pipeline preview, not from this.
+  --pipeline <name>         Which pipeline to run (default: build). One of:
+                              build     full volume
+                              preview   NLP-only teaser skin, no LLM calls
+                              resume    continue from --start-chapter
+                              sample    bounded dev slice
+                              reverify  re-derive verified facts, free
+                              package   build the .ers from an existing cache
+                              stats     statistics only
   --skip-parse              Skip EPUB parsing if volume already exists
   --skip-skin               Skip LLM skin generation
   --skip-backend            Skip backend database sync
@@ -74,6 +88,9 @@ Examples:
   bin/pipeline run dungeon_crawler_carl_1 --theme dungeon_crawler_carl --client vertex
   bin/pipeline parse lotm-1
   bin/pipeline generate v-lotm-1 --theme lotm --client gemini
+  bin/pipeline generate v-lotm-1 --pipeline preview      # every series, free
+  bin/pipeline generate v-lotm-1 --tier low             # a lead series
+  bin/pipeline generate v-lotm-1 --theme lotm --client gemini   # on request
   bin/pipeline sync
   bin/pipeline benchmark mistborn-1.1
 EOF
@@ -111,24 +128,80 @@ action_generate() {
   local client="${3:-vertex}"
   local output_name="${4:-}"
   local prev_volume="${5:-}"
+  local force="${6:-false}"
+  local pipeline="${7:-build}"
+  local tier="${8:-}"
 
+  # Make the interpreter prove it is Python, rather than testing for a file.
+  # A 0-byte .venv/bin/python passes -f and, being executable with no shebang,
+  # is handed to sh: it ignores its arguments, does nothing and exits 0. The
+  # whole pipeline then reports [SUCCESS] having generated nothing. Checking the
+  # exit status alone is not enough for the same reason - only the output is.
   local python_bin="$SKIN_MAKER_DIR/.venv/bin/python"
-  if [ ! -f "$python_bin" ]; then
+  if [ "$("$python_bin" -c 'import sys; sys.stdout.write("py%d" % sys.version_info[0])' 2>/dev/null)" != "py3" ]; then
     python_bin="python3"
   fi
+  if [ "$("$python_bin" -c 'import sys; sys.stdout.write("py%d" % sys.version_info[0])' 2>/dev/null)" != "py3" ]; then
+    error "No working Python 3 interpreter found (tried $SKIN_MAKER_DIR/.venv/bin/python and python3)."
+  fi
 
-  step "Running skin-maker pipeline for volume '$volume_uuid' (client: $client)..."
+  step "Running skin-maker '$pipeline' pipeline for volume '$volume_uuid' (client: ${client:-none})..."
   
-  local cmd=("$python_bin" "process_volume.py" "--volume" "$volume_uuid" "--client" "$client")
+  # The pipeline is a positional: what to run is a name now, not a flag combination.
+  # `process_volume.py --help` lists them.
+  local cmd=("$python_bin" "process_volume.py" "$pipeline" "--volume" "$volume_uuid")
+  [ -n "$client" ] && cmd+=("--client" "$client")
   [ -n "$theme" ] && cmd+=("--theme" "$theme")
   [ -n "$output_name" ] && cmd+=("--output-name" "$output_name")
   [ -n "$prev_volume" ] && cmd+=("--prev-volume" "$prev_volume")
+  [ "$force" = true ] && cmd+=("--force")
 
   (
     cd "$SKIN_MAKER_DIR"
+    # Exported inside the subshell so it reaches skin-maker's config, which reads
+    # it at import, without leaking into the rest of this run.
+    [ -n "$tier" ] && export SKIN_TIER="$tier"
     "${cmd[@]}"
   )
   success "Skin generated and saved to: $LFS_DIR/skins/"
+}
+
+# Parses the documented flag form of `generate`. The dispatcher used to pass
+# "$@" straight through to action_generate's positional parameters, so the
+# documented invocation
+#   bin/pipeline generate v-lotm-1 --theme lotm --client gemini
+# silently ran with theme="--theme" and client="lotm".
+action_generate_cli() {
+  local volume_uuid="$1"; shift
+
+  local theme=""
+  local client="vertex"
+  local output_name=""
+  local prev_volume=""
+  local force=false
+  local pipeline="build"
+  local tier=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --theme) theme="$2"; shift 2 ;;
+      --client) client="$2"; shift 2 ;;
+      --output-name) output_name="$2"; shift 2 ;;
+      --prev-volume) prev_volume="$2"; shift 2 ;;
+      --pipeline) pipeline="$2"; shift 2 ;;
+      --tier) tier="$2"; shift 2 ;;
+      --force) force=true; shift ;;
+      *) error "Unknown option for 'generate': $1" ;;
+    esac
+  done
+
+  # Pipelines with no LLM steps take no client; passing vertex by default would
+  # make process_volume reject them.
+  case "$pipeline" in
+    preview|reverify|stats) client="" ;;
+  esac
+
+  action_generate "$volume_uuid" "$theme" "$client" "$output_name" "$prev_volume" "$force" "$pipeline" "$tier"
 }
 
 # ------------------------------------------------------------------------------
@@ -179,6 +252,7 @@ action_run() {
   local client="vertex"
   local output_name=""
   local prev_volume=""
+  local force=false
   local skip_parse=false
   local skip_skin=false
   local skip_backend=false
@@ -190,6 +264,7 @@ action_run() {
       --client) client="$2"; shift 2 ;;
       --output-name) output_name="$2"; shift 2 ;;
       --prev-volume) prev_volume="$2"; shift 2 ;;
+      --force) force=true; shift ;;
       --skip-parse) skip_parse=true; shift ;;
       --skip-skin) skip_skin=true; shift ;;
       --skip-backend) skip_backend=true; shift ;;
@@ -220,7 +295,7 @@ action_run() {
     info "Skipping skin generation step (--skip-skin)."
   else
     header "Step 2: Skin Generation (skin-maker)"
-    action_generate "$volume_uuid" "$theme" "$client" "$output_name" "$prev_volume"
+    action_generate "$volume_uuid" "$theme" "$client" "$output_name" "$prev_volume" "$force"
   fi
 
   # Step 3: Backend Sync
@@ -266,7 +341,7 @@ main() {
       ;;
     generate)
       if [ $# -lt 1 ]; then error "Missing volumeUuid for 'generate' command."; fi
-      action_generate "$@"
+      action_generate_cli "$@"
       ;;
     sync)
       action_sync "$@"
