@@ -21,7 +21,7 @@ scripts:
     <div class="flex items-center gap-4 text-neutral-500 text-xs font-mono uppercase tracking-widest">
       <span>Last Updated</span>
       <span class="w-8 h-px bg-neutral-800"></span>
-      <span class="text-neutral-400">2026-02-23</span>
+      <span class="text-neutral-400">2026-09-15</span>
     </div>
   </header>
 
@@ -76,6 +76,24 @@ scripts:
             </ul>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <!-- Skin generation source materials -->
+    <section id="skin-generation-source-materials">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 serif italic text-cream-200">
+        Skin Generation Source Materials
+      </h2>
+      <div class="space-y-6 text-sm md:text-base leading-relaxed text-neutral-300">
+        <p>
+          The source materials used to create EnrichReader Skins are handled separately from the EPUB files that
+          readers import into the App. We currently process only works that are in the public domain or made
+          available under an open license.
+        </p>
+        <p>
+          We do not use reader-imported EPUB files as source material for Skin generation. Approved source text is
+          retained for up to 30 days for processing and quality review, then deleted.
+        </p>
       </div>
     </section>
 
@@ -175,6 +193,11 @@ scripts:
               <td class="p-4 font-bold text-cream-100">Google Analytics</td>
               <td class="p-4">Usage Tracking</td>
               <td class="p-4">Interaction data, IP, Device ID</td>
+            </tr>
+            <tr class="border-b border-neutral-900/40 hover:bg-white/[0.01] transition-colors">
+              <td class="p-4 font-bold text-cream-100">Google Cloud / Vertex AI</td>
+              <td class="p-4">Skin Generation</td>
+              <td class="p-4">Approved public-domain or openly licensed source text used for processing</td>
             </tr>
             <tr class="border-b border-neutral-900/40 hover:bg-white/[0.01] transition-colors">
               <td class="p-4 font-bold text-cream-100">Rollbar</td>

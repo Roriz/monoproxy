@@ -94,7 +94,7 @@ are also accepted by 'generate'):
 
 Options for 'series':
   --client <client>         LLM client (default: vertex)
-  --phase <name>            all (default) | detect | extract | story | story-finalize
+  --phase <name>            all (default) | detect | extract | story | story-finalize | package
   --fresh                   Archive each volume's cache before its first command and rebuild
                             from the current parse (skin-maker moves it to cache-backups/)
   --force                   Re-parse every raw and re-run completed steps

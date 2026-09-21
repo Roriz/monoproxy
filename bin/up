@@ -1,21 +1,21 @@
 #!/bin/bash
+set -e
+
+cd "$(dirname "$0")/.."
 
 # Source helpers
 # shellcheck source=bin/helpers/utils.sh
-source "$(dirname "$0")/helpers/utils.sh"
+source "bin/helpers/utils.sh"
 
-# Ensure we are in the project root
 check_project_root
 
-mkdir -p tmp
+mkdir -p tmp tmp/caddy_data tmp/caddy_config
 
-manage_caddy_trust() {
-  step "Stopping existing Caddy services..."
-  sudo systemctl stop caddy 2>/dev/null || true
-  sudo caddy stop 2>/dev/null || true
-
-  step "Setting up Caddy trust..."
-  sudo caddy trust
+build_static() {
+  if [ ! -d "public/enrichreader.com" ] || [ -z "$(ls -A public/enrichreader.com 2>/dev/null)" ]; then
+    step "Building static landing page..."
+    ./bin/build
+  fi
 }
 
 start_caddy() {
@@ -24,19 +24,73 @@ start_caddy() {
     error "Caddy configuration file not found: $conf_file (expected in $(pwd))"
   fi
 
-  step "Starting Caddy with config: $conf_file"
-  if ! sudo caddy start --config "$conf_file"; then
-    error "Failed to start Caddy with configuration: $conf_file"
+  # If native caddy is available on the host AND not forced to use docker:
+  if command -v caddy &>/dev/null && [ "${USE_DOCKER:-false}" != "true" ]; then
+    step "Stopping existing host Caddy services..."
+    sudo systemctl stop caddy 2>/dev/null || true
+    sudo caddy stop 2>/dev/null || true
+
+    step "Setting up Caddy trust..."
+    sudo caddy trust 2>/dev/null || true
+
+    step "Starting host Caddy with config: $conf_file"
+    if ! sudo caddy start --config "$conf_file"; then
+      error "Failed to start Caddy with configuration: $conf_file"
+    fi
+  else
+    step "Using Docker Caddy (caddy:2-alpine)..."
+
+    # Remove any existing container
+    docker rm -f enrichreader-proxy 2>/dev/null || true
+
+    step "Starting Docker Caddy proxy with config: $conf_file"
+    docker run -d \
+      --name enrichreader-proxy \
+      --network host \
+      -v "$(pwd):/app" \
+      -v "$(pwd)/$conf_file":/etc/caddy/Caddyfile \
+      -v "$(pwd)/tmp/caddy_data":/data \
+      -v "$(pwd)/tmp/caddy_config":/config \
+      -w /app \
+      caddy:2-alpine caddy run --config /etc/caddy/Caddyfile >/dev/null
   fi
+
   success "Monoproxy is up and running!"
+}
+
+trust_caddy_cert() {
+  local cert_path="tmp/caddy_root.crt"
+  mkdir -p tmp
+
+  # Extract cert from docker container if running in docker
+  if docker ps -q -f "name=^/enrichreader-proxy$" | grep -q .; then
+    local attempts=0
+    while [ $attempts -lt 10 ]; do
+      if docker exec enrichreader-proxy cat /data/caddy/pki/authorities/local/root.crt > "$cert_path" 2>/dev/null; then
+        break
+      fi
+      sleep 0.5
+      attempts=$((attempts + 1))
+    done
+  fi
+
+  # Install into user NSS database for Chrome/Chromium/Brave
+  if [ -f "$cert_path" ] && command -v certutil &>/dev/null && [ -d "$HOME/.pki/nssdb" ]; then
+    certutil -d sql:"$HOME/.pki/nssdb" -A -t "C,," -n "Caddy Local Authority" -i "$cert_path" 2>/dev/null || true
+    step "Caddy root CA registered in ~/.pki/nssdb (Chrome/Chromium)"
+  fi
 }
 
 main() {
   header "Starting Monoproxy Services"
 
+  if [ "${SKIP_BUILD:-false}" != "true" ]; then
+    build_static
+  fi
+
   if [ "${SKIP_CADDY:-false}" != "true" ]; then
-    manage_caddy_trust
     start_caddy
+    trust_caddy_cert
   fi
 }
 
