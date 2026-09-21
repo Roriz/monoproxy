@@ -20,6 +20,10 @@ MONOPROXY_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 # shellcheck source=bin/helpers/utils.sh
 if [ -f "$SCRIPT_DIR/helpers/utils.sh" ]; then
   source "$SCRIPT_DIR/helpers/utils.sh"
+  # utils.sh's error() exits only when utils.sh is the entry point, which it
+  # never is when sourced: every `error` here fell through and the next step
+  # ran anyway ("Raw EPUB not found" went on to invoke the parser). Fatal here.
+  error() { echo -e "${RED:-}[ERROR]${NC:-} $1" >&2; exit 1; }
 else
   header() { echo -e "\n=== $1 ==="; }
   step() { echo -e "  ➜ $1"; }
@@ -55,7 +59,11 @@ Usage: bin/pipeline <command> [options]
 
 Commands:
   run <rawUuid>         Run the full end-to-end pipeline (parse -> skin -> backend -> benchmark)
-  parse <rawUuid>       Parse EPUB raw into Volume JSON (in enrichreader-lfs/volumes)
+  parse <rawUuid> [--force]
+                        Parse EPUB raw into Volume JSON (in enrichreader-lfs/volumes);
+                        skipped when the volume already matches this raw and parser build
+  series <output_name>  Parse every raw of a series, then run skin-maker's passes over it
+                        (detect -> extract -> story -> story-finalize), resumable end to end
   generate <volumeUuid> Generate Skin from Volume using skin-maker
   sync [uuid] [file]    Sync skin .ers with reader-backend DB / ActiveStorage (or all via db:seed)
   benchmark [rawUuid]   Run verification benchmark in reader-app
@@ -84,7 +92,18 @@ are also accepted by 'generate'):
   --skip-backend            Skip backend database sync
   --skip-benchmark          Skip reader-app benchmark verification
 
+Options for 'series':
+  --client <client>         LLM client (default: vertex)
+  --phase <name>            all (default) | detect | extract | story | story-finalize
+  --fresh                   Archive each volume's cache before its first command and rebuild
+                            from the current parse (skin-maker moves it to cache-backups/)
+  --force                   Re-parse every raw and re-run completed steps
+  --skip-parse              Do not touch the volumes, run the skin-maker passes only
+  --max-attempts <n>        Retries per volume and pass before the series stops (default 5)
+
 Examples:
+  bin/pipeline series skin-lotm --fresh              # rebuild from the raws, all passes
+  bin/pipeline series skin-ri --phase story          # resume the story pass only
   bin/pipeline run dungeon_crawler_carl_1 --theme dungeon_crawler_carl --client vertex
   bin/pipeline parse lotm-1
   bin/pipeline generate v-lotm-1 --theme lotm --client gemini
@@ -102,12 +121,33 @@ EOF
 # ------------------------------------------------------------------------------
 action_parse() {
   local raw_uuid="$1"
+  local force="${2:-false}"
   local volume_uuid="v-${raw_uuid#v-}"
   local raw_path="$LFS_DIR/raws/raw-${raw_uuid}.epub"
 
   step "Parsing raw '$raw_uuid' -> '$volume_uuid' in enrichreader-lfs..."
   if [ ! -f "$raw_path" ]; then
     error "Raw EPUB not found at: $raw_path"
+  fi
+
+  # Idempotent: volume.json records the raw's md5 (`checksum`) and the parser
+  # build (`parser_version`, from epub-parser/pkg/fingerprint.js). Same raw,
+  # same parser, same output - so a series re-run costs nothing here, and a
+  # parser rebuild is what makes the parse happen again.
+  if [ "$force" != true ] && [ -f "$LFS_DIR/volumes/$volume_uuid/volume.json" ]; then
+    local want_checksum want_parser
+    want_checksum="$(md5sum "$raw_path" | cut -d' ' -f1)"
+    want_parser="$(sed -n "s/.*last_build_fingerprint = '\([0-9a-f]*\)'.*/\1/p" \
+      "$READER_APP_DIR/lib/rbook/epub-parser/pkg/fingerprint.js")"
+    if python3 - "$LFS_DIR/volumes/$volume_uuid/volume.json" "$want_checksum" "$want_parser" <<'PY'
+import json, sys
+info = json.load(open(sys.argv[1]))
+sys.exit(0 if (info.get("checksum"), info.get("parser_version")) == (sys.argv[2], sys.argv[3]) and sys.argv[3] else 1)
+PY
+    then
+      info "Volume '$volume_uuid' is already parsed from this raw with this parser; skipping (--force to re-parse)."
+      return 0
+    fi
   fi
 
   (
@@ -202,6 +242,79 @@ action_generate_cli() {
   esac
 
   action_generate "$volume_uuid" "$theme" "$client" "$output_name" "$prev_volume" "$force" "$pipeline" "$tier"
+}
+
+# ------------------------------------------------------------------------------
+# Action: Series (parse every raw of a series, then skin-maker's pass runner)
+# ------------------------------------------------------------------------------
+# The volume list, chain order and theme live in skin-maker's
+# orchestrate_volumes.py; this only adds the parse step that lives in
+# reader-app and forwards the rest. Re-runnable end to end: parse skips an
+# up-to-date volume, and each skin-maker pass resumes from its own markers.
+action_series() {
+  local series="$1"; shift
+  local client="vertex"
+  local phase="all"
+  local force=false
+  local fresh=false
+  local skip_parse=false
+  local extra=()
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --client) client="$2"; shift 2 ;;
+      --phase) phase="$2"; shift 2 ;;
+      --force) force=true; shift ;;
+      --fresh) fresh=true; shift ;;
+      --skip-parse) skip_parse=true; shift ;;
+      --max-attempts) extra+=("--max-attempts" "$2"); shift 2 ;;
+      *) error "Unknown option for 'series': $1" ;;
+    esac
+  done
+
+  local python_bin="$SKIN_MAKER_DIR/.venv/bin/python"
+  [ -x "$python_bin" ] || python_bin="python3"
+
+  local volumes
+  volumes="$(cd "$SKIN_MAKER_DIR" && "$python_bin" - "$series" <<'PY'
+import sys
+from orchestrate_volumes import VOLUMES_TO_PROCESS
+print("\n".join(t["volume"] for t in VOLUMES_TO_PROCESS if t.get("output_name") == sys.argv[1]))
+PY
+)"
+  [ -n "$volumes" ] || error "No volumes with output_name '$series' in skin-maker/orchestrate_volumes.py"
+
+  header "Series $series: $(echo "$volumes" | wc -l) volume(s)"
+  if [ "$skip_parse" = true ]; then
+    info "Skipping parse (--skip-parse)."
+  else
+    header "Step 1: Volume parsing (reader-app)"
+    local v
+    for v in $volumes; do
+      action_parse "${v#v-}" "$force"
+    done
+  fi
+
+  # The detect pass is the one NER step, and it talks to skin-maker's nlp-api
+  # container. Fail here, before anything else is archived or spent, rather
+  # than five retries into the first volume.
+  if [ "$phase" = all ] || [ "$phase" = detect ]; then
+    local ner_url="${NER_API_URL:-http://127.0.0.1:8000}"
+    if ! curl -s -m 5 -o /dev/null -X POST -H 'Content-Type: application/json' \
+        -d '{"texts":[],"ignore_labels":[]}' "$ner_url/extract"; then
+      error "NER service not reachable at $ner_url. Start it in another terminal first:\n  cd $SKIN_MAKER_DIR && bin/nlp_api"
+    fi
+  fi
+
+  header "Step 2: skin-maker passes ($phase)"
+  (
+    cd "$SKIN_MAKER_DIR"
+    local cmd=("$python_bin" orchestrate_volumes.py --series "$series" --client "$client" --phase "$phase" "${extra[@]}")
+    [ "$force" = true ] && cmd+=("--force")
+    [ "$fresh" = true ] && cmd+=("--fresh")
+    "${cmd[@]}"
+  )
+  success "Series $series: passes complete."
 }
 
 # ------------------------------------------------------------------------------
@@ -337,7 +450,11 @@ main() {
       ;;
     parse)
       if [ $# -lt 1 ]; then error "Missing rawUuid for 'parse' command."; fi
-      action_parse "$1"
+      action_parse "$1" "$([ "${2:-}" = "--force" ] && echo true || echo false)"
+      ;;
+    series)
+      if [ $# -lt 1 ]; then error "Missing series name for 'series' command (an output_name, e.g. skin-lotm)."; fi
+      action_series "$@"
       ;;
     generate)
       if [ $# -lt 1 ]; then error "Missing volumeUuid for 'generate' command."; fi
