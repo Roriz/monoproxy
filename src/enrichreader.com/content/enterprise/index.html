@@ -1,0 +1,168 @@
+---
+title: "EnrichReader | Narrative Enrichment for Long-Form Fiction"
+description: "EnrichReader combines local-first reading with AI-assisted, evidence-verified narrative enrichment for long-form fiction."
+keywords:
+  - "narrative enrichment"
+  - "spoiler-safe reading"
+  - "fiction entity extraction"
+  - "Vertex AI"
+  - "Gemini"
+stylesheets:
+  - "/enterprise/enterprise.css"
+scripts:
+  - "/main.js"
+---
+
+<header class="enterprise-hero relative px-6 pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden">
+  <div class="enterprise-orb enterprise-orb-one" aria-hidden="true"></div>
+  <div class="enterprise-orb enterprise-orb-two" aria-hidden="true"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+    <div class="lg:col-span-7">
+      <p class="enterprise-kicker">Narrative enrichment infrastructure</p>
+      <h1 class="enterprise-title">Turn long-form fiction into a <em>spoiler-safe</em> reading experience.</h1>
+      <p class="enterprise-lede">
+        EnrichReader transforms a reader's progress into the right context: evolving character profiles,
+        connected lore, and traceable narrative facts that never reveal the next chapter too soon.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 mt-10">
+        <a href="/app/" class="enterprise-button enterprise-button-primary">Explore the reader</a>
+        <a href="/reports/" class="enterprise-button enterprise-button-secondary">See public reports <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <aside class="lg:col-span-5 enterprise-output-card" aria-label="Example EnrichReader output">
+      <div class="enterprise-card-topline">
+        <span class="enterprise-status-dot" aria-hidden="true"></span>
+        <span>Progress-aware entity profile</span>
+        <span class="enterprise-card-step">Chapter 11</span>
+      </div>
+      <div class="enterprise-profile">
+        <div class="enterprise-avatar" aria-hidden="true">K</div>
+        <div>
+          <p class="enterprise-eyebrow">Character</p>
+          <h2>Klein Moretti</h2>
+        </div>
+      </div>
+      <div class="enterprise-tags" aria-label="Character facts revealed so far">
+        <span>Sequence 9: Seer</span>
+        <span>History Graduate</span>
+      </div>
+      <p class="enterprise-profile-copy">Facts remain scoped to the reader’s progress, so the same story can be explored without a separate spoiler-prone wiki.</p>
+      <p class="enterprise-source">Evidence-linked · Chapter-aware · Reader-local</p>
+    </aside>
+  </div>
+</header>
+
+<section class="enterprise-proof px-6 py-8 border-y border-neutral-800">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div>
+      <p class="enterprise-proof-label">Working product</p>
+      <p>Reader app available on web and Android</p>
+    </div>
+    <div>
+      <p class="enterprise-proof-label">Demonstrated output</p>
+      <p>Public narrative reports across multiple long-form series</p>
+    </div>
+    <div>
+      <p class="enterprise-proof-label">Local-first reader</p>
+      <p>Reading and spoiler controls stay on the device</p>
+    </div>
+  </div>
+</section>
+
+<section class="enterprise-section px-6">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+    <div class="enterprise-product-intro">
+      <p class="enterprise-kicker">The product</p>
+      <h2 class="enterprise-section-title">A living layer for a book a reader already owns.</h2>
+    </div>
+    <div class="enterprise-feature-grid grid grid-cols-1 md:grid-cols-3">
+      <article class="enterprise-feature-card">
+        <p class="enterprise-feature-number">01</p>
+        <h3>Progressive knowledge</h3>
+        <p>Profiles and lore change with the reader’s actual place in the text instead of exposing the whole series at once.</p>
+      </article>
+      <article class="enterprise-feature-card">
+        <p class="enterprise-feature-number">02</p>
+        <h3>Connected context</h3>
+        <p>Characters, places, organizations, objects, and events become an explorable layer attached to the story.</p>
+      </article>
+      <article class="enterprise-feature-card">
+        <p class="enterprise-feature-number">03</p>
+        <h3>Traceable output</h3>
+        <p>Structured facts are tied to chapter context so the product can preserve narrative order and support verification.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works" class="enterprise-section enterprise-section-dark px-6 border-y border-neutral-800">
+  <div class="max-w-6xl mx-auto">
+    <div class="max-w-3xl mb-16">
+      <p class="enterprise-kicker">The technology</p>
+      <h2 class="enterprise-section-title">AI-assisted extraction, with deterministic guardrails.</h2>
+      <p class="enterprise-lede enterprise-lede-compact">The enrichment pipeline is designed to make narrative information useful without treating a model response as the final product.</p>
+    </div>
+
+    <ol class="enterprise-flow">
+      <li>
+        <span class="enterprise-flow-index">1</span>
+        <div>
+          <h3>Structure the text locally</h3>
+          <p>Book content is organized into chapters and blocks, while local named-entity detection identifies the people, places, organizations, objects, and events worth tracking.</p>
+        </div>
+      </li>
+      <li>
+        <span class="enterprise-flow-index">2</span>
+        <div>
+          <h3>Use Gemini through Vertex AI for narrative interpretation</h3>
+          <p>Gemini supports ambiguous entity classification, chapter-context fact extraction, and contextual identity resolution as the Skin-generation pipeline builds the structured reading layer.</p>
+        </div>
+      </li>
+      <li>
+        <span class="enterprise-flow-index">3</span>
+        <div>
+          <h3>Verify before packaging</h3>
+          <p>Deterministic checks validate evidence-linked fields, maintain narrative invariants, and version facts by chapter before the final Skin is packaged for the reader.</p>
+        </div>
+      </li>
+      <li>
+        <span class="enterprise-flow-index">4</span>
+        <div>
+          <h3>Render a local-first reader experience</h3>
+          <p>The reader combines a local book with the resulting Skin to reveal the right context at the right point in the story, including when the reader is offline.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="enterprise-section px-6">
+  <div class="max-w-6xl mx-auto enterprise-report-panel">
+    <div class="enterprise-report-copy">
+      <p class="enterprise-kicker">Public proof</p>
+      <h2 class="enterprise-section-title">Explore the narrative data.</h2>
+      <p class="enterprise-lede enterprise-lede-compact">Our public reports show the kind of structured output the pipeline can produce: entity journeys, mention patterns, narrative gaps, and more.</p>
+      <a href="/reports/" class="enterprise-text-link">Browse public reports <span aria-hidden="true">→</span></a>
+    </div>
+    <a href="/lotm/" class="enterprise-report-preview" aria-label="Open Lord of the Mysteries report">
+      <p class="enterprise-preview-kicker">Report preview</p>
+      <h3>Lord of the Mysteries</h3>
+      <p>Explore a public narrative analysis built from structured entities and chapter-level data.</p>
+      <span>Open report →</span>
+    </a>
+  </div>
+</section>
+
+<section class="enterprise-cta px-6 border-t border-neutral-800">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="enterprise-kicker">Build with EnrichReader</p>
+    <h2 class="enterprise-section-title">Follow the work as we build the next generation of reading tools.</h2>
+    <p class="enterprise-lede enterprise-lede-compact mx-auto">Try the product, explore the public research, or contact the founder to discuss the technology.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-10">
+      <a href="/app/" class="enterprise-button enterprise-button-primary">Try EnrichReader</a>
+      <a href="mailto:hello@enrichreader.com" class="enterprise-button enterprise-button-secondary">Contact the founder</a>
+    </div>
+  </div>
+</section>

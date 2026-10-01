@@ -1,0 +1,427 @@
+#!/bin/bash
+# ==============================================================================
+# EnrichReader Multi-Repository Dev Orchestrator
+# ==============================================================================
+# Single dev script to run all 3 repositories:
+#   - monoproxy:      Caddy Reverse Proxy + Static Landing Page
+#   - reader-backend: Dockerized Rails API, Postgres, Mailcatcher, Jobs
+#   - reader-app:     Dockerized SvelteKit / Vite Web Application
+# ==============================================================================
+
+set -e
+set -u
+set -o pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MONOPROXY_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# Source helpers
+if [ -f "$SCRIPT_DIR/helpers/utils.sh" ]; then
+  # shellcheck source=bin/helpers/utils.sh
+  source "$SCRIPT_DIR/helpers/utils.sh"
+else
+  header() { echo -e "\n=== $1 ==="; }
+  step() { echo -e "  ➜ $1"; }
+  info() { echo -e "[INFO] $1"; }
+  success() { echo -e "[SUCCESS] $1"; }
+  warn() { echo -e "[WARN] $1"; }
+  error() { echo -e "[ERROR] $1" >&2; exit 1; }
+fi
+
+# Repository Paths
+PROJECTS_ROOT="${PROJECTS_ROOT:-$(cd "$MONOPROXY_DIR/.." && pwd)}"
+READER_APP_DIR="${READER_APP_DIR:-$PROJECTS_ROOT/reader-app}"
+READER_BACKEND_DIR="${READER_BACKEND_DIR:-$PROJECTS_ROOT/reader-backend}"
+
+# Global Config
+DETACH=false
+QUICK=false
+RUN_PROXY=true
+RUN_BACKEND=true
+RUN_APP=true
+
+usage() {
+  cat << 'HELP'
+Usage: bin/dev [command] [options]
+
+Commands:
+  up (default)       Start all development services
+  down, stop         Stop all development services
+  restart            Restart all development services
+  status             Check status and health of all services and endpoints
+  logs [service]     Tail logs for a service: app, backend, caddy, or all (default: app)
+
+Options:
+  -d, --detach       Run services in background and exit once healthy
+  --quick            Quick mode: skip container rebuilds (backend & app)
+  --only-app         Run only the reader-app frontend
+  --only-backend     Run only the reader-backend API & DB
+  --only-proxy       Run only the monoproxy (Caddy)
+  --skip-app         Skip starting reader-app
+  --skip-backend     Skip starting reader-backend
+  --skip-proxy       Skip starting monoproxy
+  -h, --help         Show this help message
+
+Examples:
+  bin/dev                    # Start all 3 repos with live log streaming (Ctrl+C to stop)
+  bin/dev -d                 # Start all 3 repos in background (detached)
+  bin/dev --quick            # Fast start without rebuilding containers
+  bin/dev down               # Stop all 3 services
+  bin/dev status             # Check health of all services and URLs
+  bin/dev logs backend       # Follow backend Rails/Docker logs
+HELP
+  exit 0
+}
+
+verify_repositories() {
+  local missing=()
+  [ ! -d "$MONOPROXY_DIR" ] && missing+=("monoproxy ($MONOPROXY_DIR)")
+  [ "$RUN_APP" = true ] && [ ! -d "$READER_APP_DIR" ] && missing+=("reader-app ($READER_APP_DIR)")
+  [ "$RUN_BACKEND" = true ] && [ ! -d "$READER_BACKEND_DIR" ] && missing+=("reader-backend ($READER_BACKEND_DIR)")
+
+  if [ ${#missing[@]} -gt 0 ]; then
+    error "Missing required repository directories:\n  - $(IFS=$'\n  - '; echo "${missing[*]}")"
+  fi
+}
+
+check_docker() {
+  if ! docker info > /dev/null 2>&1; then
+    error "Docker daemon is not running. Please start Docker first."
+  fi
+}
+
+start_proxy() {
+  header "Starting Monoproxy"
+  (
+    cd "$MONOPROXY_DIR"
+    ./bin/up
+  )
+}
+
+stop_proxy() {
+  step "Stopping Monoproxy (Caddy)..."
+  docker stop enrichreader-proxy >/dev/null 2>&1 || true
+  docker rm enrichreader-proxy >/dev/null 2>&1 || true
+  if command -v caddy &>/dev/null; then
+    sudo systemctl stop caddy 2>/dev/null || true
+    sudo caddy stop 2>/dev/null || true
+  fi
+  success "Monoproxy stopped."
+}
+
+start_backend() {
+  header "Starting Reader Backend"
+  local flags=()
+  [ "$QUICK" = true ] && flags+=("--quick")
+  (
+    cd "$READER_BACKEND_DIR"
+    ./bin/up "${flags[@]}"
+  )
+}
+
+stop_backend() {
+  step "Stopping Reader Backend..."
+  if [ -f "$READER_BACKEND_DIR/bin/down" ]; then
+    (
+      cd "$READER_BACKEND_DIR"
+      ./bin/down
+    )
+  else
+    (
+      cd "$READER_BACKEND_DIR"
+      docker compose down
+    )
+  fi
+  success "Reader Backend stopped."
+}
+
+start_app() {
+  header "Starting Reader App"
+  local flags=("-d" "--wait")
+  [ "$QUICK" = true ] && flags+=("--quick")
+  (
+    cd "$READER_APP_DIR"
+    ./bin/docker-dev "${flags[@]}"
+  )
+}
+
+stop_app() {
+  step "Stopping Reader App..."
+  if [ -f "$READER_APP_DIR/bin/docker-down" ]; then
+    (
+      cd "$READER_APP_DIR"
+      ./bin/docker-down
+    )
+  else
+    docker stop enrichreader-app > /dev/null 2>&1 || true
+    docker rm enrichreader-app > /dev/null 2>&1 || true
+  fi
+  success "Reader App stopped."
+}
+
+stop_all() {
+  header "Stopping All Services"
+  [ "$RUN_APP" = true ] && stop_app
+  [ "$RUN_BACKEND" = true ] && stop_backend
+  [ "$RUN_PROXY" = true ] && stop_proxy
+  success "All services stopped successfully."
+}
+
+print_dashboard() {
+  echo ""
+  echo -e "${CYAN}========================================================================${NC}"
+  echo -e "${GREEN}🎉 EnrichReader Local Development Environment Ready!${NC}"
+  echo -e "${CYAN}========================================================================${NC}"
+  if [ "$RUN_PROXY" = true ]; then
+    echo -e "  🌐 ${CYAN}Landing Page:${NC}  https://enrichreader.localhost"
+    echo -e "  📱 ${CYAN}Web App:${NC}       https://app.enrichreader.localhost  ${BLUE}(Direct: http://localhost:5173)${NC}"
+    echo -e "  🔌 ${CYAN}Backend API:${NC}   https://api.enrichreader.localhost  ${BLUE}(Direct: http://localhost:3000)${NC}"
+    echo -e "  📬 ${CYAN}Mailcatcher:${NC}   https://mail.localhost              ${BLUE}(Direct: http://localhost:1080)${NC}"
+  else
+    echo -e "  📱 ${CYAN}Web App:${NC}       http://localhost:5173"
+    echo -e "  🔌 ${CYAN}Backend API:${NC}   http://localhost:3000"
+    echo -e "  📬 ${CYAN}Mailcatcher:${NC}   http://localhost:1080"
+  fi
+  echo -e "${CYAN}========================================================================${NC}"
+  echo ""
+}
+
+show_status() {
+  header "EnrichReader Services Status"
+
+  # Proxy check
+  echo -e "${CYAN}[Monoproxy / Caddy]${NC}"
+  if docker ps --format '{{.Names}}' | grep -q "^enrichreader-proxy$"; then
+    echo -e "  Proxy:             ${GREEN}● Running (Docker)${NC}"
+  elif pgrep -x caddy > /dev/null 2>&1; then
+    echo -e "  Proxy:             ${GREEN}● Running (Host PID: $(pgrep -x caddy | tr '\n' ' '))${NC}"
+  else
+    echo -e "  Proxy:             ${RED}○ Stopped${NC}"
+  fi
+
+  if curl -s -k -f "https://enrichreader.localhost" > /dev/null 2>&1; then
+    echo -e "  https://enrichreader.localhost:     ${GREEN}✓ Reachable (200 OK)${NC}"
+  else
+    echo -e "  https://enrichreader.localhost:     ${YELLOW}✗ Not reachable${NC}"
+  fi
+
+  echo ""
+  # Backend check
+  echo -e "${CYAN}[Reader Backend]${NC}"
+  local api_status="Stopped"
+  local pg_status="Stopped"
+  local mail_status="Stopped"
+  docker ps --format '{{.Names}}' | grep -q "reader-backend.*api" && api_status="Running"
+  docker ps --format '{{.Names}}' | grep -q "reader-backend.*postgres" && pg_status="Running"
+  docker ps --format '{{.Names}}' | grep -q "reader-backend.*mailcatcher" && mail_status="Running"
+
+  [ "$api_status" = "Running" ] && echo -e "  API Container:         ${GREEN}● Running${NC}" || echo -e "  API Container:         ${RED}○ Stopped${NC}"
+  [ "$pg_status" = "Running" ] && echo -e "  Postgres Container:    ${GREEN}● Running${NC}" || echo -e "  Postgres Container:    ${RED}○ Stopped${NC}"
+  [ "$mail_status" = "Running" ] && echo -e "  Mailcatcher Container: ${GREEN}● Running${NC}" || echo -e "  Mailcatcher Container: ${RED}○ Stopped${NC}"
+
+  if curl -s -f "http://localhost:3000/up" > /dev/null 2>&1; then
+    echo -e "  http://localhost:3000/up:            ${GREEN}✓ Healthy (200 OK)${NC}"
+  else
+    echo -e "  http://localhost:3000/up:            ${YELLOW}✗ Not responding${NC}"
+  fi
+  if curl -s -k -f "https://api.enrichreader.localhost/up" > /dev/null 2>&1; then
+    echo -e "  https://api.enrichreader.localhost:  ${GREEN}✓ Proxy OK${NC}"
+  else
+    echo -e "  https://api.enrichreader.localhost:  ${YELLOW}✗ Proxy not responding${NC}"
+  fi
+
+  echo ""
+  # App check
+  echo -e "${CYAN}[Reader App]${NC}"
+  if docker ps --format '{{.Names}}' | grep -q "^enrichreader-app$"; then
+    echo -e "  App Container:         ${GREEN}● Running${NC}"
+  else
+    echo -e "  App Container:         ${RED}○ Stopped${NC}"
+  fi
+  if curl -s -f "http://localhost:5173" > /dev/null 2>&1; then
+    echo -e "  http://localhost:5173:               ${GREEN}✓ Reachable (200 OK)${NC}"
+  else
+    echo -e "  http://localhost:5173:               ${YELLOW}✗ Not responding${NC}"
+  fi
+  if curl -s -k -f "https://app.enrichreader.localhost" > /dev/null 2>&1; then
+    echo -e "  https://app.enrichreader.localhost:  ${GREEN}✓ Proxy OK${NC}"
+  else
+    echo -e "  https://app.enrichreader.localhost:  ${YELLOW}✗ Proxy not responding${NC}"
+  fi
+  echo ""
+}
+
+show_logs() {
+  local target="${1:-app}"
+  case "$target" in
+    app)
+      info "Streaming Reader App logs (Ctrl+C to exit)..."
+      docker logs -f enrichreader-app
+      ;;
+    backend)
+      info "Streaming Reader Backend API logs (Ctrl+C to exit)..."
+      (
+        cd "$READER_BACKEND_DIR"
+        docker compose logs -f api
+      )
+      ;;
+    caddy|proxy)
+      info "Streaming Caddy proxy logs (Ctrl+C to exit)..."
+      if docker ps -q -f "name=^/enrichreader-proxy$" | grep -q .; then
+        docker logs -f enrichreader-proxy
+      else
+        sudo journalctl -u caddy -f 2>/dev/null || info "No systemd caddy logs found."
+      fi
+      ;;
+    all)
+      info "Streaming App & Backend logs..."
+      (
+        cd "$READER_BACKEND_DIR"
+        docker compose logs -f api &
+      )
+      docker logs -f enrichreader-app
+      ;;
+    *)
+      error "Unknown log target '$target'. Options: app, backend, caddy, all"
+      ;;
+  esac
+}
+
+start_all() {
+  check_docker
+  verify_repositories
+
+  # Only prompt for sudo if host caddy is installed and explicitly used
+  if [ "$RUN_PROXY" = true ] && command -v caddy &>/dev/null && [ "${USE_DOCKER:-false}" != "true" ]; then
+    step "Validating sudo privileges for host Caddy..."
+    sudo -v
+  fi
+
+  [ "$RUN_PROXY" = true ] && start_proxy
+  [ "$RUN_BACKEND" = true ] && start_backend
+  [ "$RUN_APP" = true ] && start_app
+
+  print_dashboard
+
+  if [ "$DETACH" = true ]; then
+    info "Services are running in background."
+    info "Useful commands:"
+    echo "  bin/dev status         - Check service health"
+    echo "  bin/dev logs app       - Stream reader-app logs"
+    echo "  bin/dev logs backend   - Stream reader-backend logs"
+    echo "  bin/dev down           - Stop all services"
+    exit 0
+  fi
+
+  # Foreground mode: trap Ctrl+C and clean up
+  cleanup_trap() {
+    echo ""
+    warn "Received interrupt signal. Stopping all development services..."
+    stop_all
+    exit 0
+  }
+  trap cleanup_trap INT TERM
+
+  info "Press Ctrl+C to stop all services (or use 'bin/dev -d' for background mode)."
+  info "Streaming Reader App logs (use 'bin/dev logs backend' in another terminal for API logs)..."
+  echo ""
+  docker logs -f enrichreader-app
+}
+
+# ------------------------------------------------------------------------------
+# Argument Parsing
+# ------------------------------------------------------------------------------
+COMMAND="up"
+LOG_TARGET="app"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    up)
+      COMMAND="up"
+      shift
+      ;;
+    down|stop)
+      COMMAND="down"
+      shift
+      ;;
+    restart)
+      COMMAND="restart"
+      shift
+      ;;
+    status)
+      COMMAND="status"
+      shift
+      ;;
+    logs)
+      COMMAND="logs"
+      shift
+      if [ $# -gt 0 ] && [[ "$1" != -* ]]; then
+        LOG_TARGET="$1"
+        shift
+      fi
+      ;;
+    -d|--detach)
+      DETACH=true
+      shift
+      ;;
+    --quick)
+      QUICK=true
+      shift
+      ;;
+    --only-app)
+      RUN_PROXY=false
+      RUN_BACKEND=false
+      RUN_APP=true
+      shift
+      ;;
+    --only-backend)
+      RUN_PROXY=false
+      RUN_BACKEND=true
+      RUN_APP=false
+      shift
+      ;;
+    --only-proxy)
+      RUN_PROXY=true
+      RUN_BACKEND=false
+      RUN_APP=false
+      shift
+      ;;
+    --skip-app)
+      RUN_APP=false
+      shift
+      ;;
+    --skip-backend)
+      RUN_BACKEND=false
+      shift
+      ;;
+    --skip-proxy)
+      RUN_PROXY=false
+      shift
+      ;;
+    -h|--help)
+      usage
+      ;;
+    *)
+      error "Unknown option or command: $1 (Run 'bin/dev --help' for usage)"
+      ;;
+  esac
+done
+
+case "$COMMAND" in
+  up)
+    start_all
+    ;;
+  down)
+    stop_all
+    ;;
+  restart)
+    stop_all
+    start_all
+    ;;
+  status)
+    show_status
+    ;;
+  logs)
+    show_logs "$LOG_TARGET"
+    ;;
+esac

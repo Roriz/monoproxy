@@ -9,3 +9,5 @@ node_modules/
 caddy_ca.json
 
 public/
+
+.svelte-kit/

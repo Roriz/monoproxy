@@ -75,7 +75,7 @@
       
       {{ if not .Params.nav_minimal }}
       <!-- Desktop Navigation Menu -->
-      <div class="hidden md:flex items-center gap-6 md:gap-8 text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-bold shrink-0">
+      <div class="hidden lg:flex items-center gap-6 md:gap-8 text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-bold shrink-0">
         <a href="/" class="transition {{ if eq .RelPermalink "/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Home</a>
         <a href="/reports/" class="transition {{ if eq .RelPermalink "/reports/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Reports</a>
         <a href="/enterprise/" class="transition {{ if eq .RelPermalink "/enterprise/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Technology</a>
@@ -86,7 +86,7 @@
       </div>
 
       <!-- Mobile Menu Toggle Button -->
-      <button id="mobile-menu-toggle" aria-label="Toggle Navigation Menu" class="md:hidden text-neutral-400 hover:text-gold-500 focus:outline-none cursor-pointer p-2" style="position: relative; z-index: 60;">
+      <button id="mobile-menu-toggle" aria-label="Toggle Navigation Menu" class="lg:hidden text-neutral-400 hover:text-gold-500 focus:outline-none cursor-pointer p-2" style="position: relative; z-index: 60;">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
@@ -114,6 +114,11 @@
   <main>
     {{- block "main" . -}}{{- end -}}
   </main>
+
+  <!-- Global Footer -->
+  {{ if not .Params.no_footer }}
+  {{ partial "shared/footer.html" . }}
+  {{ end }}
 
   <!-- Non-Blocking Google tag (gtag.js) -->
   <script>
