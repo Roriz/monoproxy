@@ -7,3 +7,9 @@ publishDir = '../../public/enrichreader.com'
 
 # Disable automatic RSS and taxonomies generation to keep output clean and strictly matching current files
 disableKinds = ["RSS", "taxonomy"]
+
+[params]
+  # Visit counting with Umami on our own server (privacy policy, sections 3.3 and 5). Empty: the
+  # site loads no statistics script at all. Set to the website ID from the Umami dashboard.
+  umamiHost = 'https://stats.enrichreader.com'
+  umamiWebsiteId = ''

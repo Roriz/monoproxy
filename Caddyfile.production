@@ -34,13 +34,13 @@ enrichreader.com {
 	redir /download* /app 302
 
 	# Baseline browser security policy. Kept explicit for the externally hosted
-	# fonts, analytics and report charts the public site currently uses.
+	# fonts, report charts and our own Umami visit counter (stats.enrichreader.com).
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains"
 		X-Content-Type-Options "nosniff"
 		Referrer-Policy "strict-origin-when-cross-origin"
 		Permissions-Policy "camera=(), geolocation=(), microphone=()"
-		Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.enrichreader.com https://www.google-analytics.com https://region1.google-analytics.com"
+		Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://stats.enrichreader.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.enrichreader.com https://stats.enrichreader.com"
 	}
 
 	# Enable compression

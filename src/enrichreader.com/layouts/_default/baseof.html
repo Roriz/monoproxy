@@ -118,24 +118,20 @@
   {{ partial "shared/footer.html" . }}
   {{ end }}
 
-  <!-- Non-Blocking Google tag (gtag.js). Skipped when the browser sends Global Privacy Control or
-       Do Not Track, as the privacy policy promises. -->
+  <!-- Visit counting with Umami on our own server: no cookies, IP not stored. Nothing loads when
+       the browser sends Global Privacy Control or Do Not Track, as the privacy policy promises. -->
+  {{ with site.Params.umamiWebsiteId }}
   <script>
-    window.addEventListener('load', function() {
-      if (navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
-      setTimeout(function() {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-3N638TBS0S';
-        document.head.appendChild(script);
-
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = window.gtag || function() { dataLayer.push(arguments); };
-        gtag('js', new Date());
-        gtag('config', 'G-3N638TBS0S');
-      }, 1000); // 1s delay to move out of critical rendering path
-    });
+    if (!(navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1')) {
+      var umami = document.createElement('script');
+      umami.defer = true;
+      umami.src = '{{ site.Params.umamiHost }}/script.js';
+      umami.setAttribute('data-website-id', '{{ . }}');
+      umami.setAttribute('data-do-not-track', 'true');
+      document.head.appendChild(umami);
+    }
   </script>
+  {{ end }}
 
   {{ partial "shared/utm_forward.html" . }}
 
