@@ -1,0 +1,48 @@
+<!-- Copies a visit's UTM tags, plus the site that sent the visitor, onto every link into the app.
+     The app runs on another origin (app.enrichreader.com), so on its own it only ever sees
+     "enrichreader.com" as the referrer, and we can't tell which channel a signup came from
+     (reader-app: src/lib/utils/attribution.js). Internal /app/ links get the tags as well, since
+     most visitors land on the home page first. The script stores nothing; the tags only travel in
+     the URLs. The Play Store link receives them as its install `referrer`, which Play Console reports. -->
+<script>
+  (function () {
+    var params = new URLSearchParams(location.search);
+    var tags = new URLSearchParams();
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(function (key) {
+      var value = params.get(key);
+      if (value) tags.set(key, value);
+    });
+
+    // An earlier page on this site already forwarded it; otherwise take the external referrer's host.
+    var ref = params.get('ref') || '';
+    if (!ref) {
+      try {
+        var host = new URL(document.referrer).host;
+        if (host && host !== location.host) ref = host;
+      } catch (e) {}
+    }
+
+    if (!tags.toString() && !ref) return;
+
+    function rewrite(selector, apply) {
+      document.querySelectorAll(selector).forEach(function (link) {
+        var url = new URL(link.href, location.href);
+        apply(url.searchParams);
+        link.href = url.toString();
+      });
+    }
+
+    function forward(target) {
+      tags.forEach(function (value, key) { target.set(key, value); });
+      if (ref) target.set('ref', ref);
+    }
+
+    rewrite('a[href^="https://app.enrichreader.com"]', forward);
+    rewrite('a[href="/app/"]', forward);
+    if (tags.toString()) {
+      rewrite('a[href^="https://play.google.com/store/apps/details?id=com.enrichreader.app"]', function (target) {
+        target.set('referrer', tags.toString());
+      });
+    }
+  })();
+</script>

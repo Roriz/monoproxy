@@ -137,6 +137,8 @@
     });
   </script>
 
+  {{ partial "shared/utm_forward.html" . }}
+
   <!-- Page-specific Scripts -->
   {{ range .Params.scripts }}
     <script src="{{ . }}" {{ if $.Params.scripts_defer }}defer{{ end }}></script>
