@@ -118,9 +118,11 @@
   {{ partial "shared/footer.html" . }}
   {{ end }}
 
-  <!-- Non-Blocking Google tag (gtag.js) -->
+  <!-- Non-Blocking Google tag (gtag.js). Skipped when the browser sends Global Privacy Control or
+       Do Not Track, as the privacy policy promises. -->
   <script>
     window.addEventListener('load', function() {
+      if (navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
       setTimeout(function() {
         var script = document.createElement('script');
         script.async = true;
