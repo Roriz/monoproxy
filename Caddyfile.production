@@ -66,18 +66,10 @@ enrichreader.com {
 }
 
 stats.enrichreader.com {
-	# Umami (reader-backend/compose.umami.yml). Only the counting script and the endpoint it
-	# sends visits to are public; the dashboard sits behind a password as well as its own login.
-	@tracker path /script.js /api/send
-	handle @tracker {
-		reverse_proxy 127.0.0.1:3002
-	}
-	handle {
-		basic_auth {
-			team $2a$12$fc.5w9WwsYJoB9HpadKBnOqMVxTVnaTsBDwsEmzlGd5I/Qt0R8VF2
-		}
-		reverse_proxy 127.0.0.1:3002
-	}
+	# Umami (reader-backend/compose.umami.yml). The dashboard is protected by Umami's own login
+	# with two-factor authentication: a Caddy password prompt cannot sit in front of it, because
+	# Umami sends its own Authorization header after login.
+	reverse_proxy 127.0.0.1:3002
 }
 
 api.enrichreader.com {
