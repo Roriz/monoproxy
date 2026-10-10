@@ -52,7 +52,7 @@ scripts:
         </div>
         <div class="p-4 rounded-2xl bg-neutral-900/50 border border-neutral-800/60">
           <div class="text-gold-500 font-bold mb-1">2. No ads or data sales</div>
-          <p class="text-neutral-400 text-[11px] leading-relaxed">The app sends us usage events and crash reports. Both are on unless you switch them off in Settings &rarr; Notifications &amp; privacy &rarr; Usage data and crash reports. Our website counts page views with Umami, on our own server, without cookies.</p>
+          <p class="text-neutral-400 text-[11px] leading-relaxed">The app sends us usage events and crash reports. Both are on unless you switch them off in Settings &rarr; Notifications &amp; privacy &rarr; Usage data and crash reports. Our website and the app count page views with Umami, on our own server, without cookies.</p>
         </div>
         <div class="p-4 rounded-2xl bg-neutral-900/50 border border-neutral-800/60">
           <div class="text-gold-500 font-bold mb-1">3. Sync is optional</div>
@@ -143,7 +143,7 @@ scripts:
           </li>
           <li class="flex gap-4">
             <div class="w-1.5 h-1.5 rounded-full bg-gold-500 mt-2.5 shrink-0"></div>
-            <p class="text-sm md:text-base leading-relaxed text-neutral-300"><strong class="text-cream-100">On our website:</strong> we count visits with Umami, which runs on our own server. It records the page address and title, the page you came from, your browser, operating system, device type, screen size, language and approximate location (country and region, worked out from your IP address, which it doesn't store). It sets no cookies and groups visits under a scrambled ID that changes every month. It doesn't count your visit if your browser sends a Global Privacy Control or Do Not Track signal. The app has no page-view statistics.</p>
+            <p class="text-sm md:text-base leading-relaxed text-neutral-300"><strong class="text-cream-100">Page views, on our website and in the app:</strong> we count visits with Umami, which runs on our own server. On the website it records the page address and title and the page you came from. In the app it records only which kind of screen you opened (for example "a book" or "a character profile"), never a book, chapter or character, and the site you came from on the first screen. Both record your browser, operating system, device type, screen size, language and approximate location (country, region and city, worked out from your IP address, which it doesn't store). It sets no cookies and groups visits under a scrambled ID that changes every month. It doesn't count your visits if your browser sends a Global Privacy Control or Do Not Track signal. The usage data switch in Settings doesn't change this count.</p>
           </li>
         </ul>
         <h3 class="text-gold-500 font-bold mt-6 mb-2 uppercase text-xs tracking-widest">3.4 Survey answers (optional)</h3>
@@ -195,7 +195,7 @@ scripts:
           </li>
           <li class="flex gap-4">
             <div class="w-1.5 h-1.5 rounded-full bg-gold-500 mt-2.5 shrink-0"></div>
-            <p class="text-sm md:text-base leading-relaxed text-neutral-300"><strong class="text-cream-100">Website statistics:</strong> to see how many people visit enrichreader.com and which pages they read, we use Umami (see 3.3). Basis: legitimate interests. To object, turn on Global Privacy Control or Do Not Track in your browser; our website then doesn't count your visit.</p>
+            <p class="text-sm md:text-base leading-relaxed text-neutral-300"><strong class="text-cream-100">Page-view statistics:</strong> to see how many people visit enrichreader.com and use the app, and which pages and screens they use, we use Umami (see 3.3). Basis: legitimate interests. To object, turn on Global Privacy Control or Do Not Track in your browser; neither our website nor the app then counts your visits.</p>
           </li>
           <li class="flex gap-4">
             <div class="w-1.5 h-1.5 rounded-full bg-gold-500 mt-2.5 shrink-0"></div>
@@ -224,7 +224,7 @@ scripts:
     <section id="third-party-services">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 serif italic text-cream-200">5. Who helps us</h2>
       <div class="space-y-4">
-        <p class="text-sm md:text-base leading-relaxed text-neutral-300">Our backend and database run on a server we rent from Hetzner Online GmbH in Helsinki, Finland (EU). Our website's page-view statistics (Umami) run on the same server, so no analytics company receives them. These companies process data for us:</p>
+        <p class="text-sm md:text-base leading-relaxed text-neutral-300">Our backend and database run on a server we rent from Hetzner Online GmbH in Helsinki, Finland (EU). Our page-view statistics (Umami) run on the same server, so no analytics company receives them. These companies process data for us:</p>
         <ul class="space-y-3">
           <li class="flex gap-4">
             <div class="w-1.5 h-1.5 rounded-full bg-gold-500 mt-2.5 shrink-0"></div>
@@ -286,7 +286,7 @@ scripts:
           </li>
           <li class="flex gap-4">
             <div class="w-1.5 h-1.5 rounded-full bg-gold-500 mt-2.5 shrink-0"></div>
-            <p class="text-sm md:text-base leading-relaxed text-neutral-300"><strong class="text-cream-100">Website page-view statistics:</strong> kept on our server with no set end date. They contain no name, account or IP address.</p>
+            <p class="text-sm md:text-base leading-relaxed text-neutral-300"><strong class="text-cream-100">Page-view statistics:</strong> kept on our server with no set end date. They contain no name, account or IP address.</p>
           </li>
           <li class="flex gap-4">
             <div class="w-1.5 h-1.5 rounded-full bg-gold-500 mt-2.5 shrink-0"></div>
@@ -303,7 +303,7 @@ scripts:
     <section id="cookies-and-tracking">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 serif italic text-cream-200">8. Cookies and device storage</h2>
       <div class="space-y-4">
-        <p class="text-sm md:text-base leading-relaxed text-neutral-300">The app stores your books, Skins, settings and a random device ID on your device, and uses a cookie to keep you signed in. The app has no page-view statistics, and our website counts page views without cookies. We don't use ad networks or cross-app tracking.</p>
+        <p class="text-sm md:text-base leading-relaxed text-neutral-300">The app stores your books, Skins, settings and a random device ID on your device, and uses a cookie to keep you signed in. The app and our website count page views without cookies. We don't use ad networks or cross-app tracking.</p>
       </div>
     </section>
 
@@ -322,7 +322,7 @@ scripts:
         <p class="text-sm md:text-base leading-relaxed text-neutral-300">Without an account, your usage events are linked to a random ID on your device, not to your name or email. To get a copy or have them deleted, copy the ID from <span class="text-cream-200 font-mono">Settings &rarr; Notifications &amp; privacy &rarr; Your device ID</span> and email it to <a href="mailto:privacy@enrichreader.com" class="text-gold-500 hover:text-gold-400">privacy@enrichreader.com</a>. Switching off usage data stops new events, and after 24 months we remove that ID from them.</p>
         <p class="text-sm md:text-base leading-relaxed text-neutral-300">You can complain to the ANPD (Brazil) or to the data protection authority where you live.</p>
         <h3 id="account-deletion" class="text-gold-500 font-bold mt-6 mb-2 uppercase text-xs tracking-widest">Deleting your account</h3>
-        <p class="text-sm md:text-base leading-relaxed text-neutral-300">Use <span class="text-cream-200 font-mono">Settings &rarr; Delete account</span> in the app, or email <a href="mailto:privacy@enrichreader.com" class="text-gold-500 hover:text-gold-400">privacy@enrichreader.com</a> from your account's email address with the subject "Delete my account". Within 30 days we delete your account and everything linked to it (email address, library, reading data, usage events, reports, privacy choices and our emails with you) and, if you asked by email, confirm by email. Deleting in the app also clears your books and Skins from that device. We keep sign-in records for 6 months after each session ends, as Brazilian law requires (see section 4), then delete them. We also keep anything needed for a legal claim. Backups are overwritten after about a week, and Rollbar deletes crash reports after 30 days. Survey answers and website page-view statistics aren't linked to your account, so they stay.</p>
+        <p class="text-sm md:text-base leading-relaxed text-neutral-300">Use <span class="text-cream-200 font-mono">Settings &rarr; Delete account</span> in the app, or email <a href="mailto:privacy@enrichreader.com" class="text-gold-500 hover:text-gold-400">privacy@enrichreader.com</a> from your account's email address with the subject "Delete my account". Within 30 days we delete your account and everything linked to it (email address, library, reading data, usage events, reports, privacy choices and our emails with you) and, if you asked by email, confirm by email. Deleting in the app also clears your books and Skins from that device. We keep sign-in records for 6 months after each session ends, as Brazilian law requires (see section 4), then delete them. We also keep anything needed for a legal claim. Backups are overwritten after about a week, and Rollbar deletes crash reports after 30 days. Survey answers and page-view statistics aren't linked to your account, so they stay.</p>
       </div>
     </section>
 
