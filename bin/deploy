@@ -115,9 +115,9 @@ remote_deploy() {
         local conf_file="Caddyfile.\${RAILS_ENV:-development}"
         remote_info "Restarting Caddy with config: \$conf_file..."
         sudo caddy stop 2>/dev/null || true
-        # The background Caddy process inherits this session's output; without the redirect it keeps
-        # the SSH connection open and the deploy never returns.
-        sudo caddy start --config "\$conf_file" >/dev/null 2>&1
+        # The background Caddy process inherits this session's stdin, stdout and stderr; any of them
+        # left open keeps the SSH connection open and the deploy never returns.
+        sudo caddy start --config "\$conf_file" </dev/null >/dev/null 2>&1
       )
     }
 
