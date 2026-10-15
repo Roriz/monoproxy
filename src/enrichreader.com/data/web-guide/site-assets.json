@@ -1,0 +1,37 @@
+{
+  "shelf": {
+    "path": "/web-guide/assets/og-shelf-acbaec3a.jpg",
+    "type": "image/jpeg",
+    "width": 1200,
+    "height": 630,
+    "bytes": 23412,
+    "kind": "generic",
+    "source_guides": []
+  },
+  "authors": {
+    "path": "/web-guide/assets/og-authors-4a9c8a0b.jpg",
+    "type": "image/jpeg",
+    "width": 1200,
+    "height": 630,
+    "bytes": 22581
+  },
+  "showcase": {
+    "path": "/web-guide/assets/og-showcase-52920faf.jpg",
+    "type": "image/jpeg",
+    "width": 1200,
+    "height": 630,
+    "bytes": 25039
+  },
+  "fictionCover": {
+    "path": "/web-guide/assets/fictional-cover-32912302.svg",
+    "type": "image/svg+xml",
+    "width": 180,
+    "height": 270
+  },
+  "fiction": {
+    "path": "/web-guide/assets/fictional-example-144927a6.svg",
+    "type": "image/svg+xml",
+    "width": 640,
+    "height": 800
+  }
+}

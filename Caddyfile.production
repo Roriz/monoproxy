@@ -40,7 +40,7 @@ enrichreader.com {
 		X-Content-Type-Options "nosniff"
 		Referrer-Policy "strict-origin-when-cross-origin"
 		Permissions-Policy "camera=(), geolocation=(), microphone=()"
-		Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://stats.enrichreader.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.enrichreader.com https://stats.enrichreader.com"
+		Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://stats.enrichreader.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https://api.enrichreader.com https://stats.enrichreader.com"
 	}
 
 	# Enable compression
@@ -50,6 +50,7 @@ enrichreader.com {
 	@static {
 		file
 		path *.ico *.css *.js *.png *.jpg *.jpeg *.svg *.gif *.woff *.woff2 *.webp *.json
+		not path /web-guide/* /guia/*
 	}
 	header @static Cache-Control "public, max-age=3600, must-revalidate"
 
@@ -57,12 +58,20 @@ enrichreader.com {
 	@html {
 		file
 		path *.html
+		not path /guia/* /autores/*
 	}
 	header @html Cache-Control "no-cache"
 
-	try_files {path} {path}/ /index.html
-
-	file_server
+	@webGuide path /guia /guia/* /autores /autores/ /web-guide/* /_ops/nao-contar
+	handle @webGuide {
+		reverse_proxy 127.0.0.1:3003 {
+			header_up X-Web-Guide-Client-IP {remote_host}
+		}
+	}
+	handle {
+		try_files {path} {path}/ /index.html
+		file_server
+	}
 }
 
 stats.enrichreader.com {

@@ -100,6 +100,7 @@ start_proxy() {
 
 stop_proxy() {
   step "Stopping Monoproxy (Caddy)..."
+  "$MONOPROXY_DIR/bin/web-guide" down
   docker stop enrichreader-proxy >/dev/null 2>&1 || true
   docker rm enrichreader-proxy >/dev/null 2>&1 || true
   if command -v caddy &>/dev/null; then

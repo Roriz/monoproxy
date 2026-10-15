@@ -1,0 +1,30 @@
+import { mkdir, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { loadCatalog } from '../../src/enrichreader.com/lib/web-guide/catalog.mjs';
+import { createGuideServer } from '../../src/enrichreader.com/lib/web-guide/server.mjs';
+const guides = await loadCatalog();
+const guide = guides.find(guide => guide.series === process.argv[2]);
+if (!guide || guide.state !== 'unlisted' || guide.ownership !== 'third_party') throw new Error('Choose a configured unlisted third-party demo');
+const modulePath = process.env.WEB_GUIDE_PLAYWRIGHT_MODULE;
+if (!modulePath) throw new Error('Set WEB_GUIDE_PLAYWRIGHT_MODULE to an installed Playwright module');
+const { chromium } = await import(modulePath);
+const server = createGuideServer({ guides }); await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+const browser = await chromium.launch({ headless: true });
+const directory = await mkdtemp(join(tmpdir(), 'guide-still-'));
+try {
+  const page = await browser.newPage({ viewport: { width: 360, height: 640 }, deviceScaleFactor: 2 });
+  await page.route('https://**/*', route => route.abort());
+  await page.goto(`http://127.0.0.1:${server.address().port}/guia/${guide.series}`);
+  await page.locator('.demo-banner').waitFor(); await page.locator('main [data-readout]').waitFor();
+  if (await page.locator('main [data-preview]').count()) throw new Error('Clean gate contains story chips');
+  const screenshot = join(directory, 'gate.png'); const webp = join(directory, 'gate.webp');
+  await page.screenshot({ path: screenshot });
+  execFileSync('magick', [screenshot, '-resize', '540x960', '-strip', '-quality', '85', webp]);
+  const bytes = await readFile(webp); const hash = createHash('sha256').update(bytes).digest('hex').slice(0, 8);
+  const output = new URL('../../src/enrichreader.com/static/web-guide/assets/', import.meta.url); await mkdir(output, { recursive: true });
+  await writeFile(new URL(`still-${hash}.webp`, output), bytes);
+  console.log(JSON.stringify({ path: `/web-guide/assets/still-${hash}.webp`, type: 'image/webp', width: 540, height: 960, capture_url: `https://enrichreader.com/guia/${guide.series}`, banner_visible: true }));
+} finally { await browser.close(); server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); await rm(directory, { recursive: true, force: true }); }

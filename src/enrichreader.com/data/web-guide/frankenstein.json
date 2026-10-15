@@ -1,0 +1,2785 @@
+{
+  "series": "frankenstein",
+  "title": "Frankenstein",
+  "authors": [
+    "Mary Shelley"
+  ],
+  "state": "public",
+  "ownership": "public-domain",
+  "edition": "Standard Ebooks · texto de 1831",
+  "text_language": "en",
+  "look": {
+    "hue": 265,
+    "scheme": "noite",
+    "title_font": "playfair",
+    "cover": null
+  },
+  "provenance": {
+    "review_date": "2026-10-10",
+    "skin_version": "20261010225628",
+    "package_sha256": "8953d81c145fb87b886d93a8c6a3433cc96b4088db36b63fe6429a943ad86338",
+    "truth_record_sha256": "9bb211cd868244cda4cb4fa229fac180b84ee7612e07c1efb6b3def41961cec6",
+    "review": "skin-maker/docs/truth-reviews/frankenstein.md"
+  },
+  "books": [
+    {
+      "l": 1,
+      "status": "complete",
+      "end_cut": "end-book-1",
+      "items": [
+        {
+          "ordinal": 1,
+          "kind": "section",
+          "number": 1,
+          "part": "letters",
+          "label": "Carta 1",
+          "gender": "f",
+          "source_file": 8,
+          "cut_before": "before-1"
+        },
+        {
+          "ordinal": 2,
+          "kind": "section",
+          "number": 2,
+          "part": "letters",
+          "label": "Carta 2",
+          "gender": "f",
+          "source_file": 9,
+          "cut_before": "before-2"
+        },
+        {
+          "ordinal": 3,
+          "kind": "section",
+          "number": 3,
+          "part": "letters",
+          "label": "Carta 3",
+          "gender": "f",
+          "source_file": 10,
+          "cut_before": "before-3"
+        },
+        {
+          "ordinal": 4,
+          "kind": "section",
+          "number": 4,
+          "part": "letters",
+          "label": "Carta 4",
+          "gender": "f",
+          "source_file": 11,
+          "cut_before": "before-4"
+        },
+        {
+          "ordinal": 5,
+          "kind": "chapter",
+          "number": 1,
+          "part": "chapters",
+          "label": "Cap. 1",
+          "gender": "m",
+          "source_file": 12,
+          "cut_before": "before-5"
+        },
+        {
+          "ordinal": 6,
+          "kind": "chapter",
+          "number": 2,
+          "part": "chapters",
+          "label": "Cap. 2",
+          "gender": "m",
+          "source_file": 13,
+          "cut_before": "before-6"
+        },
+        {
+          "ordinal": 7,
+          "kind": "chapter",
+          "number": 3,
+          "part": "chapters",
+          "label": "Cap. 3",
+          "gender": "m",
+          "source_file": 14,
+          "cut_before": "before-7"
+        },
+        {
+          "ordinal": 8,
+          "kind": "chapter",
+          "number": 4,
+          "part": "chapters",
+          "label": "Cap. 4",
+          "gender": "m",
+          "source_file": 15,
+          "cut_before": "before-8"
+        },
+        {
+          "ordinal": 9,
+          "kind": "chapter",
+          "number": 5,
+          "part": "chapters",
+          "label": "Cap. 5",
+          "gender": "m",
+          "source_file": 16,
+          "cut_before": "before-9"
+        },
+        {
+          "ordinal": 10,
+          "kind": "chapter",
+          "number": 6,
+          "part": "chapters",
+          "label": "Cap. 6",
+          "gender": "m",
+          "source_file": 17,
+          "cut_before": "before-10"
+        },
+        {
+          "ordinal": 11,
+          "kind": "chapter",
+          "number": 7,
+          "part": "chapters",
+          "label": "Cap. 7",
+          "gender": "m",
+          "source_file": 18,
+          "cut_before": "before-11"
+        },
+        {
+          "ordinal": 12,
+          "kind": "chapter",
+          "number": 8,
+          "part": "chapters",
+          "label": "Cap. 8",
+          "gender": "m",
+          "source_file": 19,
+          "cut_before": "before-12"
+        },
+        {
+          "ordinal": 13,
+          "kind": "chapter",
+          "number": 9,
+          "part": "chapters",
+          "label": "Cap. 9",
+          "gender": "m",
+          "source_file": 20,
+          "cut_before": "before-13"
+        },
+        {
+          "ordinal": 14,
+          "kind": "chapter",
+          "number": 10,
+          "part": "chapters",
+          "label": "Cap. 10",
+          "gender": "m",
+          "source_file": 21,
+          "cut_before": "before-14"
+        },
+        {
+          "ordinal": 15,
+          "kind": "chapter",
+          "number": 11,
+          "part": "chapters",
+          "label": "Cap. 11",
+          "gender": "m",
+          "source_file": 22,
+          "cut_before": "before-15"
+        },
+        {
+          "ordinal": 16,
+          "kind": "chapter",
+          "number": 12,
+          "part": "chapters",
+          "label": "Cap. 12",
+          "gender": "m",
+          "source_file": 23,
+          "cut_before": "before-16"
+        },
+        {
+          "ordinal": 17,
+          "kind": "chapter",
+          "number": 13,
+          "part": "chapters",
+          "label": "Cap. 13",
+          "gender": "m",
+          "source_file": 24,
+          "cut_before": "before-17"
+        },
+        {
+          "ordinal": 18,
+          "kind": "chapter",
+          "number": 14,
+          "part": "chapters",
+          "label": "Cap. 14",
+          "gender": "m",
+          "source_file": 25,
+          "cut_before": "before-18"
+        },
+        {
+          "ordinal": 19,
+          "kind": "chapter",
+          "number": 15,
+          "part": "chapters",
+          "label": "Cap. 15",
+          "gender": "m",
+          "source_file": 26,
+          "cut_before": "before-19"
+        },
+        {
+          "ordinal": 20,
+          "kind": "chapter",
+          "number": 16,
+          "part": "chapters",
+          "label": "Cap. 16",
+          "gender": "m",
+          "source_file": 27,
+          "cut_before": "before-20"
+        },
+        {
+          "ordinal": 21,
+          "kind": "chapter",
+          "number": 17,
+          "part": "chapters",
+          "label": "Cap. 17",
+          "gender": "m",
+          "source_file": 28,
+          "cut_before": "before-21"
+        },
+        {
+          "ordinal": 22,
+          "kind": "chapter",
+          "number": 18,
+          "part": "chapters",
+          "label": "Cap. 18",
+          "gender": "m",
+          "source_file": 29,
+          "cut_before": "before-22"
+        },
+        {
+          "ordinal": 23,
+          "kind": "chapter",
+          "number": 19,
+          "part": "chapters",
+          "label": "Cap. 19",
+          "gender": "m",
+          "source_file": 30,
+          "cut_before": "before-23"
+        },
+        {
+          "ordinal": 24,
+          "kind": "chapter",
+          "number": 20,
+          "part": "chapters",
+          "label": "Cap. 20",
+          "gender": "m",
+          "source_file": 31,
+          "cut_before": "before-24"
+        },
+        {
+          "ordinal": 25,
+          "kind": "chapter",
+          "number": 21,
+          "part": "chapters",
+          "label": "Cap. 21",
+          "gender": "m",
+          "source_file": 32,
+          "cut_before": "before-25"
+        },
+        {
+          "ordinal": 26,
+          "kind": "chapter",
+          "number": 22,
+          "part": "chapters",
+          "label": "Cap. 22",
+          "gender": "m",
+          "source_file": 33,
+          "cut_before": "before-26"
+        },
+        {
+          "ordinal": 27,
+          "kind": "chapter",
+          "number": 23,
+          "part": "chapters",
+          "label": "Cap. 23",
+          "gender": "m",
+          "source_file": 34,
+          "cut_before": "before-27"
+        },
+        {
+          "ordinal": 28,
+          "kind": "chapter",
+          "number": 24,
+          "part": "chapters",
+          "label": "Cap. 24",
+          "gender": "m",
+          "source_file": 35,
+          "cut_before": "before-28"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "slug": "elizabeth",
+      "versions": [
+        {
+          "ordinal": 5,
+          "set": {
+            "aliases": [
+              "Elizabeth",
+              "Elizabeth Lavenza"
+            ],
+            "chapter_summary": "Elizabeth Lavenza is taken in from a rustic background by the narrator's family, becoming a beloved and adored companion.",
+            "current_objective": "To live with her new family as a companion to the narrator.",
+            "definition": "Fairer than pictured cherub. Adopted into the narrator's family.",
+            "display_name": "Elizabeth",
+            "location": "villa",
+            "narrative_role": "secondary",
+            "personality_traits": "Radiant and universally beloved",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "occupation",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 6,
+          "set": {
+            "chapter_summary": "Elizabeth admires the poets and Alpine nature, acting as a gentle, loving presence who softens the narrator and inspires Clerval toward beneficence.",
+            "current_objective": "To inhabit the peaceful home and bring gentleness and love to her companions.",
+            "definition": "Possessed a calmer and more concentrated disposition. Found scope for admiration and delight in aerial creations of poets and Alpine scenes. Served as the living spirit of love and gentleness in the home.",
+            "location": "Geneva",
+            "narrative_role": "secondary",
+            "personality_traits": "Calm, concentrated, gentle, and loving"
+          },
+          "remove": [],
+          "changed": [
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 7,
+          "set": {
+            "chapter_summary": "Elizabeth recovers from the scarlet fever after the narrator's mother nurses her. Following the mother's death, Elizabeth veils her own grief to comfort the family, assume her duties with courage, and see off the narrator.",
+            "current_objective": "To supply the place of the deceased mother to the younger children and comfort the family.",
+            "definition": "Caught the scarlet fever and was in the greatest danger. Saved from the distemper by the watchful attentions of the narrator's mother. Veiled her grief and strove to act as the comforter to the family.",
+            "personality_traits": "Courageous, self-sacrificing, and comforting"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 9,
+          "set": {
+            "chapter_summary": "Elizabeth appears briefly in Frankenstein's feverish dream before her image turns into a corpse, and she is later inquired about when Clerval arrives in Ingolstadt.",
+            "current_objective": "None in this chapter (mentioned only within a dream and in conversation).",
+            "definition": "Appears in Frankenstein's dream in the bloom of health.",
+            "personality_traits": "Beloved and deeply missed",
+            "narrative_role": "minor"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 10,
+          "set": {
+            "chapter_summary": "Elizabeth sends a letter to the narrator, who reads it and resolves to write back immediately to relieve her and the others from anxiety.",
+            "definition": "Writes a letter that the narrator reads and responds to.",
+            "personality_traits": "Caring and communicative"
+          },
+          "remove": [
+            "current_objective"
+          ],
+          "changed": [
+            "aliases",
+            "chapter_summary",
+            "current_objective",
+            "definition",
+            "display_name",
+            "location",
+            "personality_traits",
+            "status"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "set": {
+            "chapter_summary": "Elizabeth suffers extreme anguish and self-blame after William's murder, welcoming Victor upon his return and expressing her unwavering belief in Justine's innocence.",
+            "definition": "Suffers extreme anguish upon the disappearance and death of William. Accuses herself unjustly as the cause of William's death. Believes firmly in Justine Moritz's innocence.",
+            "personality_traits": "Compassionate, sorrowful, and fiercely loyal",
+            "narrative_role": "secondary"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 12,
+          "set": {
+            "chapter_summary": "Elizabeth bravely testifies for Justine at the trial, experiences deep sorrow upon hearing of Justine's alleged confession, and visits her in prison.",
+            "current_objective": "To speak in defense of Justine's character at the trial and later visit her in prison.",
+            "definition": "Cousin of the murdered child. Defender of Justine at the trial.",
+            "narrative_role": "secondary",
+            "personality_traits": "Courageous, compassionate, and steadfast"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 13,
+          "set": {
+            "chapter_summary": "Elizabeth stays at the house at Bellerive, deeply saddened by the deaths of William and Justine, and attempts to comfort a despairing Victor.",
+            "current_objective": "To mourn the dead and comfort Victor.",
+            "definition": "Heroic and suffering. Sad and desponding.",
+            "location": "Bellerive",
+            "personality_traits": "Compassionate and despondent"
+          },
+          "remove": [],
+          "changed": [
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 22,
+          "set": {
+            "chapter_summary": "Elizabeth acquiesces to Victor's journey to England, arranges for Clerval to accompany him as a companion, and bids him a tearful, silent farewell.",
+            "current_objective": "To see Victor depart safely and hope for his swift return.",
+            "definition": "Attached to Victor from earliest infancy. Arranged with Victor's father that Clerval should join Victor on his journey. Filled with disquiet at the idea of Victor's suffering away from her. Bade Victor a tearful silent farewell.",
+            "personality_traits": "Caring and anxious"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 23,
+          "set": {
+            "chapter_summary": "Elizabeth is mentioned as sending letters to the narrator, whose arrival is awaited with feverish impatience and anxiety.",
+            "current_objective": "To correspond with the narrator via letters.",
+            "definition": "Writes letters to the narrator.",
+            "personality_traits": "Distant and epistolary",
+            "narrative_role": "minor"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 24,
+          "set": {
+            "chapter_summary": "Elizabeth is merely thought of by the narrator while he is lost and adrift at sea.",
+            "definition": "Thought of by the narrator with concern regarding a monster's passions.",
+            "personality_traits": "Unknown from context",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 25,
+          "set": {
+            "chapter_summary": "Elizabeth is mentioned by the narrator's father in an attempt to awaken feelings of affection, which only elicits groans.",
+            "definition": "Beloved cousin of the narrator.",
+            "personality_traits": "Beloved and a source of potential happiness",
+            "narrative_role": "minor"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 26,
+          "set": {
+            "chapter_summary": "Elizabeth writes to Victor questioning if he loves another and expressing her desire for his happiness. She eventually weds Victor in Geneva and travels with him by water towards Evian.",
+            "definition": "Cousin and playmate of Victor. Writes a letter to Victor questioning his feelings and expressing her love for him. Weds Victor in Geneva.",
+            "location": "Evian",
+            "personality_traits": "Gentle, compassionate, and fluctuating between joy and melancholy.",
+            "narrative_role": "deuteragonist"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 27,
+          "set": {
+            "aliases": [
+              "Elizabeth",
+              "Elizabeth Lavenza",
+              "wife"
+            ],
+            "chapter_summary": "Elizabeth retires to her room on her wedding night where she is murdered by the fiend, leaving Victor devastated upon discovering her lifeless body.",
+            "current_objective": "None (deceased).",
+            "definition": "Wife of Victor. Victim of the murderer.",
+            "location": "an inn",
+            "personality_traits": "Timid and fearful.",
+            "status": "dead",
+            "narrative_role": "secondary"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "status",
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 28,
+          "set": {
+            "chapter_summary": "Elizabeth is mentioned by the narrator as a deceased loved one whose voice and presence are remembered in dreams and thoughts.",
+            "current_objective": "None.",
+            "definition": "Beloved whose voice is heard in dreams.",
+            "location": "Geneva",
+            "personality_traits": "Beloved and cherished.",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "henry-clerval",
+      "versions": [
+        {
+          "ordinal": 6,
+          "set": {
+            "aliases": [
+              "Clerval",
+              "Henry",
+              "Henry Clerval"
+            ],
+            "chapter_summary": "Clerval focuses on the moral relations of things, human virtues, and heroic actions, with dreams of becoming a notable benefactor of species.",
+            "current_objective": "Pursue moral relations of things and adventurous exploits.",
+            "definition": "Occupied with the moral relations of things. Wished to become a benefactor of the species.",
+            "display_name": "Henry Clerval",
+            "location": "Geneva",
+            "narrative_role": "secondary",
+            "personality_traits": "Thoughtful, generous, humane, and adventurous.",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "chapter_summary",
+            "current_objective",
+            "definition",
+            "display_name",
+            "location",
+            "occupation",
+            "personality_traits",
+            "status"
+          ]
+        },
+        {
+          "ordinal": 7,
+          "set": {
+            "aliases": [
+              "Clerval",
+              "Henry"
+            ],
+            "chapter_summary": "Clerval spends his final evening with his friends before departure, having failed to convince his trader father to let him pursue a liberal education.",
+            "current_objective": "Persuade his father to permit him to accompany his friend as a fellow student.",
+            "definition": "Henry felt the misfortune of being debarred from a liberal education.",
+            "display_name": "Clerval",
+            "personality_traits": "Ambitious and resolute"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "chapter_summary",
+            "current_objective",
+            "definition",
+            "display_name",
+            "location",
+            "occupation",
+            "personality_traits",
+            "status"
+          ]
+        },
+        {
+          "ordinal": 9,
+          "set": {
+            "aliases": [
+              "Clerval",
+              "Henry",
+              "Henry Clerval"
+            ],
+            "chapter_summary": "Clerval arrives in Ingolstadt to study, joyfully reunites with Frankenstein, and faithfully nurses him through a severe months-long nervous fever.",
+            "current_objective": "Undertake a voyage of discovery to the land of knowledge and care for his sick friend.",
+            "definition": "Friend of Frankenstein. Arrived in Ingolstadt via the Swiss diligence. Acted as Frankenstein's nurse during his months of nervous fever.",
+            "location": "Ingolstadt",
+            "occupation": "student",
+            "personality_traits": "Kind, attentive, and considerate"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 10,
+          "set": {
+            "current_objective": "Master the oriental languages and support his recovering friend.",
+            "definition": "Friend of Frankenstein. Studies oriental languages at the university.",
+            "personality_traits": "Kind, perceptive, and enterprising"
+          },
+          "remove": [
+            "chapter_summary"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 11,
+          "set": {
+            "chapter_summary": "Clerval reads Frankenstein's letter detailing his family misfortune, weeps with him, offers his sympathy, and accompanies him to order horses for Geneva.",
+            "current_objective": "Support Frankenstein and offer sympathy regarding his family disaster.",
+            "definition": "Frankenstein's friend. Expresses sympathy and weeps upon reading of the misfortune.",
+            "personality_traits": "Sympathetic, compassionate, and supportive"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 22,
+          "set": {
+            "chapter_summary": "Clerval meets Frankenstein at Strasbourg, joyfully travels with him down the Rhine, and expresses his deep love and admiration for the picturesque scenery.",
+            "current_objective": "Travel with Frankenstein down the Rhine toward Rotterdam and London, enjoying the scenery.",
+            "definition": "Frankenstein's friend who joins him on a journey to England. Alive to every new scene and joyful in nature. Possesses a wild and enthusiastic imagination chastened by sensibility.",
+            "location": "Holland",
+            "narrative_role": "secondary",
+            "personality_traits": "Joyful, enthusiastic, observant, and deeply appreciative of nature"
+          },
+          "remove": [
+            "occupation"
+          ],
+          "changed": [
+            "status",
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 23,
+          "set": {
+            "chapter_summary": "Clerval travels with Frankenstein through London, Oxford, Matlock, Cumberland, and Westmorland, eagerly seeking experience and enjoying natural scenery. He later receives an invitation to Scotland, where Frankenstein ultimately asks to tour alone.",
+            "current_objective": "Travel to Scotland with Frankenstein and visit Perth, hoping to enjoy new experiences and help further European colonization and trade.",
+            "location": "Perth",
+            "personality_traits": "Inquisitive, enthusiastic, ambitious, and deeply appreciative of nature and culture"
+          },
+          "remove": [
+            "definition"
+          ],
+          "changed": [
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 24,
+          "set": {
+            "current_objective": "Proceed to London for his Indian enterprise and meet Frankenstein at Perth.",
+            "definition": "Wrote an entreaty for Frankenstein to join him. Planning an Indian enterprise based on negotiations in London. Asked Frankenstein to meet him at Perth to proceed southwards together.",
+            "personality_traits": "Eager and persuasive"
+          },
+          "remove": [
+            "chapter_summary"
+          ],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 25,
+          "set": {
+            "chapter_summary": "Henry Clerval's dead body is viewed by Frankenstein in an inn room after he was murdered, prompting intense grief and a severe illness in Frankenstein.",
+            "current_objective": "Be buried after being murdered.",
+            "definition": "Lifeless form stretched in the coffin. Victim of a murder.",
+            "location": "Ireland",
+            "personality_traits": "Unresponsive and deceased",
+            "status": "dead",
+            "narrative_role": "minor"
+          },
+          "remove": [],
+          "changed": [
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 26,
+          "set": {
+            "chapter_summary": "Clerval is mentioned as having been murdered by the monster immediately after the enunciation of the fiend's threats.",
+            "definition": "Murdered by the monster.",
+            "personality_traits": "Deceased",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 27,
+          "set": {
+            "chapter_summary": "Clerval is mentioned among the victims of murder by the narrator.",
+            "definition": "Victim of murder."
+          },
+          "remove": [
+            "location"
+          ],
+          "changed": [
+            "location",
+            "definition",
+            "chapter_summary"
+          ]
+        },
+        {
+          "ordinal": 28,
+          "set": {
+            "chapter_summary": "Clerval is mentioned as having enjoyed health and youth in the narrator's memories, and his death is discussed.",
+            "definition": "Enjoyed health and youth.",
+            "personality_traits": "Deceased and fondly remembered"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "justine",
+      "versions": [
+        {
+          "ordinal": 10,
+          "set": {
+            "aliases": [
+              "Justine",
+              "Justine Moritz"
+            ],
+            "chapter_summary": "Justine's history is recounted, detailing her time in the family, her service, her mother's cruel treatment and subsequent remorse, the deaths of her siblings, and her recent return to the household following her mother's death.",
+            "current_objective": "Living in the narrator's household after returning from her mother's home.",
+            "definition": "She entered the household when she was twelve years of age. She attended the aunt during her illness with anxious affection. She returned to the household after her mother's death.",
+            "display_name": "Justine",
+            "location": "Geneva",
+            "narrative_role": "secondary",
+            "occupation": "Servant",
+            "personality_traits": "Grateful, gentle, and clever with a winning mildness born of grief.",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "chapter_summary",
+            "current_objective",
+            "definition",
+            "display_name",
+            "location",
+            "occupation",
+            "personality_traits",
+            "status"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "set": {
+            "current_objective": "To face trial for the murder of William.",
+            "definition": "Accused of murdering William. Taken ill and confined to bed on the morning the murder was discovered.",
+            "narrative_role": "secondary",
+            "occupation": "servant",
+            "personality_traits": "Amiable, though her recent behavior has appeared confused."
+          },
+          "remove": [
+            "chapter_summary"
+          ],
+          "changed": [
+            "display_name",
+            "aliases",
+            "occupation",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 12,
+          "set": {
+            "chapter_summary": "Justine stands trial for the murder of William, falsely confesses under pressure from her confessor to obtain absolution, and is ultimately executed on the scaffold.",
+            "current_objective": "To endure her trial, maintain her dignity, and eventually face her execution.",
+            "definition": "Justine was a girl of merit. Justine appeared confident in innocence.",
+            "personality_traits": "Calm and resilient under pressure, yet yielding to intense psychological coercion.",
+            "status": "dead"
+          },
+          "remove": [],
+          "changed": [
+            "status",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 13,
+          "set": {
+            "chapter_summary": "Justine is referenced after her death, with Victor mourning her and Elizabeth reflecting on the tragedy of her execution.",
+            "current_objective": "None.",
+            "definition": "Justine died. Victim of a miserable death.",
+            "personality_traits": "Innocent and beloved.",
+            "narrative_role": "minor"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 23,
+          "set": {
+            "chapter_summary": "Justine is mentioned as one of the victims whose blood sealed the insurmountable barrier between the narrator and his fellow men.",
+            "definition": "Victim whose death sealed a barrier between the narrator and fellow men.",
+            "personality_traits": "Deceased and associated with tragedy.",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 25,
+          "set": {
+            "aliases": [
+              "Justine",
+              "Justine Moritz",
+              "poor Justine"
+            ],
+            "chapter_summary": "Justine is mentioned by the narrator as one of the victims he believes he murdered, and whose innocence he contrasts with his own guilt.",
+            "definition": "Victim. Innocent.",
+            "personality_traits": "Innocent and deceased"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 26,
+          "set": {
+            "aliases": [
+              "Justine",
+              "Justine Moritz",
+              "poor Justine",
+              "poor unhappy Justine"
+            ],
+            "chapter_summary": "Justine is mentioned by the narrator as an innocent victim who suffered the same charge and died.",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 27,
+          "set": {
+            "chapter_summary": "Justine is referenced by the narrator among the past victims of the fiend's malignity during his reflection.",
+            "definition": "Victim of execution.",
+            "personality_traits": "Deceased and victimized"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "felix",
+      "versions": [
+        {
+          "ordinal": 16,
+          "set": {
+            "aliases": [
+              "Felix"
+            ],
+            "chapter_summary": "Felix works hard to support his family by clearing snow, gathering wood, and laboring in the garden or for a neighboring farmer. He reads to his father and sister, and though he appears sorrowful and has suffered deeply, he treats his family with gentle affection.",
+            "current_objective": "To work for a neighboring farmer or in the garden, read to the old man and Agatha, and help care for his family.",
+            "definition": "Youth of the cottage. Called brother or son. Always the saddest of the group. Brought wood and cleared snow.",
+            "display_name": "Felix",
+            "location": "Cottage",
+            "narrative_role": "secondary",
+            "occupation": "Farmer / Cottager",
+            "personality_traits": "Hardworking, sorrowful, and affectionate",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "occupation",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 17,
+          "set": {
+            "chapter_summary": "Felix’s sorrow vanishes upon the arrival of a beautiful stranger named Safie. He welcomes her affectionately into the cottage, and later instructs her in language and history using Volney's Ruins of Empires.",
+            "current_objective": "To instruct the Arabian stranger in language and history using Volney’s Ruins of Empires.",
+            "definition": "Son of the old man and brother of Agatha. Speaks to a lady who calls him by name. Greeted the arrival of the stranger with ecstatic joy. Instructs Safie in the language and the science of letters using Volney’s Ruins of Empires.",
+            "personality_traits": "Joyful around loved ones, affectionate, and patient instructor"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 18,
+          "set": {
+            "chapter_summary": "Felix previously engineered the escape of Safie's condemned father from prison, fell in love with Safie, and sacrificed his family's freedom and wealth, only to be betrayed and abandoned by the merchant.",
+            "definition": "Felix made a solemn vow to deliver Safie's father after witnessing his unjust trial. Felix surrendered himself to the law in Paris to try to free De Lacey and Agatha.",
+            "personality_traits": "Courageous, dedicated, and deeply devoted"
+          },
+          "remove": [
+            "current_objective"
+          ],
+          "changed": [
+            "aliases",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 19,
+          "set": {
+            "chapter_summary": "Felix returns from a country walk with Safie and Agatha to find the creature clinging to his blind father. Overcome with horror and fury, he tears the creature away, dashes him to the ground, and strikes him violently with a stick.",
+            "current_objective": "To protect his blind father from the creature.",
+            "definition": "Felix spent time in amusement and conversation in the cottage. Felix departed on a long country walk with Safie and Agatha. Felix attacked the creature with a stick when he found him clinging to his blind father's knees.",
+            "personality_traits": "Protective, fierce, and easily horrified by deformity"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 20,
+          "set": {
+            "chapter_summary": "Felix returns to the cottage with another man and declares that they can never inhabit the cottage again because his father's life is in danger.",
+            "current_objective": "To leave the cottage and flee the place with his family.",
+            "definition": "Felix approached the cottage with another man. Felix stated that they could never again inhabit the cottage.",
+            "personality_traits": "Resolute and protective"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 28,
+          "set": {
+            "chapter_summary": "Felix is mentioned by the being, who questions why humankind does not hate Felix for driving his friend from his door with contumely.",
+            "current_objective": "Not applicable in this chapter.",
+            "definition": "Felix drove his friend from his door with contumely.",
+            "narrative_role": "background_character",
+            "personality_traits": "Harsh and unwelcoming"
+          },
+          "remove": [
+            "location"
+          ],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "victor",
+      "versions": [
+        {
+          "ordinal": 6,
+          "set": {
+            "aliases": [
+              "Victor"
+            ],
+            "chapter_summary": "Victor reflects on his childhood and recounts how discovering a volume of Cornelius Agrippa at an inn near Thonon sparked his fateful enthusiasm for natural philosophy.",
+            "current_objective": "To state the facts which led to his predilection for natural philosophy.",
+            "definition": "He recalls his childhood before misfortune tainted his mind. He discovered the works of Cornelius Agrippa at thirteen years of age.",
+            "display_name": "Victor",
+            "location": "Geneva",
+            "narrative_role": "protagonist",
+            "personality_traits": "Enthusiastic and reflective",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "occupation",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 9,
+          "set": {
+            "chapter_summary": "Victor exhibits wild, manic behavior and laughter that frightens Clerval. Overcome by a hallucination of the monster, he struggles and collapses in a fit.",
+            "current_objective": "To calm his erratic nervous state and avoid the terror of the specter.",
+            "definition": "He is unable to contain his nervous energy and laughter upon ascending to his room with breakfast. He hallucinates or perceives a dreaded spectre, pleading to be saved before falling down in a fit.",
+            "location": "Ingolstadt",
+            "narrative_role": "protagonist",
+            "occupation": "Student",
+            "personality_traits": "Hysterical and overwhelmed"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 10,
+          "set": {
+            "chapter_summary": "Victor is the recipient of a letter from his cousin, who expresses deep concern over his severe illness, notes that he is forbidden to write, and shares family and local news from Geneva.",
+            "current_objective": "To recover from his illness and write a letter to reassure his cousin.",
+            "definition": "He has been ill. He is forbidden to write.",
+            "personality_traits": "Sickly and recovering"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "set": {
+            "chapter_summary": "Victor receives a devastating letter from his father informing him that his youngest brother, William, has been murdered. He returns home to find his family in deep mourning and is greeted by Ernest.",
+            "current_objective": "To return home and comfort his grieving family.",
+            "definition": "Recipient of a letter from his father informing him of William's murder. Returned home to his father's house.",
+            "location": "Geneva",
+            "personality_traits": "Affectionate and grieving"
+          },
+          "remove": [
+            "occupation"
+          ],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 12,
+          "set": {
+            "chapter_summary": "Victor agrees to accompany Elizabeth to visit Justine despite finding the thought to be torture.",
+            "current_objective": "Accompany Elizabeth to visit Justine.",
+            "definition": "Accompanies Elizabeth to visit Justine. Finds the idea of visiting Justine to be torture.",
+            "narrative_role": "protagonist",
+            "personality_traits": "Reluctant and distressed"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 13,
+          "set": {
+            "chapter_summary": "Victor sinks into deep solitude and despair over recent events. Elizabeth speaks to him of the tragedy of Justine Moritz and urges him to banish his dark passions, unaware he considers himself the true murderer.",
+            "current_objective": "Conceal his anguish and endure his profound despair.",
+            "definition": "Protagonist. Burdened by guilt as the true murderer in effect.",
+            "location": "Chamounix",
+            "personality_traits": "Distressed, despairing, and guilt-ridden"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 14,
+          "set": {
+            "aliases": [
+              "Frankenstein"
+            ],
+            "chapter_summary": "Frankenstein confronts his creature, refusing to hear his pleas and threatening to fight him, while the creature demands to be heard.",
+            "current_objective": "To refuse the creature's demands and either fight him or drive him away.",
+            "definition": "Creator of the creature.",
+            "location": "Montanvert",
+            "personality_traits": "Hostile, unforgiving, and resolute"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 22,
+          "set": {
+            "aliases": [
+              "Victor"
+            ],
+            "chapter_summary": "Victor assures his father of his tender love for Elizabeth and states that his future hopes are bound up in their union.",
+            "current_objective": "Express his affection for Elizabeth and respond to his father regarding their marriage.",
+            "definition": "Loves his cousin tenderly and sincerely. Sees his future hopes and prospects bound up in the expectation of union with Elizabeth.",
+            "location": "London",
+            "personality_traits": "Affectionate and candid"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 26,
+          "set": {
+            "chapter_summary": "Victor insists to his father that he is not mad and confesses to being the assassin of the innocent victims. He later affirms his love for Elizabeth and looks forward to their union.",
+            "current_objective": "Reassure his father and Elizabeth of his love while concealing his fatal secret.",
+            "definition": "Protagonist. Creator of the wretch.",
+            "location": "Evian",
+            "personality_traits": "Energetic and burdened"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 27,
+          "set": {
+            "chapter_summary": "Victor spends the night armed and fearful, watching in agitation while concealing a pistol in his bosom, and tries to reassure Elizabeth.",
+            "current_objective": "To defend himself and be prepared for his adversary's attack through the night.",
+            "definition": "Anxious and watchful.",
+            "location": "Geneva",
+            "personality_traits": "Fearful and resolute"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 28,
+          "set": {
+            "chapter_summary": "Victor describes being rescued by Walton's vessel after his dogs died and his ice-raft drifted north, asking Walton to swear to kill his enemy if he dies.",
+            "current_objective": "To pursue his enemy and ensure his vengeance is satisfied.",
+            "definition": "Nearly sank under the accumulation of distress. Destroyed part of his sledge to construct oars. Has an unfulfilled task and an enemy to pursue.",
+            "location": "Walton's ship",
+            "personality_traits": "Relentless and vengeful",
+            "status": "dead"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "william",
+      "versions": [
+        {
+          "ordinal": 10,
+          "set": {
+            "aliases": [
+              "William",
+              "little darling William"
+            ],
+            "chapter_summary": "William is described by his cousin as a very tall child for his age with sweet laughing blue eyes, dark eyelashes, curling hair, and rosy cheeks with dimples.",
+            "definition": "Little darling William.",
+            "display_name": "William",
+            "location": "Geneva",
+            "narrative_role": "background_character",
+            "occupation": "child",
+            "personality_traits": "Sweet and charming",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "occupation",
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "set": {
+            "aliases": [
+              "William",
+              "little William",
+              "little darling William",
+              "poor William"
+            ],
+            "chapter_summary": "William is discovered murdered on the grass in Plainpalais with the print of the murderer's finger on his neck, having gone missing after hiding during a walk.",
+            "definition": "Little boy who was murdered. Victim whose untimely loss is mourned.",
+            "narrative_role": "minor",
+            "personality_traits": "Bright, joyous, and radiant",
+            "status": "dead"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "status",
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 12,
+          "set": {
+            "chapter_summary": "William is referenced as a beloved child and victim who passed away, whose memory is mourned by Elizabeth, Justine, and Frankenstein.",
+            "definition": "Victim. Child whose fate is mourned.",
+            "personality_traits": "Innocent and deeply loved"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 13,
+          "set": {
+            "chapter_summary": "William is remembered as a victim whose death, alongside Justine's, is mourned by Elizabeth and Victor.",
+            "definition": "Victim of the fiend.",
+            "personality_traits": "Innocent child"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 23,
+          "set": {
+            "chapter_summary": "William is remembered through the blood that seals the insurmountable barrier between the narrator and fellow-men, filling the narrator's soul with anguish.",
+            "personality_traits": "Deceased victim",
+            "narrative_role": "background_character"
+          },
+          "remove": [
+            "definition"
+          ],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 25,
+          "set": {
+            "chapter_summary": "William is mentioned by the raving narrator, who confesses to being his murderer while suffering through a severe fever.",
+            "definition": "Murdered victim whose death is confessed by the narrator.",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary"
+          ]
+        },
+        {
+          "ordinal": 27,
+          "set": {
+            "chapter_summary": "William is briefly mentioned by the narrator, who recalls his death alongside other tragedies.",
+            "definition": "Victim whose death is recalled by the narrator."
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "agatha",
+      "versions": [
+        {
+          "ordinal": 16,
+          "set": {
+            "aliases": [
+              "Agatha"
+            ],
+            "chapter_summary": "Agatha listens to her father with respect, sometimes shedding tears which she wipes away, and becomes more cheerful after his encouragement.",
+            "current_objective": "Listen to her father's exhortations and cope with her melancholy.",
+            "definition": "Agatha is called 'sister' or 'Agatha' by the youth. Agatha is described as gentle.",
+            "display_name": "Agatha",
+            "location": "cottage",
+            "narrative_role": "secondary",
+            "personality_traits": "Gentle, respectful, and prone to melancholy.",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 17,
+          "set": {
+            "chapter_summary": "Agatha greets the mysterious visitor, kisses her hands to show welcome, and later plays the guitar and sings for her.",
+            "current_objective": "Welcome the stranger, participate in cottage activities, and help teach the visitor their language.",
+            "definition": "Agatha. Ever-gentle.",
+            "occupation": "cottager",
+            "personality_traits": "Gentle and welcoming"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits",
+            "occupation"
+          ]
+        },
+        {
+          "ordinal": 18,
+          "set": {
+            "chapter_summary": "Agatha is thrown into a prison in Paris as a consequence of Felix helping the merchant escape.",
+            "definition": "Agatha is the sister of Felix and daughter of De Lacey. She had ranked with ladies of the highest distinction.",
+            "personality_traits": "Gentle and refined"
+          },
+          "remove": [
+            "current_objective"
+          ],
+          "changed": [
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 19,
+          "set": {
+            "current_objective": "Live contented and happy in the cottage while enjoying amusement, conversation, and the presence of Safie.",
+            "definition": "Inhabitant of the cottage. Fainted from horror and consternation upon beholding the creature.",
+            "personality_traits": "Gentle and content"
+          },
+          "remove": [
+            "chapter_summary"
+          ],
+          "changed": [
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 20,
+          "set": {
+            "chapter_summary": "Agatha departs from the cottage with Felix and the others, never to be seen by the creature again.",
+            "current_objective": "To depart from the cottage safely.",
+            "definition": "Possesses gentle eyes.",
+            "personality_traits": "Gentle",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "safie",
+      "versions": [
+        {
+          "ordinal": 17,
+          "set": {
+            "aliases": [
+              "Arabian",
+              "Safie"
+            ],
+            "chapter_summary": "Safie arrives at the cottage, bringing joy to Felix, Agatha, and the old man. She takes lessons to learn the language and plays the guitar and sings for them.",
+            "current_objective": "Learn the language of the cottagers.",
+            "definition": "An Arabian stranger. Called a lovely stranger. Referred to as Safie.",
+            "display_name": "Safie",
+            "location": "the cottage",
+            "narrative_role": "secondary",
+            "personality_traits": "Gay and happy.",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 18,
+          "set": {
+            "chapter_summary": "Safie's backstory is recounted: born to a Christian Arab mother and a Turkish merchant, she defied her father's wishes to return to Asia, escaped Italy after he ordered her to abandon Felix, and traveled alone to Germany to find her lover.",
+            "definition": "Daughter of a Turkish merchant. Her mother was a Christian Arab seized and made a slave by the Turks. Refused to return to Asia to be immured in a haram. Fled Italy for Germany to find Felix after her father ordered her to return to her native country.",
+            "personality_traits": "Grateful and independent"
+          },
+          "remove": [
+            "current_objective"
+          ],
+          "changed": [
+            "aliases",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits",
+            "occupation"
+          ]
+        },
+        {
+          "ordinal": 19,
+          "set": {
+            "chapter_summary": "Safie's presence brings happiness and a greater degree of plenty to the cottage. Later, she enters the cottage, flees in horror upon seeing the monster, and is unable to assist Agatha after she faints.",
+            "current_objective": "Live in the cottage and share in the happiness of its inhabitants.",
+            "definition": "Inhabitant of the cottage.",
+            "personality_traits": "Easily frightened by monsters"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 20,
+          "set": {
+            "chapter_summary": "Safie is mentioned as having received geography lessons from Felix, which indirectly helped the creature learn about different countries and Geneva.",
+            "narrative_role": "background_character"
+          },
+          "remove": [
+            "current_objective",
+            "definition",
+            "location",
+            "personality_traits"
+          ],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 28,
+          "set": {
+            "chapter_summary": "Safie is mentioned through the letters she wrote with Felix, which helped convince the listener of the truth of Frankenstein's narrative.",
+            "definition": "Has letters that were shown as part of a tale."
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "margaret",
+      "versions": [
+        {
+          "ordinal": 1,
+          "set": {
+            "aliases": [
+              "Margaret",
+              "Mrs. Saville"
+            ],
+            "chapter_summary": "Margaret is addressed in a letter from her brother, who assures her of his safety and shares his plans for his northern expedition.",
+            "current_objective": "Receiving and reading letters from her brother regarding his voyage.",
+            "definition": "Recipient of letters from her brother.",
+            "display_name": "Margaret",
+            "location": "England",
+            "narrative_role": "minor",
+            "personality_traits": "Reserved and concerned for her brother's safety.",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "chapter_summary",
+            "current_objective",
+            "definition",
+            "display_name",
+            "location",
+            "personality_traits",
+            "status"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "set": {
+            "chapter_summary": "Margaret is addressed by her brother in a letter from Archangel, where he laments to her his lack of a sympathetic friend.",
+            "definition": "Recipient of letters from her brother. Referred to as the writer's sister.",
+            "narrative_role": "minor",
+            "personality_traits": "Gentle and sympathetic"
+          },
+          "remove": [],
+          "changed": [
+            "aliases",
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "set": {
+            "chapter_summary": "Margaret is addressed as the recipient of a letter from her brother, who informs her he is safe and advancing on his voyage."
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "chapter_summary"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "set": {
+            "chapter_summary": "Margaret is addressed as the recipient of Letter IV from her brother, detailing an encounter with ice and a mysterious stranger.",
+            "definition": "Recipient of letters from the ship captain.",
+            "personality_traits": "Distant recipient of correspondence",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 28,
+          "set": {
+            "chapter_summary": "Margaret is addressed by her brother in his letters, receiving the tragic tale of a stranger's death and news of her brother's journey.",
+            "definition": "Beloved sister. Recipient of letters. Has a husband and lovely children.",
+            "personality_traits": "Distant and anxious recipient of correspondence"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "ernest",
+      "versions": [
+        {
+          "ordinal": 10,
+          "set": {
+            "aliases": [
+              "Ernest"
+            ],
+            "chapter_summary": "Ernest is mentioned in a letter as being sixteen, active, and desiring a military career, though his family wishes to wait for his older brother's return.",
+            "definition": "He is now sixteen years old. He is full of activity and spirit. He desires to be a true Swiss and enter into foreign service. He looks upon study as an odious fetter.",
+            "display_name": "Ernest",
+            "location": "Geneva",
+            "narrative_role": "background_character",
+            "personality_traits": "Active and spirited",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "occupation",
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "set": {
+            "chapter_summary": "Ernest welcomes Victor home, recounts the tragic loss of William, and explains that Justine Moritz has been accused of the murder.",
+            "definition": "Brother of Victor. Informs Victor about the family's misery and the accusation against Justine Moritz.",
+            "narrative_role": "secondary",
+            "personality_traits": "Sorrowful and communicative"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 25,
+          "set": {
+            "chapter_summary": "Ernest is merely mentioned by the father as someone Victor will soon visit in Geneva.",
+            "current_objective": "None in this chapter.",
+            "definition": "Mentioned by the father as someone Victor would soon visit.",
+            "personality_traits": "Not described in this chapter.",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits",
+            "current_objective"
+          ]
+        },
+        {
+          "ordinal": 27,
+          "set": {
+            "chapter_summary": "Ernest is noted as still living in Geneva when the protagonist returns, but his father soon dies following the cumulative tragedies.",
+            "definition": "Alive and living in Geneva.",
+            "personality_traits": "Not described in the text."
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "kirwin",
+      "versions": [
+        {
+          "ordinal": 24,
+          "set": {
+            "aliases": [
+              "Kirwin",
+              "Mr. Kirwin"
+            ],
+            "chapter_summary": "Mr. Kirwin is mentioned as the magistrate before whom the protagonist is ordered to give an account of a murder.",
+            "current_objective": "To have someone give an account of themselves regarding the death of a murdered gentleman.",
+            "definition": "Mr. Kirwin is a magistrate.",
+            "display_name": "Kirwin",
+            "narrative_role": "minor",
+            "occupation": "magistrate",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "occupation",
+            "definition",
+            "current_objective",
+            "chapter_summary"
+          ]
+        },
+        {
+          "ordinal": 25,
+          "set": {
+            "chapter_summary": "Mr. Kirwin acts as a magistrate who oversees the protagonist's case, provides him with medical care and a prison room during his illness, examines his papers to contact his father, and helps arrange his defense until he is liberated.",
+            "definition": "He is a magistrate. He is kind and shows extreme care for the accused.",
+            "narrative_role": "secondary",
+            "personality_traits": "Compassionate, fair, and dutiful."
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "turk",
+      "versions": [
+        {
+          "ordinal": 18,
+          "set": {
+            "aliases": [
+              "the Turk",
+              "the merchant",
+              "the father of Safie"
+            ],
+            "chapter_summary": "Freed from a Paris prison by Felix the night before his execution, he flees through Lyons to Leghorn, promising Felix Safie's hand while secretly loathing the match; when Felix is ruined he orders Safie to forget him and, fearing discovery, sails for Constantinople, leaving her to follow with his property.",
+            "current_objective": "Escape the French government and return to Constantinople with his daughter and property, without letting Safie marry a Christian.",
+            "definition": "Safie's father, a wealthy Turkish merchant long resident in Paris, condemned to death there unjustly, it was judged for his religion and wealth; Felix De Lacey freed him, and he repaid Felix with betrayal.",
+            "display_name": "Turk",
+            "location": "Leghorn",
+            "narrative_role": "minor",
+            "occupation": "Merchant",
+            "personality_traits": "Calculating, ungrateful, deceitful, tyrannical toward his daughter",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": []
+        }
+      ]
+    },
+    {
+      "slug": "de-lacey",
+      "versions": [
+        {
+          "ordinal": 18,
+          "set": {
+            "aliases": [
+              "De Lacey"
+            ],
+            "chapter_summary": "De Lacey is introduced through a recounted history as a blind French man from a good family who was imprisoned by the French government due to his son Felix's actions.",
+            "current_objective": "None in this chapter; his past history is being recounted.",
+            "definition": "An old man descended from a good family in France. Imprisoned by the French government due to the plot of Felix.",
+            "display_name": "De Lacey",
+            "location": "cottage",
+            "narrative_role": "secondary",
+            "personality_traits": "Respected and beloved in his past affluence.",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 19,
+          "set": {
+            "chapter_summary": "De Lacey is alone at his cottage when a stranger enters asking for warmth and rest. Being blind, De Lacey kindly offers to try to relieve his wants.",
+            "current_objective": "To relieve the stranger's wants while his children are from home.",
+            "definition": "Blind old man. Acts as a host to a traveller.",
+            "occupation": "cottager",
+            "personality_traits": "Kind and hospitable"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits",
+            "occupation"
+          ]
+        },
+        {
+          "ordinal": 20,
+          "set": {
+            "current_objective": "To remain safe and flee from the cottage with his family.",
+            "definition": "Old man. Mild of voice.",
+            "personality_traits": "Mild and vulnerable",
+            "narrative_role": "background_character"
+          },
+          "remove": [
+            "chapter_summary",
+            "location"
+          ],
+          "changed": [
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "krempe",
+      "versions": [
+        {
+          "ordinal": 7,
+          "set": {
+            "aliases": [
+              "Krempe",
+              "Mr. Krempe",
+              "professor of natural philosophy"
+            ],
+            "chapter_summary": "Professor Krempe meets the protagonist, harshly criticizes his study of ancient alchemists as nonsense, provides a list of new books, and mentions his upcoming lectures.",
+            "current_objective": "To teach natural philosophy and dismiss the protagonist's study of alchemists.",
+            "definition": "Professor of natural philosophy. Described as an uncouth man. Described as a little squat man, with a gruff voice and a repulsive countenance.",
+            "display_name": "Krempe",
+            "location": "Ingolstadt",
+            "narrative_role": "secondary",
+            "occupation": "professor of natural philosophy",
+            "personality_traits": "Uncouth, gruff, and blunt",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "occupation",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 8,
+          "set": {
+            "aliases": [
+              "Krempe",
+              "M. Krempe",
+              "Mr. Krempe",
+              "Professor Krempe",
+              "professor of natural philosophy"
+            ],
+            "chapter_summary": "Krempe is noted for having sound sense and information despite repulsive manners, and he asks the narrator about Cornelius Agrippa with a sly smile.",
+            "current_objective": "To interact with the protagonist at the university.",
+            "definition": "He is a man of science at the university. He possesses sound sense and real information.",
+            "personality_traits": "Possesses sound sense, repulsive physiognomy and manners, sly",
+            "narrative_role": "minor"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "r-walton",
+      "versions": [
+        {
+          "ordinal": 1,
+          "set": {
+            "aliases": [
+              "R. Walton",
+              "Walton"
+            ],
+            "chapter_summary": "From St. Petersburgh, Walton assures his sister of his safety, describes his dream of the pole, his boyhood reading of uncle Thomas's books of voyages, his failure as a poet, and his years of training on whalers, and plans to hire a ship at Archangel.",
+            "current_objective": "Travel on to Archangel, hire a ship and a crew of whale-fishers, and sail north in June.",
+            "definition": "Englishman who has spent six years preparing an expedition to the North Pole, hoping to find a passage near the pole and the secret of the magnet. Writes to his sister Margaret.",
+            "display_name": "R. Walton",
+            "location": "St. Petersburgh",
+            "narrative_role": "protagonist",
+            "occupation": "Explorer",
+            "personality_traits": "Ardent, ambitious, romantic, self-disciplined",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 2,
+          "set": {
+            "aliases": [
+              "Robert Walton",
+              "R. Walton",
+              "Walton"
+            ],
+            "chapter_summary": "At Archangel, Walton has hired a vessel and is engaging sailors; he laments to Margaret that he has no friend to share his hopes, describes his lieutenant and the generous master of the ship, and prepares to depart for unexplored regions.",
+            "current_objective": "Gather his crew and sail north as soon as the weather allows.",
+            "definition": "Self-educated English explorer, twenty-eight, who has hired a vessel at Archangel for a voyage to the pole. Writes to his sister Margaret.",
+            "location": "Archangel",
+            "narrative_role": "protagonist",
+            "occupation": "Captain",
+            "personality_traits": "Lonely, ardent, impatient, romantic, gentle toward his crew"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 3,
+          "set": {
+            "chapter_summary": "In a short letter sent home by a merchantman, Walton tells Margaret he is safe and well advanced on his voyage, among floating ice in a high latitude, and promises to be cool, persevering, and prudent.",
+            "current_objective": "Press on north safely and prudently toward the pole.",
+            "definition": "Captain of a ship on a voyage of discovery toward the North Pole. Writes to his sister Margaret.",
+            "location": "his ship at sea, in a high northern latitude",
+            "personality_traits": "Confident, determined, affectionate"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 4,
+          "set": {
+            "aliases": [
+              "Captain Walton",
+              "Walton"
+            ],
+            "chapter_summary": "Walton listens as the stranger agrees to share the story of his unparalleled misfortunes to guide and warn Walton in his own pursuits.",
+            "current_objective": "To listen to the stranger's tale of disasters and learn from his experiences.",
+            "definition": "Captain. Seeks knowledge and wisdom.",
+            "location": "Walton's ship in the Arctic ice",
+            "narrative_role": "protagonist",
+            "personality_traits": "Inquisitive and ambitious"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "occupation",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 28,
+          "set": {
+            "chapter_summary": "Walton records the stranger's final requests, listens to his dying reflections on lost loved ones, and receives a warning to avoid ambition.",
+            "current_objective": "To consider his duties, return to England, and decide whether to pursue the stranger's enemy.",
+            "definition": "Captain of a vessel bound for the North Pole. Writes the letters to his sister Margaret Saville.",
+            "display_name": "Walton",
+            "narrative_role": "protagonist",
+            "personality_traits": "Empathetic and reflective"
+          },
+          "remove": [],
+          "changed": [
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "beaufort",
+      "versions": [
+        {
+          "ordinal": 5,
+          "set": {
+            "aliases": [
+              "Beaufort"
+            ],
+            "chapter_summary": "Beaufort fell into poverty, retreated with his daughter to Lucerne in pride and wretchedness, fell sick, and died.",
+            "current_objective": "To live in obscurity in Lucerne after losing his fortune.",
+            "definition": "Merchant who fell into poverty. Possessed a proud and unbending disposition.",
+            "display_name": "Beaufort",
+            "location": "Lucerne",
+            "narrative_role": "minor",
+            "occupation": "merchant",
+            "personality_traits": "Proud and unbending",
+            "status": "dead"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "occupation",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "caroline-beaufort",
+      "versions": [
+        {
+          "ordinal": 5,
+          "set": {
+            "aliases": [
+              "Caroline",
+              "Caroline Beaufort"
+            ],
+            "chapter_summary": "Caroline Beaufort tenderly attends to her sick father and uses her courage to earn a meager living through plain work and plaiting straw.",
+            "current_objective": "Earn a living to support herself and her sick father.",
+            "definition": "Attended her sick father with the greatest tenderness. Possessed a mind of an uncommon mould and rose to support herself in adversity.",
+            "display_name": "Caroline Beaufort",
+            "narrative_role": "secondary",
+            "personality_traits": "Courageous, devoted, and resilient",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "location",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "set": {
+            "chapter_summary": "Caroline Beaufort is visually represented in a historical painting over the mantelpiece in the library, shown kneeling in despair by her dead father's coffin.",
+            "definition": "Depicted in a picture as kneeling by the coffin of her dead father in an agony of despair. Portrayed with rustic garb, a pale cheek, and an air of dignity and beauty.",
+            "personality_traits": "Dignified and beautiful",
+            "status": "dead",
+            "narrative_role": "background_character"
+          },
+          "remove": [
+            "current_objective"
+          ],
+          "changed": [
+            "status",
+            "definition",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "daniel-nugent",
+      "versions": [
+        {
+          "ordinal": 25,
+          "set": {
+            "aliases": [
+              "Daniel Nugent"
+            ],
+            "current_objective": "Testify before the magistrate about the events of the previous night.",
+            "definition": "Witness to a dead body. Swore he saw a boat near the shore.",
+            "display_name": "Daniel Nugent",
+            "narrative_role": "minor",
+            "occupation": "fisherman",
+            "personality_traits": "Observant and cooperative.",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "occupation",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "madame-moritz",
+      "versions": [
+        {
+          "ordinal": 10,
+          "set": {
+            "aliases": [
+              "Madame Moritz"
+            ],
+            "chapter_summary": "Madame Moritz treated her daughter Justine ill and could not endure her after her husband's death. Later, struck by grief over the deaths of her other children, she grew troubled in conscience and called Justine home, frequently accusing her of causing their deaths before dying of a decline.",
+            "definition": "Widow with four children. Roman Catholic.",
+            "display_name": "Madame Moritz",
+            "narrative_role": "minor",
+            "personality_traits": "Vacillating, harsh, and guilt-ridden",
+            "status": "dead"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "definition",
+            "current_objective",
+            "chapter_summary",
+            "personality_traits"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "thomas",
+      "versions": [
+        {
+          "ordinal": 1,
+          "set": {
+            "aliases": [
+              "Thomas",
+              "uncle Thomas"
+            ],
+            "chapter_summary": "Uncle Thomas is briefly mentioned as having a library composed of a history of all voyages made for purposes of discovery.",
+            "current_objective": "None in this chapter.",
+            "definition": "Possesses a library composed of a history of all voyages made for purposes of discovery.",
+            "display_name": "Thomas",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "display_name",
+            "aliases",
+            "status",
+            "definition",
+            "current_objective",
+            "chapter_summary"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "set": {
+            "chapter_summary": "Uncle Thomas is briefly mentioned in relation to his books of voyages that were read during the narrator's youth.",
+            "definition": "Has books of voyages.",
+            "narrative_role": "background_character"
+          },
+          "remove": [],
+          "changed": [
+            "definition",
+            "chapter_summary"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "the-traveller",
+      "versions": [
+        {
+          "ordinal": 4,
+          "set": {
+            "aliases": [
+              "the traveller"
+            ],
+            "chapter_summary": "Walton's crew watch him through telescopes as he guides a dog sledge north across the ice until he is lost from sight. The European they rescue next day says he is pursuing one who fled from him, and Walton fancies this was the man they saw.",
+            "definition": "An unknown traveller of man's shape but apparently gigantic stature, seen from Walton's ice-bound ship driving a dog sledge north; Walton took him for a savage inhabitant of some undiscovered island.",
+            "display_name": "The traveller",
+            "location": "the Arctic ice, north of Walton's ship",
+            "narrative_role": "background_character",
+            "personality_traits": "Unknown",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 9,
+          "set": {
+            "aliases": [
+              "the being",
+              "the wretch",
+              "the monster"
+            ],
+            "chapter_summary": "Brought to life on a dreary November night, he opens his dull yellow eye; Victor flees in horror, and the creature comes to his bedside, holds up the curtain, mutters inarticulate sounds and stretches out a hand, but Victor escapes. By next morning he has left the apartment and vanished.",
+            "definition": "A being of gigantic stature that Victor Frankenstein assembled over nearly two years and brought to life in his Ingolstadt apartment: yellow skin barely covering muscles and arteries, watery eyes, flowing black hair, shrivelled complexion and straight black lips.",
+            "location": "Ingolstadt",
+            "narrative_role": "secondary",
+            "personality_traits": "Inarticulate, newly aware; reaches out to his maker",
+            "display_name": "The Creature"
+          },
+          "remove": [],
+          "changed": [
+            "display_name"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "set": {
+            "aliases": [
+              "the being",
+              "the wretch",
+              "the monster",
+              "the daemon"
+            ],
+            "chapter_summary": "During a night storm he steals from behind a clump of trees near the spot where William was murdered; lit by lightning, he passes Victor, climbs the near-perpendicular face of Mont Salêve and disappears. Victor becomes convinced he is William's murderer, though Justine Moritz has been accused.",
+            "definition": "The gigantic, deformed being Victor Frankenstein created and abandoned in Ingolstadt; Victor now believes he murdered Victor's little brother William near Geneva.",
+            "location": "Plainpalais and Mont Salêve, near Geneva",
+            "narrative_role": "antagonist",
+            "personality_traits": "Elusive, agile, superhumanly strong climber; seen by Victor as depraved"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 12,
+          "set": {
+            "chapter_summary": "He does not appear, but his crime drives the chapter: Justine Moritz is tried for William's murder on the evidence of the miniature found in her pocket, condemned and executed, while Victor wonders whether the daemon also betrayed her to death in his hellish sport.",
+            "definition": "The being Victor Frankenstein created, whom Victor does not for a minute doubt murdered his brother William; no one else knows he exists.",
+            "personality_traits": "Seen by Victor as malicious and hellish"
+          },
+          "remove": [
+            "location"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 14,
+          "set": {
+            "aliases": [
+              "the being",
+              "the wretch",
+              "the monster",
+              "the daemon",
+              "the fiend"
+            ],
+            "chapter_summary": "He bounds across the glacier toward Victor with superhuman speed, eludes Victor's attack, pleads that he is Victor's creature and miserably alone, and threatens vengeance if spurned. Victor agrees to listen, and he leads him to a hut on the mountain, lights a fire and begins his tale.",
+            "current_objective": "Make Victor hear his tale and do his duty as creator; he will leave mankind in peace if Victor complies, or glut the maw of death with the blood of Victor's friends if he refuses.",
+            "definition": "Victor Frankenstein's creation, taller, stronger and more supple than any man, now living in the ice caves of the Alps; he says he was born benevolent and good and that misery made him a fiend.",
+            "location": "the Mer de Glace and the hut on Montanvert, below Mont Blanc",
+            "personality_traits": "Eloquent, anguished, proud and threatening; longs for compassion; feels shut out from all bliss"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 15,
+          "set": {
+            "chapter_summary": "He recalls waking to confused sensations, wandering the forest near Ingolstadt, eating berries, discovering fire, and frightening a shepherd out of his hut. Stoned out of a village, he takes refuge in a hovel against a cottage and through a chink watches the old man, the girl and the youth who live there.",
+            "current_objective": "Find food, warmth and shelter, and keep away from the barbarity of man.",
+            "definition": "Victor Frankenstein's creation, who now tells Victor his own story; in his first days he was a helpless being who could not tell one sense from another.",
+            "location": "the forest near Ingolstadt, then a hovel built against a cottage in the countryside",
+            "narrative_role": "protagonist",
+            "personality_traits": "Innocent, curious, quick to learn; moved by music and kindness; fearful of people"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 16,
+          "set": {
+            "chapter_summary": "He stops stealing the poor family's food once he sees it hurts them and secretly gathers their firewood at night, so they speak of a 'good spirit'. He learns words and the cottagers' names, and is filled with despondence when he sees his reflection in a pool.",
+            "current_objective": "Master the cottagers' language so that they might overlook his deformity, then present himself to them and win their love.",
+            "definition": "Victor Frankenstein's creation, telling his story; through his first winter he lived hidden beside a poor cottage family, learning their speech and coming to see himself as a monster.",
+            "location": "the hovel against the cottage of Felix, Agatha and their blind father",
+            "personality_traits": "Kind, sympathetic, diligent learner; lonely and hopeful; ashamed of his looks"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 17,
+          "set": {
+            "chapter_summary": "When Safie arrives at the cottage he learns the language and the science of letters from Felix's lessons to her, hears history from Volney's Ruins of Empires, and learns of property, rank and family. He then asks what he himself is, with no money, friends or kin, and none like him.",
+            "current_objective": "Learn language and letters alongside Safie, and become one among his fellows.",
+            "definition": "Victor Frankenstein's creation, telling his story; by his first spring he understands speech and reads, and has learned he is not even of the same nature as man: more agile and hardy, far taller, and hideously deformed.",
+            "location": "the hovel against the cottagers' cottage",
+            "personality_traits": "Studious, reflective, morally sensitive; anguished by his loneliness and deformity"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 18,
+          "set": {
+            "chapter_summary": "He relays the history he overheard of the De Laceys' ruin in Paris for helping Safie's father escape, and of Safie's flight to join Felix. He secretly obtained writing implements in the hovel and copied Safie's letters, which he promises to give Victor as proof of his tale.",
+            "current_objective": "Understand the story of his beloved cottagers.",
+            "definition": "Victor Frankenstein's creation, telling his story; hidden by the De Lacey cottage, he has come to call the family his friends and protectors.",
+            "location": "the hovel beside the De Lacey cottage",
+            "personality_traits": "Attentive, admiring of the cottagers' virtue, resourceful"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 19,
+          "set": {
+            "chapter_summary": "He finds a portmanteau of books and reads Victor's laboratory journal, cursing his creator. In winter he speaks with old De Lacey while the others are out and begs his protection, but Felix returns, tears him from his father's knees and beats him; he refrains from harming Felix and flees to his hovel.",
+            "current_objective": "Win the goodwill of the blind old De Lacey first, so that the family will accept him and give him the kindness and sympathy he longs for.",
+            "definition": "Victor Frankenstein's creation, telling his story; self-taught from Paradise Lost, Plutarch and Werther, he has read Victor's journal of his making and knows his creator abandoned him.",
+            "location": "the hovel and the De Lacey cottage",
+            "personality_traits": "Bookish, yearning for love and acceptance, self-restrained under attack; envious and bitter in despondency"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 20,
+          "set": {
+            "chapter_summary": "After the De Laceys flee he burns their cottage and travels toward Geneva to find his creator; on the way he saves a girl from a river and is shot for it. Near Geneva he seizes young William to make him a companion, strangles him on learning he is a Frankenstein, plants the boy's portrait on the sleeping Justine, and ends by demanding a mate.",
+            "current_objective": "Force Victor to create a female companion of his own species, as deformed and horrible as himself.",
+            "definition": "Victor Frankenstein's creation, telling his story; rejected by the De Laceys and shot for saving a drowning girl, he has declared everlasting war on mankind and on his creator. He confesses he murdered William Frankenstein and framed Justine Moritz.",
+            "location": "from the De Lacey cottage across Germany to the fields near Geneva, then the Alps",
+            "personality_traits": "Vengeful, enraged by rejection, still capable of tenderness and pity; cunning and malicious in his crimes"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 21,
+          "set": {
+            "chapter_summary": "He demands a mate, swears inextinguishable hatred and Victor's destruction if refused, then pleads and reasons until Victor consents. Swearing never to be seen again once he has his companion, he promises to watch Victor's work and bounds away down the mountain faster than an eagle.",
+            "current_objective": "Have Victor make him a female companion as hideous as himself, with whom he swears to quit Europe for the wilds of South America.",
+            "definition": "Victor Frankenstein's creation and William's murderer, who says he is malicious because he is miserable and that his vices are the children of a forced solitude.",
+            "location": "the hut on Montanvert and the sea of ice",
+            "narrative_role": "antagonist",
+            "personality_traits": "Persuasive, passionate, alternately pleading and menacing; vegetarian; longs for sympathy"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 24,
+          "set": {
+            "chapter_summary": "He appears grinning at the laboratory casement and sees Victor tear the half-finished female to pieces; he withdraws with a howl, then returns to demand Victor keep his promise. When Victor refuses, he declares himself Victor's master, vows revenge, warns 'I shall be with you on your wedding night', and escapes in a boat.",
+            "current_objective": "After Victor destroys the half-made female, revenge on Victor: to make him so wretched that the light of day is hateful to him.",
+            "definition": "Victor Frankenstein's creation and William's murderer, who secretly followed Victor from Switzerland through England and Scotland to see his promised mate made.",
+            "location": "Victor's laboratory on a remote island of the Orkneys, then by boat toward the mainland",
+            "personality_traits": "Patient stalker, imperious and vengeful when betrayed; desperate not to be alone"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 25,
+          "set": {
+            "chapter_summary": "He does not appear, but his revenge drives the chapter: Clerval is found strangled on the Irish shore, with the black mark of fingers on his neck, just where Victor's boat comes ashore; Victor is charged with the murder, falls into a two-month fever, and is freed only when it is proved he was on the Orkneys that night.",
+            "definition": "Victor Frankenstein's creation, sworn to revenge on Victor; Victor knows him as the murderer of William and now of Henry Clerval.",
+            "personality_traits": "Vengeful; strikes at those Victor loves"
+          },
+          "remove": [
+            "current_objective",
+            "location"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 27,
+          "set": {
+            "chapter_summary": "On Victor's wedding night he strangles Elizabeth at the inn at Evian while Victor searches the house for him; he then appears grinning at the open window and points at her corpse, eludes Victor's pistol shot and plunges into the lake. The shock soon kills Victor's father.",
+            "current_objective": "Fulfil his wedding-night threat and leave Victor as desolate as himself.",
+            "definition": "Victor Frankenstein's creation, now the murderer of William, Clerval and Elizabeth; Victor accuses him before a Geneva magistrate, who doubts he can ever be caught.",
+            "location": "the inn at Evian on the shore of Lake Geneva",
+            "personality_traits": "Cruel, mocking, swift and elusive"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 28,
+          "set": {
+            "chapter_summary": "He leads Victor's pursuit from Geneva to the Black Sea, Tartary, Russia and the Frozen Ocean, leaving taunting inscriptions and food so Victor will not give up, and escapes over the ice by dog sledge. After Victor dies on Walton's ship he comes to grieve over the body, tells Walton of his misery and remorse, vows to burn himself, and leaps onto an ice-raft, lost in darkness and distance.",
+            "current_objective": "First, to lead Victor north in a pursuit that feeds his hatred; once Victor is dead, to go to the northern extremity of the globe and burn himself on a funeral pile so no one can make another like him.",
+            "definition": "Victor Frankenstein's creation and the murderer of William, Clerval and Elizabeth; he is the gigantic sledge traveller Walton's crew saw on the ice, and after his creator's death he is consumed by remorse.",
+            "location": "the Arctic ice, then Walton's ship beside Victor's corpse",
+            "personality_traits": "Vengeful and taunting, then grief-stricken and remorseful; eloquent; self-loathing"
+          },
+          "remove": [],
+          "changed": []
+        }
+      ]
+    },
+    {
+      "slug": "victor-s-father",
+      "versions": [
+        {
+          "ordinal": 5,
+          "set": {
+            "aliases": [],
+            "chapter_summary": "He seeks out his ruined friend Beaufort, takes the orphaned Caroline under his protection and marries her, gives up his public functions and travels with her through Italy, Germany and France; returning from Milan, he finds Elizabeth in the villa and allows Caroline to adopt her.",
+            "definition": "Victor's father, of one of Geneva's most distinguished families, respected for his integrity and attention to public business; he married Caroline Beaufort, the daughter of his ruined friend, late in life.",
+            "display_name": "Victor's father",
+            "location": "Italy",
+            "narrative_role": "secondary",
+            "occupation": "Former public official of Geneva (counsellor and syndic family); has relinquished his public functions",
+            "personality_traits": "Upright, just, loyal friend, devoted and protective husband, benevolent",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 6,
+          "set": {
+            "chapter_summary": "At an inn near Thonon, when thirteen-year-old Victor shows him a volume of Cornelius Agrippa, he glances at the titlepage and dismisses it as sad trash without explaining why, and Victor reads on.",
+            "definition": "Victor's father, head of the Frankenstein household in Geneva; not scientific himself.",
+            "location": "Thonon",
+            "narrative_role": "minor",
+            "personality_traits": "Affectionate but dismissive of his son's studies; not scientific"
+          },
+          "remove": [
+            "occupation"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 7,
+          "set": {
+            "chapter_summary": "He decides Victor should study at Ingolstadt to learn other customs, loses his wife Caroline, grants Victor a respite of some weeks, and is there at dawn to bless him on his departure.",
+            "current_objective": "Complete Victor's education by sending him to the university of Ingolstadt.",
+            "definition": "Victor's father, now a widower after Caroline's death of scarlet fever; her dying hope that Victor and Elizabeth will marry is to be his consolation.",
+            "location": "Geneva",
+            "personality_traits": "Caring, attentive to his son's education"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 8,
+          "set": {
+            "chapter_summary": "As Victor's letters stop during his secret labours, his father makes no reproach in his letters, only enquiring more closely into Victor's occupations.",
+            "current_objective": "Hear regularly from Victor.",
+            "definition": "Victor's father at home, who raised him free of superstitious terrors and asked him to write regularly while away at Ingolstadt.",
+            "narrative_role": "background_character",
+            "personality_traits": "Patient, gently watchful, values domestic affection"
+          },
+          "remove": [
+            "location"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 9,
+          "set": {
+            "chapter_summary": "Clerval reports that he is very well and happy but uneasy at Victor's silence; during Victor's long fever Clerval hides the extent of the illness from him, knowing his advanced age and unfitness for so long a journey.",
+            "definition": "Victor's father, a man of advanced age at home with Elizabeth and the younger sons.",
+            "personality_traits": "Anxious for his absent son"
+          },
+          "remove": [
+            "current_objective"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 10,
+          "set": {
+            "chapter_summary": "In Elizabeth's letter he wishes to travel to Ingolstadt to his sick son and is talked out of it by her; she writes that his health is vigorous, that he asks only to see Victor, and that he is not pleased with Ernest's wish to enter foreign service.",
+            "current_objective": "See Victor and be assured he is well; keep Ernest from a military career abroad.",
+            "definition": "Victor's father, uncle to Elizabeth, in vigorous health at the family home in Geneva.",
+            "location": "Geneva",
+            "personality_traits": "Benevolent, devoted to his children"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 11,
+          "set": {
+            "aliases": [
+              "Alphonse Frankenstein"
+            ],
+            "chapter_summary": "He writes to Victor that William has been murdered in Plainpalais, describing how he found the boy's body at dawn, and begs him to return in peace rather than vengeance; at home he greets Victor, believes Justine guilty but hopes she will be acquitted, and promises Elizabeth the law will be applied impartially.",
+            "current_objective": "Bring Victor home to comfort the family, and see Justine's case judged without partiality.",
+            "definition": "Victor's father and Elizabeth's uncle, head of the grieving family in Geneva after his youngest son William is murdered.",
+            "narrative_role": "secondary",
+            "personality_traits": "Loving, grief-stricken, gentle, just, trusts the law",
+            "display_name": "Alphonse Frankenstein"
+          },
+          "remove": [],
+          "changed": [
+            "display_name"
+          ]
+        },
+        {
+          "ordinal": 12,
+          "set": {
+            "chapter_summary": "He attends Justine's trial as a witness with the family; when the condemned Justine asks to see Elizabeth he would rather she did not go but leaves the choice to her.",
+            "definition": "Victor's father, grieving for William, whose household servant Justine is tried and condemned for the murder.",
+            "narrative_role": "minor",
+            "personality_traits": "Grieving, respectful of others' judgment"
+          },
+          "remove": [
+            "current_objective"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 13,
+          "set": {
+            "chapter_summary": "Pained by Victor's gloom, he urges him that immoderate grief is a wrong to the survivors and to himself; the family retires to their house at Bellerive, and his health is deeply shaken.",
+            "current_objective": "Rouse Victor from his excessive grief for the sake of the survivors.",
+            "definition": "Victor's father, his health deeply shaken by William's murder and Justine's execution, trying to hold the mourning family together.",
+            "location": "Bellerive",
+            "personality_traits": "Serene conscience, dutiful, loving, stoic in grief"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 20,
+          "set": {
+            "chapter_summary": "In the Creature's account of William's murder, the boy cries that his papa is a Syndic, M. Frankenstein, and will punish him; the name marks William as kin to the Creature's enemy.",
+            "definition": "Victor's father, a Syndic of Geneva; the father of little William.",
+            "narrative_role": "background_character",
+            "occupation": "Syndic of Geneva",
+            "personality_traits": "Seen by his young son as a powerful protector"
+          },
+          "remove": [
+            "current_objective",
+            "location"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 22,
+          "set": {
+            "chapter_summary": "Glad of Victor's partial recovery, he asks whether Victor loves Elizabeth and proposes an immediate marriage; he consents to Victor's journey to England, hoping change of scene will restore him, and secretly arranges with Elizabeth that Clerval join him at Strasbourg.",
+            "current_objective": "Dispel Victor's melancholy and see him married to Elizabeth without delay.",
+            "definition": "Victor's aging father, who has always looked to Victor's marriage with Elizabeth as the tie of the family's comfort and the stay of his declining years.",
+            "location": "Geneva",
+            "narrative_role": "secondary",
+            "personality_traits": "Kind, candid, anxious for his son, conscious of his age and infirmities"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 25,
+          "set": {
+            "chapter_summary": "He comes to Victor's prison cell, comforts him with news of Elizabeth and Ernest and mourns Clerval; after Victor's acquittal he tries to revive his son's affections, yields to his urging to leave Ireland, and watches over him on the ship to Havre, waking him from a nightmare.",
+            "current_objective": "Nurse Victor back to health and bring him safely home to Geneva.",
+            "definition": "Victor's aged father, summoned to Ireland by Mr. Kirwin's letter after Victor is imprisoned and falls ill there on the charge of murdering Clerval.",
+            "location": "Ireland",
+            "personality_traits": "Devoted, tender, watchful, yielding to his son"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 26,
+          "set": {
+            "chapter_summary": "Resting with Victor in Paris, he tries to lift his despair and, hearing Victor call himself the murderer of William, Justine and Henry, judges his mind deranged and changes the subject; back in Geneva he arranges the wedding within ten days, has part of Elizabeth's inheritance restored by the Austrian government, and is overjoyed on the wedding day, hosting a party at his house.",
+            "current_objective": "Restore Victor's spirits and see him married to Elizabeth.",
+            "definition": "Victor's devoted father, who takes his son's self-accusations of murder for delirium and pins the family's hopes on Victor's marriage to Elizabeth.",
+            "location": "Geneva",
+            "personality_traits": "Indefatigably caring, hopeful, unaware of the real cause of his son's misery"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 27,
+          "set": {
+            "chapter_summary": "When Victor brings him the news of Elizabeth's murder he sinks under it; unable to bear the accumulated horrors, he takes to his bed and within a few days dies in Victor's arms.",
+            "definition": "Victor's venerable old father, who doted on Elizabeth as more than a daughter and died of grief after her murder on her wedding night.",
+            "narrative_role": "minor",
+            "personality_traits": "Excellent and venerable, loving, broken by grief",
+            "status": "dead"
+          },
+          "remove": [
+            "current_objective"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 28,
+          "set": {
+            "chapter_summary": "Before leaving Geneva, Victor kneels at the tomb where William, Elizabeth and his father lie and swears to pursue the daemon; his father's benevolent face returns to Victor in dreams during the chase.",
+            "definition": "Victor's late father, buried in the cemetery at Geneva beside William and Elizabeth; one of the Creature's victims whose names Victor calls on.",
+            "narrative_role": "background_character",
+            "personality_traits": "Remembered as benevolent"
+          },
+          "remove": [],
+          "changed": []
+        }
+      ]
+    },
+    {
+      "slug": "m-waldman",
+      "versions": [
+        {
+          "ordinal": 7,
+          "set": {
+            "aliases": [
+              "M. Waldman"
+            ],
+            "chapter_summary": "Back in town, he lectures on the history and powers of modern chemistry, and Victor's resolve takes fire; when Victor visits him the next day he speaks kindly of the old alchemists, welcomes Victor as a disciple, shows him his laboratory and gives him a list of books.",
+            "current_objective": "Guide his new disciple Victor into a broad study of natural philosophy, mathematics included.",
+            "definition": "Professor of chemistry at Ingolstadt, Krempe's fellow-professor: a benevolent man of about fifty with a remarkably sweet voice, whose lecture on modern chemistry sets Victor on his path.",
+            "display_name": "M. Waldman",
+            "location": "Ingolstadt",
+            "narrative_role": "secondary",
+            "occupation": "Professor of chemistry at the university of Ingolstadt",
+            "personality_traits": "Benevolent, gentle, affable, eloquent, free of contempt or pedantry",
+            "status": "alive"
+          },
+          "remove": [],
+          "changed": []
+        },
+        {
+          "ordinal": 8,
+          "set": {
+            "chapter_summary": "Over two years he smooths Victor's path of knowledge, making abstruse questions clear, and rejoices in his pupil's rapid progress.",
+            "definition": "Victor's professor of chemistry at Ingolstadt, who becomes his true friend and mentor.",
+            "narrative_role": "minor",
+            "personality_traits": "Gentle, frank, good-natured, never dogmatic"
+          },
+          "remove": [
+            "current_objective"
+          ],
+          "changed": []
+        },
+        {
+          "ordinal": 10,
+          "set": {
+            "chapter_summary": "When Victor brings Clerval to meet the professors, he warmly praises Victor's astonishing progress; taking Victor's discomfort for modesty, he turns to the science itself and unknowingly torments him.",
+            "current_objective": "Praise Victor and draw him out on the science.",
+            "definition": "Victor's old chemistry professor and friend at Ingolstadt, unaware of what Victor has created.",
+            "personality_traits": "Kind, warm, well-meaning"
+          },
+          "remove": [],
+          "changed": []
+        }
+      ]
+    }
+  ]
+}

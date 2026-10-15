@@ -1,0 +1,4 @@
+FROM node:24-alpine
+RUN apk add --no-cache rsvg-convert imagemagick imagemagick-jpeg font-dejavu font-liberation
+RUN rsvg-convert --version && magick -size 1x1 xc:white /tmp/probe.jpg && rm /tmp/probe.jpg
+WORKDIR /workspace

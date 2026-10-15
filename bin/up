@@ -89,6 +89,8 @@ main() {
   fi
 
   if [ "${SKIP_CADDY:-false}" != "true" ]; then
+    step "Starting the chapter-aware web guide..."
+    ./bin/web-guide up
     start_caddy
     trust_caddy_cert
   fi

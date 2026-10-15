@@ -1,0 +1,15 @@
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: PerplexityBot
+User-agent: ClaudeBot
+User-agent: CCBot
+Disallow: /*?l=
+Disallow: /*&l=
+Disallow: /*?c=
+Disallow: /*&c=
+
+User-agent: *
+Allow: /
+
+Sitemap: https://enrichreader.com/sitemap.xml
+Sitemap: https://enrichreader.com/guia/sitemap.xml

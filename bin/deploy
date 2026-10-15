@@ -70,7 +70,7 @@ remote_deploy() {
 
     extract_archive() {
       remote_info "Extracting archive to staging..."
-      tar -xzf "/tmp/$ARCHIVE" -C "\$STAGING_DIR"
+      tar --no-same-owner -xzf "/tmp/$ARCHIVE" -C "\$STAGING_DIR"
       rm "/tmp/$ARCHIVE"
     }
 
@@ -92,6 +92,8 @@ remote_deploy() {
         cd "\$STAGING_DIR"
         load_env
         export SKIP_CADDY=true
+        ./bin/build
+        export SKIP_BUILD=true
         ./bin/up
       )
     }
@@ -110,6 +112,8 @@ remote_deploy() {
       (
         cd "$REMOTE_DIR"
         load_env
+        # Recreate after the swap so the read-only bind mount uses the final release path.
+        ./bin/web-guide up
         sudo caddy trust
         
         local conf_file="Caddyfile.\${RAILS_ENV:-development}"
@@ -118,6 +122,9 @@ remote_deploy() {
         # The background Caddy process inherits this session's stdin, stdout and stderr; any of them
         # left open keeps the SSH connection open and the deploy never returns.
         sudo caddy start --config "\$conf_file" </dev/null >/dev/null 2>&1
+        if [ -n "\${INDEXNOW_KEY:-}" ]; then
+          ./bin/web-guide-node scripts/web-guide/indexnow.mjs submit
+        fi
       )
     }
 

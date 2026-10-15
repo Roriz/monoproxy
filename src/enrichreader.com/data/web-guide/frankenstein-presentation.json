@@ -1,0 +1,53 @@
+{
+  "source": {
+    "edition": "Standard Ebooks · texto de 1831",
+    "cover_sha256": "e82be2b6d8f10955cdeb9f64e703997be1c7ef81206eb537f11502d9e14e3fb5"
+  },
+  "app_published": false,
+  "links": [
+    {
+      "kind": "site",
+      "label": "Ler esta edição · Standard Ebooks",
+      "url": "https://standardebooks.org/ebooks/mary-shelley/frankenstein"
+    }
+  ],
+  "assets": {
+    "thumb": {
+      "path": "/guia/frankenstein/cover-thumb-6cef1db0.webp",
+      "width": 48,
+      "height": 72,
+      "type": "image/webp",
+      "bytes": 1540
+    },
+    "cover": {
+      "path": "/guia/frankenstein/cover-cover-763a68bc.webp",
+      "width": 192,
+      "height": 288,
+      "type": "image/webp",
+      "bytes": 12418
+    },
+    "about": {
+      "path": "/guia/frankenstein/cover-about-2d273639.webp",
+      "width": 144,
+      "height": 216,
+      "type": "image/webp",
+      "bytes": 7570
+    },
+    "shelf": {
+      "path": "/guia/frankenstein/cover-shelf-5702f7f5.webp",
+      "width": 512,
+      "height": 768,
+      "type": "image/webp",
+      "bytes": 79170
+    },
+    "og": {
+      "path": "/guia/frankenstein/og-public-domain-b3090316.jpg",
+      "width": 1200,
+      "height": 630,
+      "type": "image/jpeg",
+      "bytes": 44266
+    }
+  },
+  "public_domain_example": true,
+  "example_basis": "Owner-authorized public-domain first example; no author approval implied."
+}

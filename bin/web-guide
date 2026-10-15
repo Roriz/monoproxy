@@ -1,0 +1,27 @@
+#!/bin/bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+operator_command() {
+  local guide_container=""
+  if command -v docker >/dev/null 2>&1; then
+    guide_container=$(docker compose -p monoproxy-web-guide -f compose.web-guide.yml ps --status running -q web-guide 2>/dev/null || true)
+  fi
+  if [ -n "$guide_container" ]; then
+    docker compose -p monoproxy-web-guide -f compose.web-guide.yml exec -T web-guide node "/site/lib/web-guide/$1" "${@:2}"
+    if [ "$1" = "token-cli.mjs" ]; then
+      docker compose -p monoproxy-web-guide -f compose.web-guide.yml restart web-guide >/dev/null
+    fi
+  else
+    node "src/enrichreader.com/lib/web-guide/$1" "${@:2}"
+  fi
+}
+case "${1:-dev}" in
+  dev) exec node src/enrichreader.com/lib/web-guide/server.mjs ;;
+  up) ./bin/web-guide-node scripts/web-guide/validate-map.mjs; docker compose -p monoproxy-web-guide -f compose.web-guide.yml up -d --wait --force-recreate ;;
+  down) docker compose -p monoproxy-web-guide -f compose.web-guide.yml down ;;
+  inbox|approvals|notifications) operator_command report-cli.mjs "$1" ;;
+  reports) operator_command report-cli.mjs ;;
+  token) shift; operator_command token-cli.mjs "$@" ;;
+  reports-docker) docker compose -p monoproxy-web-guide -f compose.web-guide.yml exec -T web-guide node /site/lib/web-guide/report-cli.mjs ;;
+  *) echo 'Usage: bin/web-guide [dev|up|down|reports|reports-docker|inbox|approvals|notifications|token]' >&2; exit 1 ;;
+esac

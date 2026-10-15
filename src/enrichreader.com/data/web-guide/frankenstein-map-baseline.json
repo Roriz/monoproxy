@@ -1,0 +1,292 @@
+{
+  "series": "frankenstein",
+  "books": [
+    {
+      "l": 1,
+      "status": "complete",
+      "end_cut": "end-book-1",
+      "items": [
+        {
+          "ordinal": 1,
+          "kind": "section",
+          "number": 1,
+          "part": "letters",
+          "label": "Carta 1",
+          "gender": "f",
+          "source_file": 8,
+          "cut_before": "before-1"
+        },
+        {
+          "ordinal": 2,
+          "kind": "section",
+          "number": 2,
+          "part": "letters",
+          "label": "Carta 2",
+          "gender": "f",
+          "source_file": 9,
+          "cut_before": "before-2"
+        },
+        {
+          "ordinal": 3,
+          "kind": "section",
+          "number": 3,
+          "part": "letters",
+          "label": "Carta 3",
+          "gender": "f",
+          "source_file": 10,
+          "cut_before": "before-3"
+        },
+        {
+          "ordinal": 4,
+          "kind": "section",
+          "number": 4,
+          "part": "letters",
+          "label": "Carta 4",
+          "gender": "f",
+          "source_file": 11,
+          "cut_before": "before-4"
+        },
+        {
+          "ordinal": 5,
+          "kind": "chapter",
+          "number": 1,
+          "part": "chapters",
+          "label": "Cap. 1",
+          "gender": "m",
+          "source_file": 12,
+          "cut_before": "before-5"
+        },
+        {
+          "ordinal": 6,
+          "kind": "chapter",
+          "number": 2,
+          "part": "chapters",
+          "label": "Cap. 2",
+          "gender": "m",
+          "source_file": 13,
+          "cut_before": "before-6"
+        },
+        {
+          "ordinal": 7,
+          "kind": "chapter",
+          "number": 3,
+          "part": "chapters",
+          "label": "Cap. 3",
+          "gender": "m",
+          "source_file": 14,
+          "cut_before": "before-7"
+        },
+        {
+          "ordinal": 8,
+          "kind": "chapter",
+          "number": 4,
+          "part": "chapters",
+          "label": "Cap. 4",
+          "gender": "m",
+          "source_file": 15,
+          "cut_before": "before-8"
+        },
+        {
+          "ordinal": 9,
+          "kind": "chapter",
+          "number": 5,
+          "part": "chapters",
+          "label": "Cap. 5",
+          "gender": "m",
+          "source_file": 16,
+          "cut_before": "before-9"
+        },
+        {
+          "ordinal": 10,
+          "kind": "chapter",
+          "number": 6,
+          "part": "chapters",
+          "label": "Cap. 6",
+          "gender": "m",
+          "source_file": 17,
+          "cut_before": "before-10"
+        },
+        {
+          "ordinal": 11,
+          "kind": "chapter",
+          "number": 7,
+          "part": "chapters",
+          "label": "Cap. 7",
+          "gender": "m",
+          "source_file": 18,
+          "cut_before": "before-11"
+        },
+        {
+          "ordinal": 12,
+          "kind": "chapter",
+          "number": 8,
+          "part": "chapters",
+          "label": "Cap. 8",
+          "gender": "m",
+          "source_file": 19,
+          "cut_before": "before-12"
+        },
+        {
+          "ordinal": 13,
+          "kind": "chapter",
+          "number": 9,
+          "part": "chapters",
+          "label": "Cap. 9",
+          "gender": "m",
+          "source_file": 20,
+          "cut_before": "before-13"
+        },
+        {
+          "ordinal": 14,
+          "kind": "chapter",
+          "number": 10,
+          "part": "chapters",
+          "label": "Cap. 10",
+          "gender": "m",
+          "source_file": 21,
+          "cut_before": "before-14"
+        },
+        {
+          "ordinal": 15,
+          "kind": "chapter",
+          "number": 11,
+          "part": "chapters",
+          "label": "Cap. 11",
+          "gender": "m",
+          "source_file": 22,
+          "cut_before": "before-15"
+        },
+        {
+          "ordinal": 16,
+          "kind": "chapter",
+          "number": 12,
+          "part": "chapters",
+          "label": "Cap. 12",
+          "gender": "m",
+          "source_file": 23,
+          "cut_before": "before-16"
+        },
+        {
+          "ordinal": 17,
+          "kind": "chapter",
+          "number": 13,
+          "part": "chapters",
+          "label": "Cap. 13",
+          "gender": "m",
+          "source_file": 24,
+          "cut_before": "before-17"
+        },
+        {
+          "ordinal": 18,
+          "kind": "chapter",
+          "number": 14,
+          "part": "chapters",
+          "label": "Cap. 14",
+          "gender": "m",
+          "source_file": 25,
+          "cut_before": "before-18"
+        },
+        {
+          "ordinal": 19,
+          "kind": "chapter",
+          "number": 15,
+          "part": "chapters",
+          "label": "Cap. 15",
+          "gender": "m",
+          "source_file": 26,
+          "cut_before": "before-19"
+        },
+        {
+          "ordinal": 20,
+          "kind": "chapter",
+          "number": 16,
+          "part": "chapters",
+          "label": "Cap. 16",
+          "gender": "m",
+          "source_file": 27,
+          "cut_before": "before-20"
+        },
+        {
+          "ordinal": 21,
+          "kind": "chapter",
+          "number": 17,
+          "part": "chapters",
+          "label": "Cap. 17",
+          "gender": "m",
+          "source_file": 28,
+          "cut_before": "before-21"
+        },
+        {
+          "ordinal": 22,
+          "kind": "chapter",
+          "number": 18,
+          "part": "chapters",
+          "label": "Cap. 18",
+          "gender": "m",
+          "source_file": 29,
+          "cut_before": "before-22"
+        },
+        {
+          "ordinal": 23,
+          "kind": "chapter",
+          "number": 19,
+          "part": "chapters",
+          "label": "Cap. 19",
+          "gender": "m",
+          "source_file": 30,
+          "cut_before": "before-23"
+        },
+        {
+          "ordinal": 24,
+          "kind": "chapter",
+          "number": 20,
+          "part": "chapters",
+          "label": "Cap. 20",
+          "gender": "m",
+          "source_file": 31,
+          "cut_before": "before-24"
+        },
+        {
+          "ordinal": 25,
+          "kind": "chapter",
+          "number": 21,
+          "part": "chapters",
+          "label": "Cap. 21",
+          "gender": "m",
+          "source_file": 32,
+          "cut_before": "before-25"
+        },
+        {
+          "ordinal": 26,
+          "kind": "chapter",
+          "number": 22,
+          "part": "chapters",
+          "label": "Cap. 22",
+          "gender": "m",
+          "source_file": 33,
+          "cut_before": "before-26"
+        },
+        {
+          "ordinal": 27,
+          "kind": "chapter",
+          "number": 23,
+          "part": "chapters",
+          "label": "Cap. 23",
+          "gender": "m",
+          "source_file": 34,
+          "cut_before": "before-27"
+        },
+        {
+          "ordinal": 28,
+          "kind": "chapter",
+          "number": 24,
+          "part": "chapters",
+          "label": "Cap. 24",
+          "gender": "m",
+          "source_file": 35,
+          "cut_before": "before-28"
+        }
+      ]
+    }
+  ]
+}

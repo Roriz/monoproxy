@@ -37,6 +37,17 @@ main() {
     # Case 1: Hugo Project
     if [ -f "$project_dir/hugo.toml" ] || [ -f "$project_dir/hugo.yaml" ] || [ -f "$project_dir/hugo.json" ] || [ -f "$project_dir/config.toml" ]; then
       info "Found Hugo configuration in $project_dir. Building..."
+      if [ "$project_name" = "enrichreader.com" ]; then
+        if command -v node >/dev/null && command -v rsvg-convert >/dev/null && command -v magick >/dev/null; then
+          node scripts/web-guide/build-site-assets.mjs
+        else
+          docker build -f scripts/web-guide/Dockerfile.build -t monoproxy-web-guide-build:node24 scripts/web-guide
+          docker run --rm --network none --user "$(stat -c %u:%g "$project_dir/data/web-guide/site-assets.json")" --cap-drop ALL \
+            --security-opt no-new-privileges:true -v "$PWD:/workspace" -w /workspace \
+            monoproxy-web-guide-build:node24 node scripts/web-guide/build-site-assets.mjs
+        fi
+        ./bin/web-guide-node scripts/web-guide/indexnow.mjs key
+      fi
       
       # Use local hugo binary if available, fallback to system hugo
       local hugo_cmd="hugo"
@@ -45,6 +56,9 @@ main() {
       fi
 
       if $hugo_cmd -s "$project_dir"; then
+        if [ "$project_name" = "enrichreader.com" ]; then
+          ./bin/web-guide-node scripts/web-guide/build-sitemap.mjs
+        fi
         success "Successfully built Hugo project: $project_name"
         built=true
       else

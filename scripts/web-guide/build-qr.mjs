@@ -1,0 +1,11 @@
+import { writeFile, mkdir } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+const url = new URL(process.argv[2]);
+if (url.origin !== 'https://enrichreader.com' || !/^\/guia\/[a-z0-9-]+$/.test(url.pathname) || url.hash || url.username || url.password || [...url.searchParams.keys()].some(key => !/^utm_[a-z_]+$/.test(key))) throw new Error('QR must point to a clean production guide');
+const svg = execFileSync('qrencode', ['-t', 'SVG', '-l', 'M', '-m', '4', '-o', '-', url.href]);
+const hash = createHash('sha256').update(svg).digest('hex').slice(0, 8);
+const output = new URL('../../src/enrichreader.com/static/web-guide/assets/', import.meta.url);
+await mkdir(output, { recursive: true });
+await writeFile(new URL(`qr-${hash}.svg`, output), svg);
+console.log(JSON.stringify({ path: `/web-guide/assets/qr-${hash}.svg`, type: 'image/svg+xml', target: url.href, correction: 'M', quiet_zone: 4 }));
