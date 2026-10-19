@@ -12,7 +12,7 @@ stylesheets:
     <div class="companion-hero-copy">
       <p class="companion-eyebrow"><span aria-hidden="true"></span> How EnrichReader works</p>
       <h1 id="hiw-title">It only knows<br><em>what you've read.</em></h1>
-      <p class="companion-intro">EnrichReader keeps track of where you are in the story and shows characters, places and lore up to that point, never past it. Here's how, from the book you bring to the name you tap.</p>
+      <p class="companion-intro">EnrichReader keeps track of where you are in the story. It shows you the characters, places and lore you've already met, and keeps everything after that hidden.</p>
       <div class="companion-actions">
         <a class="companion-button companion-button-primary" href="/app/">Open EnrichReader <span aria-hidden="true">↗</span></a>
         <a class="companion-button companion-button-secondary" href="/reading-guides/">Browse reading guides <span aria-hidden="true">↗</span></a>
@@ -20,7 +20,7 @@ stylesheets:
     </div>
 
     <figure class="companion-demo hiw-cut" aria-labelledby="hiw-cut-caption">
-      <div class="companion-demo-toolbar"><span class="companion-demo-label">The Creature’s profile</span><span>Frankenstein, 1831 text</span></div>
+      <div class="companion-demo-toolbar"><span class="companion-demo-label">The Creature's profile</span><span>Frankenstein, 1831 text</span></div>
       <div class="hiw-cut-body">
         <ol class="hiw-chapters" aria-label="Walton's 4 letters and 24 chapters, read up to chapter 12"><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read"></li><li class="is-read is-here" aria-current="step"></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ol>
         <p class="hiw-chapter-scale" aria-hidden="true"><span>Letter 1</span><span>Ch. 24</span></p>
@@ -31,7 +31,7 @@ stylesheets:
           <li class="is-locked"><span class="hiw-fact-chapter">Ch. 24</span><span>Revealed in a chapter you haven't read.</span></li>
         </ul>
       </div>
-      <figcaption id="hiw-cut-caption">Every fact carries the chapter that reveals it.<br>Your position decides which ones you see.</figcaption>
+      <figcaption id="hiw-cut-caption">Every fact carries the chapter that reveals it,<br>and where you are decides which ones you see.</figcaption>
     </figure>
   </section>
 
@@ -40,77 +40,77 @@ stylesheets:
   <section class="companion-chapter companion-shell" id="how-it-works" aria-labelledby="rule-heading">
     <div class="companion-section-heading"><p class="companion-eyebrow">01 <span class="companion-eyebrow-rule" aria-hidden="true"></span> The one rule</p><h2 id="rule-heading">Nothing past<br>your chapter.</h2></div>
     <div class="companion-progress-copy">
-      <p>Everything EnrichReader knows about a story is stored as small facts, and each fact is tagged with the chapter that reveals it. When you open a profile, the app shows the facts from chapters you've read and holds back the rest.</p>
-      <p>It remembers the furthest chapter you've reached. If you go back to reread an early scene, what you've already seen stays visible: what's revealed stays revealed. And if the app can't tell where you are, it shows nothing rather than guessing.</p>
+      <p>EnrichReader stores what it knows about a story as small facts, and each one is tagged with the chapter that reveals it. Open a profile and you get the facts from chapters you've read. The rest stays hidden.</p>
+      <p>The app remembers the furthest chapter you've reached, so going back to reread an early scene doesn't hide anything you've already seen. If it can't work out where you are, it shows you nothing at all.</p>
     </div>
   </section>
 
   <section class="companion-routes companion-shell" aria-labelledby="routes-heading">
-    <div class="companion-section-heading"><p class="companion-eyebrow">02 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Two ways to use it</p><h2 id="routes-heading">In the app, or beside your book.</h2><p>The same rule applies to both. They differ in where you read and how the companion knows your place.</p></div>
+    <div class="companion-section-heading"><p class="companion-eyebrow">02 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Two ways to use it</p><h2 id="routes-heading">In the app, or beside your book.</h2><p>Both follow the same rule. The difference is where you read and how the companion finds out where you are.</p></div>
     <div class="companion-route-grid">
       <article class="companion-route">
         <div class="companion-route-top"><span class="companion-route-number">A</span><span class="companion-route-label">Inside your reader</span></div>
-        <h3>The app follows you</h3><p>Read your own book in EnrichReader with a matching Skin. The app knows where you are as you read, so profiles and lore keep up on their own.</p>
+        <h3>The app follows you</h3><p>Read your own book in EnrichReader with a matching Skin. The app sees where you are as you turn pages, so the profiles keep up without you doing anything.</p>
         <a class="companion-text-link" href="#in-the-app">How the app works <span aria-hidden="true">↓</span></a>
       </article>
       <article class="companion-route">
         <div class="companion-route-top"><span class="companion-route-number">B</span><span class="companion-route-label">Alongside your book</span></div>
-        <h3>You tell the guide</h3><p>Keep reading wherever you like and open a reading guide in your browser. You pick the chapter you're on, and the guide shows only what came before it.</p>
+        <h3>You tell the guide</h3><p>Read wherever you like and keep a reading guide open in your browser. You tell it which chapter you're on, and it shows only what came before.</p>
         <a class="companion-text-link" href="#in-the-browser">How guides work <span aria-hidden="true">↓</span></a>
       </article>
     </div>
   </section>
 
   <section class="hiw-section companion-shell" id="in-the-app" aria-labelledby="app-heading">
-    <div class="companion-section-heading"><p class="companion-eyebrow">03 <span class="companion-eyebrow-rule" aria-hidden="true"></span> In the app</p><h2 id="app-heading">From your book<br>to the first name you tap.</h2></div>
+    <div class="companion-section-heading"><p class="companion-eyebrow">03 <span class="companion-eyebrow-rule" aria-hidden="true"></span> In the app</p><h2 id="app-heading">Four steps,<br>then you're reading.</h2></div>
     <ol class="hiw-steps">
       <li>
         <span class="hiw-step-number">1</span>
-        <div><h3>Bring your book</h3><p>Import a DRM-free book file you own. It's stored and opened on your device, and you don't need an account to read it. The reader works with or without a Skin.</p></div>
+        <div><h3>Bring your book</h3><p>Import a DRM-free book file you own. The app keeps it on your device and opens it there, and you can read without an account. The reader works fine without a Skin, too.</p></div>
       </li>
       <li>
         <span class="hiw-step-number">2</span>
-        <div><h3>Find its Skin</h3><p>A Skin is the companion for one story: its characters, places, organizations and lore, with every fact tagged by chapter. Skins are prepared ahead of time for partner series. Sign in and search the catalog; if your book isn't there yet, ask for it and the app will tell you when it's ready.</p></div>
+        <div><h3>Find its Skin</h3><p>A Skin is the companion for one story: its characters, places, organizations and lore, each fact tagged with a chapter. We prepare Skins ahead of time for partner series. Sign in and search the catalog. If your book isn't there, ask for it, and the app will let you know when it's ready.</p></div>
       </li>
       <li>
         <span class="hiw-step-number">3</span>
-        <div><h3>Match it to your copy</h3><p>The first time you open the book, the app lines the Skin up with your own file, chapter by chapter, right on your device. It takes a couple of minutes, once. If your edition is too different to line up, the app says so instead of guessing.</p></div>
+        <div><h3>Match it to your copy</h3><p>The first time you open the book, the app lines the Skin up with your file, chapter by chapter, on your device. That takes a couple of minutes and only happens once. If your edition is too different to line up, the app tells you rather than matching the wrong chapters.</p></div>
       </li>
       <li>
         <span class="hiw-step-number">4</span>
-        <div><h3>Read, and tap a name</h3><p>Names the Skin knows glow in the text. Tap one to see who they are, as of the chapter you're in. The first time someone appears, the app tells you their details will unlock as the story goes on.</p></div>
+        <div><h3>Read, and tap a name</h3><p>Names the Skin knows glow in the text. Tap one to see who they are as of the chapter you're in. When someone shows up for the first time, the app tells you their details unlock in later chapters.</p></div>
       </li>
     </ol>
-    <p class="hiw-note">Want to see it before importing anything? The app comes with a sample book, <em>Initiation Protocol</em>, already matched to its Skin, and a short tour.</p>
+    <p class="hiw-note">If you'd rather try it before importing anything, the app comes with a sample book, <em>Initiation Protocol</em>, already matched to its Skin, plus a short tour.</p>
   </section>
 
   <section class="hiw-section companion-shell" aria-labelledby="features-heading">
     <div class="companion-section-heading"><p class="companion-eyebrow">04 <span class="companion-eyebrow-rule" aria-hidden="true"></span> While you read</p><h2 id="features-heading">A companion that<br>reads along with you.</h2></div>
     <div class="hiw-features">
-      <article><h3>Profiles that grow</h3><p>Each profile shows the chapter it's up to date with. When a chapter changes what you know about someone, the profile shows what that chapter revealed.</p></article>
-      <article><h3>Appearances so far</h3><p>A timeline marks the chapters where a character shows up. Chapters you haven't read stay locked; you can tap to peek, and the app asks first.</p></article>
-      <article><h3>The Codex</h3><p>Everyone and everything you've met, in one place, with what's new since you last read. Search only finds people you've already encountered.</p></article>
-      <article><h3>Welcome back</h3><p>Coming back after a break? A briefing shows where you are, how long it's been, and what was going on: the arc and the leads still open. It appears when the Skin includes story data.</p></article>
-      <article><h3>Atmosphere</h3><p>Weather and light play behind the text, and artwork marks key scenes, each appearing when you reach that moment. What you see depends on the Skin; you can turn the effects off in settings.</p></article>
-      <article><h3>Something look wrong?</h3><p>Every profile has a way to report a mistake. A report sends that chapter's text, the titles and your note to us, so we can fix the Skin.</p></article>
+      <article><h3>Profiles that grow</h3><p>Each profile tells you which chapter it's current as of. When a chapter changes what you know about someone, you can see exactly what that chapter added.</p></article>
+      <article><h3>Appearances so far</h3><p>A timeline marks the chapters where a character shows up. The ones you haven't read stay locked. You can tap to peek, but the app checks with you first.</p></article>
+      <article><h3>The Codex</h3><p>The Codex collects everyone and everything you've met and flags what's new since your last session. Its search only finds people you've already run into.</p></article>
+      <article><h3>Welcome back</h3><p>If you put the book down for a while, a briefing tells you where you are, how long it's been and what was going on, including the current arc and any leads still open. It shows up when the Skin has story data.</p></article>
+      <article><h3>Atmosphere</h3><p>Weather and light play behind the text, and artwork shows up at key scenes when you reach them. It depends on the Skin, and you can switch the effects off in settings.</p></article>
+      <article><h3>Something look wrong?</h3><p>Every profile lets you report a mistake. The report sends us that chapter's text, the titles and your note, and we fix the Skin.</p></article>
     </div>
   </section>
 
   <section class="companion-chapter companion-shell hiw-made" aria-labelledby="made-heading">
     <div class="companion-section-heading"><p class="companion-eyebrow">05 <span class="companion-eyebrow-rule" aria-hidden="true"></span> How a Skin is made</p><h2 id="made-heading">Built from the book,<br>before you open it.</h2></div>
     <div class="companion-progress-copy">
-      <p>Skins are made ahead of time for partner series, from the book's text, by EnrichReader's own AI model, which runs on our own hardware. Every fact it records is tagged with the chapter that reveals it, so the app can hold it back until you get there.</p>
-      <p>Your own book is never sent to it. A Skin can still contain mistakes; when you report one, we fix the Skin.</p>
+      <p>We make Skins ahead of time for partner series, from the book's text, using EnrichReader's own AI model on our own hardware. Every fact it records gets the chapter that reveals it, which is how the app knows to hold it back until you get there.</p>
+      <p>We never send your own book to it. A Skin can still get things wrong, and when you report a mistake, we fix it.</p>
     </div>
   </section>
 
   <section class="hiw-section companion-shell" aria-labelledby="shield-heading">
     <div class="hiw-split">
-      <div class="companion-section-heading"><p class="companion-eyebrow">06 <span class="companion-eyebrow-rule" aria-hidden="true"></span> The spoiler shield</p><h2 id="shield-heading">You decide how<br>careful it is.</h2><p>Set a default for every book, or change it for just one. Anything looser than what you've read asks before it shows you more.</p></div>
+      <div class="companion-section-heading"><p class="companion-eyebrow">06 <span class="companion-eyebrow-rule" aria-hidden="true"></span> The spoiler shield</p><h2 id="shield-heading">You decide how<br>careful it is.</h2><p>Pick a default for all your books, or change it for one. If you choose something looser than where you are, the app asks before showing you more.</p></div>
       <dl class="hiw-shield">
         <div><dt>Strict</dt><dd>Only what you've read, up to your chapter.</dd></div>
-        <div><dt>Volume</dt><dd>Everything up to the end of the volume you're in. Handy when you've already read ahead somewhere else.</dd></div>
-        <div><dt>Off</dt><dd>Everything the Skin knows. For rereads, or when you've finished the series.</dd></div>
+        <div><dt>Volume</dt><dd>Everything up to the end of the volume you're in. Useful if you've already read ahead somewhere else.</dd></div>
+        <div><dt>Off</dt><dd>Everything the Skin knows, for rereads or once you've finished the series.</dd></div>
       </dl>
     </div>
   </section>
@@ -118,20 +118,20 @@ stylesheets:
   <section class="companion-chapter companion-shell" id="in-the-browser" aria-labelledby="guides-heading">
     <div class="companion-section-heading"><p class="companion-eyebrow">07 <span class="companion-eyebrow-rule" aria-hidden="true"></span> In the browser</p><h2 id="guides-heading">Reading guides:<br>you pick the chapter.</h2></div>
     <div class="companion-progress-copy">
-      <p>A reading guide works next to a book you're reading anywhere: paper, another app, a library copy. Choose the letter or chapter you're on, and the guide shows characters, places and story context from the sections you've finished. Nothing to install, no account, and no book to import.</p>
-      <p>Your position lives in the link, so a guide you bookmark opens where you left it. When you finish a section, move the picker forward. The first guide is Mary Shelley's <em>Frankenstein</em>.</p>
+      <p>A reading guide sits next to whatever you're reading, whether that's a paperback, another app or a library copy. Choose the letter or chapter you're on, and the guide shows characters, places and story context from the sections you've finished. You don't need to install anything or sign up.</p>
+      <p>The link remembers your position, so a bookmarked guide opens where you left off. When you finish a section, move the picker forward. The first guide is Mary Shelley's <em>Frankenstein</em>.</p>
       <a class="companion-text-link" href="/reading-guides/">Browse reading guides <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 
   <section class="companion-before companion-shell" aria-labelledby="facts-heading">
-    <div><p class="companion-eyebrow">08 <span class="companion-eyebrow-rule" aria-hidden="true"></span> The fine print</p><h2 id="facts-heading">Good to know.</h2><p>Books, accounts, privacy and what it costs.</p></div>
+    <div><p class="companion-eyebrow">08 <span class="companion-eyebrow-rule" aria-hidden="true"></span> The fine print</p><h2 id="facts-heading">Good to know.</h2><p>Books, accounts, privacy and cost.</p></div>
     <dl class="companion-facts">
-      <div><dt>Your book</dt><dd>The reader opens DRM-free book files you own. EnrichReader doesn't sell or provide books, and companion features need a Skin for your story.</dd></div>
-      <div><dt>Privacy</dt><dd>Imported books stay on your device. Sync covers your library details, reading positions and settings, not book text. Reporting a chapter problem sends that chapter's text. The <a href="/privacy-policy/">privacy policy</a> has the details.</dd></div>
-      <div><dt>Accounts</dt><dd>Reading needs no account. Sign in to install Skins and to sync between devices.</dd></div>
-      <div><dt>Offline</dt><dd>Once your book and its Skin are on your device, you can read offline. Installing a Skin needs a connection.</dd></div>
-      <div><dt>Cost</dt><dd>The app is free to download, with no in-app purchases.</dd></div>
+      <div><dt>Your book</dt><dd>The reader opens DRM-free book files you own. EnrichReader doesn't sell books, and you need a Skin for your story to get the companion features.</dd></div>
+      <div><dt>Privacy</dt><dd>Imported books stay on your device. Sync covers your library, reading positions and settings, but never book text. Reporting a chapter problem does send that chapter's text. The <a href="/privacy-policy/">privacy policy</a> has the details.</dd></div>
+      <div><dt>Accounts</dt><dd>You can read without an account. You need one to install Skins and to sync between devices.</dd></div>
+      <div><dt>Offline</dt><dd>Once your book and its Skin are on your device, you can read offline. You need a connection to install a Skin.</dd></div>
+      <div><dt>Cost</dt><dd>The app is free to download and has no in-app purchases.</dd></div>
     </dl>
   </section>
 
