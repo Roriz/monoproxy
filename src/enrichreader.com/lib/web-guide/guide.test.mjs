@@ -126,8 +126,8 @@ test('footer keeps author links first and app promotion depends on catalog publi
   assert.match(unpublished, /De Mary Shelley/);
   assert.ok(unpublished.indexOf('Standard Ebooks') < unpublished.indexOf('Cada fato'));
   assert.match(unpublished, /Mandar este guia para alguém/);
-  assert.match(unpublished, /feito com EnrichReader/);
-  assert.doesNotMatch(unpublished, /Também no app|href="https:\/\/enrichreader.com"/);
+  assert.match(unpublished, /feito com <a href="https:\/\/enrichreader.com\/">EnrichReader<\/a>/);
+  assert.doesNotMatch(unpublished, /Também no app/);
   assert.match(render(true), /Também no app: o guia ao lado do texto/);
 });
 

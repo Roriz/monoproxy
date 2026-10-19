@@ -1,7 +1,6 @@
 ---
-title: "EnrichReader | The End of Static Text"
-description: "EnrichReader transforms static text into a living story. Discover progressive character profiles, lore
-directories, and dynamic reading experiences without spoilers."
+title: "EnrichReader: Your Spoiler-Free Story Companion"
+description: "Forgot who someone is? EnrichReader is a spoiler-free story companion that shows characters and lore only up to the chapter you are reading."
 keywords:
 - "reading app"
 - "progressive disclosure"
@@ -22,30 +21,29 @@ scripts:
 <header class="relative px-6 flex flex-col items-center pt-32 pb-24 md:pt-48 md:pb-32 text-center overflow-hidden">
 
   <div class="max-w-6xl mx-auto relative z-10">
-    <!-- Primary Heading: THE ABSOLUTE STAR -->
+    <p class="text-gold-500 mb-6">The end of static text</p>
     <h1 class="font-bold serif leading-[0.85] tracking-tighter mb-10 animate-ink-bleed"
       style="font-size: clamp(3.0rem, 10vw, 7.5rem); animation-delay: 200ms;">
-      The End of<br>
-      <span class="text-gold-500 italic hover-lift cursor-default inline-block" style="animation-delay: 400ms;">Static
-        Text</span>
+      Every character, remembered.<br>
+      <span class="text-gold-500 italic">Your spoiler-free companion.</span>
     </h1>
 
     <!-- Supporting Subtext: 18px, capped at 560px -->
     <div class="max-w-[560px] mx-auto mb-12">
       <p class="text-[18px] md:text-[20px] text-neutral-400 leading-relaxed font-light animate-reveal-up"
         style="animation-delay: 600ms;">
-        No more wikis. No more spoilers. <br />
-        Experience a living world that evolves with your progress.
+        Characters, recaps and lore that follow your chapter, in the app or in a reading guide on the web.
       </p>
     </div>
 
     <!-- Action Group: Refined, confident CTA -->
     <div class="flex flex-col items-center gap-12 animate-reveal-up" style="animation-delay: 800ms; width: 100%;">
-      <div class="flex items-center justify-center w-full max-w-md mx-auto">
-        <a href="/app/" id="hero-cta" aria-label="Open launcher options"
-          class="w-full sm:w-auto px-8 py-3.5 bg-brand-primary text-neutral-950 rounded-xl font-bold text-sm md:text-base hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold border border-gold-400/30 text-center">
-          Launch Reader
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full mx-auto">
+        <a href="/app/" id="hero-cta" aria-label="Open EnrichReader app options"
+          class="btn btn-primary w-full sm:w-auto">
+          Open EnrichReader
         </a>
+        <a href="/reading-guides/" class="btn btn-secondary w-full sm:w-auto">Explore reading guides</a>
       </div>
 
     </div>
@@ -55,109 +53,120 @@ scripts:
 <!-- Interactive Demo Section -->
 <section id="demo" class="py-40 px-6 max-w-6xl mx-auto reveal-on-scroll">
   <div class="text-center mb-24">
-    <h2 class="text-4xl font-bold mb-4 serif">Progressive Disclosure</h2>
-    <p class="text-gray-500 text-sm">Scroll to see how character knowledge evolves. No spoilers, ever...
-      until you reach them.</p>
+    <h2 class="text-4xl font-bold mb-4 serif">Character profiles that follow your progress</h2>
+    <p class="text-gray-500 text-sm">Illustrative profile examples from Mary Shelley's Frankenstein (1831 text), with spoilers through chapter 24, the last chapter. These are rewritten examples, not quotations from the novel. Scroll to see a profile change at different reading positions.</p>
   </div>
 
   <div class="relative flex flex-col md:flex-row gap-12 md:items-stretch">
     <!-- Left Column: Timeline Text -->
     <div class="md:w-3/5 pb-20 md:pb-40 w-full reveal-on-scroll" id="timeline-texts" style="transition-delay: 200ms;">
-      <!-- Volume 1: Clown -->
+      <!-- Walton's Letters: Letter 4 -->
       <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="1">
         <div class="text-xs font-bold text-neutral-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
-          <span class="w-8 h-px bg-neutral-700"></span> Volume 1: Clown (Ch. 11)
+          <span class="w-8 h-px bg-neutral-700"></span> Walton's Letters (Letter 4)
         </div>
-        <blockquote class="text-xl leading-relaxed serif italic text-neutral-400">
-          "From the cup, a sweet, clear, yet deep scent wafted out... <span
-            class="text-gold-500 border-b border-gold-500/30 px-1 rounded bg-gold-500/5 transition-colors">Klein
-            Moretti</span> adjusted his posture, tipped his head back, and drank the potion down. In Chapter 11, he
-          became a Seer."
-        </blockquote>
+        <p class="text-xl leading-relaxed serif italic text-neutral-400">
+          Walton's ship is stuck in the Arctic ice when the crew sees a dog sledge racing north. Its driver, <span
+            class="text-gold-500 border-b border-gold-500/30 px-1 rounded bg-gold-500/5 transition-colors">the
+            traveller</span>, has the shape of a man but looks far too big. In Letter 4, nobody on board knows who
+          he is.
+        </p>
 
         <!-- Mobile Inline Profile Card -->
         <div class="mt-8 md:hidden glass rounded-3xl p-6 border-gold-500/30 shadow-gold text-left">
           <div class="text-[10px] font-bold text-gold-500 mb-3 uppercase tracking-widest">Entity: Character</div>
-          <div class="font-bold text-xl mb-2 text-cream-100">Klein Moretti</div>
+          <div class="font-bold text-xl mb-2 text-cream-100">The Traveller</div>
           <div class="flex gap-2 mb-4 flex-wrap">
             <span
-              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Sequence
-              9: Seer</span>
+              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Identity
+              Unknown</span>
             <span
-              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">History
-              Graduate</span>
+              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Sledge
+              Driver</span>
+            <span
+              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Heading
+              North</span>
           </div>
           <p class="text-xs text-neutral-400 leading-relaxed font-light">
-            A graduate of the History department of Khoy University who transmigrated into Tingen. In Chapter 11, he
-            consumes the Seer potion to become a Sequence 9 Beyonder, officially joining the Nighthawks.
+            A huge figure seen from Walton's ship, which is stuck in the Arctic ice. In Letter 4, he drives a dog
+            sledge north until the crew loses sight of him. Nobody on board knows who or what he is.
           </p>
         </div>
       </div>
 
-      <!-- Volume 2: Faceless -->
+      <!-- The Cottage: Chapter 12 -->
       <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="2">
         <div class="text-xs font-bold text-neutral-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
-          <span class="w-8 h-px bg-neutral-700"></span> Volume 2: Faceless (Ch. 293)
+          <span class="w-8 h-px bg-neutral-700"></span> The Cottage (Ch. 12)
         </div>
-        <blockquote class="text-xl leading-relaxed serif italic text-neutral-400">
-          "He could feel the strange, magical threads connecting his hands to the world. In Chapter 293, <span
-            class="text-gold-500 border-b border-gold-500/30 px-1 rounded bg-gold-500/5 transition-colors">Sherlock
-            Moriarty</span> consumed the Magician potion and was born anew."
-        </blockquote>
+        <p class="text-xl leading-relaxed serif italic text-neutral-400">
+          At night he gathers firewood for the poor family next door, and they never see who helps them. In Chapter
+          12, <span
+            class="text-gold-500 border-b border-gold-500/30 px-1 rounded bg-gold-500/5 transition-colors">the
+            Creature</span> learns his first words by listening through a gap in the wall.
+        </p>
 
         <!-- Mobile Inline Profile Card -->
         <div class="mt-8 md:hidden glass rounded-3xl p-6 border-gold-500/30 shadow-gold text-left">
           <div class="text-[10px] font-bold text-gold-500 mb-3 uppercase tracking-widest">Entity: Character</div>
-          <div class="font-bold text-xl mb-2 text-cream-100">Sherlock Moriarty</div>
+          <div class="font-bold text-xl mb-2 text-cream-100">The Creature</div>
           <div class="flex gap-2 mb-4 flex-wrap">
             <span
-              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Sequence
-              7: Magician</span>
+              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Victor's
+              Creation</span>
             <span
-              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Consulting
-              Detective</span>
+              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Learning
+              to Speak</span>
+            <span
+              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Secret
+              Helper</span>
           </div>
           <p class="text-xs text-neutral-400 leading-relaxed font-light">
-            Residing as a consulting detective in Backlund. In Chapter 293, Klein consumes the Magician formula to
-            advance to Sequence 7, gaining powerful spellcasting illusions and paper substitutes.
+            Victor's creation, telling his own story. In Chapter 12, he hides in a shed against a poor family's
+            cottage, gathers their firewood in secret, and learns words by listening. Then he sees his reflection in
+            a pool.
           </p>
         </div>
       </div>
 
-      <!-- Volume 3: Traveler -->
+      <!-- The Arctic: Chapter 24 -->
       <div class="timeline-step opacity-30 transition-opacity duration-700" data-step="3">
         <div class="text-xs font-bold text-gold-300 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
-          <span class="w-8 h-px bg-gold-500/30"></span> Volume 3: Traveler (Ch. 664) (Major Spoiler!)
+          <span class="w-8 h-px bg-gold-500/30"></span> The Arctic (Ch. 24) (Major Spoiler!)
         </div>
-        <blockquote class="text-xl leading-relaxed serif italic text-neutral-400">
-          "Every second counts. As the gray fog churned, the marionette string snapped into place. In Chapter 664,
+        <p class="text-xl leading-relaxed serif italic text-neutral-400">
+          Victor lies dead in Walton's cabin, and a giant figure stands over the body. In Chapter 24, the sledge
+          driver from Letter 4 turns out to be
           <span
-            class="text-gold-300 border-b border-gold-300/50 px-1 rounded bg-gold-300/10 transition-colors shadow-gold">Gehrman
-            Sparrow</span> controlled his first spirit body threads."
-        </blockquote>
+            class="text-gold-300 border-b border-gold-300/50 px-1 rounded bg-gold-300/10 transition-colors shadow-gold">the
+            Creature</span>, who mourns his maker.
+        </p>
 
         <!-- Mobile Inline Profile Card -->
         <div class="mt-8 md:hidden glass rounded-3xl p-6 border-gold-300/50 shadow-gold text-left">
           <div class="text-[10px] font-bold text-gold-300 mb-3 uppercase tracking-widest">Entity: Character</div>
-          <div class="font-bold text-xl mb-2 text-gold-300">Gehrman Sparrow</div>
+          <div class="font-bold text-xl mb-2 text-gold-300">The Creature</div>
           <div class="flex gap-2 mb-4 flex-wrap">
             <span
-              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Sequence
-              5: Marionettist</span>
-            <span class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Crazy
-              Adventurer</span>
+              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Killer
+              of Three</span>
+            <span class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">The
+              Sledge Traveller</span>
+            <span
+              class="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-neutral-300">Full
+              of Remorse</span>
           </div>
           <p class="text-xs text-neutral-400 leading-relaxed font-light mb-4">
-            Under the disguise of a cold-blooded adventurer on the Sea of Ruins, Klein consumes the potion in Chapter
-            664 to become a Sequence 5 Marionettist, controlling the spirit body threads of his targets.
+            The sledge driver from Letter 4. He killed William, Clerval and Elizabeth, then led Victor north. In
+            Chapter 24, he grieves over Victor's body, says he will burn himself, and drifts away on an ice raft.
           </p>
           <div class="p-3 rounded-xl bg-gold-500/5 border border-gold-500/20 flex items-start gap-2">
             <span class="text-sm" aria-hidden="true">🕯️</span>
             <div>
               <div class="text-[9px] font-bold text-gold-400 uppercase tracking-wider mb-0.5">Major Spoiler Unlocked
               </div>
-              <div class="text-[9px] text-neutral-500">This information was progressively revealed over 600+ chapters.
-              </div>
+              <div class="text-[9px] text-neutral-500">This was revealed bit by bit, from Letter 4 to the last
+                chapter.</div>
             </div>
           </div>
         </div>
@@ -178,15 +187,18 @@ scripts:
         <div class="flex items-center gap-4 md:block">
           <div>
             <div class="font-bold text-xl md:text-3xl mb-2 transition-colors duration-300 text-cream-100"
-              id="profile-name">Klein Moretti</div>
+              id="profile-name">The Traveller</div>
 
             <div class="flex gap-2 mb-0 md:mb-6 flex-wrap transition-all duration-300" id="profile-tags">
               <span
-                class="text-xs px-2 md:px-3 py-1 bg-white/5 border border-white/10 rounded-full text-neutral-300">Sequence
-                9: Seer</span>
+                class="text-xs px-2 md:px-3 py-1 bg-white/5 border border-white/10 rounded-full text-neutral-300">Identity
+                Unknown</span>
               <span
-                class="text-xs px-2 md:px-3 py-1 bg-white/5 border border-white/10 rounded-full text-neutral-300">History
-                Graduate</span>
+                class="text-xs px-2 md:px-3 py-1 bg-white/5 border border-white/10 rounded-full text-neutral-300">Sledge
+                Driver</span>
+              <span
+                class="text-xs px-2 md:px-3 py-1 bg-white/5 border border-white/10 rounded-full text-neutral-300">Heading
+                North</span>
             </div>
           </div>
         </div>
@@ -194,8 +206,8 @@ scripts:
         <div
           class="text-xs md:text-base text-neutral-400 leading-relaxed min-h-[60px] md:min-h-[100px] transition-all duration-300 mt-4 md:mt-0 reading"
           id="profile-desc">
-          A graduate of the History department of Khoy University who transmigrated into Tingen. In Chapter 11, he
-          consumes the Seer potion to become a Sequence 9 Beyonder, officially joining the Nighthawks.
+          A huge figure seen from Walton's ship, which is stuck in the Arctic ice. In Letter 4, he drives a dog
+          sledge north until the crew loses sight of him. Nobody on board knows who or what he is.
         </div>
 
         <div id="spoiler-warning" class="mt-4 md:mt-8 hidden overflow-hidden transition-all duration-500">
@@ -204,14 +216,21 @@ scripts:
             <div>
               <div class="text-[10px] md:text-xs font-bold text-gold-400 uppercase tracking-wider mb-1">Major Spoiler
                 Unlocked</div>
-              <div class="text-[10px] md:text-xs text-neutral-550">This information was progressively revealed over
-                600+ chapters.</div>
+              <div class="text-[10px] md:text-xs text-neutral-550">This was revealed bit by bit, from Letter 4 to
+                the last chapter.</div>
             </div>
           </div>
         </div>
       </div>
     </aside>
   </div>
+</section>
+
+<!-- Web guides: generic pointer to /reading-guides/ (no per-book cards on the home page) -->
+<section id="web-guides" class="py-20 px-6 max-w-5xl mx-auto" aria-labelledby="web-guide-heading">
+  <h2 id="web-guide-heading" class="text-3xl font-bold serif mb-6">Reading guides you can open in your browser</h2>
+  <p class="text-neutral-300 leading-relaxed mb-8">Pick where you are in the book and look up characters and story context up to that point. For the same help with the books you own, read them in the EnrichReader app.</p>
+  <p><a href="/reading-guides/" class="text-gold-500 underline">Browse the reading guides</a></p>
 </section>
 
 <!-- How it Works Section: Asymmetric Process -->
@@ -245,10 +264,9 @@ scripts:
             class="w-full h-full object-cover relative z-10">
         </div>
       </div>
-      <h3 class="text-2xl font-bold mb-4 serif italic text-cream-200">100% Local</h3>
+      <h3 class="text-2xl font-bold mb-4 serif italic text-cream-200">Your book stays on your device</h3>
       <p class="text-sm text-neutral-550 leading-relaxed">
-        Bring your own files. The EnrichReader parsing engine runs entirely on your device. We never upload your books
-        or track them on a server. Your reading stays completely private.
+        Import and read your book on your device. Optional sync stores library details and reading positions; reporting a chapter problem sends that chapter’s text. See the <a href="/privacy-policy/" class="text-gold-500 underline">privacy policy</a> for data controls.
       </p>
     </article>
 
@@ -272,7 +290,7 @@ scripts:
       </div>
       <h3 class="text-2xl font-bold mb-4 serif italic text-gold-300">The Skin</h3>
       <p class="text-sm text-neutral-400 leading-relaxed">
-        Search and install a Skin. Skins add interactivity, lore lookup, and memory to your books.
+        Sign in to find and install a matching Skin for a supported story. Skins are prepared in advance and add character profiles and lore lookup.
       </p>
     </article>
 
@@ -307,7 +325,7 @@ scripts:
 <section id="vision" class="py-40 px-6 max-w-7xl mx-auto">
   <div class="grid grid-cols-1 md:grid-cols-12 gap-y-12 mb-32 items-end reveal-on-scroll">
     <div class="md:col-span-8">
-      <h2 class="text-4xl md:text-5xl font-bold serif italic leading-tight">Beyond Static Pages<br>Our Vision</h2>
+      <h2 class="text-4xl md:text-5xl font-bold serif italic leading-tight">From static pages<br>to a living story</h2>
     </div>
     <div class="md:col-start-9 md:col-span-4 border-l border-gold-500/20 pl-8">
       <p class="text-gray-400 text-lg font-light leading-relaxed">
@@ -342,9 +360,9 @@ scripts:
       class="glass p-10 rounded-3xl md:mt-24 hover:translate-y-[-8px] transition-all duration-500 border-neutral-800 reveal-on-scroll"
       style="transition-delay: 500ms;">
       <div class="text-gold-500 mb-6 font-mono text-xl tracking-tighter" aria-hidden="true">03/</div>
-      <h3 class="text-2xl font-bold mb-4 serif italic">Classified Images</h3>
-      <p class="text-neutral-400 leading-relaxed reading">Skip the random appendices. The reader displays artwork in
-        profiles, mentions, and the directory exactly when it becomes relevant to the plot.</p>
+      <h3 class="text-2xl font-bold mb-4 serif italic">Atmosphere Scenes</h3>
+      <p class="text-neutral-400 leading-relaxed reading">See artwork that sets the mood of the scene you are reading.
+        It shows up when the story reaches that moment, never before.</p>
     </article>
   </div>
 </section>
@@ -368,6 +386,10 @@ scripts:
     </div>
   </div>
 </section>
+
+{{< partial "shared/reader-discovery.html" >}}
+
+{{< partial "shared/reader-faq.html" >}}
 
 <!-- CTA -->
 <section id="download" class="py-32 text-center px-6 reveal-on-scroll">

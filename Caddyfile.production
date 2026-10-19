@@ -33,6 +33,10 @@ enrichreader.com {
 	# Redirect old download route to app route
 	redir /download* /app 302
 
+	# The old EPUB reader page moved to the story companion page
+	@epubReader path /epub-reader /epub-reader/ /epub-reader/*
+	redir @epubReader /story-companion/ permanent
+
 	# Baseline browser security policy. Kept explicit for the externally hosted
 	# fonts, report charts and our own Umami visit counter (stats.enrichreader.com).
 	header {

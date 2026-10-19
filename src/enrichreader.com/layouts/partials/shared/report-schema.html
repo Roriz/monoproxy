@@ -1,0 +1,10 @@
+{{ $raw := readFile (printf "static%s" .Params.series_data) }}
+{{ $data := transform.Unmarshal $raw }}
+{{ $name := printf "%s %s" .Params.series_title_first .Params.series_title_second }}
+{{ $metrics := slice
+  (dict "@type" "PropertyValue" "name" "Chapters in analyzed export" "value" $data.metadata.total_chapters)
+  (dict "@type" "PropertyValue" "name" "Words in analyzed export" "value" $data.metadata.total_words)
+  (dict "@type" "PropertyValue" "name" "Character records in export metadata" "value" $data.metadata.total_characters)
+}}
+{{ $schema := dict "@context" "https://schema.org" "@type" "Dataset" "@id" (printf "%s#dataset" .Permalink) "name" (printf "%s narrative analysis export" $name) "url" .Permalink "description" (printf "Experimental automated analysis of %s. Counts describe the included export; see the methodology and limitations on this page." $name) "creator" (dict "@id" ("/#organization" | absURL) "@type" "Organization" "name" "EnrichReader" "url" site.BaseURL) "version" (sha256 $raw) "variableMeasured" $metrics "distribution" (dict "@type" "DataDownload" "encodingFormat" "application/json" "contentUrl" (.Params.series_data | absURL)) }}
+<script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>

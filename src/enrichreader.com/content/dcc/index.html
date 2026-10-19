@@ -1,5 +1,6 @@
 ---
-title: "Dungeon Crawler Carl, by the numbers | EnrichReader"
+title: "Dungeon Crawler Carl Characters, Timeline & Statistics | EnrichReader"
+og_image: "/assets/social/dcc.jpg"
 description: "Dungeon Crawler Carl, by the numbers. 515 chapters, 1,245,618 words, 317 unique characters analyzed."
 fonts_override: '<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">'
 stylesheets:
@@ -19,7 +20,7 @@ nav_bg_border: false
 nav_minimal: true
 series_title_first: "Dungeon Crawler"
 series_title_second: "Carl"
-series_subtitle: "by the numbers"
+series_subtitle: "characters & story statistics"
 series_intro: "This is what the entire crawl looks like when you slow down and count. A quantitative autopsy of Matt Dinniman's LitRPG masterpiece, powered by Enrich Reader's semantic text engine."
 series_data: "/dcc/dcc_data.json"
 stat_chapters: 515
@@ -31,7 +32,7 @@ funnel_breakdown:
   max_chapter: 515
   raw_mentions: "4,280"
   unique_characters: 317
-  unique_entities: "317"
+  unique_entities: 830
   summary_title: "Volume 7, Chapter 119"
   insights:
     - title: "Loot-Driven Narrative (Items vs. Locations)"
@@ -147,30 +148,7 @@ matrix:
       count: 3
     - name: "Fairy"
       count: 2
-survival_mortality:
-  section_subtitle: "LitRPGs are brutal. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as floors get more difficult."
-  summary_title: "Volume 7, Chapter 119"
-  insights:
-    - title: "The Early Floor Filter (Volume 1)"
-      color: "var(--color-person)"
-      text: "By the end of Volume 1, <strong>26 characters</strong> have died out of 120 introduced (a 21.6% initial mortality rate). Early floors serve as a rapid filter, quickly eliminating secondary and tertiary characters introduced in the panic of the initial collapse."
-    - title: "Steady Attrition to Plunge"
-      color: "var(--color-item)"
-      text: "While the survival rate hovers steadily around <strong>70%</strong> through Volume 6, it takes a sharp plunge to <strong>62.1%</strong> in Volume 7. This indicates that while intermediate floors have manageable attrition, transitioning into open system warfare collapses the safety margin."
-    - title: "The 9th Floor Massacre (Peak Lethality)"
-      color: "var(--color-event)"
-      text: "Volume 7, Chapter 13 is the single most lethal chapter in the series, recording <strong>5 key character deaths</strong> in a single sequence. This climactic battlefield clash of the Faction War represents the absolute peak of system lethality."
-  table:
-    - metric: "Total Characters Introduced"
-      value: "317"
-    - metric: "Surviving Characters (Alive)"
-      value: "197"
-    - metric: "Eliminated Characters (Dead)"
-      value: "120"
-    - metric: "Survival Rate"
-      value: "62.15%"
-    - metric: "Mortality Rate"
-      value: "37.85%"
+
 word_trends:
   section_subtitle: "Explore the keywords that define the crawl, alongside a clear demographic breakdown of character pronouns."
   cloud_title: "Crawl Keyword Map"
@@ -259,50 +237,5 @@ absence_gaps:
   {{< partial "shared/contact.html" >}}
 </main>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Dataset",
-  "name": "Dungeon Crawler Carl Narrative Analysis Dataset",
-  "description": "Quantitative analysis of Matt Dinniman's LitRPG masterpiece Dungeon Crawler Carl. Covers character survival timelines, species selections, entity mentions, and pronoun counts across all 7 volumes.",
-  "creator": {
-    "@type": "Organization",
-    "name": "EnrichReader",
-    "url": "https://enrichreader.com"
-  },
-  "license": "https://creativecommons.org/licenses/by/4.0/",
-  "variableMeasured": [
-    {
-      "@type": "PropertyValue",
-      "name": "Entity Mentions",
-      "description": "Frequencies of entity mentions categorized into character (Carl: 6458, Donut: 6173), location, organization (System AI: 4170), item (Achievement Box: 2834), and event, tracked chapter by chapter."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Narrative Absence Spans",
-      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Randall: 324 chapters gap)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Character Survival",
-      "description": "Survival timeline of 317 characters with 197 alive and 120 dead (62.15% survival rate) at the end of Volume 7."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Entity Funnel and Category Breakdown",
-      "description": "Filters raw entity mentions down to 830 unique entities categorized into Person (317), Item (140), Organization (125), Location (107), Event (98), and Other (43)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Crawl Keywords & Demographics",
-      "description": "Visual keyword mapping of crawl terminology and pronoun demographics of characters (They/Them, It/Its, He/Him, She/Her)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Race Selections",
-      "description": "Breakdown of crawler race selections per volume, showing 36 unique races selected in Volume 7 faction war."
-    }
-  ]
-}
-</script>
+{{< partial "shared/report-schema.html" >}}
 

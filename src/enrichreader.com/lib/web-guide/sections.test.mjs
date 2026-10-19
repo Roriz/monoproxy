@@ -23,7 +23,7 @@ test('panel shows a bounded recap and locally ranked cast; app card is gated and
   assert.doesNotMatch(main(render('', 9)), /data-hub|total_mentions|Inspiration of a Waking Nightmare|The Creation and Pursuit/);
   const published = { ...guide, presentation: { ...guide.presentation, app_published: true } };
   const html = renderGuide(published, new URL('https://enrichreader.com/guia/frankenstein?l=1&c=9'));
-  assert.match(html, /arquivo EPUB/);
+  assert.match(html, /Funciona com o arquivo do seu livro/);
   assert.doesNotMatch(html.match(/<footer>(.*?)<\/footer>/s)[1], /Também no app/);
   assert.doesNotMatch(renderGuide(published, new URL('https://enrichreader.com/guia/frankenstein?l=1&c=1')), /data-app-bridge/);
 });

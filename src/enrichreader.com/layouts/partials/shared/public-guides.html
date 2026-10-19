@@ -1,0 +1,11 @@
+{{/* Mirror catalog publication overrides; never expose private or unlisted entries. */}}
+{{ $data := index site.Data "web-guide" }}
+{{ $guides := slice }}
+{{ range $data.catalog }}
+  {{ $guide := index $data (strings.TrimSuffix ".json" .data) }}
+  {{ $presentation := index $data (strings.TrimSuffix ".json" .presentation) }}
+  {{ if eq ($presentation.state | default $guide.state) "public" }}
+    {{ $guides = $guides | append (dict "title" $guide.title "authors" $guide.authors "edition" $guide.edition "url" (printf "/guia/%s" $guide.series) "cover" $presentation.assets.shelf) }}
+  {{ end }}
+{{ end }}
+{{ return (sort $guides "title") }}

@@ -44,7 +44,14 @@
             </tr>
           </thead>
           <tbody id="matrixTableBody">
-            <!-- Dynamically populated via JS -->
+            {{ $matrix := transform.Unmarshal (readFile (printf "static%s" .Params.matrix.data_url)) }}
+            {{ range $name, $count := $matrix.series.counts }}
+            <tr>
+              <th scope="row" class="matrix-th-race">{{ $name | title }}</th>
+              {{ range $matrix.volumes }}<td class="matrix-th">{{ index .counts $name | default 0 }}</td>{{ end }}
+              <td class="matrix-th-total">{{ $count }}</td>
+            </tr>
+            {{ end }}
           </tbody>
         </table>
       </div>
@@ -59,6 +66,7 @@
       </div>
 
       <!-- Insights & Analysis Section -->
+      {{ partial "shared/report-commentary-note.html" . }}
       <div class="mt-12 pt-8 border-t border-white/5">
         <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Crawl Insights & Species Diversity Analysis</span>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -78,25 +86,5 @@
 
     </div>
 
-    <!-- SEO & Accessibility Data (Exposing final state selections) -->
-    <div class="sr-only" aria-hidden="false">
-      <h3>Narrative {{ .Params.matrix.noun_plural_capital }} Summary (Series Totals)</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>{{ .Params.matrix.noun_singular | title }} Selection</th>
-            <th>Characters Count</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{ range .Params.matrix.table }}
-          <tr>
-            <td>{{ .name }}</td>
-            <td>{{ .count }}</td>
-          </tr>
-          {{ end }}
-        </tbody>
-      </table>
-    </div>
   </div>
 </section>

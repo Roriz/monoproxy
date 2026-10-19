@@ -1,3 +1,6 @@
+{{ $data := transform.Unmarshal (readFile (printf "static%s" .Params.series_data)) }}
+{{ $total := 0 }}
+{{ range $data.breakdowns.pronouns }}{{ $total = add $total . }}{{ end }}
 <!-- [05] Word Cloud & Pronoun Breakdown -->
 <section id="word-trends" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem); background: rgba(0,0,0,0.15);">
   <div class="max-w-5xl mx-auto px-6 fade-in-up">
@@ -52,12 +55,12 @@
       <div class="lg:col-span-5">
         <div class="chart-card p-8 flex flex-col justify-between h-full">
           <div>
-            <span class="control-label mb-6 block">Character Pronouns Distribution</span>
+            <span class="control-label mb-6 block">Exported Pronoun Tag Counts</span>
             <div class="relative w-full max-w-[200px] aspect-square mx-auto mb-8 flex items-center justify-center">
               <!-- Center Total Display -->
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none">
-                <span id="pronoun-total-count" class="donut-total-value" style="font-size: clamp(2rem, 3.5vw, 2.5rem);">{{ .Params.word_trends.total_pronouns }}</span>
-                <span class="donut-total-label" style="font-size: 8px; text-transform: uppercase; letter-spacing: 0.05em;">{{ .Params.word_trends.total_pronouns_label }}</span>
+                <span id="pronoun-total-count" class="donut-total-value" style="font-size: clamp(2rem, 3.5vw, 2.5rem);">{{ $total }}</span>
+                <span class="donut-total-label" style="font-size: 8px; text-transform: uppercase; letter-spacing: 0.05em;">tag records</span>
               </div>
               <canvas id="pronounsDonutChart"></canvas>
             </div>
@@ -69,12 +72,18 @@
                 <thead>
                   <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                     <th style="padding-bottom: 8px;">Pronoun</th>
-                    <th style="padding-bottom: 8px; text-align: right;">{{ .Params.word_trends.table_count_header }}</th>
+                    <th style="padding-bottom: 8px; text-align: right;">Tag count</th>
                     <th style="padding-bottom: 8px; text-align: right;">Share</th>
                   </tr>
                 </thead>
                 <tbody id="pronouns-table-body">
-                  <!-- Dynamically populated -->
+                  {{ range $label, $count := $data.breakdowns.pronouns }}
+                  <tr>
+                    <th scope="row" style="padding: 8px 0;">{{ $label }}</th>
+                    <td style="text-align: right;">{{ $count }}</td>
+                    <td style="text-align: right;">{{ if gt $total 0 }}{{ printf "%.1f" (mul (div (float $count) (float $total)) 100) }}{{ else }}0.0{{ end }}%</td>
+                  </tr>
+                  {{ end }}
                 </tbody>
               </table>
             </div>

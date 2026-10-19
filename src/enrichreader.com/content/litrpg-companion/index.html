@@ -1,0 +1,93 @@
+---
+title: "LitRPG & Web Novel Reading Companion | EnrichReader"
+description: "Keep track of characters, items, and lore in partner LitRPG and web novel series, with profiles limited to your reading position."
+layout: companion
+body_class: companion-page
+stylesheets:
+- "/style/companion.css"
+scripts:
+- "/litrpg.js"
+scripts_defer: true
+---
+<div class="companion-landing" id="companion-content" tabindex="-1">
+  <section class="companion-hero companion-shell" aria-labelledby="companion-title">
+    <div class="companion-hero-copy">
+      <p class="companion-eyebrow"><span aria-hidden="true"></span> For LitRPG &amp; long web novels</p>
+      <h1 id="companion-title">Remember the cast.<br><em>Keep your place<br>in the story.</em></h1>
+      <p class="companion-intro">You've seen the name before, but you can't place it. EnrichReader shows character profiles and lore up to your reading position in supported stories.</p>
+      <div class="companion-actions">
+        <a class="companion-button companion-button-primary" href="/app/">Open EnrichReader <span aria-hidden="true">↗</span></a>
+        <a class="companion-button companion-button-secondary" href="/reading-guides/">Browse reading guides <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="companion-hero-note">Use a guide beside your book, or read it in the app.</p>
+    </div>
+
+    <figure class="companion-demo" aria-labelledby="demo-caption">
+      <div class="companion-demo-toolbar"><span class="companion-demo-label">An example lookup</span><span>Fictional example</span></div>
+      <div class="companion-excerpt">
+        <p class="companion-book-label">The Ashen Road</p>
+        <div class="companion-excerpt-rule" aria-hidden="true"></div>
+        <p class="companion-excerpt-text">At the bridge, <mark>Mara Venn</mark> paused to check the road behind them. The others waited for her to choose a way through.</p>
+        <p class="companion-excerpt-prompt"><span aria-hidden="true">↳</span> Mara's profile shows what you've read so far.</p>
+      </div>
+      <div class="companion-profile">
+        <div class="companion-position"><span><span class="companion-status-dot" aria-hidden="true"></span> Reading position</span><strong data-demo-position>Chapter 12</strong></div>
+      <div class="companion-demo-controls" data-demo-controls hidden>
+        <span>Change chapters to see her profile update.</span>
+        <div role="group" aria-label="Example reading position"><button type="button" data-demo-chapter="12" aria-pressed="true">Chapter 12</button><button type="button" data-demo-chapter="24" aria-pressed="false">Chapter 24</button></div>
+      </div>
+        <div class="companion-profile-heading"><span class="companion-monogram" aria-hidden="true">MV</span><div><p>Character profile</p><h2>Mara Venn</h2></div></div>
+        <p class="companion-profile-description" data-demo-description>The party hired Mara to guide them through the northern pass. She knows the old roads and carries a silver compass.</p>
+        <p class="companion-profile-role" data-demo-role>Mountain guide</p>
+        <p class="companion-profile-boundary"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m12 3 8 4v6c0 4-8 8-8 8s-8-4-8-8V7l8-4Z"/><path d="m8 12 3 3 5-6"/></svg><span data-demo-boundary>This profile shows details revealed by chapter 12.</span></p>
+      </div>
+      <p class="companion-demo-live sr-only" aria-live="polite" aria-atomic="true" data-demo-live></p>
+      <figcaption id="demo-caption">This example uses a fictional story.<br>The details you can look up depend on the guide or Skin.</figcaption>
+    </figure>
+  </section>
+
+  <div class="companion-principles companion-shell" aria-label="How the companion helps"><span>Look up what you've read</span><span>Character profiles and lore</span><span>Return to a series after a break</span></div>
+
+  <section class="companion-chapter companion-shell" id="how-it-works" aria-labelledby="progress-heading">
+    <div class="companion-section-heading"><p class="companion-eyebrow">01 <span class="companion-eyebrow-rule" aria-hidden="true"></span> When you forget a name</p><h2 id="progress-heading">Look up a character<br>without reading ahead.</h2></div>
+    <div class="companion-progress-copy">
+      <p>A wiki page can give away a character's fate before you've finished the book. With a matching guide or Skin, EnrichReader limits what you see to your reading position. If you're returning after a break, check your saved position first, then look up the people, places and lore you've already encountered.</p>
+      <a class="companion-text-link" href="/spoiler-free-wiki-alternative/">How spoiler-free lookups work <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="companion-routes companion-shell" aria-labelledby="routes-heading">
+    <div class="companion-section-heading"><p class="companion-eyebrow">02 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Two ways to use EnrichReader</p><h2 id="routes-heading">Choose how you read.</h2><p>Check that a guide or Skin is available for your book before you start.</p></div>
+    <div class="companion-route-grid">
+      <article class="companion-route companion-route-guide">
+        <div class="companion-route-top"><span class="companion-route-number">A</span><span class="companion-route-label">Alongside your book</span></div>
+        <h3>A guide in your browser</h3><p>Keep your book open wherever you normally read. In a published browser guide, choose your current letter or chapter to look up information from sections you've finished.</p>
+        <div class="companion-published-guide"><img src="/guia/frankenstein/cover-shelf-5702f7f5.webp" width="62" height="93" loading="lazy" alt=""><div><span>Available browser guide</span><strong>Frankenstein</strong><p>Mary Shelley · 1831 text<br>Portuguese interface<br>English profiles</p></div></div>
+        <p class="companion-guide-availability">Try the guide with Frankenstein, a public-domain novel. Check the catalog for a guide to your own book.</p>
+        <a class="companion-text-link" href="/reading-guides/">Browse reading guides <span aria-hidden="true">↗</span></a>
+      </article>
+      <article class="companion-route companion-route-reader">
+        <div class="companion-route-top"><span class="companion-route-number">B</span><span class="companion-route-label">Inside your reader</span></div>
+        <h3>Read your book in the app</h3><p>Import your own DRM-free book file. If there's a Skin for your story, install it to add character profiles and lore. A Skin is companion data we prepare for that book.</p>
+        <ol class="companion-setup"><li><span>1</span> Import your book</li><li><span>2</span> Install a matching Skin</li><li><span>3</span> Read with character profiles and lore</li></ol>
+        <a class="companion-text-link" href="/app/">Open EnrichReader <span aria-hidden="true">↗</span></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="companion-before companion-shell" aria-labelledby="before-heading">
+    <div><p class="companion-eyebrow">03 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Books, accounts and privacy</p><h2 id="before-heading">Before you start.</h2><p>You'll need your own book, and a matching guide or Skin for companion features.</p></div>
+    <dl class="companion-facts">
+      <div><dt>Check your story</dt><dd>Check browser guides and the app's Skin catalog separately. A published guide doesn't guarantee an app Skin for the same book.</dd></div>
+      <div><dt>Bring your book</dt><dd>You'll need your own lawfully obtained copy of the novel. The reader opens DRM-free book files; EnrichReader doesn't provide the books.</dd></div>
+      <div><dt>Reading &amp; accounts</dt><dd>You can read your books without an account. Sign in to install Skins or sync your library. Before you go offline, download your book and any Skin you need.</dd></div>
+      <div><dt>Your book stays on your device</dt><dd>The app stores imported books on your device. If you report a chapter problem, the report includes that chapter's text. The <a href="/privacy-policy/">privacy policy</a> explains sync, usage data and the settings you can change.</dd></div>
+    </dl>
+  </section>
+
+  <section class="companion-final companion-shell" aria-labelledby="continue-heading">
+    <p class="companion-eyebrow">Read with EnrichReader</p><h2 id="continue-heading">Enjoy your next<br><em>chapter.</em></h2>
+    <div class="companion-actions"><a class="companion-button companion-button-primary" href="/app/">Open EnrichReader <span aria-hidden="true">↗</span></a><a class="companion-button companion-button-secondary" href="/reading-guides/">Browse reading guides <span aria-hidden="true">↗</span></a></div>
+
+  </section>
+</div>

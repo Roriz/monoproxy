@@ -370,7 +370,7 @@ reviewer_verdict:
 | **Location Disclosure** | Clear geographical headquarters city, state, country | **PASS** | `São José dos Campos, SP, Brazil` displayed in shared footer, Terms of Service preamble/contact, and Privacy Policy. |
 | **Terms of Service** | Active, binding SaaS terms of service URL | **PASS** | Live at [`https://enrichreader.com/terms-of-service/`](https://enrichreader.com/terms-of-service/) with explicit Skin IP protection. |
 | **Founder LinkedIn** | Public founder profile verifying executive identity | **PASS** | [`https://www.linkedin.com/in/radames-roriz/`](https://www.linkedin.com/in/radames-roriz/) linked in shared footer and homepage quote. |
-| **Privacy Policy** | Active data protection & AI source retention policy | **PASS** | Live at [`https://enrichreader.com/privacy-policy/`](https://enrichreader.com/privacy-policy/) with 30-day retention and local-only reader EPUB clause. |
+| **Privacy Policy** | Active data protection & AI source retention policy | **PASS** | Live at [`https://enrichreader.com/privacy-policy/`](https://enrichreader.com/privacy-policy/) with 30-day retention and local-only reader book-file clause. |
 | **Working MVP / App** | Live interactive software product (not vaporware) | **PASS** | Functional reader application live and accessible at [`https://app.enrichreader.com`](https://app.enrichreader.com). |
 | **Domain & Corporate Email** | Custom domain with matching personal business email | **PASS** | Domain `enrichreader.com` with `radames@enrichreader.com` corporate email. |
 | **GCP / AI Architecture** | Defensible Google Cloud Vertex AI & Gemini workload | **PASS** | Authenticated Vertex AI Gemini pipelines in `skin-maker/skin_entities/clients/vertex_client.py`. |

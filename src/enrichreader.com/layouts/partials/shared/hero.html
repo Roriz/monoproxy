@@ -5,8 +5,8 @@
     </a>
     <div class="flex items-center gap-8 font-ui"
       style="font-size: var(--text-xs); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
-      <a href="/" style="transition: color 0.2s ease;" onmouseover="this.style.color='var(--color-text-primary)'"
-        onmouseout="this.style.color='var(--color-text-dim)'" id="nav-home-link">Home</a>
+      <a href="/reports/" style="transition: color 0.2s ease;" onmouseover="this.style.color='var(--color-text-primary)'"
+        onmouseout="this.style.color='var(--color-text-dim)'" id="nav-home-link">Series reports</a>
     </div>
   </div>
 </nav>
@@ -38,10 +38,15 @@
         </div>
 
         <div class="methodology-badge -mt-6 mb-8 flex items-center gap-2 font-mono text-[10px] text-neutral-400 uppercase tracking-wider" id="methodology-disclosure" style="font-size: 9px; letter-spacing: 0.15em; color: var(--color-text-dim);">
-          <span class="inline-block w-4 h-4 rounded-full border border-neutral-500 flex items-center justify-center font-bold text-[8px] cursor-help" style="border: 1px solid var(--color-surface-divider); width: 14px; height: 14px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;" title="Semantic entity extraction via Enrich Reader NLP engine, cross-checked per chapter. Entities require minimum mention thresholds to filter narrative noise. Tags verified for pronoun and race selection confidence.">?</span>
-          <span>Methodology: Named-entity extraction, cross-checked per chapter</span>
+          <a href="#methodology" style="text-decoration: underline;">Experimental automated analysis · methodology and limitations</a>
         </div>
 
+        <p class="font-body mb-8 hero-description">
+          This {{ .Params.series_title_first }} {{ .Params.series_title_second }} report analyzes {{ .Params.stat_characters }} named characters across {{ .Params.stat_chapters }} chapters in the dataset ({{ .Params.timeline_scope | default "all volumes" }}). Explore character mentions, timelines, and story statistics below. Counts describe the analyzed files, rather than every edition of the series.
+        </p>
+        <p class="font-body mb-8 hero-description">
+          <strong>Spoiler warning:</strong> this public report includes later-story identities, character deaths, and events. For reading with information limited to your position, use the <a href="/spoiler-free-wiki-alternative/">EnrichReader companion</a> with an available matching Skin; a report does not guarantee Skin availability.
+        </p>
         <p class="font-body italic mb-12 hero-description" id="hero-para">
           {{ .Params.series_intro }}
         </p>
@@ -104,3 +109,13 @@
     </div>
   </div>
 </section>
+<aside class="max-w-5xl mx-auto px-6 py-8" aria-label="More series reports">
+  <p>Explore other character reports:
+  {{ $current := .RelPermalink }}
+  {{ range where site.RegularPages "Params.series_data" "!=" nil }}
+    {{ if ne .RelPermalink $current }}<a href="{{ .RelPermalink }}" style="text-decoration: underline; margin-right: 1rem;">{{ .Params.series_title_first }} {{ .Params.series_title_second }}</a>{{ end }}
+  {{ end }}
+  </p>
+</aside>
+
+{{ partial "shared/report-methodology.html" . }}

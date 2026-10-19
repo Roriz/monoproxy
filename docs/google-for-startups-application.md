@@ -31,7 +31,7 @@ The requested cloud support would be used to make the Gemini/Vertex AI pipeline 
 
 ## Approved source-text policy
 
-The Skin-generation pipeline currently processes only public-domain or openly licensed works. This source material is distinct from EPUB files that readers import into EnrichReader: reader-imported EPUBs are not used as Skin-generation input. Approved source text is retained for up to 30 days for processing and quality review, then deleted.
+The Skin-generation pipeline currently processes only public-domain or openly licensed works. This source material is distinct from the book files that readers import into EnrichReader: reader-imported books are not used as Skin-generation input. Approved source text is retained for up to 30 days for processing and quality review, then deleted.
 
 ## Public proof to include
 
@@ -75,7 +75,7 @@ The Skin-generation pipeline currently processes only public-domain or openly li
 - Active enterprise clients, pilots, publishers, or integrations.
 - API availability or documented turnaround-time commitments.
 - Revenue, retention, accuracy, or cost savings claims without publishable measurement.
-- A claim that reader-uploaded EPUB text is sent to Vertex AI. The current public policy says a reader’s EPUB remains local; do not change that statement unless the product behavior and policy are deliberately updated together.
+- A claim that reader-imported book text is sent to Vertex AI. The current public policy says a reader’s book files stay on their device; do not change that statement unless the product behavior and policy are deliberately updated together.
 - Scale-tier or AI-tier eligibility without qualifying institutional equity funding.
 
 ## Submission checklist

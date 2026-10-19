@@ -1,5 +1,6 @@
 ---
-title: "The Wandering Inn, by the numbers | EnrichReader"
+title: "The Wandering Inn Characters, Timeline & Statistics | EnrichReader"
+og_image: "/assets/social/the_wandering_inn.jpg"
 description: "The Wandering Inn, by the numbers. 713 chapters, 7,131,157 words, 592 unique characters analyzed."
 fonts_override: '<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">'
 stylesheets:
@@ -18,7 +19,7 @@ nav_bg_border: false
 nav_minimal: true
 series_title_first: "The Wandering"
 series_title_second: "Inn"
-series_subtitle: "by the numbers"
+series_subtitle: "characters & story statistics"
 series_intro: "A quantitative narrative autopsy of pirateaba's portal fantasy epic, The Wandering Inn. Track character survival, perspective shifts, and entity mentions across 11 volumes, powered by Enrich Reader's semantic text engine."
 series_data: "/the_wandering_inn/twi_data.json"
 stat_chapters: 713
@@ -95,27 +96,7 @@ mentions_race:
     - entity: "Klbkch"
       classification: "character"
       mentions: "4,870"
-survival_mortality:
-  section_subtitle: "Portal fantasy introduces characters to a world of levels, monsters, and war. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as major wars and sieges unfold."
-  summary_title: "Volume 11, Chapter 24"
-  insights:
-    - title: "A Brutal World"
-      color: "var(--color-person)"
-      text: "In the dangerous lands of Izril, characters face constant threats. Out of 592 characters introduced, <strong>122 deaths</strong> are recorded, representing a 20.61% mortality rate."
-    - title: "Lethal Milestones"
-      color: "var(--color-event)"
-      text: "The most lethal event occurs at Chapter 26, where a single battle registers <strong>7 key character deaths</strong>, highlighting pirateaba's willingness to eliminate main cast members in major conflicts."
-  table:
-    - metric: "Total Characters Introduced"
-      value: "592"
-    - metric: "Surviving Characters (Alive)"
-      value: "470"
-    - metric: "Eliminated Characters (Dead)"
-      value: "122"
-    - metric: "Survival Rate"
-      value: "79.39%"
-    - metric: "Mortality Rate"
-      value: "20.61%"
+
 word_trends:
   section_subtitle: "Explore the keywords that define the novel, alongside a clear demographic breakdown of character pronouns."
   cloud_title: "The Wandering Inn Keyword Map"
@@ -198,45 +179,5 @@ absence_gaps:
   {{< partial "shared/contact.html" >}}
 </main>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Dataset",
-  "name": "The Wandering Inn Narrative Analysis Dataset",
-  "description": "Quantitative analysis of pirateaba's portal fantasy epic The Wandering Inn. Covers character survival timelines, entity mentions, and pronoun counts across 713 chapters.",
-  "creator": {
-    "@type": "Organization",
-    "name": "EnrichReader",
-    "url": "https://enrichreader.com"
-  },
-  "license": "https://creativecommons.org/licenses/by/4.0/",
-  "variableMeasured": [
-    {
-      "@type": "PropertyValue",
-      "name": "Entity Mentions",
-      "description": "Frequencies of entity mentions categorized into character (Erin: 32207, Ryoka: 11849), location (Liscor), and organization (Antinium), tracked chapter by chapter."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Narrative Absence Spans",
-      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Gregor: 643 chapters gap)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Character Survival",
-      "description": "Survival timeline of 592 characters with 470 alive and 122 dead (79.39% survival rate) at the end of Chapter 713."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Entity Funnel and Category Breakdown",
-      "description": "Filters raw entity mentions down to 45 unique entities categorized into Person (40), Location (1), Organization (3), and Other (1)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "TWI Keywords & Demographics",
-      "description": "Visual keyword mapping of novel terminology and pronoun demographics of characters (He/Him, She/Her, It/Its, They/Them)."
-    }
-  ]
-}
-</script>
+{{< partial "shared/report-schema.html" >}}
 

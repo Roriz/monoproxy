@@ -13,6 +13,7 @@ export function guideSitemapPaths(guides, site) {
   if (authorsAvailable(site)) paths.push('/autores');
   return paths;
 }
-export function guideSitemapXML(paths, date = new Date().toISOString().slice(0, 10)) {
-  return paths.map(path => `<url><loc>https://enrichreader.com${escape(path)}</loc><lastmod>${date}</lastmod></url>`).join('');
+// Omit lastmod until we have reliable per-page content modification dates.
+export function guideSitemapXML(paths) {
+  return paths.map(path => `<url><loc>https://enrichreader.com${escape(path)}</loc></url>`).join('');
 }

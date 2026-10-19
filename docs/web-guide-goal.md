@@ -83,7 +83,7 @@ respective earlier states and are superseded by the final evidence above.
   narrator summary and four questionable threads. Supplemental data is server-only
   and not yet rendered. Next: cut projections, name audit, panel and section routes.
 - 2026-10-13 — Connected reader milestone verified: richer U3 panel (up to three
-  source-tagged scenes, locally ranked cast, mystery doors, conditional EPUB app
+  source-tagged scenes, locally ranked cast, mystery doors, conditional app
   bridge); U4 class-whitelisted dossier, appearance strip, chapter-local scenes
   and question-name-only links, co-occurrence connections; working U5 world/search,
   U6 board/detail and U7 chapter/timeline routes; shared bottom navigation. Legacy

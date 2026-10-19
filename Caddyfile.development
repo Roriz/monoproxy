@@ -11,6 +11,10 @@ mail.localhost {
 enrichreader.localhost {
 	root * ./public/enrichreader.com
 
+	# The old EPUB reader page moved to the story companion page
+	@epubReader path /epub-reader /epub-reader/ /epub-reader/*
+	redir @epubReader /story-companion/ permanent
+
 	# Enable compression
 	encode zstd gzip
 

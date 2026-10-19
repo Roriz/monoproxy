@@ -1,5 +1,6 @@
 ---
-title: "Defiance of the Fall, by the numbers | EnrichReader"
+title: "Defiance of the Fall Characters, Timeline & Statistics | EnrichReader"
+og_image: "/assets/social/defiance_of_the_fall.jpg"
 description: "Defiance of the Fall, by the numbers. 2132 chapters, 3,544,939 words, 367 unique characters analyzed."
 fonts_override: '<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">'
 stylesheets:
@@ -18,7 +19,7 @@ nav_bg_border: false
 nav_minimal: true
 series_title_first: "Defiance"
 series_title_second: "of the Fall"
-series_subtitle: "by the numbers"
+series_subtitle: "characters & story statistics"
 series_intro: "A quantitative narrative autopsy of TheFirstOrder's cultivation and system-apocalypse epic, Defiance of the Fall. Track character survival, perspective shifts, and key entity mentions across 16 volumes, powered by Enrich Reader's semantic text engine."
 series_data: "/defiance_of_the_fall/dotf_data.json"
 stat_chapters: 2132
@@ -98,27 +99,7 @@ mentions_race:
     - entity: "Thea"
       classification: "character"
       mentions: "2,481"
-survival_mortality:
-  section_subtitle: "System integrations and beast invasions are highly lethal. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as major battles with incursions and enemy sectors unfold."
-  summary_title: "Volume 16, Chapter 71"
-  insights:
-    - title: "Sector-Wide Filter"
-      color: "var(--color-person)"
-      text: "Out of 367 characters introduced, <strong>90 deaths</strong> are recorded, representing a 24.52% mortality rate. The system apocalypse filters out weaker combatants swiftly, keeping the cast lean and competitive."
-    - title: "Lethal Milestones"
-      color: "var(--color-event)"
-      text: "The most lethal event occurs at Chapter 36, where a single battle registers <strong>2 key character deaths</strong>, demonstrating the immediate toll of the early system integration wars."
-  table:
-    - metric: "Total Characters Introduced"
-      value: "367"
-    - metric: "Surviving Characters (Alive)"
-      value: "277"
-    - metric: "Eliminated Characters (Dead)"
-      value: "90"
-    - metric: "Survival Rate"
-      value: "75.48%"
-    - metric: "Mortality Rate"
-      value: "24.52%"
+
 word_trends:
   section_subtitle: "Explore the keywords that define the system apocalypse, alongside a clear demographic breakdown of character pronouns."
   cloud_title: "Apocalypse Keyword Map"
@@ -201,45 +182,5 @@ absence_gaps:
   {{< partial "shared/contact.html" >}}
 </main>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Dataset",
-  "name": "Defiance of the Fall Narrative Analysis Dataset",
-  "description": "Quantitative analysis of TheFirstOrder's portal fantasy epic Defiance of the Fall. Covers character survival timelines, entity mentions, and pronoun counts across 2132 chapters.",
-  "creator": {
-    "@type": "Organization",
-    "name": "EnrichReader",
-    "url": "https://enrichreader.com"
-  },
-  "license": "https://creativecommons.org/licenses/by/4.0/",
-  "variableMeasured": [
-    {
-      "@type": "PropertyValue",
-      "name": "Entity Mentions",
-      "description": "Frequencies of entity mentions categorized into character (Zac: 37757, Ogras: 5880, etc.), location (Planet Earth), and organization (Zhix), tracked chapter by chapter."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Narrative Absence Spans",
-      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Roger: 1777 chapters gap)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Character Survival",
-      "description": "Survival timeline of 367 characters with 277 alive and 90 dead (75.48% survival rate) at the end of Chapter 2132."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Entity Funnel and Category Breakdown",
-      "description": "Filters raw entity mentions down to 30 unique entities categorized into Person (20), Location (4), Organization (2), and Other (4)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "DOTF Keywords & Demographics",
-      "description": "Visual keyword mapping of novel terminology and pronoun demographics of characters (He/Him, She/Her, It/Its, They/Them)."
-    }
-  ]
-}
-</script>
+{{< partial "shared/report-schema.html" >}}
 

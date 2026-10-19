@@ -1,10 +1,11 @@
+{{ $data := transform.Unmarshal (readFile (printf "static%s" .Params.series_data)) }}
 <!-- [03] Survival Curve & Mortality Feed -->
 <section id="character-mortality" class="chart-section" style="padding-block: clamp(6rem, 10vw, 10rem);">
   <div class="max-w-5xl mx-auto px-6 fade-in-up">
     <div class="section-header mb-12">
-      <h2 class="section-title">Series survival rate, <br><em>over the timeline</em></h2>
+      <h2 class="section-title">Extracted status labels, <br><em>over the timeline</em></h2>
       <p class="section-subtitle">
-        {{ .Params.survival_mortality.section_subtitle }}
+        Chapter-level counts of records labeled alive or dead in this export. These counts are automated observations and may cover a different set of records from the headline metadata.
       </p>
     </div>
 
@@ -15,7 +16,7 @@
 
           <div class="mb-6 pb-4 border-b border-white/5">
             <div class="flex flex-col gap-1">
-              <span class="control-label">Series Survival Curve (All Volumes)</span>
+              <span class="control-label">Chapter-Level Status Counts (Analyzed Export)</span>
               <div class="flex flex-wrap gap-4 mt-2">
                 <span class="legend-item-minimal">
                   <span class="dot-marker" style="background: var(--color-person)"></span>
@@ -42,40 +43,10 @@
       </div>
     </div>
 
-    <!-- Insights & Analysis Section -->
     <div class="mt-16 pt-8 border-t border-white/5">
-      <span class="control-label mb-6 block text-cream-200" style="color: var(--color-text-secondary);">Survival Timeline & Mortality Analysis</span>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {{ range .Params.survival_mortality.insights }}
-        <div class="p-5 rounded-lg" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.04);">
-          <h4 class="font-display italic text-sm mb-2" style="color: {{ .color }}; font-weight: 700;">{{ .title }}</h4>
-          <p class="text-xs text-neutral-400 font-ui leading-relaxed">
-            {{ .text | safeHTML }}
-          </p>
-        </div>
-        {{ end }}
-      </div>
-    </div>
-
-    <!-- SEO & Accessibility Data (Exposing final state survival stats) -->
-    <div class="sr-only" aria-hidden="false">
-      <h3>Narrative Survival & Mortality Summary ({{ .Params.survival_mortality.summary_title }})</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Metric</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{ range .Params.survival_mortality.table }}
-          <tr>
-            <td>{{ .metric }}</td>
-            <td>{{ .value }}</td>
-          </tr>
-          {{ end }}
-        </tbody>
-      </table>
+      <h3 class="control-label mb-6 block">Headline export status metadata</h3>
+      <p class="font-body">The export metadata records {{ $data.metadata.total_survived }} alive labels and {{ $data.metadata.total_dead }} dead labels across {{ $data.metadata.total_characters }} character records. These summary fields are separate from the chapter-level chart. They do not establish a whole-series survival rate or explain why a character survives.</p>
+      <p class="font-body">Status extraction can miss later reversals or merge identities incorrectly. See the <a href="#methodology" style="text-decoration: underline;">methodology and limitations</a> before drawing conclusions about the novel.</p>
     </div>
   </div>
 </section>

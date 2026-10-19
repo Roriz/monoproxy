@@ -74,9 +74,17 @@ body {
   line-height: 1.7;
 }
 
+/* No backdrop-filter: behind the cards it only blurred the void and its
+   starfield, so it erased the stars under some cards (not under cards whose
+   reveal ancestor was a backdrop root), made them pop in and out at card edges
+   while scrolling, and re-blurred the twinkling stars on every frame. (The
+   /app/ PWA modal sits over page content, but its own overlay already dims and
+   blurs that.) Instead the fill is a darker translucent tint, so the faint
+   stars behind a card stay dim enough for text-neutral-400 to keep 4.5:1 at
+   peak twinkle. The fill is a single colour equal to a 2% white highlight
+   (4% on hover) over oklch(12% 0.025 260 / 0.6), so hover still transitions. */
 .glass {
-  background: oklch(100% 0 0 / 0.02);
-  backdrop-filter: blur(12px);
+  background: oklch(16.42% 0.0197 268.66 / 0.608);
   border: 1px solid oklch(100% 0 0 / 0.08);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -95,7 +103,7 @@ nav {
 
 .glass:hover {
   border-color: var(--color-gold-500);
-  background: oklch(100% 0 0 / 0.04);
+  background: oklch(20.03% 0.0181 269 / 0.616);
 }
 
 .glow-gold {
@@ -127,6 +135,17 @@ nav {
   width: 100%;
   height: 100%;
   z-index: -1;
+  contain: strict;
+  /* Star fade, read by initParticles (static/main.js, rem units only): stars
+     keep full strength in the side gutters, outside the widest content frame
+     (max-w-7xl, 80rem), and fade over --void-ramp to a faint field
+     (--void-center-alpha) behind the reading column, so they never compete
+     with text. On screens 80rem wide or narrower only the faint field shows.
+     The fade is a per-star opacity (--fade) rather than a mask-image, so the
+     twinkle does not redraw a masked full-viewport layer on every frame. */
+  --void-column: 40rem;
+  --void-ramp: 3rem;
+  --void-center-alpha: 0.15;
   /* Sophisticated scholarly tint: Deep Sea Ink */
   /* Dramatic Atmospheric Fog */
   background: 
@@ -144,18 +163,24 @@ nav {
   pointer-events: none;
 }
 
+.void-stars {
+  position: absolute;
+  inset: 0;
+}
+
 .star {
   position: absolute;
   background: white;
   border-radius: 50%;
-  opacity: 0.4;
-  will-change: transform, opacity;
+  opacity: calc(0.4 * var(--fade, 1));
   animation: twinkle var(--duration) infinite;
 }
 
+/* Opacity only, and no will-change: the running animation already composites
+   each star, and scaling 1-3px dots resampled them on every frame. */
 @keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.4); }
+  0%, 100% { opacity: calc(0.2 * var(--fade, 1)); }
+  50% { opacity: calc(0.7 * var(--fade, 1)); }
 }
 
 /* Animations & Motion */
@@ -235,6 +260,16 @@ nav {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .star {
+    animation: none;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
 }
 
 /* Interactions */
@@ -269,4 +304,57 @@ nav {
   cursor: pointer;
   border: 2px solid var(--color-neutral-950);
   box-shadow: var(--shadow-gold);
+}
+/* Call-to-action pair: .btn-primary (gold fill) for the main action, .btn-secondary (outline) for the rest.
+   Both share .btn so they keep the same height and padding side by side. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+@media (min-width: 48rem) {
+  .btn {
+    font-size: var(--text-base);
+  }
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-gold-300);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background-color: var(--color-gold-500);
+  border-color: oklch(78% 0.10 85 / 0.3);
+  color: var(--color-neutral-950);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-gold-400);
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: oklch(74% 0.12 85 / 0.55);
+  color: var(--color-cream-200);
+}
+
+.btn-secondary:hover {
+  background-color: oklch(100% 0 0 / 0.05);
+  border-color: var(--color-gold-400);
+  color: var(--color-gold-300);
 }

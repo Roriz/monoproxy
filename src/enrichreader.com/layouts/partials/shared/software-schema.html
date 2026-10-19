@@ -1,0 +1,15 @@
+{{ $organizationRef := dict "@id" ("/#organization" | absURL) }}
+{{ if .IsHome }}
+{{ $organization := dict "@type" "Organization" "@id" ("/#organization" | absURL) "name" "EnrichReader" "url" site.BaseURL }}
+{{ $website := dict "@type" "WebSite" "@id" ("/#website" | absURL) "name" "EnrichReader" "url" site.BaseURL "publisher" $organizationRef }}
+{{ $app := dict "@type" "SoftwareApplication" "@id" ("/#app" | absURL) "name" "EnrichReader" "applicationCategory" "BookApplication" "operatingSystem" "Android, iOS (web app), Web" "description" "Spoiler-free story companion app with chapter-aware character profiles and lore through matching Skins for partner series." "url" ("/app/" | absURL) "downloadUrl" "https://play.google.com/store/apps/details?id=com.enrichreader.app" "publisher" $organizationRef }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $organization $website $app) | jsonify | safeJS }}</script>
+{{ end }}
+{{ if eq .RelPermalink "/reading-guides/" }}
+{{ $items := slice }}
+{{ range $index, $guide := partialCached "shared/public-guides.html" . }}
+  {{ $items = $items | append (dict "@type" "ListItem" "position" (add $index 1) "url" ($guide.url | absURL) "name" (printf "%s reading guide" $guide.title)) }}
+{{ end }}
+{{ $collection := dict "@context" "https://schema.org" "@type" "CollectionPage" "url" .Permalink "name" .Title "description" .Description "inLanguage" "en" "isPartOf" (dict "@id" ("/#website" | absURL)) "publisher" $organizationRef "mainEntity" (dict "@type" "ItemList" "itemListElement" $items) }}
+<script type="application/ld+json">{{ $collection | jsonify | safeJS }}</script>
+{{ end }}

@@ -81,7 +81,7 @@ node scripts/web-guide/indexnow.mjs submit
 
 The key command prepares the root ownership file for Hugo. `submit` verifies that
 published file before notifying IndexNow. Deployment calls it only when the key is
-configured. Current eligible URLs and prior eligible removals are included; failures
+configured. Public reader landing pages and series reports are included alongside eligible guide URLs and prior eligible removals; failures
 retain the prior manifest for retry. State defaults to
 `~/.local/state/enrichreader/indexnow.json`; override with
 `WEB_GUIDE_INDEXNOW_STATE` when needed. Preserve that state across releases.

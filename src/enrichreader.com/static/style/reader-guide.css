@@ -1,0 +1,2 @@
+.reader-guide { max-width: 52rem; }
+.reader-guide a { color: var(--color-accent, #d4af37); text-decoration: underline; text-underline-offset: .2em; }

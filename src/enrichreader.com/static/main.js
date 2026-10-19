@@ -8,20 +8,56 @@ function initParticles() {
 
   const starCount = 120;
   const fragment = document.createDocumentFragment();
+  const stars = [];
 
   for (let i = 0; i < starCount; i++) {
     const star = document.createElement('div');
     star.className = 'star';
     const size = Math.random() * 2 + 1;
+    const left = Math.random() * 100;
     star.style.width = size + 'px';
     star.style.height = size + 'px';
-    star.style.left = Math.random() * 100 + '%';
+    star.style.left = left + '%';
     star.style.top = Math.random() * 100 + '%';
     star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+    stars.push({ star, left, size });
     fragment.appendChild(star);
   }
 
-  voidEl.appendChild(fragment);
+  // Stars keep full strength in the side gutters and fade to --void-center-alpha
+  // behind the reading column (see .void-bg in input.css). The fade is a per-star
+  // opacity, not a mask-image on the star layer: a mask turns the whole viewport
+  // into an offscreen pass that is redrawn on every twinkle frame. It depends on
+  // the viewport width only, so it is recomputed when the width changes.
+  let fadedWidth = 0;
+  const fadeStars = () => {
+    const width = voidEl.clientWidth;
+    if (!width || width === fadedWidth) return;
+    fadedWidth = width;
+    const vars = getComputedStyle(voidEl);
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    const column = parseFloat(vars.getPropertyValue('--void-column')) * rem;
+    const ramp = parseFloat(vars.getPropertyValue('--void-ramp')) * rem;
+    const floor = parseFloat(vars.getPropertyValue('--void-center-alpha'));
+    stars.forEach(({ star, left, size }) => {
+      const fromColumn = Math.abs(left / 100 * width + size / 2 - width / 2) - column;
+      const fade = Math.min(1, Math.max(floor, floor + (1 - floor) * fromColumn / ramp));
+      star.style.setProperty('--fade', fade.toFixed(3));
+    });
+  };
+  fadeStars();
+
+  let fadeQueued = false;
+  window.addEventListener('resize', () => {
+    if (fadeQueued) return;
+    fadeQueued = true;
+    requestAnimationFrame(() => { fadeQueued = false; fadeStars(); });
+  }, { passive: true });
+
+  const layer = document.createElement('div');
+  layer.className = 'void-stars';
+  layer.appendChild(fragment);
+  voidEl.appendChild(layer);
 }
 
 // Transparent to Solid Nav on Scroll

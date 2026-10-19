@@ -5,21 +5,21 @@
 
 const profileData = {
   "1": {
-    name: "Klein Moretti",
-    desc: "A graduate of the History department of Khoy University who transmigrated into Tingen. In Chapter 11, he consumes the Seer potion to become a Sequence 9 Beyonder, officially joining the Nighthawks.",
-    tags: ["Sequence 9: Seer", "History Graduate", "Nighthawk Guard"],
+    name: "The Traveller",
+    desc: "A huge figure seen from Walton's ship, which is stuck in the Arctic ice. In Letter 4, he drives a dog sledge north until the crew loses sight of him. Nobody on board knows who or what he is.",
+    tags: ["Identity Unknown", "Sledge Driver", "Heading North"],
     theme: "gold"
   },
   "2": {
-    name: "Sherlock Moriarty",
-    desc: "Residing as a consulting detective in Backlund. In Chapter 293, Klein consumes the Magician formula to advance to Sequence 7, gaining powerful spellcasting illusions and paper substitutes.",
-    tags: ["Sequence 7: Magician", "Consulting Detective", "Tarot Club Founder"],
+    name: "The Creature",
+    desc: "Victor's creation, telling his own story. In Chapter 12, he hides in a shed against a poor family's cottage, gathers their firewood in secret, and learns words by listening. Then he sees his reflection in a pool.",
+    tags: ["Victor's Creation", "Learning to Speak", "Secret Helper"],
     theme: "gold"
   },
   "3": {
-    name: "Gehrman Sparrow",
-    desc: "Under the disguise of a cold-blooded adventurer on the Sea of Ruins, Klein consumes the potion in Chapter 664 to become a Sequence 5 Marionettist, controlling the spirit body threads of his targets.",
-    tags: ["Sequence 5: Marionettist", "Crazy Adventurer", "The Fool"],
+    name: "The Creature",
+    desc: "The sledge driver from Letter 4. He killed William, Clerval and Elizabeth, then led Victor north. In Chapter 24, he grieves over Victor's body, says he will burn himself, and drifts away on an ice raft.",
+    tags: ["Killer of Three", "The Sledge Traveller", "Full of Remorse"],
     theme: "spoiler"
   }
 };

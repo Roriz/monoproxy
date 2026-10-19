@@ -8,7 +8,7 @@
           <img src="/assets/logo-4x1-dark-transparent.png" alt="EnrichReader" style="height: 32px; width: auto;" class="logo">
         </a>
         <p class="text-xs text-neutral-400 max-w-sm mt-3 leading-relaxed font-light">
-          Narrative intelligence platform transforming long-form fiction into structured, spoiler-safe knowledge.
+          A spoiler-free story companion with character profiles and lore that follow your progress.
         </p>
 
         <!-- Social / Verification links -->
@@ -43,6 +43,11 @@
             <li>
               <a href="/" class="text-xs text-neutral-400 hover:text-gold-500 transition-colors">Home</a>
             </li>
+            {{ if partialCached "shared/public-guides.html" . }}<li><a href="/reading-guides/" class="text-xs text-neutral-400 hover:text-gold-500 transition-colors">Reading guides</a></li>{{ end }}
+            <li><a href="/reports/" class="text-xs text-neutral-400 hover:text-gold-500 transition-colors">Series reports</a></li>
+            <li><a href="/story-companion/" class="text-xs text-neutral-400 hover:text-gold-500 transition-colors">Story companion</a></li>
+            <li><a href="/litrpg-companion/" class="text-xs text-neutral-400 hover:text-gold-500 transition-colors">LitRPG companion</a></li>
+            <li><a href="/spoiler-free-wiki-alternative/" class="text-xs text-neutral-400 hover:text-gold-500 transition-colors">Wiki alternative</a></li>
             <li>
               <a href="/enterprise/" class="text-xs text-neutral-400 hover:text-gold-500 transition-colors">Technology</a>
             </li>

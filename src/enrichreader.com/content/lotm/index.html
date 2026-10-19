@@ -1,5 +1,6 @@
 ---
-title: "Lord of the Mysteries, by the numbers | EnrichReader"
+title: "Lord of the Mysteries Characters, Timeline & Statistics | EnrichReader"
+og_image: "/assets/social/lotm.jpg"
 description: "Lord of the Mysteries, by the numbers. 1551 chapters, 3,245,618 words, 514 unique characters analyzed."
 fonts_override: '<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Spectral:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">'
 stylesheets:
@@ -19,7 +20,7 @@ nav_bg_border: false
 nav_minimal: true
 series_title_first: "Lord of the"
 series_title_second: "Mysteries"
-series_subtitle: "by the numbers"
+series_subtitle: "characters & story statistics"
 series_intro: "A quantitative narrative autopsy of Cuttlefish That Loves Diving's fantasy masterpiece, Lord of the Mysteries. Track character survival, Beyonder pathway selections, and entity mentions across all eight volumes, powered by Enrich Reader's semantic text engine."
 series_data: "/lotm/lotm_data.json"
 stat_chapters: 1551
@@ -31,7 +32,7 @@ funnel_breakdown:
   max_chapter: 1551
   raw_mentions: "20,000"
   unique_characters: 514
-  unique_entities: "1,044"
+  unique_entities: 954
   summary_title: "Volume 8, Chapter 1551"
   insights:
     - title: "Fantasy Setting Depth (Locations vs. Items)"
@@ -148,30 +149,7 @@ matrix:
       count: 6
     - name: "Assassin"
       count: 5
-survival_mortality:
-  section_subtitle: "Occult worlds are brutal. Track the survival curve of characters introduced across the series. Watch the cumulative deaths increase as the volumes progress."
-  summary_title: "Volume 8, Chapter 1551"
-  insights:
-    - title: "The Tingen Filter (Volume 1)"
-      color: "var(--color-person)"
-      text: "By the end of Volume 1, <strong>3 characters</strong> have died out of 16 introduced (an 18.75% initial mortality rate). Volume 1 serves as the opening filter, culminating in the Tingen Tragedy."
-    - title: "Tarot Club Integrity"
-      color: "var(--color-item)"
-      text: "Tarot Club members show a <strong>100% survival rate</strong> throughout the series. While other organizations collapse, the protection of the Fool maintains complete safety."
-    - title: "Apotheosis Peak Lethality (Volume 8)"
-      color: "var(--color-event)"
-      text: "Volume 8 records the highest density of high-sequence beyonder deaths, with <strong>12 key beyonder and deity deaths</strong>. The Apotheosis war represents the absolute peak of occult lethality."
-  table:
-    - metric: "Total Characters Introduced"
-      value: "514"
-    - metric: "Surviving Characters (Alive)"
-      value: "492"
-    - metric: "Eliminated Characters (Dead)"
-      value: "22"
-    - metric: "Survival Rate"
-      value: "95.72%"
-    - metric: "Mortality Rate"
-      value: "4.28%"
+
 word_trends:
   section_subtitle: "Explore the keywords that define the novel, alongside a clear demographic breakdown of character pronouns."
   cloud_title: "Occult Keyword Map"
@@ -268,50 +246,5 @@ absence_gaps:
   {{< partial "shared/contact.html" >}}
 </main>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Dataset",
-  "name": "Lord of the Mysteries Narrative Analysis Dataset",
-  "description": "Quantitative analysis of Cuttlefish That Loves Diving's fantasy masterpiece Lord of the Mysteries. Covers character survival timelines, Beyonder pathway selections, entity mentions, and pronoun counts across all eight volumes.",
-  "creator": {
-    "@type": "Organization",
-    "name": "EnrichReader",
-    "url": "https://enrichreader.com"
-  },
-  "license": "https://creativecommons.org/licenses/by/4.0/",
-  "variableMeasured": [
-    {
-      "@type": "PropertyValue",
-      "name": "Entity Mentions",
-      "description": "Frequencies of entity mentions categorized into character (Klein Moretti: 45818, Audrey Hall: 6216), location, organization (Tarot Club: 1348), item (Arrodes: 713), and event, tracked chapter by chapter."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Narrative Absence Spans",
-      "description": "The largest chapter segments during which a character disappears from the narrative text before re-appearing (e.g. Azik Eggers: 320 chapters gap)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Character Survival",
-      "description": "Survival timeline of 514 characters with 364 alive and 150 dead (70.82% survival rate) at the end of Volume 8."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Entity Funnel and Category Breakdown",
-      "description": "Filters raw entity mentions down to 954 unique entities categorized into Person (514), Location (175), Organization (100), Other (87), Item (38), and Event (40)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Occult Keywords & Demographics",
-      "description": "Visual keyword mapping of novel terminology and pronoun demographics of characters (He/Him, She/Her, It/Its, They/Them)."
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Pathway Selections",
-      "description": "Breakdown of Beyonder pathway selections per volume, showing Sleepless, Seer, Spectator, and Sailor pathway counts."
-    }
-  ]
-}
-</script>
+{{< partial "shared/report-schema.html" >}}
 

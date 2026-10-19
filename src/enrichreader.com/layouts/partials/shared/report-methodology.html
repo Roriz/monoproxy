@@ -1,0 +1,13 @@
+{{ $raw := readFile (printf "static%s" .Params.series_data) }}
+{{ $data := transform.Unmarshal $raw }}
+<section id="methodology" class="max-w-5xl mx-auto px-6 py-8" aria-labelledby="methodology-heading">
+  <h2 id="methodology-heading" class="section-title">About this analysis</h2>
+  <p class="font-body hero-description">EnrichReader publishes this experimental, automated analysis of the files in this report. The headline export records {{ $data.metadata.total_chapters }} chapters, {{ $data.metadata.total_words }} words, and {{ $data.metadata.total_characters }} character records. These are dataset measurements, rather than definitive counts for every edition of the story.</p>
+  <details class="font-body hero-description">
+    <summary style="cursor: pointer; text-decoration: underline;">Sources, definitions, and limitations</summary>
+    <p>The <a href="{{ .Params.series_data }}" style="text-decoration: underline;">JSON analysis export</a> contains headline metadata, chapter identifiers, entity mentions, and chart data. Snapshot identifier: <code style="overflow-wrap: anywhere;">{{ sha256 $raw }}</code>. This identifier changes when the exported data changes.</p>
+    <p>Chapter positions follow the export’s series index; they may differ from printed chapter numbers or other editions. Character records and entity labels come from automated extraction. Alias merging and category assignments can be incomplete, so record counts are not a verified census of distinct fictional people.</p>
+    <p>Pronoun figures are counts in the exported tag breakdown, rather than a deduplicated character census. Species and pathway counts depend on the labels in their separate exported matrices. Survival figures reflect extracted status labels; they are not independent verification of every death or later reversal.</p>
+    <p>The source edition, extraction thresholds, and independent review history are not recorded in this public export. Editorial insight text and chapter-level charts can use different scopes from headline metadata. Treat this report as exploratory analysis, and check the novel before relying on a story claim. It contains spoilers.</p>
+  </details>
+</section>
