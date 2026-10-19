@@ -63,7 +63,6 @@
 .enterprise-kicker,
 .enterprise-eyebrow,
 .enterprise-proof-label,
-.enterprise-preview-kicker,
 .enterprise-source {
   color: var(--color-gold-500);
   font-family: var(--font-interface);
@@ -160,8 +159,7 @@
 
 .enterprise-card-topline,
 .enterprise-profile,
-.enterprise-tags,
-.enterprise-report-panel {
+.enterprise-tags {
   display: flex;
 }
 
@@ -254,7 +252,7 @@
 
 .enterprise-proof > div {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
   align-items: start;
 }
@@ -286,10 +284,6 @@
   background: rgb(255 255 255 / 0.012);
 }
 
-#how-it-works > div > div:first-child {
-  margin-bottom: var(--enterprise-space-block);
-}
-
 .enterprise-feature-grid {
   gap: var(--enterprise-gap-grid);
 }
@@ -316,9 +310,8 @@
   letter-spacing: 0.12em;
 }
 
-.enterprise-feature-card h3,
-.enterprise-flow h3 {
-  margin-top: 2.4rem;
+.enterprise-feature-card h3 {
+  margin-top: 1rem;
   color: var(--color-cream-200);
   font-family: var(--font-master);
   font-size: 1.45rem;
@@ -326,131 +319,102 @@
   line-height: 1.25;
 }
 
-.enterprise-feature-card p:last-child,
-.enterprise-flow p {
+.enterprise-feature-card p:last-child {
   margin-top: 1rem;
   color: var(--color-neutral-400);
   font-size: 0.92rem;
   line-height: 1.7;
 }
 
-.enterprise-flow {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  overflow: hidden;
-  border: 1px solid var(--color-neutral-800);
-  border-radius: 1.5rem;
-}
-
-.enterprise-flow li {
-  display: flex;
-  gap: 1.5rem;
-  min-height: 15rem;
-  padding: clamp(1.75rem, 3vw, 2.5rem);
-  border-bottom: 1px solid var(--color-neutral-800);
-}
-
-.enterprise-flow li:nth-child(odd) {
-  border-right: 1px solid var(--color-neutral-800);
-}
-
-.enterprise-flow li:nth-last-child(-n + 2) {
-  border-bottom: 0;
-}
-
-.enterprise-flow-index {
-  display: grid;
-  flex: 0 0 auto;
-  width: 2rem;
-  height: 2rem;
-  place-items: center;
-  border: 1px solid oklch(74% 0.12 85 / 0.35);
-  border-radius: 0.65rem;
-  color: var(--color-gold-400);
-  font-family: var(--font-interface);
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.enterprise-flow h3 {
-  margin-top: 0.25rem;
-}
-
-.enterprise-report-panel {
-  align-items: stretch;
-  gap: clamp(2rem, 4vw, 3.5rem);
-  padding: clamp(1.6rem, 5vw, 4rem);
-  border: 1px solid var(--color-neutral-800);
-  border-radius: 2rem;
-  background: linear-gradient(120deg, rgb(255 255 255 / 0.025), transparent 55%);
-}
-
-.enterprise-report-copy {
-  flex: 1 1 56%;
-}
-
-.enterprise-text-link {
-  display: inline-block;
-  margin-top: 2rem;
-  color: var(--color-gold-400);
-  font-family: var(--font-interface);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.enterprise-report-preview {
-  display: flex;
-  flex: 1 1 36%;
-  flex-direction: column;
-  justify-content: end;
-  min-height: 17rem;
-  padding: 1.6rem;
-  border: 1px solid oklch(74% 0.12 85 / 0.25);
-  border-radius: 1.25rem;
-  background: radial-gradient(circle at 80% 15%, oklch(74% 0.12 85 / 0.2), transparent 34%), rgb(22 22 27 / 0.85);
-  transition: transform 180ms ease, border-color 180ms ease;
-}
-
-.enterprise-report-preview:hover {
-  transform: translateY(-3px);
-  border-color: var(--color-gold-500);
-}
-
-.enterprise-report-preview h3 {
-  margin-top: 1.4rem;
-  color: var(--color-cream-100);
-  font-family: var(--font-master);
-  font-size: 2rem;
-  font-style: italic;
-}
-
-.enterprise-report-preview p:not(.enterprise-preview-kicker) {
-  margin-top: 0.65rem;
-  color: var(--color-neutral-400);
-  font-size: 0.85rem;
-  line-height: 1.6;
-}
-
-.enterprise-report-preview > span {
-  margin-top: 1.5rem;
-  color: var(--color-gold-400);
-  font-family: var(--font-interface);
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
 .enterprise-cta {
   background: radial-gradient(ellipse at 50% 100%, oklch(74% 0.12 85 / 0.09), transparent 62%);
 }
 
-@media (min-width: 64rem) {
-  .enterprise-product-intro {
-    grid-column: span 4;
+/* Same character at three reading positions; the last card carries the spoiler. */
+.enterprise-stage-grid,
+.enterprise-offer {
+  margin-top: var(--enterprise-space-block);
+}
+
+.enterprise-offer {
+  gap: var(--enterprise-gap-grid);
+}
+
+.enterprise-stage-spoiler {
+  border-color: oklch(74% 0.12 85 / 0.35);
+}
+
+.enterprise-caption {
+  max-width: 43rem;
+  margin-top: 1.5rem;
+  color: var(--color-neutral-500);
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.enterprise-list {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+  color: var(--color-neutral-300);
+  font-family: var(--font-reading);
+  line-height: 1.6;
+}
+
+.enterprise-list li {
+  padding-left: 1.2rem;
+  border-left: 1px solid oklch(74% 0.12 85 / 0.35);
+}
+
+.enterprise-offer-cta {
+  margin-top: var(--enterprise-space-block);
+}
+
+.enterprise-faq {
+  margin-top: var(--enterprise-space-block);
+}
+
+.enterprise-faq dt {
+  margin-top: 2rem;
+  color: var(--color-cream-200);
+  font-family: var(--font-master);
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+.enterprise-faq dt:first-child {
+  margin-top: 0;
+}
+
+.enterprise-faq dd {
+  margin-top: 0.6rem;
+  color: var(--color-neutral-400);
+  line-height: 1.7;
+}
+
+/* The single cross-sell to readers: one thin, low-contrast line. */
+.enterprise-reader-strip {
+  padding-block: 1.5rem;
+  color: var(--color-neutral-500);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.enterprise-reader-strip a {
+  color: var(--color-neutral-400);
+  text-decoration: underline;
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .enterprise-proof > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 1.5rem;
   }
 
-  .enterprise-feature-grid {
-    grid-column: span 8;
+  .enterprise-proof > div > div:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
   }
 }
 
@@ -473,25 +437,5 @@
   .enterprise-proof > div > div:first-child {
     padding-top: 0;
     border-top: 0;
-  }
-
-  .enterprise-flow {
-    grid-template-columns: 1fr;
-  }
-
-  .enterprise-flow li,
-  .enterprise-flow li:nth-last-child(-n + 2) {
-    min-height: auto;
-    padding: 1.6rem;
-    border-right: 0;
-    border-bottom: 1px solid var(--color-neutral-800);
-  }
-
-  .enterprise-flow li:last-child {
-    border-bottom: 0;
-  }
-
-  .enterprise-report-panel {
-    display: grid;
   }
 }

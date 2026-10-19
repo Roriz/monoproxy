@@ -1,12 +1,14 @@
 ---
-title: "EnrichReader | Narrative Enrichment for Long-Form Fiction"
-description: "EnrichReader combines local-first reading with AI-assisted, evidence-verified narrative enrichment for long-form fiction."
+title: "Spoiler-Free Reading Guides for Publishers & Authors | EnrichReader"
+description: "You write the story. EnrichReader builds its spoiler-free wiki: readers pick their chapter and only see what they've reached. One-time fee per book."
 keywords:
-  - "narrative enrichment"
-  - "spoiler-safe reading"
-  - "fiction entity extraction"
-  - "Vertex AI"
-  - "Gemini"
+  - "spoiler-free reading guide"
+  - "book wiki for authors"
+  - "character guide for publishers"
+  - "web novel companion"
+nav_cta_label: "Request a guide for your book"
+nav_hide_reader_links: true
+nav_cta_href: "mailto:hello@enrichreader.com?subject=A%20spoiler-free%20guide%20for%20my%20book&body=Hi%20Radam%C3%A9s%2C%20I'd%20like%20a%20guide%20for%20%5Btitle%5D%20by%20%5Bauthor%5D.%20It's%20published%20on%20%5Be.g.%20Royal%20Road%2C%20Kindle%2C%20a%20small%20press%5D."
 stylesheets:
   - "/enterprise/enterprise.css"
 scripts:
@@ -19,133 +21,175 @@ scripts:
 
   <div class="max-w-6xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
     <div class="lg:col-span-7">
-      <p class="enterprise-kicker">Narrative enrichment infrastructure</p>
-      <h1 class="enterprise-title">Turn long-form fiction into a <em>spoiler-safe</em> reading experience.</h1>
+      <p class="enterprise-kicker">Spoiler-free reading guides · for publishers &amp; authors</p>
+      <h1 class="enterprise-title">You write the story. I build its wiki, <em>without the spoilers.</em></h1>
       <p class="enterprise-lede">
-        EnrichReader transforms a reader's progress into the right context: evolving character profiles,
-        connected lore, and traceable narrative facts that never reveal the next chapter too soon.
+        A spoiler-free reading guide for your book, with your cover and buy links. Readers only see what
+        they've reached, and you approve it before it goes live.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 mt-10">
-        <a href="/app/" class="enterprise-button enterprise-button-primary">Explore the reader</a>
-        <a href="mailto:hello@enrichreader.com" class="enterprise-button enterprise-button-secondary">Contact the founder <span aria-hidden="true">→</span></a>
+        <a href="{{< param nav_cta_href >}}" class="enterprise-button enterprise-button-primary">Request a guide for your book</a>
+        <a href="/guia/frankenstein" hreflang="pt-BR" class="enterprise-button enterprise-button-secondary">See a live guide <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
-    <aside class="lg:col-span-5 enterprise-output-card" aria-label="Example EnrichReader output">
+    <aside class="lg:col-span-5 enterprise-output-card" aria-label="Example profile from the Frankenstein guide">
       <div class="enterprise-card-topline">
         <span class="enterprise-status-dot" aria-hidden="true"></span>
-        <span>Progress-aware entity profile</span>
-        <span class="enterprise-card-step">Chapter 11</span>
+        <span>Frankenstein guide</span>
+        <span class="enterprise-card-step">Letter 4</span>
       </div>
       <div class="enterprise-profile">
-        <div class="enterprise-avatar" aria-hidden="true">K</div>
+        <div class="enterprise-avatar" aria-hidden="true">T</div>
         <div>
           <p class="enterprise-eyebrow">Character</p>
-          <h2>Klein Moretti</h2>
+          <h2>The Traveller</h2>
         </div>
       </div>
       <div class="enterprise-tags" aria-label="Character facts revealed so far">
-        <span>Sequence 9: Seer</span>
-        <span>History Graduate</span>
+        <span>Identity Unknown</span>
+        <span>Sledge Driver</span>
+        <span>Heading North</span>
       </div>
-      <p class="enterprise-profile-copy">Facts remain scoped to the reader’s progress, so the same story can be explored without a separate spoiler-prone wiki.</p>
-      <p class="enterprise-source">Evidence-linked · Chapter-aware · Reader-local</p>
+      <p class="enterprise-profile-copy">A huge figure seen from Walton's ship, which is stuck in the Arctic ice. In Letter 4, he drives a dog sledge north until the crew loses sight of him. Nobody on board knows who or what he is.</p>
+      <p class="enterprise-source">Example profile · Mary Shelley, 1831 text (public domain) · <a href="/guia/frankenstein" hreflang="pt-BR" class="underline">Open the live guide</a></p>
     </aside>
   </div>
 </header>
 
-<section class="enterprise-proof px-6 py-8 border-y border-neutral-800">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+<section class="enterprise-proof px-6 py-8 border-y border-neutral-800" aria-label="Proof">
+  <div class="max-w-6xl mx-auto">
     <div>
-      <p class="enterprise-proof-label">Working product</p>
-      <p>Reader app available on web and Android</p>
+      <p class="enterprise-proof-label">Live guide</p>
+      <p><a href="/guia/frankenstein" hreflang="pt-BR" class="underline">Frankenstein</a>, open to anyone</p>
     </div>
     <div>
-      <p class="enterprise-proof-label">Demonstrated output</p>
-      <p>Structured narrative models across multiple long-form series</p>
+      <p class="enterprise-proof-label">Reader-tested</p>
+      <p>200k+ views across 15 Reddit posts by English web-novel readers</p>
     </div>
     <div>
-      <p class="enterprise-proof-label">Local-first reader</p>
-      <p>Reading and spoiler controls stay on the device</p>
+      <p class="enterprise-proof-label">Traceable</p>
+      <p>Every fact cites its chapter</p>
+    </div>
+    <div>
+      <p class="enterprise-proof-label">Corrections</p>
+      <p>Anything wrong is fixed within 24h</p>
     </div>
   </div>
 </section>
 
 <section class="enterprise-section px-6">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-    <div class="enterprise-product-intro">
-      <p class="enterprise-kicker">The product</p>
-      <h2 class="enterprise-section-title">A living layer for a book a reader already owns.</h2>
+  <div class="max-w-6xl mx-auto">
+    <div class="max-w-3xl">
+      <p class="enterprise-kicker">The problem</p>
+      <h2 class="enterprise-section-title">Keep your readers in the story.</h2>
+      <p class="enterprise-lede enterprise-lede-compact">A reader who can't place a character either stops or searches. Neither one ends well for your twists.</p>
     </div>
-    <div class="enterprise-feature-grid grid grid-cols-1 md:grid-cols-3">
+
+    <div class="enterprise-feature-grid enterprise-stage-grid grid grid-cols-1 md:grid-cols-3">
       <article class="enterprise-feature-card">
-        <p class="enterprise-feature-number">01</p>
-        <h3>Progressive knowledge</h3>
-        <p>Profiles and lore change with the reader’s actual place in the text instead of exposing the whole series at once.</p>
+        <p class="enterprise-feature-number">Letter 4</p>
+        <h3>The Traveller</h3>
+        <div class="enterprise-tags"><span>Identity Unknown</span><span>Sledge Driver</span></div>
+        <p>A huge figure driving a dog sledge north across the ice. Nobody on Walton's ship knows who or what he is.</p>
       </article>
       <article class="enterprise-feature-card">
-        <p class="enterprise-feature-number">02</p>
-        <h3>Connected context</h3>
-        <p>Characters, places, organizations, objects, and events become an explorable layer attached to the story.</p>
+        <p class="enterprise-feature-number">Chapter 12</p>
+        <h3>The Creature</h3>
+        <div class="enterprise-tags"><span>Victor's Creation</span><span>Learning to Speak</span></div>
+        <p>Victor's creation, telling his own story. He hides beside a poor family's cottage, gathers their firewood in secret, and learns words by listening.</p>
       </article>
-      <article class="enterprise-feature-card">
-        <p class="enterprise-feature-number">03</p>
-        <h3>Traceable output</h3>
-        <p>Structured facts are tied to chapter context so the product can preserve narrative order and support verification.</p>
+      <article class="enterprise-feature-card enterprise-stage-spoiler">
+        <p class="enterprise-feature-number">Chapter 24 · ending spoiler</p>
+        <h3>The Creature</h3>
+        <div class="enterprise-tags"><span>The Sledge Traveller</span><span>Full of Remorse</span></div>
+        <p>The sledge driver from Letter 4. He grieves over Victor's body, says he will burn himself, and drifts away on an ice raft.</p>
       </article>
+    </div>
+    <p class="enterprise-caption">Same character, three points in the book. The reveal arrives where you wrote it. Rewritten examples from Mary Shelley's <cite>Frankenstein</cite> (1831 text); the third card spoils the ending.</p>
+  </div>
+</section>
+
+<section id="offer" class="enterprise-section enterprise-section-dark px-6 border-y border-neutral-800">
+  <div class="max-w-6xl mx-auto">
+    <div class="max-w-3xl">
+      <p class="enterprise-kicker">The offer</p>
+      <h2 class="enterprise-section-title">You keep writing. I do the rest.</h2>
+    </div>
+
+    <div class="enterprise-offer grid grid-cols-1 md:grid-cols-2">
+      <div class="enterprise-feature-card">
+        <h3>What you get</h3>
+        <ul class="enterprise-list">
+          <li>A spoiler-free guide for your book on the web, with your cover and your buy links.</li>
+          <li>A private preview before it goes live. If something's wrong, I fix it within 24h.</li>
+          <li>One link for your bio, newsletter and launch posts, plus a report of visits to the guide.</li>
+          <li>One book to start. Have several? We'll scope them together.</li>
+        </ul>
+      </div>
+      <div class="enterprise-feature-card">
+        <h3>What you do</h3>
+        <ul class="enterprise-list">
+          <li>Send me the book file.</li>
+          <li>15 minutes on a call to approve it.</li>
+          <li>Share the link whenever you like.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 enterprise-offer-cta">
+      <a href="{{< param nav_cta_href >}}" class="enterprise-button enterprise-button-primary">Request a guide for your book</a>
     </div>
   </div>
 </section>
 
-<section id="how-it-works" class="enterprise-section enterprise-section-dark px-6 border-y border-neutral-800">
+<section id="how-it-works" class="enterprise-section px-6">
   <div class="max-w-6xl mx-auto">
-    <div class="max-w-3xl mb-16">
-      <p class="enterprise-kicker">The technology</p>
-      <h2 class="enterprise-section-title">AI-assisted extraction, with deterministic guardrails.</h2>
-      <p class="enterprise-lede enterprise-lede-compact">The enrichment pipeline is designed to make narrative information useful without treating a model response as the final product.</p>
+    <div class="max-w-3xl">
+      <p class="enterprise-kicker">How it's built</p>
+      <h2 class="enterprise-section-title">Your book never leaves my hands.</h2>
+      <p class="enterprise-lede enterprise-lede-compact">I trained EnrichReader's own model specifically for understanding fiction. It outperforms frontier models at it, and it runs on my own hardware: your book never goes to an outside AI provider.</p>
     </div>
+  </div>
+</section>
 
-    <ol class="enterprise-flow">
-      <li>
-        <span class="enterprise-flow-index">1</span>
-        <div>
-          <h3>Structure the text locally</h3>
-          <p>Book content is organized into chapters and blocks, while local named-entity detection identifies the people, places, organizations, objects, and events worth tracking.</p>
-        </div>
-      </li>
-      <li>
-        <span class="enterprise-flow-index">2</span>
-        <div>
-          <h3>Use Gemini through Vertex AI for narrative interpretation</h3>
-          <p>Gemini supports ambiguous entity classification, chapter-context fact extraction, and contextual identity resolution as the Skin-generation pipeline builds the structured reading layer.</p>
-        </div>
-      </li>
-      <li>
-        <span class="enterprise-flow-index">3</span>
-        <div>
-          <h3>Verify before packaging</h3>
-          <p>Deterministic checks validate evidence-linked fields, maintain narrative invariants, and version facts by chapter before the final Skin is packaged for the reader.</p>
-        </div>
-      </li>
-      <li>
-        <span class="enterprise-flow-index">4</span>
-        <div>
-          <h3>Render a local-first reader experience</h3>
-          <p>The reader combines a local book with the resulting Skin to reveal the right context at the right point in the story, including when the reader is offline.</p>
-        </div>
-      </li>
-    </ol>
+<section id="faq" class="enterprise-section enterprise-section-dark px-6 border-y border-neutral-800">
+  <div class="max-w-3xl mx-auto">
+    <p class="enterprise-kicker">Questions</p>
+    <h2 class="enterprise-section-title">Before you ask.</h2>
+    <dl class="enterprise-faq">
+      <dt>What does it cost?</dt>
+      <dd>A one-time fee per book, no subscription. I quote it on the call, before you decide.</dd>
+      <dt>Does it use AI? Is my book used to train other models?</dt>
+      <dd>Yes, EnrichReader's own model, trained for fiction and run on my own hardware. Your book never goes to an outside AI provider, so no one else's model trains on it. Nothing is invented: every fact points to the chapter it came from, and you approve the guide before it goes live.</dd>
+      <dt>What if it gets something wrong?</dt>
+      <dd>You see the guide before anyone else. Tell me what's off, and I fix it within 24h.</dd>
+      <dt>Will my book be exposed?</dt>
+      <dd>The guide shows character profiles, short summaries and, at most, short quotes, each with its chapter. Your book stays where you sell it.</dd>
+      <dt>Do readers need an app?</dt>
+      <dd>No. The guide opens in any browser, on any device.</dd>
+      <dt>Can I take it down?</dt>
+      <dd>Yes, any time. Ask, and the guide goes offline.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="enterprise-section px-6">
+  <div class="max-w-3xl mx-auto">
+    <p class="enterprise-kicker">Why I built this</p>
+    <p class="enterprise-lede enterprise-lede-compact">I built EnrichReader because keeping track of 50 characters over 1,400 chapters felt like homework. Now I build every guide myself, so your readers never have to. Radamés Roriz, founder.</p>
   </div>
 </section>
 
 <section class="enterprise-cta px-6 border-t border-neutral-800">
   <div class="max-w-3xl mx-auto text-center">
-    <p class="enterprise-kicker">Build with EnrichReader</p>
-    <h2 class="enterprise-section-title">Follow the work as we build the next generation of reading tools.</h2>
-    <p class="enterprise-lede enterprise-lede-compact mx-auto">Try the product or contact the founder to discuss the technology.</p>
+    <p class="enterprise-kicker">Start with one book</p>
+    <h2 class="enterprise-section-title">Keep writing. I'll build the wiki.</h2>
     <div class="flex flex-col sm:flex-row justify-center gap-4 mt-10">
-      <a href="/app/" class="enterprise-button enterprise-button-primary">Try EnrichReader</a>
-      <a href="mailto:hello@enrichreader.com" class="enterprise-button enterprise-button-secondary">Contact the founder</a>
+      <a href="{{< param nav_cta_href >}}" class="enterprise-button enterprise-button-primary">Request a guide for your book</a>
+      <a href="/guia/frankenstein" hreflang="pt-BR" class="enterprise-button enterprise-button-secondary">See a live guide <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
+
+<p class="enterprise-reader-strip px-6">Reading, not writing? <a href="/">Open EnrichReader <span aria-hidden="true">→</span></a></p>
