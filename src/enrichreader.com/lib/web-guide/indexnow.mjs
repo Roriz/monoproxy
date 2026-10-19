@@ -2,7 +2,7 @@ import { guideSitemapPaths } from './sitemap.mjs';
 
 // Explicit public marketing routes; private app and positioned guide URLs stay excluded.
 export const landingPaths = [
-  '/', '/app/', '/reports/', '/reading-guides/', '/story-companion/', '/litrpg-companion/', '/spoiler-free-wiki-alternative/',
+  '/', '/app/', '/how-it-works/', '/reports/', '/reading-guides/', '/story-companion/', '/litrpg-companion/', '/spoiler-free-wiki-alternative/',
   '/lotm/', '/coi/', '/dcc/', '/orv/', '/the_wandering_inn/', '/ri/', '/tbate/',
   '/mother_of_learning/', '/he_who_fights_with_monsters/', '/defiance_of_the_fall/', '/trash_of_the_count_family/',
 ];

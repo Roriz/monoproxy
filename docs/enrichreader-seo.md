@@ -8,6 +8,8 @@ The consumer pages explain the story companion, matching Skins, and progress-lim
 lookups in crawlable HTML. The three intent pages are `/story-companion/`,
 `/litrpg-companion/`, and `/spoiler-free-wiki-alternative/`. The old
 `/epub-reader/` URL returns a 301 to `/story-companion/` (`Caddyfile.production`).
+`/how-it-works/` is the full explanation of the reader and guides; product facts
+on it come from the reader app's own strings and `src/lib/data/spoilers.js`.
 
 ## Copy rule: EPUB
 

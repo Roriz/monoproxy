@@ -90,7 +90,7 @@
       <div class="hidden lg:flex items-center gap-6 md:gap-8 text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-bold shrink-0">
         <a href="/" class="transition {{ if eq .RelPermalink "/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Home</a>
         <a href="/enterprise/" class="transition {{ if eq .RelPermalink "/enterprise/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">For publishers &amp; authors</a>
-        {{ if $readerLinks }}<a href="/#how-it-works" class="hover:text-gold-500 transition">How It Works</a>{{ end }}
+        {{ if $readerLinks }}<a href="/how-it-works/" class="hover:text-gold-500 transition">How It Works</a>{{ end }}
         {{ if partialCached "shared/public-guides.html" . }}<a href="/reading-guides/" class="hover:text-gold-500 transition">Guides</a>{{ end }}
         {{ if $readerLinks }}<a href="/#demo" class="hover:text-gold-500 transition">Demo</a>{{ end }}
         <a href="{{ $navCtaHref }}" aria-label="{{ $navCtaLabel }}"
@@ -113,7 +113,7 @@
     <div class="flex flex-col items-center gap-8 text-[11px] uppercase tracking-[0.3em] text-neutral-400 font-bold text-center">
       <a href="/" class="mobile-nav-link transition {{ if eq .RelPermalink "/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Home</a>
       <a href="/enterprise/" class="mobile-nav-link transition {{ if eq .RelPermalink "/enterprise/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">For publishers &amp; authors</a>
-      {{ if $readerLinks }}<a href="/#how-it-works" class="mobile-nav-link hover:text-gold-500 transition">How It Works</a>{{ end }}
+      {{ if $readerLinks }}<a href="/how-it-works/" class="mobile-nav-link hover:text-gold-500 transition">How It Works</a>{{ end }}
       {{ if partialCached "shared/public-guides.html" . }}<a href="/reading-guides/" class="mobile-nav-link hover:text-gold-500 transition">Guides</a>{{ end }}
       {{ if $readerLinks }}<a href="/#demo" class="mobile-nav-link hover:text-gold-500 transition">Demo</a>{{ end }}
       <a href="{{ $navCtaHref }}" aria-label="{{ $navCtaLabel }}"
