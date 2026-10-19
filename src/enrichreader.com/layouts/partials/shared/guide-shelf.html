@@ -1,0 +1,22 @@
+{{ with partialCached "shared/public-guides.html" . }}
+<section class="hiw-section companion-shell" id="guides-shelf" aria-labelledby="shelf-heading">
+  <div class="companion-section-heading"><p class="companion-eyebrow">01 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Open now</p><h2 id="shelf-heading">{{ if gt (len .) 1 }}Guides you can<br>open today.{{ else }}The guide you can<br>open today.{{ end }}</h2></div>
+  <ul class="rg-shelf">
+    {{ range $g := . }}
+    <li class="rg-book">
+      {{ with .cover }}<img src="{{ .path }}" width="{{ .width }}" height="{{ .height }}" alt="Cover of {{ $g.title }}" loading="lazy">{{ end }}
+      <div>
+        <p class="rg-block-label">Reading guide</p>
+        <h3>{{ .title }}</h3>
+        <p class="rg-book-author">By {{ delimit .authors ", " " and " }}</p>
+        <p class="rg-book-coverage">{{ with .sections }}{{ . }} {{ $g.part }} · {{ end }}{{ .chapters }} chapters · {{ .characters }} characters · {{ .places }} places</p>
+        <div class="companion-actions">
+          <a class="companion-button companion-button-primary" href="{{ .url }}" hreflang="pt-BR">Open the guide <span aria-hidden="true">↗</span></a>
+          {{ with .edition_url }}<a class="companion-button companion-button-secondary" href="{{ . }}" rel="noopener">Get this edition{{ if $g.public_domain }}, free{{ end }} <span aria-hidden="true">↗</span></a>{{ end }}
+        </div>
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

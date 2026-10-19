@@ -1,20 +1,107 @@
 ---
 title: "Spoiler-Free Reading Guides: Characters by Chapter | EnrichReader"
-description: "Find characters and story context up to your reading position. Start with Mary Shelley's Frankenstein; browser guides work alongside your own copy of the book."
+description: "Free browser guides that show characters, places and story up to the chapter you're reading. Start with Mary Shelley's Frankenstein."
+layout: companion
+body_class: companion-page
 stylesheets:
-- "/style/reader-guide.css"
-scripts:
-- "/main.js"
+- "/style/companion.css"
+- "/style/how-it-works.css"
+- "/style/reading-guides.css"
 ---
-<header class="pt-32 pb-12 px-6 max-w-5xl mx-auto">
-  <h1 class="text-4xl md:text-6xl font-bold serif leading-tight mb-8">Reading guides that stop where you stop</h1>
-  <p class="text-neutral-300 leading-relaxed">An EnrichReader web guide is a chapter-aware companion to your book. Choose your current letter or chapter to see character profiles, places, and story context from the sections you have already finished. You can keep reading your own edition without importing a file or installing an app.</p>
-</header>
-{{< partial "shared/web-guide-discovery.html" >}}
-<article class="reader-guide px-6 pb-20 max-w-5xl mx-auto space-y-12">
-  <section><h2 class="text-2xl font-bold serif mb-4">How to choose your position</h2><p class="text-neutral-300 leading-relaxed">Choose the section you are currently reading. The guide shows information from the sections before it, so you can look things up before finishing the current chapter. After you finish it, move to the next section. Select “Terminei este livro” only when you have finished the book and are comfortable seeing its full story.</p></section>
-  <section><h2 class="text-2xl font-bold serif mb-4">Start with Frankenstein, by Mary Shelley</h2><p class="text-neutral-300 leading-relaxed">The published Frankenstein guide follows the 1831 text in the Standard Ebooks edition: four opening letters followed by 24 chapters. Its interface is in Portuguese and its character profiles are in English. In the position selector, “Carta” means letter and “Cap.” means chapter. If your edition numbers sections differently, match the section before relying on a lookup.</p></section>
-  <section><h2 class="text-2xl font-bold serif mb-4">A lookup example from the opening letter</h2><p class="text-neutral-300 leading-relaxed">In Letter 1, R. Walton is an English explorer preparing an expedition to the North Pole and writing to his sister. After you finish that letter, choose “Carta 2” to consult what Letter 1 has established. Later information stays outside that lookup until you advance your position. You can <a href="/guia/frankenstein" hreflang="pt-BR">open the Frankenstein guide</a> and choose your own position; this link does not preselect a later chapter.</p></section>
-  <section><h2 class="text-2xl font-bold serif mb-4">Where the information comes from</h2><p class="text-neutral-300 leading-relaxed">EnrichReader prepares guide data from the source text with AI assistance. Facts show their source chapter, and the guide offers “Algo errado?” to report a mistake. Frankenstein is a public-domain example; it does not imply approval by Mary Shelley. Guide data can contain errors, so use the cited passage to check a detail that seems inconsistent with your reading.</p></section>
-  <section><h2 class="text-2xl font-bold serif mb-4">Web guide or app?</h2><p class="text-neutral-300 leading-relaxed">A web guide sits alongside a book you are reading elsewhere. The <a href="/story-companion/">EnrichReader app</a> opens your own DRM-free books and adds companion features when a matching Skin is available. A published web guide does not mean its Skin is available in the app: check the app’s catalog separately.</p></section>
-</article>
+<div class="companion-landing">
+  <section class="companion-hero companion-shell" aria-labelledby="guides-title">
+    <div class="companion-hero-copy">
+      <p class="companion-eyebrow"><span aria-hidden="true"></span> Reading guides</p>
+      <h1 id="guides-title">A guide that stops<br><em>where you stop.</em></h1>
+      <p class="companion-intro">Tell the guide which chapter you're on. It shows the characters, places and story up to there, and leaves the pages ahead alone. It opens in your browser, next to whatever copy of the book you have.</p>
+      <div class="companion-actions">
+        <a class="companion-button companion-button-primary" href="/guia/frankenstein" hreflang="pt-BR">Open the Frankenstein guide <span aria-hidden="true">↗</span></a>
+        <a class="companion-button companion-button-secondary" href="/how-it-works/#in-the-browser">How guides work <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <figure class="companion-demo rg-card" aria-labelledby="rg-card-caption">
+      <div class="companion-demo-toolbar"><span class="companion-demo-label">Frankenstein guide</span><span>Mary Shelley · 1831 text</span></div>
+      <div class="rg-card-body">
+        <div class="companion-position"><span><span class="companion-status-dot" aria-hidden="true"></span> You're reading</span><strong>Chapter 12</strong></div>
+        <div class="rg-block">
+          <p class="rg-block-label">Chapter 11, in short</p>
+          <p class="rg-recap">The creature remembers his first days: the forest near Ingolstadt, finding fire and food, being driven out of a village, and hiding in a hovel beside a cottage.</p>
+        </div>
+        <div class="rg-block">
+          <p class="rg-block-label">Still open</p>
+          <ul class="rg-questions">
+            <li>What is the creature's tale, and how will it explain what he has done?</li>
+            <li>What does the creature want Victor to agree to?</li>
+          </ul>
+        </div>
+        <p class="rg-locked">Chapters 12 to 24 stay hidden until you move forward.</p>
+      </div>
+      <figcaption id="rg-card-caption">What the guide shows while you read chapter 12.</figcaption>
+    </figure>
+  </section>
+
+  <div class="companion-principles companion-shell" aria-label="The short version"><span>Pick your chapter</span><span>See only what you've read</span><span>Free, with no account</span></div>
+
+  {{< partial "shared/guide-shelf.html" >}}
+
+  <section class="hiw-section companion-shell" aria-labelledby="use-heading">
+    <div class="companion-section-heading"><p class="companion-eyebrow">02 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Using a guide</p><h2 id="use-heading">Three steps,<br>while you read.</h2></div>
+    <ol class="hiw-steps rg-steps">
+      <li>
+        <span class="hiw-step-number">1</span>
+        <div><h3>Pick where you are</h3><p>Open the guide and choose the letter or chapter you're reading right now. You don't need to have finished it.</p></div>
+      </li>
+      <li>
+        <span class="hiw-step-number">2</span>
+        <div><h3>Look things up</h3><p>The guide covers everything up to the last section you finished. The one you're in stays out, so looking up a name can't spoil the page in front of you.</p></div>
+      </li>
+      <li>
+        <span class="hiw-step-number">3</span>
+        <div><h3>Move forward as you go</h3><p>When you finish a section, move the picker forward. Your browser remembers your place, and so does the link if you bookmark it. When you reach the end of the book, mark it finished to open everything.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="hiw-section companion-shell" aria-labelledby="inside-heading">
+    <div class="companion-section-heading"><p class="companion-eyebrow">03 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Inside a guide</p><h2 id="inside-heading">What you've met so far,<br>in one place.</h2></div>
+    <div class="hiw-features">
+      <article><h3>The panel</h3><p>The first thing you see after picking your place. It recaps the section you just finished, says who was in it and lists what it left unanswered.</p></article>
+      <article><h3>Characters and places</h3><p>A profile for everyone you've met and every place the story has been, written as of your chapter. Search only finds what you've already read about.</p></article>
+      <article><h3>Mysteries</h3><p>The questions the story has raised so far. An answer shows up only once you've read the chapter that gives it.</p></article>
+      <article><h3>Timeline</h3><p>How the tension rises and falls up to your chapter, with a short recap of each chapter you've read.</p></article>
+      <article><h3>Every fact has a source</h3><p>Each fact names the chapter it comes from, so you can check it against your book. If something looks wrong, you can report it from the guide.</p></article>
+      <article><h3>Nothing to install</h3><p>A guide is a web page, so it works on your phone too. It's free, and you don't sign up or upload a book.</p></article>
+    </div>
+  </section>
+
+  <section class="companion-routes companion-shell" aria-labelledby="routes-heading">
+    <div class="companion-section-heading"><p class="companion-eyebrow">04 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Guide or app</p><h2 id="routes-heading">Two ways to keep your place.</h2><p>Both follow the same rule: nothing past your chapter. The difference is where you read and who keeps track of your place.</p></div>
+    <div class="companion-route-grid">
+      <article class="companion-route">
+        <div class="companion-route-top"><span class="companion-route-number">A</span><span class="companion-route-label">Alongside your book</span></div>
+        <h3>A reading guide</h3><p>Read a paperback, a library copy or another app, and keep the guide open beside it. You tell it which chapter you're on.</p>
+        <a class="companion-text-link" href="#guides-shelf">See the guides <span aria-hidden="true">↑</span></a>
+      </article>
+      <article class="companion-route">
+        <div class="companion-route-top"><span class="companion-route-number">B</span><span class="companion-route-label">Inside your reader</span></div>
+        <h3>The EnrichReader app</h3><p>Read your own book file in the app with a matching Skin, and it follows along as you turn pages. Not every book with a guide has a Skin yet, so check the app's catalog first.</p>
+        <a class="companion-text-link" href="/how-it-works/#in-the-app">How the app works <span aria-hidden="true">↗</span></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="companion-chapter companion-shell rg-source" aria-labelledby="source-heading">
+    <div class="companion-section-heading"><p class="companion-eyebrow">05 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Where it comes from</p><h2 id="source-heading">Made from the book,<br>checked against it.</h2></div>
+    <div class="companion-progress-copy">
+      <p>We prepare each guide from the book's own text with AI help, then review it against that text. Every fact keeps a pointer to the chapter it came from, which is how the guide knows when to show it.</p>
+      <p>Frankenstein is in the public domain, and its guide isn't affiliated with any of the book's publishers. Guides can get things wrong. When you report a mistake, we fix it.</p>
+    </div>
+  </section>
+
+  <p class="rg-author-line companion-shell">Write books? <a href="/enterprise/">Get a guide like this for yours <span aria-hidden="true">→</span></a></p>
+
+  <section class="companion-final companion-shell" aria-labelledby="continue-heading">
+    <p class="companion-eyebrow">Reading guides</p><h2 id="continue-heading">Keep reading.<br><em>We'll keep track.</em></h2>
+    <div class="companion-actions"><a class="companion-button companion-button-primary" href="/guia/frankenstein" hreflang="pt-BR">Open the Frankenstein guide <span aria-hidden="true">↗</span></a><a class="companion-button companion-button-secondary" href="/app/">Open EnrichReader <span aria-hidden="true">↗</span></a></div>
+  </section>
+</div>

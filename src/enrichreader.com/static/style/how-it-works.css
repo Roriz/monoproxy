@@ -1,4 +1,4 @@
-/* /how-it-works/ components on top of companion.css. */
+/* Companion-page components: /how-it-works/, also reused by /reading-guides/. */
 
 /* Hero figure: a chapter strip with the reader's position, and facts cut at it. */
 .hiw-cut-body { padding: 26px 30px 22px; }

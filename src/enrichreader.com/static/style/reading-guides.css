@@ -1,0 +1,48 @@
+/* /reading-guides/ components on top of companion.css and how-it-works.css. */
+
+/* Hero card: what the guide shows at one reading position. */
+.rg-card-body { padding: 22px 30px 20px; }
+.rg-block { padding-block: 16px; border-bottom: 1px solid var(--companion-line); }
+.rg-block-label { margin-bottom: 8px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--companion-gold); }
+.rg-recap { font-family: var(--font-reading, 'Spectral', Georgia, serif); font-size: 16px; line-height: 1.6; color: #d9d5ca; }
+.rg-questions { list-style: none; display: grid; gap: 8px; margin: 0; padding: 0; }
+.rg-questions li { padding-left: 14px; border-left: 1px solid #5a4f36; font-size: 14px; line-height: 1.55; color: #c9ccd0; }
+.rg-locked { padding-top: 14px; font-size: 12px; font-style: italic; color: #80858b; }
+
+/* Shelf: one card per public guide. */
+.rg-shelf { list-style: none; display: grid; gap: 24px; margin: 0; padding: 0; }
+.rg-book { display: grid; grid-template-columns: 150px 1fr; gap: 36px; align-items: center; padding: 30px; border: 1px solid var(--companion-line); border-radius: 9px; background: var(--companion-surface); }
+.rg-book img { width: 150px; height: auto; border-radius: 3px; box-shadow: 0 18px 40px #0007; }
+.rg-book h3 { font-family: var(--font-master, Georgia, serif); font-size: 36px; line-height: 1.15; font-weight: 400; }
+.rg-book-author { margin-top: 6px; font-size: 15px; color: var(--companion-muted); }
+.rg-book-coverage { margin-block: 18px 24px; font-size: 13px; letter-spacing: .02em; color: #c8bd9f; }
+
+/* Three steps instead of how-it-works' four. */
+.rg-steps { grid-template-columns: repeat(3, 1fr); }
+
+.rg-source { border-top: 1px solid var(--companion-line); }
+
+/* The single line for authors: thin and low-contrast. */
+.rg-author-line { padding-block: 26px; border-top: 1px solid var(--companion-line); font-size: 13px; color: #8d9197; text-align: center; }
+.rg-author-line a { color: #c1beb4; text-decoration: underline; text-underline-offset: 4px; }
+.rg-author-line a:hover { color: var(--companion-gold); }
+
+@media (max-width: 1150px) {
+  .rg-steps li:nth-child(3) { padding-left: 28px; border-left: 1px solid var(--companion-line); }
+  .rg-steps li:nth-child(n + 3) { border-top: 0; }
+}
+
+@media (max-width: 900px) {
+  .rg-steps { grid-template-columns: 1fr; }
+  .rg-steps li, .rg-steps li + li, .rg-steps li:nth-child(3) { padding: 26px 0; border-left: 0; }
+  .rg-steps li + li { border-top: 1px solid var(--companion-line); }
+  .rg-book { grid-template-columns: 110px 1fr; gap: 24px; padding: 24px; }
+  .rg-book img { width: 110px; }
+  .rg-book h3 { font-size: 30px; }
+}
+
+@media (max-width: 600px) {
+  .rg-card-body { padding: 18px 20px 16px; }
+  .rg-book { grid-template-columns: 1fr; }
+  .rg-book img { width: 120px; }
+}

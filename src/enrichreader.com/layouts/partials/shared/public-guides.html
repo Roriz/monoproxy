@@ -4,8 +4,22 @@
 {{ range $data.catalog }}
   {{ $guide := index $data (strings.TrimSuffix ".json" .data) }}
   {{ $presentation := index $data (strings.TrimSuffix ".json" .presentation) }}
+  {{ $context := index $data (strings.TrimSuffix ".json" .context) }}
   {{ if eq ($presentation.state | default $guide.state) "public" }}
-    {{ $guides = $guides | append (dict "title" $guide.title "authors" $guide.authors "edition" $guide.edition "url" (printf "/guia/%s" $guide.series) "cover" $presentation.assets.shelf) }}
+    {{/* Coverage, counted the way the guide's picker counts it: retired items don't show. */}}
+    {{ $sections := 0 }}{{ $part := "" }}{{ $chapters := 0 }}
+    {{ range $guide.books }}{{ range .items }}{{ if not .retired }}
+      {{ if eq .kind "section" }}{{ $sections = add $sections 1 }}{{ $part = .part }}{{ else if eq .kind "chapter" }}{{ $chapters = add $chapters 1 }}{{ end }}
+    {{ end }}{{ end }}{{ end }}
+    {{ $edition := index (where ($presentation.links | default slice) "kind" "site") 0 }}
+    {{ $guides = $guides | append (dict
+      "title" $guide.title "authors" $guide.authors
+      "url" (printf "/guia/%s" $guide.series) "cover" $presentation.assets.shelf
+      "sections" $sections "part" $part "chapters" $chapters
+      "characters" (len $guide.entities)
+      "places" (len (where ($context.world | default slice) "classification" "location"))
+      "public_domain" $presentation.public_domain_example
+      "edition_url" ($edition.url | default "")) }}
   {{ end }}
 {{ end }}
 {{ return (sort $guides "title") }}
