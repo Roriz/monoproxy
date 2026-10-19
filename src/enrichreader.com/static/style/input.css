@@ -101,6 +101,39 @@ nav {
   padding-bottom: 0.75rem !important;
 }
 
+/* Header skip link: off screen until focused (layouts/partials/shared/header.html). */
+.skip-link {
+  position: fixed;
+  top: -5rem;
+  left: 1.5rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.25rem;
+  background: var(--color-cream-100);
+  color: var(--color-neutral-950);
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* Header menu: one font on every page (reports load their own font set), and tighter
+   spacing below 1200px so the longest button label still fits. */
+.site-nav-menu,
+#mobile-menu-drawer {
+  font-family: var(--font-interface);
+}
+
+@media (max-width: 1199.98px) {
+  .site-nav-menu {
+    gap: 1.25rem;
+    letter-spacing: 0.16em;
+  }
+}
+
+
+
 .glass:hover {
   border-color: var(--color-gold-500);
   background: oklch(20.03% 0.0181 269 / 0.616);

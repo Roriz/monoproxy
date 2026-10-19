@@ -68,71 +68,16 @@
   <!-- Semantic background element -->
   <div class="void-bg" id="void" aria-hidden="true"></div>
 
-  {{ block "navigation" . }}
-  {{ $navCtaHref := .Params.nav_cta_href | default "/app/" }}
-  {{ $navCtaLabel := .Params.nav_cta_label | default "Download App" }}
-  {{ $readerLinks := not .Params.nav_hide_reader_links }}
-  <!-- Persistent Navigation Bar -->
-  <nav class="fixed w-full z-50 px-6 py-4 md:px-12 md:py-6 transition-all duration-500 top-0 {{ if .Params.nav_bg_border }}bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900{{ end }}">
-    <div class="max-w-7xl mx-auto w-full flex justify-between items-center {{ if .Params.nav_max_width_4xl }}max-w-4xl{{ end }}">
-      <a href="/" class="shrink-0 group flex items-center gap-3" aria-label="EnrichReader home" style="position: relative; z-index: 60;">
-        {{ if .Params.nav_back_arrow }}
-          <span class="text-neutral-500 group-hover:text-gold-500 transition-colors font-mono text-sm">&larr;</span>
-        {{ end }}
-        <img src="/assets/logo-4x1-dark-transparent.png"
-          class="logo transition-transform duration-500 group-hover:scale-105" alt="EnrichReader"
-          width="176" height="44" fetchpriority="high"
-          style="height: {{ if .Params.nav_logo_height }}{{ .Params.nav_logo_height }}{{ else }}44px{{ end }}; width: auto;">
-      </a>
-      
-      {{ if not .Params.nav_minimal }}
-      <!-- Desktop Navigation Menu -->
-      <div class="hidden lg:flex items-center gap-6 md:gap-8 text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-bold shrink-0">
-        <a href="/" class="transition {{ if eq .RelPermalink "/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Home</a>
-        <a href="/enterprise/" class="transition {{ if eq .RelPermalink "/enterprise/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">For publishers &amp; authors</a>
-        {{ if $readerLinks }}<a href="/how-it-works/" class="hover:text-gold-500 transition">How It Works</a>{{ end }}
-        {{ if partialCached "shared/public-guides.html" . }}<a href="/reading-guides/" class="hover:text-gold-500 transition">Guides</a>{{ end }}
-        {{ if $readerLinks }}<a href="/#demo" class="hover:text-gold-500 transition">Demo</a>{{ end }}
-        <a href="{{ $navCtaHref }}" aria-label="{{ $navCtaLabel }}"
-          class="px-4 py-2 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold whitespace-nowrap">{{ $navCtaLabel }}</a>
-      </div>
-
-      <!-- Mobile Menu Toggle Button -->
-      <button id="mobile-menu-toggle" aria-label="Toggle Navigation Menu" class="lg:hidden text-neutral-400 hover:text-gold-500 focus:outline-none cursor-pointer p-2" style="position: relative; z-index: 60;">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-      {{ end }}
-    </div>
-  </nav>
-
-  <!-- Mobile Menu Drawer (Slide-down overlay) -->
-  {{ if not .Params.nav_minimal }}
-  <div id="mobile-menu-drawer">
-    <div class="flex flex-col items-center gap-8 text-[11px] uppercase tracking-[0.3em] text-neutral-400 font-bold text-center">
-      <a href="/" class="mobile-nav-link transition {{ if eq .RelPermalink "/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">Home</a>
-      <a href="/enterprise/" class="mobile-nav-link transition {{ if eq .RelPermalink "/enterprise/" }}text-gold-500 font-bold{{ else }}text-neutral-450 hover:text-gold-500{{ end }}">For publishers &amp; authors</a>
-      {{ if $readerLinks }}<a href="/how-it-works/" class="mobile-nav-link hover:text-gold-500 transition">How It Works</a>{{ end }}
-      {{ if partialCached "shared/public-guides.html" . }}<a href="/reading-guides/" class="mobile-nav-link hover:text-gold-500 transition">Guides</a>{{ end }}
-      {{ if $readerLinks }}<a href="/#demo" class="mobile-nav-link hover:text-gold-500 transition">Demo</a>{{ end }}
-      <a href="{{ $navCtaHref }}" aria-label="{{ $navCtaLabel }}"
-        class="mobile-nav-link px-6 py-3 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition shadow-gold glow-gold whitespace-nowrap mt-4">{{ $navCtaLabel }}</a>
-    </div>
-  </div>
-  {{ end }}
-
-  {{ end }}
+  {{ partial "shared/header.html" . }}
 
   <!-- Main Content Block -->
-  <main>
+  <main id="main-content" tabindex="-1">
     {{- block "main" . -}}{{- end -}}
   </main>
 
   <!-- Global Footer -->
-  {{ if not .Params.no_footer }}
-  {{ block "site_footer" . }}{{ partial "shared/footer.html" . }}{{ end }}
-  {{ end }}
+  {{ partial "shared/footer.html" . }}
+  <script src="/nav.js" defer></script>
 
   <!-- Visit counting with Umami on our own server: no cookies, IP not stored. Nothing loads when
        the browser sends Global Privacy Control or Do Not Track, as the privacy policy promises. -->

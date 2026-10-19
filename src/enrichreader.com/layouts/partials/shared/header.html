@@ -1,0 +1,37 @@
+{{/* The one site header. Pages may only relabel the button (nav_cta_label / nav_cta_href). */}}
+{{ $ctaHref := .Params.nav_cta_href | default "/app/" }}
+{{ $ctaLabel := .Params.nav_cta_label | default "Open EnrichReader" }}
+{{ $current := .RelPermalink }}
+{{ $links := slice (dict "href" "/how-it-works/" "label" "How it works") }}
+{{ if partialCached "shared/public-guides.html" . }}{{ $links = $links | append (dict "href" "/reading-guides/" "label" "Reading guides") }}{{ end }}
+{{ $links = $links | append (dict "href" "/enterprise/" "label" "For publishers & authors") }}
+<a href="#main-content" class="skip-link">Skip to content</a>
+<nav id="site-nav" class="fixed w-full z-50 px-6 py-4 md:px-12 md:py-6 top-0 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900" aria-label="Main">
+  <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+    <a href="/" class="shrink-0 group flex items-center gap-3" aria-label="EnrichReader home" style="position: relative; z-index: 60;">
+      <img src="/assets/logo-4x1-dark-transparent.png" class="logo transition-transform duration-500 group-hover:scale-105" alt="EnrichReader" width="176" height="44" fetchpriority="high" style="height: 44px; width: auto;">
+    </a>
+
+    <div class="site-nav-menu hidden lg:flex items-center gap-8 text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-bold shrink-0">
+      {{ range $links }}
+      <a href="{{ .href }}" class="transition {{ if eq $current .href }}text-gold-500{{ else }}hover:text-gold-500{{ end }}"{{ if eq $current .href }} aria-current="page"{{ end }}>{{ .label }}</a>
+      {{ end }}
+      <a href="{{ $ctaHref }}" class="px-4 py-2 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold whitespace-nowrap">{{ $ctaLabel }}</a>
+    </div>
+
+    <button id="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu-drawer" class="lg:hidden text-neutral-400 hover:text-gold-500 focus:outline-none cursor-pointer p-2" style="position: relative; z-index: 60;">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu-drawer">
+  <div class="flex flex-col items-center gap-8 text-[11px] uppercase tracking-[0.3em] text-neutral-400 font-bold text-center">
+    {{ range $links }}
+    <a href="{{ .href }}" class="mobile-nav-link transition {{ if eq $current .href }}text-gold-500{{ else }}hover:text-gold-500{{ end }}"{{ if eq $current .href }} aria-current="page"{{ end }}>{{ .label }}</a>
+    {{ end }}
+    <a href="{{ $ctaHref }}" class="mobile-nav-link px-6 py-3 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition shadow-gold glow-gold whitespace-nowrap mt-4">{{ $ctaLabel }}</a>
+  </div>
+</div>

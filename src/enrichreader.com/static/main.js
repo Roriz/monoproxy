@@ -60,57 +60,6 @@ function initParticles() {
   voidEl.appendChild(layer);
 }
 
-// Transparent to Solid Nav on Scroll
-function initHeaderScroll() {
-  const nav = document.querySelector('nav');
-  if (!nav) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.classList.add('nav-scrolled');
-    } else {
-      nav.classList.remove('nav-scrolled');
-    }
-  }, { passive: true });
-}
-
-// Mobile Navigation Menu Toggle
-function initMobileMenu() {
-  const toggleBtn = document.getElementById('mobile-menu-toggle');
-  const drawer = document.getElementById('mobile-menu-drawer');
-  const iconPath = document.getElementById('menu-icon-path');
-  if (!toggleBtn || !drawer || !iconPath) return;
-
-  let isOpen = false;
-
-  const openIcon = 'M4 6h16M4 12h16M4 18h16';
-  const closeIcon = 'M6 18L18 6M6 6l12 12';
-
-  function toggleMenu() {
-    isOpen = !isOpen;
-    if (isOpen) {
-      drawer.classList.add('open');
-      iconPath.setAttribute('d', closeIcon);
-      document.body.style.overflow = 'hidden';
-    } else {
-      drawer.classList.remove('open');
-      iconPath.setAttribute('d', openIcon);
-      document.body.style.overflow = '';
-    }
-  }
-
-  toggleBtn.addEventListener('click', toggleMenu);
-
-  const navLinks = drawer.querySelectorAll('.mobile-nav-link');
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (isOpen) toggleMenu();
-    });
-  });
-}
-
-
-
 const TICKER_ITEMS = [
   { title: "Primal Hunter Vol 9", chapters: 320 },
   { title: "Defiance of the Fall Vol 12", chapters: 890 },
@@ -192,8 +141,6 @@ function initTicker() {
 
 function initAll() {
   initParticles();
-  initHeaderScroll();
-  initMobileMenu();
   initTicker();
 }
 
