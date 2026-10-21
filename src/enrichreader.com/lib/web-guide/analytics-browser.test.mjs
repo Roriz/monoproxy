@@ -54,7 +54,7 @@ test('private pageviews and report events never transmit tokens, summary setting
   await page.locator('[data-report-confirmation]').waitFor();
   await page.locator('#report-detail').fill('confidential correction detail');
   await page.locator('[data-detail-send]').click();
-  await page.getByText('Detalhe enviado.', { exact: true }).waitFor();
+  await page.getByText('Details sent.', { exact: true }).waitFor();
   const events = await page.evaluate(() => window.analyticsEvents);
   assert.ok(events.some(value => value.name === 'report_sent'));
   assert.ok(events.some(value => value.name === 'report_detail'));

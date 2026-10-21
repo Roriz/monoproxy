@@ -16,6 +16,7 @@ import { resolve } from 'node:path';
 import { isIP } from 'node:net';
 import { renderGuide } from './guide.mjs';
 import { FileReportStore, ReportLimiter, ReportError, reportRecord, reportJSON } from './reports.mjs';
+import { localizeWebGuideHTML } from './i18n.mjs';
 
 const site = fileURLToPath(new URL('../../', import.meta.url));
 const defaultCatalog = await loadCatalog();
@@ -63,7 +64,10 @@ function sameOrigin(req) {
   try { const origin = new URL(req.headers.origin); return ['http:', 'https:'].includes(origin.protocol) && origin.host === req.headers.host; }
   catch { return false; }
 }
-const operatorHTML = (html, req) => /(?:^|;\s*)er_ops=1(?:;|$)/.test(req.headers.cookie ?? '') ? html.replace('<body', '<body data-operator="1"') : html;
+const operatorHTML = (html, req) => {
+  const marked = /(?:^|;\s*)er_ops=1(?:;|$)/.test(req.headers.cookie ?? '') ? html.replace('<body', '<body data-operator="1"') : html;
+  return localizeWebGuideHTML(marked);
+};
 
 export function createGuideServer({ guide = defaultGuide, guides = [guide], showcases = defaultShowcases, access = runtimeAccess[defaultGuide.series] ?? {}, siteConfig = runtimeSite, approvalNotifications = null, trustProxy = false, approvalStore = new ApprovalStore(resolve(process.env.WEB_GUIDE_REPORT_DIR || resolve(site, '../../tmp/web-guide-reports'), 'approvals')), inbox = new OperatorInbox(resolve(process.env.WEB_GUIDE_REPORT_DIR || resolve(site, '../../tmp/web-guide-reports'), 'inbox')), reportStore = new FileReportStore(process.env.WEB_GUIDE_REPORT_DIR || resolve(site, '../../tmp/web-guide-reports')), limiter = new ReportLimiter() } = {}) {
   for (const value of guides) validateGuideConfig(value);
@@ -83,7 +87,7 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
       if (url.pathname === '/web-guide/health' && ['GET', 'HEAD'].includes(req.method)) { res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(req.method === 'HEAD' ? undefined : '{"ok":true}'); return; }
       if (url.pathname === '/autores' || url.pathname === '/autores/') {
         if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405, { Allow: 'GET, HEAD' }); res.end(); return; }
-        if (!authorsAvailable(siteConfig)) { res.writeHead(503, { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Type': 'text/html; charset=utf-8' }); res.end(req.method === 'HEAD' ? undefined : '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>Página indisponível</title></head><body><main><h1>Esta página ainda não está disponível.</h1><a href="/guia">Ver guias publicados</a></main></body></html>'); return; }
+        if (!authorsAvailable(siteConfig)) { res.writeHead(503, { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Type': 'text/html; charset=utf-8' }); res.end(req.method === 'HEAD' ? undefined : operatorHTML('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>Página indisponível</title></head><body><main><h1>Esta página ainda não está disponível.</h1><a href="/guia">Ver guias publicados</a></main></body></html>', req)); return; }
         const html = operatorHTML(renderAuthors(guides, siteConfig, siteAssets, url), req);
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'Referrer-Policy': 'strict-origin-when-cross-origin' }); res.end(req.method === 'HEAD' ? undefined : html); return;
       }
@@ -91,7 +95,7 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
         const token = url.pathname.match(/^\/guia\/v\/([a-zA-Z0-9_-]+)\/?$/)?.[1];
         const allowed = showcaseAccess(showcases, token, req.headers['user-agent']);
         const headers = { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Referrer-Policy': 'strict-origin' };
-        if (allowed.status !== 200) { res.writeHead(allowed.status, headers); res.end(req.method === 'HEAD' ? undefined : accessError(allowed.status, publicCount)); return; }
+        if (allowed.status !== 200) { res.writeHead(allowed.status, headers); res.end(req.method === 'HEAD' ? undefined : operatorHTML(accessError(allowed.status, publicCount), req)); return; }
         if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405, headers); res.end(); return; }
         const html = operatorHTML(renderShowcase(allowed.showcase, catalog, url, siteAssets), req);
         if (req.method === 'GET') await inbox.opened({ series: `showcase-${allowed.showcase.publisher.slug}`, publisher: allowed.showcase.publisher.slug, title: allowed.showcase.publisher.name }, allowed.token_hash, req, new Date(), true).catch(() => console.error('Operator inbox unavailable'));
@@ -101,7 +105,7 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
       const guide = catalog.get(requestedSeries) ?? sourceGuide;
       const guidePath = `/guia/${guide.series}`;
       const homePath = guidePath;
-      if (requestedSeries && !catalog.has(requestedSeries) && !['sitemap'].includes(requestedSeries) && url.pathname !== '/guia/sitemap.xml') { res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' }); res.end(accessError(404, publicCount)); return; }
+      if (requestedSeries && !catalog.has(requestedSeries) && !['sitemap'].includes(requestedSeries) && url.pathname !== '/guia/sitemap.xml') { res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' }); res.end(operatorHTML(accessError(404, publicCount), req)); return; }
       let authorization;
       let renderedGuide = { ...guide, site: siteConfig };
       if (url.pathname === homePath || url.pathname.startsWith(`${homePath}/`)) {
@@ -109,7 +113,7 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
         if (authorization.status !== 200) {
           const headers = { 'Cache-Control': authorization.status === 301 ? 'max-age=86400' : 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Type': 'text/html; charset=utf-8' };
           if (authorization.location) headers.Location = authorization.location;
-          res.writeHead(authorization.status, headers); res.end(req.method === 'HEAD' ? undefined : accessError(authorization.status, publicCount)); return;
+          res.writeHead(authorization.status, headers); res.end(req.method === 'HEAD' ? undefined : operatorHTML(accessError(authorization.status, publicCount), req)); return;
         }
         if (guide.state === 'private') renderedGuide = { ...renderedGuide, approval: await approvalStore.get(guide.series), hideSummaries: url.searchParams.get('resumos') === '0' };
       }
@@ -131,7 +135,7 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
       }
       if (url.pathname === '/_ops/nao-contar') {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Set-Cookie': 'er_ops=1; Path=/; SameSite=Lax; Max-Age=31536000; HttpOnly' });
-        res.end('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Dispositivo do operador</title></head><body><h1>Este navegador não conta nas visitas.</h1><script>localStorage.setItem("umami.disabled", "1")</script><a href="/guia">Abrir guias</a></body></html>'); return;
+        res.end(operatorHTML('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Dispositivo do operador</title></head><body><h1>Este navegador não conta nas visitas.</h1><script>localStorage.setItem("umami.disabled", "1")</script><a href="/guia">Abrir guias</a></body></html>', req)); return;
       }
 
       const reportRoute = url.pathname.match(new RegExp(`^/guia/${guide.series}/reports(?:/([0-9a-f-]+))?$`, 'i'));
@@ -182,7 +186,7 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
         if (guide.state === 'private' && req.method === 'GET' && route.type === 'home' && !url.searchParams.has('l') && !url.searchParams.has('c')) await inbox.opened(renderedGuide, authorization.token_hash, req).catch(error => console.error('Operator inbox unavailable'));
         if (route.type === 'not_found') res.statusCode = 404;
       } else {
-        res.writeHead(404); res.end('Página não encontrada.'); return;
+        res.writeHead(404); res.end('Page not found.'); return;
       }
       if (type.startsWith('text/html') && typeof html === 'string') html = operatorHTML(html, req);
       const headers = { 'Content-Type': type, 'Cache-Control': asset?.[1].startsWith('image/') && guide.state !== 'private' ? 'public, max-age=31536000, immutable' : 'no-store', 'X-Content-Type-Options': 'nosniff' };

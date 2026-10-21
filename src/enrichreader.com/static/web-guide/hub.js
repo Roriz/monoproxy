@@ -1,6 +1,8 @@
 import { track } from './analytics.js';
 import { searchHit, highlightParts, normalize } from './search.mjs';
+const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
 let urlTimer, statusTimer, flushSearch = null;
+let removeLanguageListener = null;
 addEventListener('pagehide', () => flushSearch?.());
 function highlight(node, value, query) {
   node.replaceChildren(...highlightParts(value, query).map(part => {
@@ -79,7 +81,7 @@ export function initializeHub() {
     list.append(...ranked.filter(item => !grouped || item.row.dataset.new === 'true').map(item => item.row));
     knownList.append(...ranked.filter(item => grouped && item.row.dataset.new !== 'true').map(item => item.row));
     grouped ? list.setAttribute('aria-labelledby', 'hub-new') : list.removeAttribute('aria-labelledby');
-    list.setAttribute('aria-label', searching ? 'Resultados' : 'Personagens e mundo até sua posição');
+    list.setAttribute('aria-label', searching ? t('Results') : t('Characters and world up to your position'));
     if (filter) filter.hidden = searching;
     clear.hidden = !searching;
     hub.querySelector('[data-hub-empty]').hidden = count !== 0;
@@ -91,10 +93,15 @@ export function initializeHub() {
     }
     return count;
   }
+  function announceCount() {
+    const count = apply();
+    status.textContent = count === 1 ? t('{count} result', { count }) : t('{count} results', { count });
+    sendSearch();
+  }
   input.addEventListener('input', () => {
     apply(); if (!normalize(input.value)) sentQuery = null; clearTimeout(urlTimer); clearTimeout(statusTimer);
     urlTimer = setTimeout(() => apply(true), 300);
-    statusTimer = setTimeout(() => { const count = apply(); status.textContent = count === 1 ? '1 resultado' : `${count} resultados`; sendSearch(); }, 1000);
+    statusTimer = setTimeout(announceCount, 1000);
   });
   hub.querySelector('[data-hub-search]').addEventListener('submit', event => { event.preventDefault(); clearTimeout(urlTimer); clearTimeout(statusTimer); apply(true); sendSearch(); input.blur(); });
   hub.querySelectorAll('[data-clear-search]').forEach(control => control.addEventListener('click', event => { event.preventDefault(); input.value = ''; clearTimeout(urlTimer); clearTimeout(statusTimer); apply(true); status.textContent = ''; sentQuery = null; input.focus(); }));
@@ -106,10 +113,25 @@ export function initializeHub() {
     const target = new URL(control.href); const url = new URL(location.href);
     target.searchParams.has('classe') ? url.searchParams.set('classe', target.searchParams.get('classe')) : url.searchParams.delete('classe');
     url.searchParams.delete('n'); history.replaceState(history.state, '', url);
-    status.textContent = `${control.textContent.trim()}: ${apply()}`;
+    status.textContent = t('Filter {filter}: {count}', { filter: control.textContent.trim(), count: apply() });
     control.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   }));
   input.addEventListener('focus', () => requestAnimationFrame(() => input.scrollIntoView({ block: 'start', behavior: 'instant' })));
   apply(); sendSearch();
+  const onLanguageChange = () => {
+    apply();
+    if (normalize(input.value)) announceCount();
+    filter?.querySelectorAll('[data-filter]').forEach(control => {
+      const number = control.textContent.match(/\d+$/)?.[0];
+      const type = control.dataset.filter;
+      const name = type === 'todos' ? t('All') : t(({ person: 'People', location: 'Places', organization: 'Organizations', object: 'Objects', other: 'Other' })[type]);
+      if (number) control.textContent = `${name} ${number}`;
+    });
+  };
+  document.addEventListener('languagechange', onLanguageChange);
+  removeLanguageListener = () => document.removeEventListener('languagechange', onLanguageChange);
 }
-export function disposeHub() { flushSearch?.(); flushSearch = null; clearTimeout(urlTimer); clearTimeout(statusTimer); }
+export function disposeHub() {
+  flushSearch?.(); flushSearch = null; clearTimeout(urlTimer); clearTimeout(statusTimer);
+  removeLanguageListener?.(); removeLanguageListener = null;
+}

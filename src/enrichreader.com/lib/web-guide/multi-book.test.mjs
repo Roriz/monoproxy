@@ -54,7 +54,7 @@ test('multi-book browser picker drafts, cancels, commits and disables announced/
     assert.equal(await sheet.locator('[data-commit]').isVisible(), true);
     assert.equal(await sheet.locator('input[name="l"]').inputValue(), '1');
     assert.equal(await sheet.locator('select[name="c"]').inputValue(), 'fim');
-    assert.match(await sheet.locator('[data-book-notice]').innerText(), /Livro 3/);
+    assert.match(await sheet.locator('[data-book-notice]').innerText(), /Book 3/);
     assert.equal(await sheet.locator('[data-picker-book="1"]').getAttribute('aria-current'), 'true');
     await sheet.locator('[data-picker-book="1"]').focus();
     await page.keyboard.press('ArrowRight');

@@ -1,0 +1,15 @@
+# EnrichReader page translations
+
+The Hugo site keeps flat English-to-Portuguese dictionaries in `src/enrichreader.com/data/translations/`. `shared.json` covers shared templates and common generated interface text. Each page dictionary is named for its route slug (`home.json` for `/`, `enterprise.json` for `/enterprise/`, and so on). A JSON object maps an English source string to its Brazilian Portuguese translation. Keys can contain named placeholders such as `{count}` for generated labels; matching is anchored to the full normalized text so prose and names are not rewritten by partial matches.
+
+Dictionary lookup collapses repeated whitespace and trims the edges. Text keys describe one DOM text node at a time, including punctuation; strings split by inline markup must be translated as separate text nodes. Attributes use the same key space for `title`, `aria-label`, `placeholder`, and `alt`. Metadata `content` values are translated for description, title, Open Graph title/description, and Twitter title/description tags. The document title is handled as a text node. The runtime resolves unique Portuguese values back to English and retains captured placeholder values while switching languages.
+
+Generated web-guide dictionaries translate interface labels and controls. Book-derived names, summaries, facts, quotations, and other story data remain in English; do not machine-translate that content as part of the UI pass. Mark authored English text with `lang="en"`, and keep translatable source labels outside that protected text span.
+
+Do not add keys for code, scripts, styles, URLs, data values, or proper names. The runtime preserves the DOM and its event listeners, watches dynamic UI, and can resolve a unique Portuguese dictionary value back to English. Duplicate Portuguese values are skipped for reverse lookup.
+
+Hugo embeds both dictionaries and the runtime in the head before the body is parsed. Standalone pages served by the web-guide Node app use the same approach: define `window.EnrichReaderTranslations = { shared: ..., page: ... }` and inline the runtime synchronously before the body or generated UI is parsed. Provide the same dictionaries to standalone routes; the language selector uses buttons with `data-language-choice="en"` and `data-language-choice="pt-BR"`.
+
+Scripts can localize generated UI through `window.EnrichReaderI18n.t('Show all {count} race selections', { count: 68 })`. The API's `language` property is `en` or `pt-BR`. Manual selector changes dispatch `languagechange` on `document` with `event.detail.language`, allowing already-rendered controls to refresh.
+
+The initial language precedence is `?lang=en|pt|pt-BR`, saved `localStorage` choice, then the first supported English or Portuguese browser language in `navigator.languages`; unsupported browser languages fall back to English. A valid query choice and a manual selector choice are saved under `enrichreader-language`. Manual selection removes a `lang` query override so the saved choice takes effect on the next visit. Storage and URL API failures are handled without breaking the page.

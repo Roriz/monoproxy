@@ -90,7 +90,7 @@ test('source markers distinguish the latest state changes from regenerated prose
   assert.equal((changed.match(/class="source source-loud"/g) ?? []).length, 2);
   assert.match(changed, /mudou na Carta 2/);
   assert.match(changed, /novo na Carta 2/);
-  assert.match(changed, /Rewritten description\. <span class="source">/);
+  assert.match(changed, /<span lang="en">Rewritten description\.<\/span> <span class="source">/);
   assert.doesNotMatch(rendered(4), /source-loud/);
   assert.doesNotMatch(rendered(2), /dead|Geneva|Rewritten/);
 });

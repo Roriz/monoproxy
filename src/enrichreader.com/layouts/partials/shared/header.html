@@ -16,6 +16,10 @@
       {{ range $links }}
       <a href="{{ .href }}" class="transition {{ if eq $current .href }}text-gold-500{{ else }}hover:text-gold-500{{ end }}"{{ if eq $current .href }} aria-current="page"{{ end }}>{{ .label }}</a>
       {{ end }}
+      <div class="language-switch" role="group" aria-label="Language">
+        <button type="button" data-language-choice="en" aria-label="English" lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-language-choice="pt-BR" aria-label="Português" lang="pt-BR" aria-pressed="false">PT</button>
+      </div>
       <a href="{{ $ctaHref }}" class="px-4 py-2 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition-all transform hover:scale-105 shadow-gold glow-gold whitespace-nowrap">{{ $ctaLabel }}</a>
     </div>
 
@@ -33,5 +37,9 @@
     <a href="{{ .href }}" class="mobile-nav-link transition {{ if eq $current .href }}text-gold-500{{ else }}hover:text-gold-500{{ end }}"{{ if eq $current .href }} aria-current="page"{{ end }}>{{ .label }}</a>
     {{ end }}
     <a href="{{ $ctaHref }}" class="mobile-nav-link px-6 py-3 bg-brand-primary text-neutral-950 rounded-full font-bold hover:bg-gold-400 transition shadow-gold glow-gold whitespace-nowrap mt-4">{{ $ctaLabel }}</a>
+    <div class="language-switch" role="group" aria-label="Language">
+      <button type="button" data-language-choice="en" aria-label="English" lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-language-choice="pt-BR" aria-label="Português" lang="pt-BR" aria-pressed="false">PT</button>
+    </div>
   </div>
 </div>

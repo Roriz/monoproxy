@@ -4,6 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{ $translationSlug := cond .IsHome "home" (path.Base (strings.TrimSuffix "/" .RelPermalink)) }}
+  {{ $sharedTranslations := site.Data.translations.shared | default dict }}
+  {{ $pageTranslations := index (site.Data.translations | default dict) $translationSlug | default dict }}
+  <script>window.EnrichReaderTranslations = { shared: {{ $sharedTranslations | jsonify | safeJS }}, page: {{ $pageTranslations | jsonify | safeJS }} };</script>
+  <script>{{ readFile "static/i18n.js" | safeJS }}</script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
 

@@ -1,5 +1,6 @@
 import { track } from './analytics.js';
 const states = new WeakMap();
+const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
 export function disposeApproval(dialog) {
   const state = states.get(dialog);
   if (state) { state.controller?.abort(); state.active = false; states.delete(dialog); }
@@ -24,7 +25,7 @@ export function initializeApproval() {
     if (submit.disabled || state.busy) return;
     const payload = Object.fromEntries(new FormData(form));
     if (payload.divulgar !== 'data') delete payload.data;
-    state.busy = true; submit.disabled = true; submit.textContent = 'Enviando…';
+    state.busy = true; submit.disabled = true; submit.textContent = t('Sending…');
     form.querySelectorAll('fieldset').forEach(fieldset => { fieldset.disabled = true; });
     const error = form.querySelector('[data-approval-error]'); error.hidden = true;
     const controller = new AbortController(); state.controller = controller;
@@ -40,17 +41,17 @@ export function initializeApproval() {
       if (!state.active) return;
       form.replaceChildren();
       const title = document.createElement('p'); title.setAttribute('role', 'status'); title.tabIndex = -1; title.dataset.approvalConfirmation = '';
-      title.textContent = 'Aprovado. Obrigado!';
-      const text = document.createElement('p'); text.textContent = 'Vai ao ar em até 24h, neste mesmo endereço. Te aviso no WhatsApp com os links para a bio e os posts.';
-      const close = document.createElement('button'); close.type = 'button'; close.dataset.close = ''; close.textContent = 'Fechar';
+      title.textContent = t('Approved. Thanks!');
+      const text = document.createElement('p'); text.textContent = t('It will go live within 24 hours at this same address. I’ll send the bio and post links on WhatsApp.');
+      const close = document.createElement('button'); close.type = 'button'; close.dataset.close = ''; close.textContent = t('Close');
       form.append(title, text, close); title.focus();
     } catch {
       if (!state.active) return;
-      error.hidden = false; error.replaceChildren(document.createTextNode('Não deu para enviar · '));
-      const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = 'Tentar de novo'; retry.addEventListener('click', () => void send()); error.append(retry);
+      error.hidden = false; error.replaceChildren(document.createTextNode(t('Error sending · ')));
+      const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = t('Try again'); retry.addEventListener('click', () => void send()); error.append(retry);
     } finally {
       clearTimeout(timeout); state.busy = false;
-      if (state.active && form.querySelector('[data-approve-submit]')) { form.querySelectorAll('fieldset').forEach(fieldset => { fieldset.disabled = false; }); submit.textContent = 'Aprovar e publicar'; validate(); }
+      if (state.active && form.querySelector('[data-approve-submit]')) { form.querySelectorAll('fieldset').forEach(fieldset => { fieldset.disabled = false; }); submit.textContent = t('Approve and publish'); validate(); }
     }
   }
   form.onsubmit = event => void send(event);

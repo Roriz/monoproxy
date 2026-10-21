@@ -1,9 +1,16 @@
-import { announcedNotice, itemLabel } from './position.mjs';
+import { announcedNotice } from './position.mjs';
 import { touchPicker } from './analytics.js';
 // Picker controls change only the draft. The page changes on form submission.
 const states = new WeakMap();
 let held = null;
 const heldClicks = new WeakSet();
+const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
+const label = item => {
+  if (!item) return '';
+  const number = item.number ?? item.label.match(/\d+/)?.[0] ?? item.label;
+  return t(item.kind === 'section' ? 'Letter {number}' : 'Chapter {number}', { number });
+};
+const finishedLabel = book => t('You finished Book {book}', { book });
 
 function render(form, announce = false) {
   const state = states.get(form);
@@ -11,28 +18,33 @@ function render(form, announce = false) {
   const stop = state.items.find(item => String(item.ordinal) === select.value);
   const previous = state.items.filter(item => item.ordinal < Number(select.value)).at(-1) ?? (select.value === 'fim' ? state.items.at(-1) : null);
   const finished = select.value === 'fim';
-  const inline = item => itemLabel(item, true);
+  const inline = item => label(item);
   const readout = form.querySelector('[data-readout]');
-  readout.textContent = finished ? 'Terminei' : itemLabel(stop);
+  readout.textContent = finished ? t('Finished') : label(stop);
+  [...select.options].forEach(option => {
+    if (option.value === 'fim') option.textContent = t('I finished this book');
+    else { const item = state.items.find(value => String(value.ordinal) === option.value); if (item) option.textContent = label(item); }
+  });
   readout.hidden = state.numeric;
   form.querySelector('[data-picker-title]').htmlFor = state.numeric ? form.querySelector('[data-number]').id : readout.id;
   form.querySelector('[data-number]').hidden = !state.numeric;
   form.querySelector('[data-slider-group]').hidden = state.numeric;
   form.querySelector('[data-consequence]').textContent = !state.valid ? '' : finished
-    ? `Mostra tudo até o fim do Livro ${state.l}.`
-    : previous ? `Mostra tudo até o fim ${previous.gender === 'f' ? 'da' : 'do'} ${inline(previous)}.`
-      : state.l > 1 ? `Mostra tudo até o fim do Livro ${state.l - 1}.` : 'Nada aparece ainda: escolha sua posição.';
+    ? t('Show everything through the end of Book {book}.', { book: state.l })
+    : previous ? t('Show everything through the end of {article} {position}.', { article: window.EnrichReaderI18n?.language === 'en' ? 'the' : previous.gender === 'f' ? 'da' : 'do', position: inline(previous) })
+      : state.l > 1 ? t('Show everything through the end of Book {book}.', { book: state.l - 1 }) : t('Nothing appears yet: choose your position.');
   const commit = form.querySelector('[data-commit]');
-  commit.textContent = finished ? `Terminei o Livro ${state.l}` : `Estou ${stop.gender === 'f' ? 'na' : 'no'} ${inline(stop)}`;
+  const currentNumber = stop?.number ?? stop?.label.match(/\d+/)?.[0] ?? '';
+  commit.textContent = finished ? finishedLabel(state.l) : t(stop.kind === 'section' ? 'I’m at Letter {number}' : 'I’m at Chapter {number}', { number: currentNumber });
   commit.disabled = !state.valid;
   const range = form.querySelector('[data-slider]');
   range.value = select.selectedIndex;
-  range.setAttribute('aria-valuetext', finished ? `Terminei o Livro ${state.l}` : itemLabel(stop).replace('Cap.', 'Capítulo'));
+  range.setAttribute('aria-valuetext', finished ? finishedLabel(state.l) : label(stop));
   form.querySelector('[data-step="-1"]').disabled = select.selectedIndex === 0;
   form.querySelector('[data-step="1"]').disabled = select.selectedIndex === select.options.length - 1;
   const chip = form.querySelector('[data-finish]');
   chip.setAttribute('aria-pressed', String(finished));
-  chip.textContent = `${finished ? '✓ ' : ''}Terminei este livro`;
+  chip.textContent = `${finished ? '✓ ' : ''}${t('I finished this book')}`;
   if (announce) form.querySelector('[data-picker-live]').textContent = range.getAttribute('aria-valuetext');
 }
 
@@ -44,7 +56,7 @@ function choose(form, c, announce = true) {
   const stop = state.items.find(item => String(item.ordinal) === String(c));
   form.querySelector('[data-number]').value = stop?.number ?? '';
   const feedback = form.querySelector('[data-number-feedback]');
-  feedback.textContent = stop ? itemLabel(stop) : 'Terminei';
+  feedback.textContent = stop ? label(stop) : t('Finished');
   feedback.hidden = !state.numeric;
   form.querySelector('[data-number-choices]').hidden = true;
   render(form, announce);
@@ -60,7 +72,7 @@ export function initializePicker(form, items, c, l = 1) {
 
 export function showAnnouncedBook(form, book) {
   const notice = form.querySelector('[data-book-notice]');
-  notice.hidden = false; notice.textContent = announcedNotice(book);
+  notice.hidden = false; notice.textContent = t('The guide for Book {book} isn’t ready yet.', { book: book.l });
   const launch = form.querySelector('[data-book-launch]');
   launch.replaceChildren();
   const template = form.querySelector(`[data-book-launch-template="${book.l}"]`);
@@ -80,10 +92,10 @@ export function initializePickerBook(form, book, c) {
   form.querySelector('[data-book-launch]').hidden = !announced;
   if (announced) showAnnouncedBook(form, book);
   if (announced) { states.set(form, { items: [], l: book.l, valid: false }); return; }
-  form.elements.c.replaceChildren(...book.items.map(item => new Option(itemLabel(item), String(item.ordinal))), ...(book.status === 'complete' ? [new Option('Terminei este livro', 'fim')] : []));
+  form.elements.c.replaceChildren(...book.items.map(item => new Option(label(item), String(item.ordinal))), ...(book.status === 'complete' ? [new Option(t('I finished this book'), 'fim')] : []));
   form.querySelector('[data-slider]').max = form.elements.c.options.length - 1;
   const ends = form.querySelectorAll('.slider-labels span');
-  ends[0].textContent = book.items[0].label; ends[1].textContent = book.items.at(-1).label;
+  ends[0].textContent = label(book.items[0]); ends[1].textContent = label(book.items.at(-1));
   form.querySelector('[data-finish]').hidden = book.status !== 'complete';
   initializePicker(form, book.items, c ?? String(book.items[0].ordinal), book.l);
 }
@@ -114,21 +126,21 @@ function matchNumber(form) {
   if (matches.length === 1) { choose(form, matches[0].ordinal, false); return; }
   state.valid = false;
   feedback.hidden = !value;
-  feedback.textContent = !value ? '' : matches.length ? 'Qual posição você quis dizer?'
-    : `Não há carta ou capítulo ${value} neste livro.`;
+  feedback.textContent = !value ? '' : matches.length ? t('Which position did you mean?')
+    : t('There is no letter or chapter {number} in this book.', { number: value });
   if (matches.length > 1) {
     choices.hidden = false;
     const currentOrdinal = Number(form.elements.c.value);
     const nearest = matches.sort((a, b) => Math.abs(a.ordinal - currentOrdinal) - Math.abs(b.ordinal - currentOrdinal));
     nearest.forEach((item, index) => {
       const button = document.createElement('button');
-      button.type = 'button'; button.textContent = itemLabel(item);
+      button.type = 'button'; button.textContent = label(item);
       button.dataset.numberChoice = item.ordinal; button.hidden = index >= 3;
       choices.append(button);
     });
     if (matches.length > 3) {
       const more = document.createElement('button'); more.type = 'button';
-      more.textContent = `Ver mais ${matches.length - 3}`; more.dataset.moreChoices = '';
+      more.textContent = t('Show {count} more', { count: matches.length - 3 }); more.dataset.moreChoices = '';
       choices.append(more);
     }
   }
@@ -214,4 +226,11 @@ document.addEventListener('keydown', event => {
   touchPicker(form, 'slider');
   select.selectedIndex = Math.max(0, Math.min(select.options.length - 1, index));
   choose(form, select.value, false);
+});
+
+document.addEventListener('languagechange', () => {
+  document.querySelectorAll('[data-picker]').forEach(form => {
+    if (states.get(form)?.items.length) render(form);
+    form.querySelectorAll('[data-picker-book]').forEach(link => { link.textContent = link.dataset.pickerStatus === 'announced' ? t('Book {number} · coming soon', { number: link.dataset.pickerBook }) : t('Book {number}', { number: link.dataset.pickerBook }); });
+  });
 });

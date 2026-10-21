@@ -240,10 +240,14 @@ function renderMatrix() {
       toggleContainer.style.display = 'none';
     } else {
       toggleContainer.style.display = 'flex';
-      const nounPlural = (matrixData && matrixData.field) ? matrixData.field + 's' : 'races';
-      toggleBtn.textContent = matrixShowAll 
-        ? 'Show Less' 
-        : `Show all ${totalRaces.length} ${nounPlural}`;
+      const field = matrixData && matrixData.field;
+      const nounPlural = field ? field + 's' : 'races';
+      const i18n = window.EnrichReaderI18n;
+      toggleBtn.textContent = matrixShowAll
+        ? (i18n ? i18n.t('Show Less') : 'Show Less')
+        : field === 'race_selection' && i18n
+          ? i18n.t('Show all {count} race selections', { count: totalRaces.length })
+          : `Show all ${totalRaces.length} ${nounPlural}`;
     }
   }
 }

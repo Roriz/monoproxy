@@ -20,19 +20,93 @@ async function selectStop(page, surface, ordinal) {
   if (number <= 4) await form.getByRole('button', { name: `${item <= 4 ? 'Carta' : 'Cap.'} ${number}`, exact: true }).click();
 }
 
-async function withBrowser(run, options = () => ({})) {
+async function withBrowser(run, options = () => ({}), locale = 'pt-BR') {
   const directory = await mkdtemp(join(tmpdir(), 'guide-browser-reports-'));
   const server = createGuideServer({ reportStore: new FileReportStore(directory), ...options(directory) });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const browser = await chromium.launch({ headless: true });
+  const localizedBrowser = { newPage: options => browser.newPage({ locale, ...options }) };
   try {
-    await run(browser, `http://127.0.0.1:${server.address().port}`, directory);
+    await run(localizedBrowser, `http://127.0.0.1:${server.address().port}`, directory);
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
     await rm(directory, { recursive: true, force: true });
   }
 }
+
+test('web guide serves English without JavaScript, saves language choice, and preserves English story data', { skip: !chromium }, () => withBrowser(async (browser, base) => {
+  const nojs = await browser.newPage({ javaScriptEnabled: false });
+  await nojs.route('https://**/*', route => route.abort());
+  await nojs.goto(`${base}/guia`);
+  assert.equal(await nojs.locator('html').getAttribute('lang'), 'en');
+  assert.equal(await nojs.locator('h1').textContent(), 'Spoiler-free guides');
+  assert.equal(await nojs.locator('[data-language-choice="pt-BR"]').count(), 1);
+  await nojs.close();
+
+  const browserPT = await browser.newPage({ locale: 'pt-BR' });
+  await browserPT.route('https://**/*', route => route.abort());
+  await browserPT.goto(`${base}/guia/frankenstein?l=1&c=5`);
+  assert.equal(await browserPT.locator('html').getAttribute('lang'), 'pt-BR');
+  assert.equal(await browserPT.locator('meta[property="og:locale"]').getAttribute('content'), 'pt_BR');
+  assert.equal(await browserPT.locator('.language-switch').getAttribute('aria-label'), 'Idioma');
+  await browserPT.close();
+
+  const page = await browser.newPage();
+  await page.route('https://**/*', route => route.abort());
+  await page.goto(`${base}/guia/frankenstein?l=1&c=5`);
+  assert.equal(await page.locator('html').getAttribute('lang'), 'en');
+  assert.match(await page.locator('h1').first().textContent(), /Dashboard · Frankenstein/);
+  assert.equal(await page.locator('.brand small').textContent(), 'by Mary Shelley');
+  assert.equal(await page.locator('[data-picker-dialog] [data-commit]').textContent(), 'I’m at Chapter 1');
+  assert.equal(await page.locator('[data-picker-dialog] [data-consequence]').textContent(), 'Show everything through the end of the Letter 4.');
+  const story = page.locator('[lang="en"][data-i18n-ignore]').first();
+  assert.ok(await page.locator('[lang="en"][data-i18n-ignore]').count() > 0);
+  const storyText = await story.textContent();
+  await page.locator('[data-language-choice="pt-BR"]').click();
+  await page.waitForFunction(() => document.documentElement.lang === 'pt-BR');
+  assert.equal(await page.locator('html').getAttribute('lang'), 'pt-BR');
+  assert.equal(await story.textContent(), storyText);
+  assert.equal(await page.evaluate(() => localStorage.getItem('enrichreader-language')), 'pt-BR');
+  await page.locator('[data-language-choice="en"]').click();
+  await page.waitForFunction(() => document.documentElement.lang === 'en');
+  assert.equal(await page.evaluate(() => localStorage.getItem('enrichreader-language')), 'en');
+  await page.reload();
+  assert.equal(await page.locator('html').getAttribute('lang'), 'en');
+  await page.goto(`${base}/guia/frankenstein/mundo?l=1&c=5`);
+  assert.equal(await page.locator('#search').getAttribute('placeholder'), 'Search a name up to Letter 4');
+  assert.equal(await page.locator('[data-hub-new-label]').textContent(), 'New in Letter 4');
+  await page.goto(`${base}/guia/frankenstein?l=1&c=5`);
+  assert.ok(await page.getByRole('link', { name: 'Read the whole Letter 4 →' }).count());
+  assert.ok(await page.getByRole('heading', { name: 'Who appeared in Letter 4' }).count());
+}, () => ({}), 'en-US'));
+
+test('generated guide edition, timeline labels, profile prose and source tags round-trip', { skip: !chromium }, () => withBrowser(async (browser, base) => {
+  const page = await browser.newPage({ locale: 'en-US' });
+  await page.route('https://**/*', route => route.abort());
+  await page.goto(`${base}/guia/frankenstein`);
+  const overview = page.locator('.guide-overview');
+  assert.match(await overview.innerText(), /The guide follows Standard Ebooks · 1831 text\./);
+  await page.locator('[data-language-choice="pt-BR"]').click();
+  await page.waitForFunction(() => document.documentElement.lang === 'pt-BR');
+  assert.match(await overview.innerText(), /O guia segue Standard Ebooks · texto de 1831\./);
+
+  await page.goto(`${base}/guia/frankenstein/tempo?l=1&c=9`);
+  const pov = page.locator('.timeline-rail p.muted.small').filter({ hasText: 'R. Walton' }).first();
+  await pov.waitFor();
+  assert.equal(await pov.innerText(), '· pelo olhar de R. Walton');
+  await page.locator('[data-language-choice="en"]').click();
+  await page.waitForFunction(() => document.documentElement.lang === 'en');
+  assert.equal(await pov.innerText(), '· From R. Walton’s point of view');
+
+  await page.goto(`${base}/guia/frankenstein/mundo?l=1&c=9`);
+  const firstSource = page.locator('[data-hub-row] .muted.small').first();
+  assert.equal(await firstSource.innerText(), 'Place · since Chapter 4');
+  await page.locator('[data-language-choice="pt-BR"]').click();
+  await page.waitForFunction(() => document.documentElement.lang === 'pt-BR');
+  assert.equal(await firstSource.innerText(), 'Lugar · desde o cap. 4');
+  await page.close();
+}, () => ({}), 'en-US'));
 
 test('mobile guide: picker, memory, history, safe cuts, search, sharing and errors', { skip: !chromium && 'Set WEB_GUIDE_PLAYWRIGHT_MODULE to an installed Playwright module' }, () => withBrowser(async (browser, base) => {
   const page = await browser.newPage({ viewport: { width: 360, height: 640 } });
@@ -114,6 +188,7 @@ test('reports: one-tap receipt, preview reuse, preserved retry details and clean
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   const records = async () => Promise.all((await readdir(directory)).filter(file => file.endsWith('.json')).map(async file => JSON.parse(await readFile(join(directory, file), 'utf8'))));
   await page.goto(`${base}/guia/frankenstein?l=1&c=5`);
+  await page.locator('[data-language-choice="pt-BR"]').click();
   await page.locator('[data-preview="preview-the-traveller"]').first().click();
   const historyLength = await page.evaluate(() => history.length);
   await page.locator('[data-preview-dialog] [data-report]').click();
@@ -151,7 +226,7 @@ test('reports: one-tap receipt, preview reuse, preserved retry details and clean
   await page.locator('[data-report-dialog] .report-close').click();
   await page.goto(`${base}/guia/frankenstein`);
   await page.locator('footer [data-report]').click();
-  await page.getByRole('button', { name: /Falta algo/ }).click();
+  await page.getByRole('button', { name: /Está faltando algo/ }).click();
   await page.getByText('Recebido. Obrigado por avisar.', { exact: true }).waitFor();
   const clean = (await records()).find(record => record.scope === 'guia');
   assert.equal(clean.l, null); assert.equal(clean.c, null); assert.deepEqual(clean.fields, []);
@@ -246,6 +321,24 @@ test('picker drafts: ambiguous printed numbers, keyboard, held steppers and canc
   await noJS.locator('#chapter').selectOption('2');
   await noJS.locator('main [data-commit]').click();
   assert.match(await noJS.locator('main').innerText(), /Walton/);
+}));
+
+test('hub language listeners are removed when a position render replaces the hub', { skip: !chromium }, () => withBrowser(async (browser, base) => {
+  const page = await browser.newPage({ locale: 'en-US' });
+  await page.route('https://**/*', route => route.abort());
+  const errors = []; page.on('pageerror', error => errors.push(error.message));
+  await page.goto(`${base}/guia/frankenstein/mundo?l=1&c=5`);
+  await page.locator('#search').fill('doctor');
+  await page.evaluate(() => { window.__oldHubStatus = document.querySelector('[data-hub-status]'); });
+  await page.locator('[data-open-picker]').click();
+  const picker = page.locator('[data-picker-dialog]');
+  await picker.locator('[data-slider]').evaluate(slider => { slider.value = '5'; slider.dispatchEvent(new Event('input', { bubbles: true })); });
+  await picker.locator('[data-commit]').click();
+  await page.waitForFunction(() => new URL(location.href).searchParams.get('c') === '6');
+  await page.evaluate(() => { window.__oldHubStatus.textContent = 'detached hub sentinel'; });
+  await page.locator('[data-language-choice="pt-BR"]').click();
+  assert.equal(await page.evaluate(() => window.__oldHubStatus.textContent), 'detached hub sentinel');
+  assert.deepEqual(errors, []);
 }));
 
 test('character previews stay in the current cut and preserve browser navigation', { skip: !chromium }, () => withBrowser(async (browser, base) => {

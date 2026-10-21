@@ -1,7 +1,7 @@
 import { initializeAnalytics, initializeReaderMetrics, track, beginPicker, observeHeroPicker, touchPicker, pickerCommit } from './analytics.js';
 import { initializeApproval, disposeApproval } from './approval.js';
 import { initializeHub, disposeHub } from './hub.js';
-import { resolvePosition, commitURL, shareURL, completedIndex, itemLabel } from './position.mjs';
+import { resolvePosition, commitURL, shareURL, completedIndex } from './position.mjs';
 import { initializePickerBook, showAnnouncedBook, focusPicker } from './picker.js';
 import { openReport, disposeReport } from './reports.js';
 
@@ -10,6 +10,7 @@ let dialogOpener = null;
 let request = null;
 let toastTimer;
 const guideMap = JSON.parse(document.querySelector('#guide-map').textContent);
+const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
 const bookTitle = document.querySelector('.brand > span')?.childNodes[0]?.textContent ?? 'este livro';
 const authorName = document.querySelector('.brand small')?.textContent.replace(/^de /, '') ?? '';
 const currentPosition = () => {
@@ -29,12 +30,18 @@ const remembered = () => {
 };
 const positionBook = position => guideMap.books.find(book => book.l === position.l);
 const label = position => {
-  if (position.c === 'fim') return `fim do Livro ${position.l}`;
+  if (position.c === 'fim') return t('The end of Book {book}', { book: position.l });
   const item = positionBook(position).items.find(item => item.ordinal === Number(position.c));
   if (!item && Number(document.body.dataset.positionL) === position.l && document.body.dataset.positionC === position.c) return document.body.dataset.positionLabel;
-  return `${guideMap.books.length > 1 ? `L${position.l} · ` : ''}${item ? itemLabel(item) : `posição ${position.c}`}`;
+  const number = item?.number ?? item?.label.match(/\d+/)?.[0] ?? position.c;
+  return `${guideMap.books.length > 1 ? `${t('Book {number}', { number: position.l })} · ` : ''}${item ? t(item.kind === 'section' ? 'Letter {number}' : 'Chapter {number}', { number }) : t('position {number}', { number: position.c })}`;
 };
-const inPosition = position => position.c === 'fim' ? `no fim do Livro ${position.l}` : `${!positionBook(position).items.some(item => item.ordinal === Number(position.c)) || positionBook(position).items.find(item => item.ordinal === Number(position.c))?.gender === 'f' ? 'na' : 'no'} ${label(position).replace('Cap.', 'cap.')}`;
+const inPosition = position => {
+  if (position.c === 'fim') return window.EnrichReaderI18n?.language === 'en' ? t('the end of Book {book}', { book: position.l }) : t('at the end of Book {book}', { book: position.l });
+  const item = positionBook(position).items.find(item => item.ordinal === Number(position.c));
+  if (window.EnrichReaderI18n?.language === 'en') return label(position);
+  return t(!item || item.gender === 'f' ? 'at {position}' : 'in {position}', { position: label(position) });
+};
 const equal = (a, b) => a && b && a.l === b.l && a.c === b.c;
 
 function initialize(committed = false) {
@@ -48,9 +55,9 @@ function initialize(committed = false) {
     initializePickerBook(form, book, book.l === (position ?? memory)?.l ? (position ?? memory).c : null);
   });
   const hint = document.querySelector('[data-memory-hint]');
-  if (hint && memory) { hint.hidden = false; hint.textContent = `Da última vez: ${label(memory)}`; }
+  if (hint && memory) { hint.hidden = false; hint.textContent = t('Last time: {position}', { position: label(memory) }); }
   const pill = document.querySelector('[data-open-picker]');
-  pill.setAttribute('aria-label', position ? `Sua posição: ${label(position)}. Mudar` : 'Escolher sua posição no livro');
+  pill.setAttribute('aria-label', position ? t('Your position: {position}. Change', { position: label(position) }) : t('Choose your position in the book'));
   observeHeroPicker(document.querySelector('main [data-picker]'), { surface: 'hero', source: document.body.dataset.pageType === 'entity' ? 'entity' : document.body.dataset.pageType === 'gate' ? 'gate' : 'section', prefill: position ? 'url' : memory ? 'memory' : 'default', from_memory: !position && !!memory });
   initializeHub();
   initializeApproval();
@@ -124,7 +131,7 @@ async function movePosition(position, saveMemory = true, force = false, transiti
   const privateStrip = document.querySelector('.review-strip');
   privateStrip?.querySelector('[data-tour-row]')?.remove();
   document.querySelector('#content').replaceChildren(...(privateStrip ? [privateStrip] : []));
-  const skeleton = document.createElement('div'); skeleton.className = 'skeleton'; skeleton.setAttribute('role', 'status'); skeleton.textContent = 'Carregando sua posição…';
+  const skeleton = document.createElement('div'); skeleton.className = 'skeleton'; skeleton.setAttribute('role', 'status'); skeleton.textContent = t('Loading your position…');
   document.querySelector('#content').append(skeleton);
   document.querySelector('[data-preview-body]').replaceChildren();
   document.querySelector('[data-open-picker]').textContent = `${label(position)} ⌄`;
@@ -155,13 +162,13 @@ async function movePosition(position, saveMemory = true, force = false, transiti
     }
     (document.querySelector('[data-position-heading]') ?? document.querySelector('h1'))?.focus();
     const teachTap = enteredPanel && document.querySelector('[data-preview]');
-    toast(`Agora você está ${inPosition(position)}.${teachTap ? ' Toque num nome para ver quem é.' : ''}`, teachTap ? 4000 : 3000);
+    toast(teachTap ? t('You’re now at {position}. Click a name to see who they are.', { position: inPosition(position) }) : t('You’re now at {position}.', { position: inPosition(position) }), teachTap ? 4000 : 3000);
   } catch {
     if (request !== controller) return;
     const main = document.querySelector('#content');
     main.replaceChildren(...(privateStrip ? [privateStrip] : []));
-    const message = document.createElement('p'); message.textContent = `Não deu para carregar ${label(position)}.`;
-    const retry = document.createElement('button'); retry.textContent = 'Tentar de novo';
+    const message = document.createElement('p'); message.textContent = t('Couldn’t load {position}.', { position: label(position) });
+    const retry = document.createElement('button'); retry.textContent = t('Try again');
     retry.addEventListener('click', () => { void movePosition(position, false, true, transition); });
     main.append(message, retry);
   } finally { clearTimeout(timer); }
@@ -171,9 +178,9 @@ async function share(position = null) {
   const url = shareURL(location.pathname, position).href;
   if (navigator.share) {
     try {
-      const text = !position ? `Guia sem spoiler de ${bookTitle}, de ${authorName}: você diz em que capítulo está e só vê o que já leu.`
-        : position.c === 'fim' ? `Terminei o Livro 1 de ${bookTitle}, de ${authorName}. Este link abre o guia até o fim dele.`
-          : `Estou ${inPosition(position)} de ${bookTitle}, de ${authorName}. Este link mostra o guia até onde eu li.`;
+      const text = !position ? t('Spoiler-free guide to {book}, by {author}: tell us which chapter you’re on and see only what you’ve read.', { book: bookTitle, author: authorName })
+        : position.c === 'fim' ? t('I finished Book 1 of {book}, by {author}. This link opens the guide through the end.', { book: bookTitle, author: authorName })
+          : t('I’m at {position} in {book}, by {author}. This link shows the guide through what I’ve read.', { position: inPosition(position), book: bookTitle, author: authorName });
       await navigator.share({ title: document.title, text, url });
       track('share', { mode: position ? 'position' : 'clean', method: 'native', outcome: 'sent' });
       await closeDialog(); return;
@@ -181,7 +188,7 @@ async function share(position = null) {
   }
   try {
     await navigator.clipboard.writeText(url);
-    track('share', { mode: position ? 'position' : 'clean', method: 'clipboard', outcome: 'copied' }); await closeDialog(); toast('Link copiado');
+    track('share', { mode: position ? 'position' : 'clean', method: 'clipboard', outcome: 'copied' }); await closeDialog(); toast(t('Link copied'));
   } catch {
     document.querySelector('[data-share-options]').hidden = true;
     track('share', { mode: position ? 'position' : 'clean', method: 'manual', outcome: 'manual' });
@@ -205,7 +212,7 @@ document.addEventListener('input', event => {
       card.hidden = !card.querySelector('h3').textContent.toLocaleLowerCase('en').includes(query);
       if (!card.hidden) count++;
     });
-    document.querySelector('[data-result-count]').textContent = `${count} personagens encontrados nesta posição.`;
+    document.querySelector('[data-result-count]').textContent = t('Found {count} characters at this position.', { count });
     document.querySelector('[data-search-empty]').hidden = count !== 0;
   }
 });
@@ -316,10 +323,10 @@ if (landing && position && !equal(position, remembered())) {
   const urlCut = completedIndex(guideMap, position);
   alert.dataset.variant = memory ? urlCut > memoryCut || urlCut === memoryCut && position.l > memory.l ? 'ahead' : 'behind' : 'nomemory';
   track('position_alert', { variant: alert.dataset.variant, outcome: 'shown' });
-  alert.append(document.createTextNode(`${memory ? 'Este link abre' : 'Este guia está aberto'} ${inPosition(position)}.${memory ? '' : ' Ainda não chegou lá?'} `));
+  alert.append(document.createTextNode(`${memory ? t('This link opens through {position}', { position: label(position) }) : t('This guide is open through {position}', { position: label(position) })}.${memory ? '' : ` ${t('Haven’t reached it yet?')}`} `));
   const action = document.createElement('button');
-  action.textContent = memory ? `Voltar para ${label(memory)}` : 'Escolher minha posição';
+  action.textContent = memory ? t('Back to {position}', { position: label(memory) }) : t('Choose my position');
   action.addEventListener('click', () => { track('position_alert', { variant: alert.dataset.variant, outcome: memory ? 'back' : 'choose' }); memory ? void movePosition(memory, false) : openDialog(document.querySelector('[data-picker-dialog]'), null, 'alert'); });
-  const dismiss = document.createElement('button'); dismiss.textContent = '×'; dismiss.setAttribute('aria-label', 'Dispensar aviso');
+  const dismiss = document.createElement('button'); dismiss.textContent = '×'; dismiss.setAttribute('aria-label', t('Dismiss notice'));
   dismiss.addEventListener('click', () => { track('position_alert', { variant: alert.dataset.variant, outcome: 'dismiss' }); alert.hidden = true; }); alert.append(action, dismiss);
 }

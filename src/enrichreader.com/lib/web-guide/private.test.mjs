@@ -48,7 +48,7 @@ test('private HTTP navigation, summary switch and idempotent durable approval ne
     }
     const url = `${base}/guia/frankenstein?k=${live}`;
     const gate = await fetch(url); const html = await gate.text();
-    assert.equal(gate.status, 200); assert.match(html, /Prévia para Mary/);
+    assert.equal(gate.status, 200); assert.match(html, /Preview for Mary Shelley/); assert.match(html, /data-language-choice="pt-BR"/);
     assert.doesNotMatch(html, /data-share|data-scope="sheet"|data-scope="card"/);
     for (const link of html.matchAll(/href="(\/guia\/frankenstein[^"#]*)"/g)) {
       assert.ok(link[1].includes(`k=${live}`), link[1]);
@@ -56,7 +56,7 @@ test('private HTTP navigation, summary switch and idempotent durable approval ne
     const bot = await fetch(url, { headers: { 'User-Agent': 'GPTBot' } }); assert.equal(bot.status, 403); assert.equal(await bot.text(), '');
     const withSummaries = await (await fetch(`${url}&l=1&c=5`)).text();
     const without = await (await fetch(`${url}&l=1&c=5&resumos=0`)).text();
-    assert.match(withSummaries, /class="scene-meta"/); assert.doesNotMatch(without, /class="scene-meta"/); assert.match(without, /Mostrar resumos/);
+    assert.match(withSummaries, /class="scene-meta"/); assert.doesNotMatch(without, /class="scene-meta"/); assert.match(without, /Show scene summaries/);
     const endpoint = `${base}/guia/frankenstein/aprovacao?k=${live}`;
     const send = input => fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) });
     assert.equal((await send({ divulgar: 'semana', resumos: 'off' })).status, 200);

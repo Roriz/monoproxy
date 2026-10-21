@@ -2337,6 +2337,43 @@ nav {
   font-family: var(--font-interface);
 }
 
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.2rem;
+  border: 1px solid oklch(100% 0 0 / 0.14);
+  border-radius: 9999px;
+  color: var(--color-neutral-400);
+  letter-spacing: 0.04em;
+}
+
+.language-switch button {
+  min-width: 2.25rem;
+  padding: 0.4rem 0.5rem;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.language-switch button[aria-pressed="true"] {
+  background: var(--color-gold-500);
+  color: var(--color-neutral-950);
+}
+
+.language-switch button:focus-visible {
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 2px;
+}
+
+#mobile-menu-drawer .language-switch {
+  margin-top: 1rem;
+}
+
 @media (max-width: 1199.98px) {
   .site-nav-menu {
     gap: 1.25rem;

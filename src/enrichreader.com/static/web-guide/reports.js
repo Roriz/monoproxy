@@ -1,9 +1,10 @@
 import { track } from './analytics.js';
 const sessions = new WeakMap();
+const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
 const reasons = {
-  spoiler: ['⚠', 'Spoiler!', 'Mostra algo que eu ainda não li'],
-  wrong: ['✗', 'Não é isso', 'A informação está errada'],
-  missing: ['+', 'Falta algo', 'Faltou alguma coisa importante'],
+  spoiler: ['⚠', 'Spoiler!', 'Shows something I haven’t read yet'],
+  wrong: ['✗', 'That’s not right', 'The information is wrong'],
+  missing: ['+', 'Something is missing', 'Important information is missing'],
 };
 
 export function disposeReport(dialog) {
@@ -21,13 +22,13 @@ export function openReport(dialog, context) {
   sessions.set(dialog, state); dialog.dataset.reporting = 'true';
   const titleId = dialog.matches('[data-preview-dialog]') ? 'preview-report-title' : 'report-title';
   dialog.setAttribute('aria-labelledby', titleId);
-  body.innerHTML = `<h2 tabindex="-1" data-report-title>O que está errado?</h2><p class="report-about"></p><div class="report-reasons"></div><div data-report-error hidden></div>`;
+  body.innerHTML = `<h2 tabindex="-1" data-report-title>What’s wrong?</h2><p class="report-about"></p><div class="report-reasons"></div><div data-report-error hidden></div>`;
   const title = body.querySelector('[data-report-title]'); title.id = titleId;
-  body.querySelector('.report-about').textContent = `Sobre: ${context.label}`;
+  body.querySelector('.report-about').textContent = t('About: {label}', { label: context.label });
   const rows = body.querySelector('.report-reasons');
   for (const [reason, [glyph, label, subtitle]] of Object.entries(reasons)) {
     const button = document.createElement('button'); button.type = 'button'; button.dataset.reportReason = reason;
-    button.innerHTML = `<span class="report-glyph" aria-hidden="true">${glyph}</span><span><strong>${label}</strong><span data-reason-subtitle>${subtitle}</span></span>`;
+    button.innerHTML = `<span class="report-glyph" aria-hidden="true">${glyph}</span><span><strong>${t(label)}</strong><span data-reason-subtitle>${t(subtitle)}</span></span>`;
     button.addEventListener('click', () => void sendReason(state, reason)); rows.append(button);
   }
   if (dialog.open) title.focus();
@@ -51,8 +52,8 @@ async function request(state, method, payload) {
 }
 
 function errorLine(node, retry) {
-  node.hidden = false; node.replaceChildren(document.createTextNode('Não deu para enviar · '));
-  const button = document.createElement('button'); button.type = 'button'; button.textContent = 'Tentar de novo';
+  node.hidden = false; node.replaceChildren(document.createTextNode(t('Couldn’t send · ')));
+  const button = document.createElement('button'); button.type = 'button'; button.textContent = t('Try again');
   button.addEventListener('click', retry); node.append(button);
 }
 
@@ -63,7 +64,7 @@ async function sendReason(state, reason) {
   const rows = [...state.body.querySelectorAll('[data-report-reason]')];
   rows.forEach(row => {
     row.disabled = true;
-    if (row.dataset.reportReason === reason) { row.dataset.sending = 'true'; row.querySelector('[data-reason-subtitle]').textContent = 'Enviando…'; }
+    if (row.dataset.reportReason === reason) { row.dataset.sending = 'true'; row.querySelector('[data-reason-subtitle]').textContent = t('Sending…'); }
   });
   state.body.querySelector('[data-report-error]').hidden = true;
   try {
@@ -79,10 +80,10 @@ async function sendReason(state, reason) {
 }
 
 function confirmation(state, reason) {
-  state.body.innerHTML = `<h2 class="sr-only" data-report-title>Aviso recebido</h2><p tabindex="-1" role="status" data-report-confirmation></p><div data-detail-form><label for="report-detail">Quer contar mais? (opcional)</label><textarea id="report-detail" rows="3" maxlength="255" placeholder="O que você viu, e onde?"></textarea><p class="detail-counter" data-detail-counter>0/255</p><button class="detail-send" data-detail-send disabled>Enviar detalhe</button><div data-detail-error hidden></div></div><button class="report-close" data-close>Fechar</button>`;
+  state.body.innerHTML = `<h2 class="sr-only" data-report-title>Issue received</h2><p tabindex="-1" role="status" data-report-confirmation></p><div data-detail-form><label for="report-detail">Want to tell us more? (optional)</label><textarea id="report-detail" rows="3" maxlength="255" placeholder="What did you see, and where?"></textarea><p class="detail-counter" data-detail-counter>0/255</p><button class="detail-send" data-detail-send disabled>Send details</button><div data-detail-error hidden></div></div><button class="report-close" data-close>Close</button>`;
   state.body.querySelector('[data-report-title]').id = state.dialog.getAttribute('aria-labelledby');
   const confirmation = state.body.querySelector('[data-report-confirmation]');
-  confirmation.textContent = document.body.dataset.guideState === 'private' ? 'Recebido. Corrijo em até 24h.' : reason === 'spoiler' ? 'Desculpe pelo spoiler. Obrigado por avisar: vamos corrigir.' : 'Recebido. Obrigado por avisar.';
+  confirmation.textContent = document.body.dataset.guideState === 'private' ? t('Received. I’ll fix it within 24 hours.') : reason === 'spoiler' ? t('Sorry about the spoiler. Thanks for letting us know; we’ll fix it.') : t('Received. Thanks for letting us know.');
   confirmation.focus();
   const input = state.body.querySelector('textarea');
   const send = state.body.querySelector('[data-detail-send]');
@@ -98,7 +99,7 @@ function confirmation(state, reason) {
       await request(state, 'PATCH', { detail: input.value });
       track('report_detail', { reason });
       if (current(state)) {
-        const done = document.createElement('p'); done.textContent = 'Detalhe enviado.'; done.setAttribute('role', 'status');
+        const done = document.createElement('p'); done.textContent = t('Details sent.'); done.setAttribute('role', 'status');
         state.body.querySelector('[data-detail-form]').replaceChildren(done);
       }
     } catch {
