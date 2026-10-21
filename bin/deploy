@@ -1,167 +1,149 @@
 #!/bin/bash
-
-# Exit on any error, unset variable, or pipe failure
-set -e
-set -u
-set -o pipefail
-
-# Source helpers
-# shellcheck source=bin/helpers/utils.sh
-source "$(dirname "$0")/helpers/utils.sh"
-
-# --- Configuration ---
+set -euo pipefail
+cd "$(dirname "$0")/.."
 REMOTE_HOST="${REMOTE_HOST:-135.181.249.165}"
 REMOTE_USER="${REMOTE_USER:-root}"
 REMOTE_DIR="${REMOTE_DIR:-/apps/monoproxy}"
-ARCHIVE="${ARCHIVE:-monoproxy.tar.gz}"
-
-# --- Deployment Steps ---
-
-cleanup_local() {
-  if [ -f "$ARCHIVE" ]; then
-    info "Cleaning up local archive..."
-    rm "$ARCHIVE"
-  fi
+RELEASES_DIR="${RELEASES_DIR:-/apps/releases}"
+# Server secrets live outside release directories so rollbacks and pruning never touch them.
+SHARED_DIR="${SHARED_DIR:-/apps/shared}"
+BUILD_ONLY=false
+case "${1:-}" in
+    '') ;;
+    --build-only) BUILD_ONLY=true ;;
+    *) echo "Usage: $0 [--build-only]" >&2; exit 1 ;;
+esac
+info() { printf '[INFO] %s\n' "$*"; }
+STARTED=$SECONDS
+WORK=$(mktemp -d)
+REMOTE_STAGE=''
+cleanup() {
+    rm -rf "$WORK"
+    if [[ -n "$REMOTE_STAGE" ]]; then
+        printf -v command 'rm -rf -- %q' "$REMOTE_STAGE"
+        ssh "$REMOTE_USER@$REMOTE_HOST" "$command" || true
+    fi
 }
+trap cleanup EXIT
 
-create_archive() {
-  info "Archiving project (excluding logs, tmp, and vcs)..."
-  touch "$ARCHIVE"
-  tar --exclude-vcs \
-      --exclude='./.git' \
-      --exclude='./tmp' \
-      --exclude='./log' \
-      --exclude="$ARCHIVE" \
-      -czf "$ARCHIVE" .
-  
-  if [ ! -f "$ARCHIVE" ]; then
-    error "Failed to create archive: $ARCHIVE"
-  fi
-}
-
-upload_archive() {
-  info "Uploading $ARCHIVE to $REMOTE_USER@$REMOTE_HOST..."
-  if ! scp "$ARCHIVE" "$REMOTE_USER@$REMOTE_HOST:/tmp/$ARCHIVE"; then
-    error "Failed to upload archive to remote host."
-  fi
-}
-
-remote_deploy() {
-  info "Executing remote deployment steps..."
-  
-  ssh "$REMOTE_USER@$REMOTE_HOST" bash -s << BASH
-    set -e
-    set -u
-    set -o pipefail
-    
-    # Redefine colors inside SSH session (sourced helpers file is local)
-    CYAN='\033[0;36m'
-    NC='\033[0m'
-    remote_info() { echo -e "\${CYAN}[REMOTE]\${NC} \$1"; }
-
-    STAGING_DIR="${REMOTE_DIR}.next"
-    BACKUP_DIR="${REMOTE_DIR}.old"
-
-    prepare_staging() {
-      remote_info "Preparing staging directory: \$STAGING_DIR"
-      rm -rf "\$STAGING_DIR"
-      mkdir -p "\$STAGING_DIR"
-    }
-
-    extract_archive() {
-      remote_info "Extracting archive to staging..."
-      tar --no-same-owner -xzf "/tmp/$ARCHIVE" -C "\$STAGING_DIR"
-      rm "/tmp/$ARCHIVE"
-    }
-
-    load_env() {
-      if [ -f "\$HOME/.bashrc" ]; then
-        remote_info "Loading global environment variables..."
-        eval "\$(grep '^export ' "\$HOME/.bashrc" || true)"
-      fi
-      if [ -f .env.production ]; then
-        remote_info "Sourcing .env.production..."
-        set -a; source .env.production; set +a
-      fi
-    }
-
-    run_staging_up() {
-      remote_info "Running build/update script in staging..."
-      chmod +x "\$STAGING_DIR"/bin/*
-      (
-        cd "\$STAGING_DIR"
-        load_env
-        export SKIP_CADDY=true
-        ./bin/build
-        export SKIP_BUILD=true
-        ./bin/up
-      )
-    }
-
-    atomic_swap() {
-      remote_info "Performing atomic directory swap..."
-      rm -rf "\$BACKUP_DIR"
-      if [ -d "$REMOTE_DIR" ]; then
-        mv "$REMOTE_DIR" "\$BACKUP_DIR"
-      fi
-      mv "\$STAGING_DIR" "$REMOTE_DIR"
-    }
-
-    finalize_caddy() {
-      remote_info "Finalizing Caddy configuration..."
-      (
-        cd "$REMOTE_DIR"
-        load_env
-        # Recreate after the swap so the read-only bind mount uses the final release path.
-        ./bin/web-guide up
-        sudo caddy trust
-        
-        local conf_file="Caddyfile.\${RAILS_ENV:-development}"
-        remote_info "Restarting Caddy with config: \$conf_file..."
-        sudo caddy stop 2>/dev/null || true
-        # The background Caddy process inherits this session's stdin, stdout and stderr; any of them
-        # left open keeps the SSH connection open and the deploy never returns.
-        sudo caddy start --config "\$conf_file" </dev/null >/dev/null 2>&1
-        if [ -n "\${INDEXNOW_KEY:-}" ]; then
-          ./bin/web-guide-node scripts/web-guide/indexnow.mjs submit
-        fi
-      )
-    }
-
-    cleanup_old() {
-      if [ -d "\$BACKUP_DIR" ]; then
-        remote_info "Cleaning up old release directory..."
-        rm -rf "\$BACKUP_DIR"
-      fi
-    }
-
-    # --- Execution Flow ---
-    prepare_staging
-    extract_archive
-    run_staging_up
-    atomic_swap
-    finalize_caddy
-    cleanup_old
-    
-    remote_info "Ready to serve."
+if [[ "$BUILD_ONLY" == false ]]; then
+    # Retrieve only the public build settings; runtime credentials stay on the server.
+    printf -v command 'bash -s -- %q %q' "$REMOTE_DIR" "$SHARED_DIR"
+    ssh "$REMOTE_USER@$REMOTE_HOST" "$command" > "$WORK/build.env" <<'BASH'
+set -eo pipefail
+if [[ -f "$HOME/.bashrc" ]]; then eval "$(grep '^export ' "$HOME/.bashrc" || true)"; fi
+for env in "$2/.env.production" "$1/.env.production"; do
+    if [[ -f "$env" ]]; then source "$env"; break; fi
+done
+printf 'export WEB_GUIDE_WHATSAPP=%q\nexport INDEXNOW_KEY=%q\n' "${WEB_GUIDE_WHATSAPP-5511953664050}" "${INDEXNOW_KEY:-}"
 BASH
+    source "$WORK/build.env"
+fi
+info 'Building the ready-to-serve release locally...'
+./bin/build-release
+if [[ "$BUILD_ONLY" == true ]]; then
+    info "Local build completed in $((SECONDS-STARTED))s. No release uploaded."
+    exit 0
+fi
+
+tar -czf "$WORK/release.tar.gz" -C tmp/deploy-build/release .
+bytes=$(stat -c %s "$WORK/release.tar.gz")
+checksum=$(sha256sum "$WORK/release.tar.gz")
+checksum=${checksum%% *}
+info "Uploading $bytes bytes of prepared files..."
+REMOTE_STAGE=$(ssh "$REMOTE_USER@$REMOTE_HOST" 'mktemp -d /tmp/monoproxy.XXXXXXXX')
+scp "$WORK/release.tar.gz" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_STAGE/release.tar.gz"
+printf -v command 'bash -s -- %q %q %q %q %q' "$REMOTE_DIR" "$SHARED_DIR" "$RELEASES_DIR" "$REMOTE_STAGE" "$checksum"
+ssh "$REMOTE_USER@$REMOTE_HOST" "$command" <<'BASH' | tee "$WORK/remote.log"
+set -euo pipefail
+SHARED_ENV=$2/.env.production
+# One-time migration: earlier releases each carried their own copy of the server secrets.
+if [[ ! -e "$SHARED_ENV" && -f "$1/.env.production" && ! -L "$1/.env.production" ]]; then
+    install -D -m 600 "$1/.env.production" "$SHARED_ENV"
+fi
+if [[ -f "$HOME/.bashrc" ]]; then eval "$(grep '^export ' "$HOME/.bashrc" || true)"; fi
+if [[ -f "$SHARED_ENV" ]]; then
+    set -a; source "$SHARED_ENV"; set +a
+fi
+# Caller arguments win over same-named server exports.
+REMOTE_DIR=$1 SHARED_ENV=$2/.env.production RELEASES_DIR=$3 STAGE=$4 CHECKSUM=$5
+export MONOPROXY_ROOT="$REMOTE_DIR"
+ACTIVATED=false SWAPPED=false PREVIOUS='' RELEASE=''
+point_at() {
+    # Clear leftovers (such as the old deploy's staging directory) so ln cannot nest inside them.
+    rm -rf -- "${REMOTE_DIR}.next"
+    ln -sT "$1" "${REMOTE_DIR}.next"
+    mv -Tf "${REMOTE_DIR}.next" "$REMOTE_DIR"
 }
-
-# --- Main Execution ---
-
-main() {
-  check_project_root
-
-  # Traps to ensure local cleanup happens even on failure
-  trap cleanup_local EXIT
-
-  info "Starting Deployment to $REMOTE_HOST..."
-  
-  create_archive
-  upload_archive
-  remote_deploy
-
-  success "Deployment completed successfully!"
+compose() { docker compose -p monoproxy-web-guide -f compose.web-guide.yml "$@" < /dev/null; }
+apply_caddy() {
+    # Start Caddy when its admin endpoint is down (e.g. after a reboot). The background
+    # process must not inherit SSH's streams or cwd, which may be a release pruned later.
+    caddy reload --config "$REMOTE_DIR/Caddyfile.production" --adapter caddyfile < /dev/null ||
+        (cd / && caddy start --config "$REMOTE_DIR/Caddyfile.production" --adapter caddyfile < /dev/null > /dev/null 2>&1)
 }
+finish() {
+    status=$?
+    if [[ "$status" != 0 && "$ACTIVATED" == false ]]; then
+        if [[ "$SWAPPED" == true && -n "$PREVIOUS" ]]; then
+            echo '[REMOTE] Activation failed; restoring previous release.' >&2
+            point_at "$PREVIOUS"
+            cd "$REMOTE_DIR"
+            compose up -d --wait --force-recreate || true
+            apply_caddy || true
+        elif [[ "$SWAPPED" == true && -L "$REMOTE_DIR" ]]; then
+            rm -f -- "$REMOTE_DIR"
+        fi
+        # Failed releases must not count toward the retained rollback targets.
+        if [[ -n "$RELEASE" ]]; then rm -rf -- "$RELEASE"; fi
+    fi
+    rm -rf "$STAGE"
+    return "$status"
+}
+trap finish EXIT
+printf '%s  %s\n' "$CHECKSUM" "$STAGE/release.tar.gz" | sha256sum --check --status
+mkdir -p "$RELEASES_DIR"
+RELEASE=$(mktemp -d "$RELEASES_DIR/monoproxy-$(date -u +%Y%m%d%H%M%S)-XXXXXXXX")
+tar --no-same-owner -xzf "$STAGE/release.tar.gz" -C "$RELEASE"
+# tar applies the archive root's mode, so the release mode is set after extraction.
+chmod 755 "$RELEASE"
+[[ -s "$RELEASE/public/enrichreader.com/index.html" && -s "$RELEASE/src/enrichreader.com/lib/web-guide/server.mjs" ]]
+if [[ -f "$SHARED_ENV" ]]; then ln -s "$SHARED_ENV" "$RELEASE/.env.production"; fi
 
-main "$@"
+# Validate the ready runtime and Caddy config before replacing anything live.
+docker run --rm --network none --cap-drop ALL --security-opt no-new-privileges:true \
+    -v "$RELEASE:/workspace:ro" -w /workspace node:24-alpine \
+    node scripts/web-guide/check-runtime.mjs < /dev/null
+caddy validate --config "$RELEASE/Caddyfile.production" --adapter caddyfile < /dev/null
+if [[ -L "$REMOTE_DIR" ]]; then PREVIOUS=$(readlink -f "$REMOTE_DIR"); fi
+SWAPPED=true
+if [[ -d "$REMOTE_DIR" && ! -L "$REMOTE_DIR" ]]; then
+    legacy="$RELEASES_DIR/monoproxy-legacy-$(date -u +%Y%m%d%H%M%S)"
+    mv "$REMOTE_DIR" "$legacy"
+    PREVIOUS=$legacy
+fi
+point_at "$RELEASE"
+cd "$REMOTE_DIR"
+if ! compose up -d --wait --force-recreate; then
+    compose logs --tail 40 web-guide >&2
+    exit 1
+fi
+apply_caddy
+ACTIVATED=true
+mapfile -t releases < <(find "$RELEASES_DIR" -mindepth 1 -maxdepth 1 -type d -name 'monoproxy-20*' | sort -r)
+for release in "${releases[@]:5}"; do
+    [[ "$release" == "$RELEASE" ]] || rm -rf -- "$release"
+done
+# The release is already live; a search-engine ping failure must not report a failed deploy.
+if [[ -n "${INDEXNOW_KEY:-}" ]]; then
+    ./bin/web-guide-node scripts/web-guide/indexnow.mjs submit < /dev/null ||
+        echo '[REMOTE] IndexNow submission failed; the release is live.' >&2
+fi
+printf '[REMOTE] Ready to serve: %s\n' "$CHECKSUM"
+BASH
+grep -Fxq "[REMOTE] Ready to serve: $checksum" "$WORK/remote.log" || {
+    echo 'Remote deployment did not reach completion.' >&2
+    exit 1
+}
+REMOTE_STAGE=''
+info "Deployment completed successfully in $((SECONDS-STARTED))s; upload=$bytes bytes."

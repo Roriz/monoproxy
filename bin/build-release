@@ -1,0 +1,44 @@
+#!/bin/bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+CACHE=tmp/deploy-build
+RELEASE="$CACHE/release"
+mkdir -p "$CACHE"
+fingerprint() {
+    {
+        find src scripts/web-guide bin/build bin/hugo bin/web-guide-node bin/helpers -type f \
+            ! -name '.hugo_build.lock' ! -path '*/resources/_gen/*' -print0 | sort -z | xargs -0 sha256sum
+        printf '%s\n' "${INDEXNOW_KEY:-}" "${WEB_GUIDE_WHATSAPP:-}" "${WEB_GUIDE_DOCKER_NODE:-}"
+        ./bin/web-guide-node --version
+    } | sha256sum | cut -d' ' -f1
+}
+output_fingerprint() {
+    find public -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | cut -d' ' -f1
+}
+started=$(date +%s%N)
+hash=$(fingerprint)
+if [[ -f "$CACHE/fingerprint" && -f "$CACHE/output-fingerprint" && -s public/enrichreader.com/index.html && \
+      "$(cat "$CACHE/fingerprint")" == "$hash" && "$(cat "$CACHE/output-fingerprint")" == "$(output_fingerprint)" ]]; then
+    printf '[BUILD] Static inputs unchanged; reusing local build.\n'
+else
+    ./bin/build
+    fingerprint > "$CACHE/fingerprint"
+    output_fingerprint > "$CACHE/output-fingerprint"
+fi
+./bin/web-guide-node scripts/web-guide/validate-map.mjs
+mkdir -p "$RELEASE/public" "$RELEASE/src/enrichreader.com" "$RELEASE/bin" "$RELEASE/scripts/web-guide"
+rsync -a --delete public/ "$RELEASE/public/"
+for directory in lib data; do
+    mkdir -p "$RELEASE/src/enrichreader.com/$directory"
+    rsync -a --delete --exclude '*.test.mjs' --exclude '*.spec.mjs' \
+        "src/enrichreader.com/$directory/" "$RELEASE/src/enrichreader.com/$directory/"
+done
+# Hugo already copied every static asset. Share that output with the guide instead
+# of maintaining a second, incomplete allowlist or duplicating media in the archive.
+rm -rf "$RELEASE/src/enrichreader.com/static"
+ln -s ../../public/enrichreader.com "$RELEASE/src/enrichreader.com/static"
+cp Caddyfile.production compose.web-guide.yml "$RELEASE/"
+cp bin/web-guide bin/web-guide-node "$RELEASE/bin/"
+cp scripts/web-guide/indexnow.mjs scripts/web-guide/validate-map.mjs scripts/web-guide/check-runtime.mjs "$RELEASE/scripts/web-guide/"
+(cd "$RELEASE" && ./bin/web-guide-node scripts/web-guide/check-runtime.mjs)
+printf '[BUILD] Ready release prepared in %sms: %s\n' "$((($(date +%s%N)-started)/1000000))" "$RELEASE"

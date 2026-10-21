@@ -32,10 +32,7 @@ warn() {
 
 error() {
   echo -e "${RED}[ERROR]${NC} $1" >&2
-  # Only exit if not being sourced
-  if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    exit 1
-  fi
+  exit 1
 }
 
 remote_info() {

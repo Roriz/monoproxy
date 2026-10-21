@@ -17,7 +17,8 @@ operator_command() {
 }
 case "${1:-dev}" in
   dev) exec node src/enrichreader.com/lib/web-guide/server.mjs ;;
-  up) ./bin/web-guide-node scripts/web-guide/validate-map.mjs; docker compose -p monoproxy-web-guide -f compose.web-guide.yml up -d --wait --force-recreate ;;
+  # Create the static mount source first; Docker would otherwise create it owned by root.
+  up) ./bin/web-guide-node scripts/web-guide/validate-map.mjs; mkdir -p public/enrichreader.com; docker compose -p monoproxy-web-guide -f compose.web-guide.yml up -d --wait --force-recreate ;;
   down) docker compose -p monoproxy-web-guide -f compose.web-guide.yml down ;;
   inbox|approvals|notifications) operator_command report-cli.mjs "$1" ;;
   reports) operator_command report-cli.mjs ;;

@@ -1,5 +1,5 @@
 app.enrichreader.com {
-	root * ../reader-app/build
+	root * {$READER_APP_PATH:/apps/reader-app}/build
 
 	# Enable compression
 	encode zstd gzip
@@ -28,7 +28,7 @@ www.enrichreader.com {
 }
 
 enrichreader.com {
-	root * ./public/enrichreader.com
+	root * {$MONOPROXY_ROOT:/apps/monoproxy}/public/enrichreader.com
 
 	# Redirect old download route to app route
 	redir /download* /app 302

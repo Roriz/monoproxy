@@ -33,6 +33,7 @@ services:
       - "127.0.0.1:3003:3003"
     volumes:
       - ./src/enrichreader.com:/site:ro
+      - ./public/enrichreader.com:/public/enrichreader.com:ro
       - reports:/reports
     command: [node, /site/lib/web-guide/server.mjs]
     healthcheck:
@@ -40,5 +41,8 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
+      # Fast checks only while starting, so `up --wait` returns quickly during deploys.
+      start_period: 60s
+      start_interval: 1s
 volumes:
   reports:
