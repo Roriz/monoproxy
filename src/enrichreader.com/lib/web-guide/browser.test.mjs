@@ -35,6 +35,48 @@ async function withBrowser(run, options = () => ({}), locale = 'pt-BR') {
   }
 }
 
+test('language control stays in page chrome with clear targets at reader and marketing widths', { skip: !chromium }, () => withBrowser(async (browser, base) => {
+  for (const width of [320, 360, 768, 912, 1024, 1280]) {
+    const page = await browser.newPage({ viewport: { width, height: 850 }, locale: 'en-US' });
+    await page.route('https://**/*', route => route.abort());
+    await page.goto(`${base}/guia/frankenstein?l=1&c=5&lang=pt-BR`);
+    assert.equal(await page.locator('.language-switch').count(), 1);
+    assert.equal(await page.locator('.language-switch').getAttribute('aria-label'), 'Idioma');
+    assert.equal(await page.locator('[data-language-choice="en"]').getAttribute('aria-label'), 'English');
+    assert.equal(await page.locator('[data-language-choice="pt-BR"]').getAttribute('aria-label'), 'Português');
+    assert.equal(await page.locator('[data-language-choice="pt-BR"]').getAttribute('aria-pressed'), 'true');
+    const layout = await page.evaluate(() => {
+      const rect = selector => { const { x, y, width, height, right } = document.querySelector(selector).getBoundingClientRect(); return { x, y, width, height, right }; };
+      const controls = [...document.querySelectorAll('.language-switch button')].map(button => { const { x, y, width, height, right } = button.getBoundingClientRect(); return { x, y, width, height, right }; });
+      return { viewport: innerWidth, document: document.documentElement.scrollWidth, switch: rect('.language-switch'), picker: rect('.position-pill'), controls };
+    });
+    assert.equal(layout.document, width, `no horizontal overflow at ${width}px`);
+    assert.ok(layout.controls.every(({ width, height }) => width >= 44 && height >= 44), `language buttons meet the 44px target at ${width}px`);
+    if (width < 1024) assert.ok(layout.switch.x >= layout.picker.right, `position picker remains before language control at ${width}px`);
+    assert.ok(layout.controls[0].right <= layout.controls[1].x, `language buttons do not overlap at ${width}px`);
+    if (width === 360) {
+      await page.locator('.brand').focus();
+      for (let tab = 0; tab < 5; tab++) await page.keyboard.press('Tab');
+      assert.equal(await page.evaluate(() => document.activeElement.hasAttribute('data-open-picker')), true, 'keyboard reaches the position picker before the language control');
+      await page.keyboard.press('Tab');
+      assert.equal(await page.evaluate(() => document.activeElement.matches('.share')), true, 'keyboard reaches share after the position picker');
+      await page.keyboard.press('Tab');
+      assert.equal(await page.evaluate(() => document.activeElement.matches('[data-language-choice="en"]')), true, 'keyboard reaches the language control after the primary actions');
+    }
+    await page.close();
+  }
+  for (const route of ['/guia', '/autores']) for (const width of [360, 1280]) {
+    const page = await browser.newPage({ viewport: { width, height: 850 }, locale: 'en-US' });
+    await page.route('https://**/*', route => route.abort());
+    await page.goto(`${base}${route}?lang=en`);
+    assert.equal(await page.locator('.language-switch').count(), 1);
+    assert.equal(await page.locator('.language-switch').evaluate(node => node.closest('header') !== null), true);
+    assert.equal(await page.locator('html').getAttribute('lang'), 'en');
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width, `no horizontal overflow on ${route} at ${width}px`);
+    await page.close();
+  }
+}, directory => ({ siteConfig: { whatsapp_number: '5511999999999' } }), 'en-US'));
+
 test('web guide serves English without JavaScript, saves language choice, and preserves English story data', { skip: !chromium }, () => withBrowser(async (browser, base) => {
   const nojs = await browser.newPage({ javaScriptEnabled: false });
   await nojs.route('https://**/*', route => route.abort());
@@ -42,6 +84,8 @@ test('web guide serves English without JavaScript, saves language choice, and pr
   assert.equal(await nojs.locator('html').getAttribute('lang'), 'en');
   assert.equal(await nojs.locator('h1').textContent(), 'Spoiler-free guides');
   assert.equal(await nojs.locator('[data-language-choice="pt-BR"]').count(), 1);
+  assert.equal(await nojs.locator('[data-language-choice="en"]').getAttribute('aria-pressed'), 'true');
+  assert.equal(await nojs.locator('[data-language-choice="pt-BR"]').getAttribute('aria-pressed'), 'false');
   await nojs.close();
 
   const browserPT = await browser.newPage({ locale: 'pt-BR' });

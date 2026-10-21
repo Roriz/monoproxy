@@ -93,6 +93,14 @@ export function localizeWebGuideHTML(html, { runtime = true } = {}) {
   result = result.replace(/(<meta\s+property="og:locale"\s+content=")pt_BR("\s*\/?\s*>)/i, '$1en_US$2');
   if (!runtime || !/<\/head>/i.test(result) || !/<\/body>/i.test(result)) return result;
   const boot = `<script>window.EnrichReaderTranslations={shared:{},page:${JSON.stringify(webGuideTranslations).replace(/</g, '\\u003c')}};</script><script>${runtimeSource}</script><script>const syncLocale=()=>{const locale=document.querySelector('meta[property="og:locale"]');if(locale)locale.content=document.documentElement.lang==='pt-BR'?'pt_BR':'en_US'};syncLocale();document.addEventListener('languagechange',syncLocale);</script>`;
-  const selector = '<nav class="language-switch" aria-label="Language"><button type="button" lang="en" data-language-choice="en">English</button><button type="button" lang="pt-BR" data-language-choice="pt-BR">Português</button></nav>';
-  return result.replace(/<\/head>/i, () => `${boot}</head>`).replace(/<\/body>/i, () => `${selector}</body>`);
+  const selector = '<div class="language-switch" role="group" aria-label="Language"><button type="button" lang="en" aria-label="English" title="English" aria-pressed="true" data-language-choice="en">EN</button><button type="button" lang="pt-BR" aria-label="Português" title="Português" aria-pressed="false" data-language-choice="pt-BR">PT</button></div>';
+  result = result.replace(/<\/head>/i, () => `${boot}</head>`);
+  if (/<header\b[^>]*class="[^"]*topbar[^"]*"[^>]*>/i.test(result)) {
+    result = result.replace(/(<header\b[^>]*class="[^"]*topbar[^"]*"[^>]*>[\s\S]*?)<\/header>/i, `$1${selector}</header>`);
+  } else if (/<header\b[^>]*class="[^"]*marketing-header[^"]*"[^>]*>/i.test(result)) {
+    result = result.replace(/(<header\b[^>]*class="[^"]*marketing-header[^"]*"[^>]*>[\s\S]*?)<\/header>/i, `$1${selector}</header>`);
+  } else {
+    result = result.replace(/<body\b([^>]*)>/i, `<body$1><header class="guide-language-header">${selector}</header>`);
+  }
+  return result;
 }
