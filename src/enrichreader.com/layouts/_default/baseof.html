@@ -45,7 +45,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Preload Critical Styles -->
-  <link rel="preload" href="/style/style.css" as="style">
+  {{ $styleVersion := crypto.SHA256 (readFile "static/style/style.css") }}
+  <link rel="preload" href="/style/style.css?v={{ $styleVersion }}" as="style">
 
   <!-- Non-Blocking Google Fonts Loading -->
   {{ if .Params.fonts_override }}
@@ -58,7 +59,7 @@
   {{ end }}
 
   <!-- Static Styling System -->
-  <link rel="stylesheet" href="/style/style.css">
+  <link rel="stylesheet" href="/style/style.css?v={{ $styleVersion }}">
 
   <!-- Page-specific Stylesheets -->
   {{ range .Params.stylesheets }}
