@@ -1,7 +1,6 @@
 import { renderShelf, renderAuthors, authorsAvailable } from './marketing.mjs';
 import { validateShowcases, showcaseAccess, renderShowcase } from './publisher.mjs';
 import { loadCatalog, publicGuides } from './catalog.mjs';
-import { escape } from './content.mjs';
 import { validateGuideConfig } from './config-validation.mjs';
 import { guideAccess, accessError } from './access.mjs';
 import { ApprovalStore, OperatorInbox, approvalRecord } from './approval.mjs';
@@ -17,8 +16,11 @@ import { isIP } from 'node:net';
 import { renderGuide } from './guide.mjs';
 import { FileReportStore, ReportLimiter, ReportError, reportRecord, reportJSON } from './reports.mjs';
 import { localizeWebGuideHTML } from './i18n.mjs';
+import { guideHome } from './content.mjs';
+import { page } from './page.mjs';
 
 const site = fileURLToPath(new URL('../../', import.meta.url));
+const reportDir = process.env.WEB_GUIDE_REPORT_DIR || resolve(site, '../../tmp/web-guide-reports');
 const defaultCatalog = await loadCatalog();
 const defaultGuide = defaultCatalog[0];
 const siteAssets = JSON.parse(await readFile(resolve(site, 'data/web-guide/site-assets.json'), 'utf8'));
@@ -39,6 +41,7 @@ const assets = new Map([
   ['/web-guide/analytics-privacy.mjs', ['lib/web-guide/analytics-privacy.mjs', 'text/javascript']],
   ['/web-guide/approval.js', ['static/web-guide/approval.js', 'text/javascript']],
   ['/web-guide/reports.js', ['static/web-guide/reports.js', 'text/javascript']],
+  ['/web-guide/client.js', ['static/web-guide/client.js', 'text/javascript']],
   ['/web-guide/search.mjs', ['lib/web-guide/search.mjs', 'text/javascript']],
   ['/web-guide/hub.js', ['static/web-guide/hub.js', 'text/javascript']],
   ['/web-guide/position.mjs', ['lib/web-guide/position.mjs', 'text/javascript']],
@@ -69,13 +72,14 @@ const operatorHTML = (html, req) => {
   return localizeWebGuideHTML(marked);
 };
 
-export function createGuideServer({ guide = defaultGuide, guides = [guide], showcases = defaultShowcases, access = runtimeAccess[defaultGuide.series] ?? {}, siteConfig = runtimeSite, approvalNotifications = null, trustProxy = false, approvalStore = new ApprovalStore(resolve(process.env.WEB_GUIDE_REPORT_DIR || resolve(site, '../../tmp/web-guide-reports'), 'approvals')), inbox = new OperatorInbox(resolve(process.env.WEB_GUIDE_REPORT_DIR || resolve(site, '../../tmp/web-guide-reports'), 'inbox')), reportStore = new FileReportStore(process.env.WEB_GUIDE_REPORT_DIR || resolve(site, '../../tmp/web-guide-reports')), limiter = new ReportLimiter() } = {}) {
+export function createGuideServer({ guide = defaultGuide, guides = [guide], showcases = defaultShowcases, access = runtimeAccess[guide.series] ?? {}, siteConfig = runtimeSite, approvalNotifications = null, trustProxy = false, approvalStore = new ApprovalStore(resolve(reportDir, 'approvals')), inbox = new OperatorInbox(resolve(reportDir, 'inbox')), reportStore = new FileReportStore(reportDir), limiter = new ReportLimiter() } = {}) {
   for (const value of guides) validateGuideConfig(value);
   const catalog = new Map(guides.map(value => [value.series, value]));
   validateShowcases(showcases, catalog);
-  const listed = publicGuides(guides);
-  const publicCount = listed.length;
+  const publicCount = publicGuides(guides).length;
   const sourceGuide = guide;
+  const accessBySeries = { ...runtimeAccess, [guide.series]: access };
+  let shelfHTML, sitemapXML;
   const guideAssets = new Map(assets);
   for (const asset of Object.values(siteAssets)) guideAssets.set(asset.path, [`static${asset.path}`, asset.type]);
   for (const entry of showcases) for (const asset of [entry.qr, entry.phone_still].filter(Boolean)) guideAssets.set(asset.path, [`static${asset.path}`, asset.type ?? 'image/webp']);
@@ -87,7 +91,7 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
       if (url.pathname === '/web-guide/health' && ['GET', 'HEAD'].includes(req.method)) { res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(req.method === 'HEAD' ? undefined : '{"ok":true}'); return; }
       if (url.pathname === '/autores' || url.pathname === '/autores/') {
         if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405, { Allow: 'GET, HEAD' }); res.end(); return; }
-        if (!authorsAvailable(siteConfig)) { res.writeHead(503, { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Type': 'text/html; charset=utf-8' }); res.end(req.method === 'HEAD' ? undefined : operatorHTML('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>Página indisponível</title></head><body><main><h1>Esta página ainda não está disponível.</h1><a href="/guia">Ver guias publicados</a></main></body></html>', req)); return; }
+        if (!authorsAvailable(siteConfig)) { res.writeHead(503, { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Type': 'text/html; charset=utf-8' }); res.end(req.method === 'HEAD' ? undefined : operatorHTML(page({ head: '<meta name="robots" content="noindex, nofollow"><title>Página indisponível</title>', body: '<main><h1>Esta página ainda não está disponível.</h1><a href="/guia">Ver guias publicados</a></main>' }), req)); return; }
         const html = operatorHTML(renderAuthors(guides, siteConfig, siteAssets, url), req);
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'Referrer-Policy': 'strict-origin-when-cross-origin' }); res.end(req.method === 'HEAD' ? undefined : html); return;
       }
@@ -103,13 +107,13 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
       }
       const requestedSeries = url.pathname.match(/^\/guia\/([a-z0-9-]+)(?:\/|$)/)?.[1];
       const guide = catalog.get(requestedSeries) ?? sourceGuide;
-      const guidePath = `/guia/${guide.series}`;
-      const homePath = guidePath;
-      if (requestedSeries && !catalog.has(requestedSeries) && !['sitemap'].includes(requestedSeries) && url.pathname !== '/guia/sitemap.xml') { res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' }); res.end(operatorHTML(accessError(404, publicCount), req)); return; }
+      const guidePath = guideHome(guide);
+      const inGuide = url.pathname === guidePath || url.pathname.startsWith(`${guidePath}/`);
+      if (requestedSeries && requestedSeries !== 'sitemap' && !catalog.has(requestedSeries)) { res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' }); res.end(operatorHTML(accessError(404, publicCount), req)); return; }
       let authorization;
       let renderedGuide = { ...guide, site: siteConfig };
-      if (url.pathname === homePath || url.pathname.startsWith(`${homePath}/`)) {
-        authorization = guideAccess(guide, url, req.headers['user-agent'], guide === sourceGuide ? access : runtimeAccess[guide.series] ?? {});
+      if (inGuide) {
+        authorization = guideAccess(guide, url, req.headers['user-agent'], accessBySeries[guide.series] ?? {});
         if (authorization.status !== 200) {
           const headers = { 'Cache-Control': authorization.status === 301 ? 'max-age=86400' : 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Type': 'text/html; charset=utf-8' };
           if (authorization.location) headers.Location = authorization.location;
@@ -117,7 +121,7 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
         }
         if (guide.state === 'private') renderedGuide = { ...renderedGuide, approval: await approvalStore.get(guide.series), hideSummaries: url.searchParams.get('resumos') === '0' };
       }
-      if (url.pathname === `${homePath}/aprovacao`) {
+      if (url.pathname === `${guidePath}/aprovacao`) {
         const json = (status, data) => { res.writeHead(status, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' }); res.end(JSON.stringify(data)); };
         if (req.method !== 'POST') { json(405, { error: 'Method not allowed' }); return; }
         if (guide.state !== 'private' || !authorization?.token) { json(404, { error: 'Not found' }); return; }
@@ -135,10 +139,11 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
       }
       if (url.pathname === '/_ops/nao-contar') {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Set-Cookie': 'er_ops=1; Path=/; SameSite=Lax; Max-Age=31536000; HttpOnly' });
-        res.end(operatorHTML('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Dispositivo do operador</title></head><body><h1>Este navegador não conta nas visitas.</h1><script>localStorage.setItem("umami.disabled", "1")</script><a href="/guia">Abrir guias</a></body></html>', req)); return;
+        res.end(operatorHTML(page({ head: '<title>Dispositivo do operador</title>', body: '<h1>Este navegador não conta nas visitas.</h1><script>localStorage.setItem("umami.disabled", "1")</script><a href="/guia">Abrir guias</a>' }), req)); return;
       }
 
-      const reportRoute = url.pathname.match(new RegExp(`^/guia/${guide.series}/reports(?:/([0-9a-f-]+))?$`, 'i'));
+      // Case-sensitive and gated on inGuide: only paths that passed guideAccess may write reports.
+      const reportRoute = inGuide && url.pathname.match(new RegExp(`^${guidePath}/reports(?:/([0-9a-f-]+))?$`));
       if (reportRoute) {
         const json = (status, value) => { res.writeHead(status, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' }); res.end(JSON.stringify(value)); };
         const allowed = reportRoute[1] ? 'PATCH' : 'POST';
@@ -171,10 +176,10 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
         html = await readFile(resolve(site, asset[0])); type = asset[1].startsWith('image/') ? asset[1] : `${asset[1]}; charset=utf-8`;
       } else if (url.pathname === '/guia/sitemap.xml') {
         type = 'application/xml; charset=utf-8';
-        html = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${guideSitemapXML(guideSitemapPaths(guides, siteConfig))}</urlset>`;
+        html = sitemapXML ??= `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${guideSitemapXML(guideSitemapPaths(guides, siteConfig))}</urlset>`;
       } else if (url.pathname === '/guia' || url.pathname === '/guia/') {
-        html = renderShelf(guides, siteConfig, siteAssets);
-      } else if (url.pathname === guidePath || url.pathname.startsWith(`${guidePath}/`)) {
+        html = shelfHTML ??= renderShelf(guides, siteConfig, siteAssets);
+      } else if (inGuide) {
         const route = guideRoute(guide, url.pathname);
         if (route.redirect) {
           res.writeHead(301, { Location: route.redirect + url.search, 'Cache-Control': 'max-age=86400' }); res.end(); return;
@@ -202,11 +207,10 @@ export function createGuideServer({ guide = defaultGuide, guides = [guide], show
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const port = Number(process.env.WEB_GUIDE_PORT || 3003);
   const host = process.env.WEB_GUIDE_HOST || '127.0.0.1';
-  const directory = process.env.WEB_GUIDE_REPORT_DIR || resolve(site, '../../tmp/web-guide-reports');
-  const approvalNotifications = new ApprovalNotifications({ directory: resolve(directory, 'notifications'), to: runtimeSite.approval_email,
+  const approvalNotifications = new ApprovalNotifications({ directory: resolve(reportDir, 'notifications'), to: runtimeSite.approval_email,
     from: runtimeSite.approval_email_from, send: resendTransport({ apiKey: process.env.RESEND_API_KEY }) });
   // Repair an interrupted enqueue from the durable approval before starting delivery.
-  const approvalStore = new ApprovalStore(resolve(directory, 'approvals'));
+  const approvalStore = new ApprovalStore(resolve(reportDir, 'approvals'));
   for (const guide of defaultCatalog) {
     if (guide.state !== 'private') continue;
     const approval = await approvalStore.get(guide.series);
@@ -215,5 +219,5 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   const stopNotifications = approvalNotifications.start();
   const server = createGuideServer({ guides: defaultCatalog, approvalStore, approvalNotifications, trustProxy: process.env.WEB_GUIDE_TRUST_PROXY === '1' });
   server.on('close', stopNotifications);
-  server.listen(port, host, () => console.log(`Web guide: http://${host}:${port}/guia/frankenstein`));
+  server.listen(port, host, () => console.log(`Web guide: http://${host}:${port}/guia/${defaultGuide.series}`));
 }

@@ -1,8 +1,9 @@
 import { validateMap } from './map-validation.mjs';
 import { resolvePosition, storyItems } from './position.mjs';
-import { cutEntities } from './content.mjs';
+import { cutEntities, guideEntities } from './content.mjs';
 import { cutStory, hasName } from './context.mjs';
 import { proseChips } from './views.mjs';
+import { isPublished } from './states.mjs';
 
 export function validateGuideConfig(guide) {
   validateMap(guide);
@@ -18,11 +19,11 @@ export function validateGuideConfig(guide) {
   if (guide.ownership === 'third_party' && guide.state !== 'unlisted' && guide.state !== 'taken_down') throw new Error('Third-party guides must be unlisted');
   if (config.blurb != null && (typeof config.blurb !== 'string' || config.blurb.length > 600)) throw new Error('Invalid book-one blurb');
   if (guide.state === 'public' && guide.ownership !== 'public-domain' && (!config.blurb || config.blurb_approved !== true)) throw new Error('Public author guide requires approved blurb');
-  if (guide.ownership === 'own' && ['public', 'unlisted'].includes(guide.state) && !['autores', 'editora'].includes(config.approved_by)) throw new Error('Published own guide needs an approval actor');
+  if (guide.ownership === 'own' && isPublished(guide) && !['autores', 'editora'].includes(config.approved_by)) throw new Error('Published own guide needs an approval actor');
   if (guide.ownership === 'third_party' && (!config.publisher?.name || !config.publisher?.store_url)) throw new Error('Third-party guide needs publisher metadata');
   if (config.publisher?.store_url && !['https:', 'http:'].includes(new URL(config.publisher.store_url).protocol)) throw new Error('Invalid publisher store');
   const sourceOrdinals = new Set(storyItems(guide).map(item => item.ordinal));
-  const entities = [...guide.entities, ...(guide.context?.world ?? [])];
+  const entities = guideEntities(guide);
   const slugs = new Set();
   for (const entity of entities) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entity.slug) || slugs.has(entity.slug)) throw new Error('Invalid or repeated entity slug');

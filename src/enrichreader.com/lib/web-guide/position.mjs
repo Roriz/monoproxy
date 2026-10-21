@@ -28,6 +28,16 @@ export function storyItems(map) {
     return items;
   });
 }
+/** `storyItems(map).find(…)` without rebuilding every item: views call this per row. */
+export function itemAt(map, ordinal) {
+  let offset = 0;
+  for (const book of map.books) {
+    if (book.status === 'announced') continue;
+    const item = book.items.find(value => value.ordinal === ordinal - offset);
+    if (item) return { ...item, l: book.l, bookOrdinal: item.ordinal, ordinal };
+    offset += book.last_ordinal ?? book.items.at(-1).ordinal;
+  }
+}
 
 export function completedIndex(map, position) {
   const book = map.books.find(book => book.l === position.l);
@@ -38,7 +48,7 @@ export function completedIndex(map, position) {
 
 /** Position immediately after a source item, without adding a growing end cut. */
 export function positionAfter(map, ordinal) {
-  const source = storyItems(map).find(item => item.ordinal === ordinal);
+  const source = itemAt(map, ordinal);
   if (!source) throw new Error('Unknown source item');
   const book = map.books.find(book => book.l === source.l);
   const next = book.items.find(item => item.ordinal > source.bookOrdinal);

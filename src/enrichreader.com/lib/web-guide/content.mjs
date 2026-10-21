@@ -1,12 +1,12 @@
-import { internalURL, completedIndex, storyItems, itemLabel } from './position.mjs';
-export const guidePath = '/guia/frankenstein';
+import { internalURL, completedIndex, storyItems, itemAt, itemLabel } from './position.mjs';
+export const guideHome = guide => `/guia/${guide.series}`;
+export const guideURL = guide => `https://enrichreader.com${guideHome(guide)}`;
 export const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const placeholders = /^(unknown|none\.?|not applicable\.?|not specified.*|não especificado.*)$/i;
-export const labels = { aliases: 'Também conhecido como', definition: 'Quem é', status: 'Estado', location: 'Onde está', occupation: 'Ocupação', current_objective: 'O que busca', personality_traits: 'Personalidade', chapter_summary: 'Na última aparição' };
 const stateFields = new Set(['display_name', 'aliases', 'status', 'location', 'occupation']);
 export const previewRoles = new Map([['protagonist', 'Protagonista'], ['antagonist', 'Antagonista']]);
 export const completedOrdinal = completedIndex;
-export const sourceItem = (guide, ordinal) => storyItems(guide).find(item => item.ordinal === ordinal);
+export const guideEntities = guide => [...guide.entities, ...(guide.context?.world ?? [])];
 export const currentItem = (guide, position) => storyItems(guide).find(item => item.l === position.l && String(item.bookOrdinal) === position.c);
 export const positionHref = (path, position) => {
   const url = internalURL(path, position);
@@ -16,7 +16,7 @@ export const positionHref = (path, position) => {
 /** Fold only included deltas. Never seed from a profile's final facts or global role. */
 export function cutEntities(guide, position) {
   const last = completedOrdinal(guide, position);
-  return [...guide.entities, ...(guide.context?.world ?? [])].filter(entity => !(guide.presentation?.hidden_entities ?? []).includes(entity.slug)).flatMap(entity => {
+  return guideEntities(guide).filter(entity => !(guide.presentation?.hidden_entities ?? []).includes(entity.slug)).flatMap(entity => {
     const facts = {};
     const sources = {};
     const changes = {};
@@ -54,7 +54,7 @@ export function positionLabel(guide, position) {
 
 export function source(guide, entity, field, position, dense = false) {
   const ordinal = entity.sources[field];
-  const item = sourceItem(guide, ordinal);
+  const item = itemAt(guide, ordinal);
   const last = completedOrdinal(guide, position);
   const newEntity = entity.first === last;
   const kind = newEntity ? (field === 'display_name' ? 'new' : null)

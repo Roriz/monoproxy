@@ -1,15 +1,11 @@
-import { announcedNotice } from './position.mjs';
 import { touchPicker } from './analytics.js';
+import { t } from './client.js';
 // Picker controls change only the draft. The page changes on form submission.
 const states = new WeakMap();
 let held = null;
 const heldClicks = new WeakSet();
-const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
-const label = item => {
-  if (!item) return '';
-  const number = item.number ?? item.label.match(/\d+/)?.[0] ?? item.label;
-  return t(item.kind === 'section' ? 'Letter {number}' : 'Chapter {number}', { number });
-};
+const numberOf = item => item.number ?? item.label.match(/\d+/)?.[0] ?? item.label;
+const label = item => item ? t(item.kind === 'section' ? 'Letter {number}' : 'Chapter {number}', { number: numberOf(item) }) : '';
 const finishedLabel = book => t('You finished Book {book}', { book });
 
 function render(form, announce = false) {
@@ -18,7 +14,6 @@ function render(form, announce = false) {
   const stop = state.items.find(item => String(item.ordinal) === select.value);
   const previous = state.items.filter(item => item.ordinal < Number(select.value)).at(-1) ?? (select.value === 'fim' ? state.items.at(-1) : null);
   const finished = select.value === 'fim';
-  const inline = item => label(item);
   const readout = form.querySelector('[data-readout]');
   readout.textContent = finished ? t('Finished') : label(stop);
   [...select.options].forEach(option => {
@@ -31,11 +26,10 @@ function render(form, announce = false) {
   form.querySelector('[data-slider-group]').hidden = state.numeric;
   form.querySelector('[data-consequence]').textContent = !state.valid ? '' : finished
     ? t('Show everything through the end of Book {book}.', { book: state.l })
-    : previous ? t('Show everything through the end of {article} {position}.', { article: window.EnrichReaderI18n?.language === 'en' ? 'the' : previous.gender === 'f' ? 'da' : 'do', position: inline(previous) })
+    : previous ? t('Show everything through the end of {article} {position}.', { article: window.EnrichReaderI18n?.language === 'en' ? 'the' : previous.gender === 'f' ? 'da' : 'do', position: label(previous) })
       : state.l > 1 ? t('Show everything through the end of Book {book}.', { book: state.l - 1 }) : t('Nothing appears yet: choose your position.');
   const commit = form.querySelector('[data-commit]');
-  const currentNumber = stop?.number ?? stop?.label.match(/\d+/)?.[0] ?? '';
-  commit.textContent = finished ? finishedLabel(state.l) : t(stop.kind === 'section' ? 'I’m at Letter {number}' : 'I’m at Chapter {number}', { number: currentNumber });
+  commit.textContent = finished ? finishedLabel(state.l) : t(stop.kind === 'section' ? 'I’m at Letter {number}' : 'I’m at Chapter {number}', { number: numberOf(stop) });
   commit.disabled = !state.valid;
   const range = form.querySelector('[data-slider]');
   range.value = select.selectedIndex;

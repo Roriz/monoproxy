@@ -1,19 +1,20 @@
-import { completedOrdinal, cutEntities } from './content.mjs';
-import { storyItems, positionAfter } from './position.mjs';
+import { completedOrdinal, cutEntities, guideHome } from './content.mjs';
+import { positionAfter, itemAt } from './position.mjs';
 import { activeArc, arcAt } from './story-codec.mjs';
 
 export const classNames = { person: 'Pessoa', location: 'Lugar', organization: 'Organização', object: 'Objeto', other: '' };
 export const classPaths = { person: 'pessoa', location: 'lugar', organization: 'organizacao', object: 'objeto', other: 'outro' };
 export const threadKinds = { mystery: 'Mistério', threat: 'Ameaça', goal: 'Objetivo' };
-export const entityPath = (guide, entity) => `/guia/${guide.series}/${classPaths[entity.classification ?? 'person']}/${entity.slug}`;
+export const entityPath = (guide, entity) => `${guideHome(guide)}/${classPaths[entity.classification ?? 'person']}/${entity.slug}`;
 export const chapterPath = (guide, ordinal) => {
-  const item = storyItems(guide).find(item => item.ordinal === ordinal);
-  return `/guia/${guide.series}/tempo/livro-${item.l}/cap-${item.bookOrdinal}`;
+  const item = itemAt(guide, ordinal);
+  return `${guideHome(guide)}/tempo/livro-${item.l}/cap-${item.bookOrdinal}`;
 };
-export const threadPath = (guide, thread) => `/guia/${guide.series}/misterios/${thread.slug}`;
+export const threadPath = (guide, thread) => `${guideHome(guide)}/misterios/${thread.slug}`;
 export const knownNames = entity => [entity.facts.display_name, ...(Array.isArray(entity.facts.aliases) ? entity.facts.aliases : [])].filter(name => typeof name === 'string' && name.trim());
 const regexText = text => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 export const hasName = (text, name) => new RegExp(`(?<![\\p{L}\\p{N}])${regexText(name)}(?![\\p{L}\\p{N}])`, 'iu').test(text);
+export const namesIn = (text, entity) => knownNames(entity).some(name => hasName(text, name));
 
 /** Story projection explicitly omits final importance, unrevealed closure and future answers. */
 export function cutStory(guide, position) {
@@ -86,6 +87,6 @@ export function connectionsAt(guide, entity, position) {
 export function threadsFor(guide, entity, position) {
   return cutStory(guide, position).threads.filter(thread => {
     const atRaise = cutEntities(guide, positionAfter(guide, thread.raised)).find(value => value.slug === entity.slug);
-    return atRaise && knownNames(atRaise).some(name => hasName(thread.question, name));
+    return atRaise && namesIn(thread.question, atRaise);
   });
 }

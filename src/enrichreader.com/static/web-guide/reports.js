@@ -1,6 +1,6 @@
 import { track } from './analytics.js';
+import { t, sendJSON, errorLine } from './client.js';
 const sessions = new WeakMap();
-const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
 const reasons = {
   spoiler: ['⚠', 'Spoiler!', 'Shows something I haven’t read yet'],
   wrong: ['✗', 'That’s not right', 'The information is wrong'],
@@ -37,24 +37,11 @@ export function openReport(dialog, context) {
 const current = state => sessions.get(state.dialog) === state;
 
 async function request(state, method, payload) {
-  const controller = new AbortController(); state.controller = controller;
-  const timer = setTimeout(() => controller.abort(), 15000);
-  try {
-    const base = `/guia/${encodeURIComponent(state.context.guide)}/reports${method === 'PATCH' ? `/${state.id}` : ''}`;
-    const endpoint = new URL(base, location.origin);
-    const page = new URL(location.href);
-    for (const key of ['k', 'resumos']) if (page.searchParams.has(key)) endpoint.searchParams.set(key, page.searchParams.get(key));
-    const response = await fetch(endpoint, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal });
-    if (!response.ok) throw new Error('Report request failed');
-    const receipt = await response.json();
-    if (receipt.id !== state.id) throw new Error('Invalid report receipt');
-  } finally { clearTimeout(timer); }
-}
-
-function errorLine(node, retry) {
-  node.hidden = false; node.replaceChildren(document.createTextNode(t('Couldn’t send · ')));
-  const button = document.createElement('button'); button.type = 'button'; button.textContent = t('Try again');
-  button.addEventListener('click', retry); node.append(button);
+  const endpoint = new URL(`${document.querySelector('[data-report-dialog]').dataset.endpoint}${method === 'PATCH' ? `/${state.id}` : ''}`, location.origin);
+  const page = new URL(location.href);
+  for (const key of ['k', 'resumos']) if (page.searchParams.has(key)) endpoint.searchParams.set(key, page.searchParams.get(key));
+  const receipt = await sendJSON(endpoint, method, payload, state);
+  if (receipt.id !== state.id) throw new Error('Invalid report receipt');
 }
 
 async function sendReason(state, reason) {
@@ -75,7 +62,7 @@ async function sendReason(state, reason) {
   } catch {
     if (!current(state)) return;
     rows.forEach(row => { row.disabled = false; delete row.dataset.sending; row.querySelector('[data-reason-subtitle]').textContent = reasons[row.dataset.reportReason][2]; });
-    errorLine(state.body.querySelector('[data-report-error]'), () => void sendReason(state, reason));
+    errorLine(state.body.querySelector('[data-report-error]'), 'Couldn’t send · ', () => void sendReason(state, reason));
   } finally { state.busy = false; }
 }
 
@@ -103,7 +90,7 @@ function confirmation(state, reason) {
         state.body.querySelector('[data-detail-form]').replaceChildren(done);
       }
     } catch {
-      if (current(state)) errorLine(state.body.querySelector('[data-detail-error]'), () => void sendDetail());
+      if (current(state)) errorLine(state.body.querySelector('[data-detail-error]'), 'Couldn’t send · ', () => void sendDetail());
     } finally { state.busy = false; if (send.isConnected) send.disabled = !input.value.trim(); }
   };
   send.addEventListener('click', () => void sendDetail());

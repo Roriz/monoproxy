@@ -4,13 +4,13 @@ import { initializeHub, disposeHub } from './hub.js';
 import { resolvePosition, commitURL, shareURL, completedIndex } from './position.mjs';
 import { initializePickerBook, showAnnouncedBook, focusPicker } from './picker.js';
 import { openReport, disposeReport } from './reports.js';
+import { t } from './client.js';
 
 let activeDialog = null;
 let dialogOpener = null;
 let request = null;
 let toastTimer;
 const guideMap = JSON.parse(document.querySelector('#guide-map').textContent);
-const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
 const bookTitle = document.querySelector('.brand > span')?.childNodes[0]?.textContent ?? 'este livro';
 const authorName = document.querySelector('.brand small')?.textContent.replace(/^de /, '') ?? '';
 const currentPosition = () => {
@@ -176,22 +176,23 @@ async function movePosition(position, saveMemory = true, force = false, transiti
 
 async function share(position = null) {
   const url = shareURL(location.pathname, position).href;
+  const sent = (method, outcome) => track('share', { mode: position ? 'position' : 'clean', method, outcome });
   if (navigator.share) {
     try {
       const text = !position ? t('Spoiler-free guide to {book}, by {author}: tell us which chapter you’re on and see only what you’ve read.', { book: bookTitle, author: authorName })
-        : position.c === 'fim' ? t('I finished Book 1 of {book}, by {author}. This link opens the guide through the end.', { book: bookTitle, author: authorName })
+        : position.c === 'fim' ? t('I finished Book {number} of {book}, by {author}. This link opens the guide through the end.', { number: position.l, book: bookTitle, author: authorName })
           : t('I’m at {position} in {book}, by {author}. This link shows the guide through what I’ve read.', { position: inPosition(position), book: bookTitle, author: authorName });
       await navigator.share({ title: document.title, text, url });
-      track('share', { mode: position ? 'position' : 'clean', method: 'native', outcome: 'sent' });
+      sent('native', 'sent');
       await closeDialog(); return;
-    } catch (error) { if (error.name === 'AbortError') { track('share', { mode: position ? 'position' : 'clean', method: 'native', outcome: 'cancelled' }); await closeDialog(); return; } }
+    } catch (error) { if (error.name === 'AbortError') { sent('native', 'cancelled'); await closeDialog(); return; } }
   }
   try {
     await navigator.clipboard.writeText(url);
-    track('share', { mode: position ? 'position' : 'clean', method: 'clipboard', outcome: 'copied' }); await closeDialog(); toast(t('Link copied'));
+    sent('clipboard', 'copied'); await closeDialog(); toast(t('Link copied'));
   } catch {
     document.querySelector('[data-share-options]').hidden = true;
-    track('share', { mode: position ? 'position' : 'clean', method: 'manual', outcome: 'manual' });
+    sent('manual', 'manual');
     const panel = document.querySelector('[data-manual]'); panel.hidden = false;
     const input = panel.querySelector('input'); input.value = url; input.focus(); input.select();
   }

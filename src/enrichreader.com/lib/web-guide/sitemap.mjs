@@ -1,13 +1,13 @@
 import { publicGuides } from './catalog.mjs';
 import { authorsAvailable } from './marketing.mjs';
 import { entityPath } from './context.mjs';
-import { escape } from './content.mjs';
+import { escape, guideEntities, guideHome } from './content.mjs';
 
 export function guideSitemapPaths(guides, site) {
   const listed = publicGuides(guides);
   const paths = listed.flatMap(guide => {
     const intros = guide.ownership === 'own' ? Object.entries(guide.presentation?.entity_intros ?? {}).filter(([slug, intro]) => intro.approved && !(guide.presentation.hidden_entities ?? []).includes(slug)) : [];
-    return [`/guia/${guide.series}`, ...intros.map(([slug]) => entityPath(guide, [...guide.entities, ...(guide.context?.world ?? [])].find(entity => entity.slug === slug))), ...(intros.length >= 3 ? [`/guia/${guide.series}/mundo`] : [])];
+    return [guideHome(guide), ...intros.map(([slug]) => entityPath(guide, guideEntities(guide).find(entity => entity.slug === slug))), ...(intros.length >= 3 ? [`${guideHome(guide)}/mundo`] : [])];
   });
   if (listed.length >= 3) paths.push('/guia');
   if (authorsAvailable(site)) paths.push('/autores');

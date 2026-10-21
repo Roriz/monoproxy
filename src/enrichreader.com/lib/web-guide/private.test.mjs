@@ -46,6 +46,10 @@ test('private HTTP navigation, summary switch and idempotent durable approval ne
     for (const path of ['/guia/frankenstein', '/guia/frankenstein/pessoa/r-walton', '/guia/frankenstein/reports']) {
       const response = await fetch(base + path); assert.equal(response.status, 404); assert.doesNotMatch(await response.text(), /Frankenstein|Mary|Walton/);
     }
+    for (const path of ['/GUIA/frankenstein/reports', '/guia/FRANKENSTEIN/reports', '/Guia/frankenstein/REPORTS']) {
+      const response = await fetch(base + path, { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: base }, body: '{}' });
+      assert.ok([404, 405].includes(response.status), `${path} answered ${response.status}`);
+    }
     const url = `${base}/guia/frankenstein?k=${live}`;
     const gate = await fetch(url); const html = await gate.text();
     assert.equal(gate.status, 200); assert.match(html, /Preview for Mary Shelley/); assert.match(html, /data-language-choice="pt-BR"/);

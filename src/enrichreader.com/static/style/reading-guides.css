@@ -20,8 +20,6 @@
 /* Three steps instead of how-it-works' four. */
 .rg-steps { grid-template-columns: repeat(3, 1fr); }
 
-.rg-source { border-top: 1px solid var(--companion-line); }
-
 /* The single line for authors: thin and low-contrast. */
 .rg-author-line { padding-block: 26px; border-top: 1px solid var(--companion-line); font-size: 13px; color: #8d9197; text-align: center; }
 .rg-author-line a { color: #c1beb4; text-decoration: underline; text-underline-offset: 4px; }

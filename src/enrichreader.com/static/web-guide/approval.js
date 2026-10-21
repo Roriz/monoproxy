@@ -1,6 +1,6 @@
 import { track } from './analytics.js';
+import { t, sendJSON, errorLine } from './client.js';
 const states = new WeakMap();
-const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
 export function disposeApproval(dialog) {
   const state = states.get(dialog);
   if (state) { state.controller?.abort(); state.active = false; states.delete(dialog); }
@@ -28,14 +28,9 @@ export function initializeApproval() {
     state.busy = true; submit.disabled = true; submit.textContent = t('Sending…');
     form.querySelectorAll('fieldset').forEach(fieldset => { fieldset.disabled = true; });
     const error = form.querySelector('[data-approval-error]'); error.hidden = true;
-    const controller = new AbortController(); state.controller = controller;
-    const timeout = setTimeout(() => controller.abort(), 15000);
     try {
-      const url = new URL(location.href);
-      const endpoint = `/guia/${JSON.parse(document.querySelector('#guide-map').textContent).series}/aprovacao?k=${encodeURIComponent(url.searchParams.get('k'))}`;
-      const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal });
-      if (!response.ok) throw new Error('Approval failed');
-      const receipt = await response.json();
+      const endpoint = `${form.dataset.endpoint}?k=${encodeURIComponent(new URL(location.href).searchParams.get('k'))}`;
+      const receipt = await sendJSON(endpoint, 'POST', payload, state);
       if (receipt.approved !== true) throw new Error('Invalid approval receipt');
       track('approval_sent', { divulgar: receipt.divulgar, resumos: receipt.resumos, outcome: receipt.outcome });
       if (!state.active) return;
@@ -47,10 +42,9 @@ export function initializeApproval() {
       form.append(title, text, close); title.focus();
     } catch {
       if (!state.active) return;
-      error.hidden = false; error.replaceChildren(document.createTextNode(t('Error sending · ')));
-      const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = t('Try again'); retry.addEventListener('click', () => void send()); error.append(retry);
+      errorLine(error, 'Error sending · ', () => void send());
     } finally {
-      clearTimeout(timeout); state.busy = false;
+      state.busy = false;
       if (state.active && form.querySelector('[data-approve-submit]')) { form.querySelectorAll('fieldset').forEach(fieldset => { fieldset.disabled = false; }); submit.textContent = t('Approve and publish'); validate(); }
     }
   }

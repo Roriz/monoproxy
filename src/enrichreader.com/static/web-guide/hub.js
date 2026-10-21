@@ -1,9 +1,10 @@
 import { track } from './analytics.js';
 import { searchHit, highlightParts, normalize } from './search.mjs';
-const t = (key, params = {}) => window.EnrichReaderI18n?.t(key, params) ?? key.replace(/\{([\w]+)\}/g, (_, name) => String(params[name] ?? `{${name}}`));
+import { t } from './client.js';
 let urlTimer, statusTimer, flushSearch = null;
 let removeLanguageListener = null;
 addEventListener('pagehide', () => flushSearch?.());
+const stopTimers = () => { clearTimeout(urlTimer); clearTimeout(statusTimer); };
 function highlight(node, value, query) {
   node.replaceChildren(...highlightParts(value, query).map(part => {
     if (!part.marked) return document.createTextNode(part.text);
@@ -11,7 +12,7 @@ function highlight(node, value, query) {
   }));
 }
 export function initializeHub() {
-  clearTimeout(urlTimer); clearTimeout(statusTimer);
+  stopTimers();
   const hub = document.querySelector('[data-hub]');
   if (!hub) return;
   const input = hub.querySelector('#search');
@@ -26,16 +27,17 @@ export function initializeHub() {
   const filter = hub.querySelector('[data-hub-filters]');
   const clear = hub.querySelector('button[data-clear-search]');
   let selected = filter?.querySelector('[aria-current]')?.dataset.filter ?? 'todos';
-  const aliases = new Map(rows.map(row => [row, JSON.parse(row.dataset.a)]));
+  const keys = new Map(rows.map(row => [row, { name: row.dataset.n, aliases: JSON.parse(row.dataset.a), description: row.dataset.d }]));
+  const visibleRows = () => [...hub.querySelectorAll('[data-hub-row]')].filter(row => !row.hidden);
   let sentQuery = null;
   const sendSearch = () => {
     const query = input.value;
     if (!normalize(query) || query === sentQuery) return;
     sentQuery = query;
-    const visible = [...hub.querySelectorAll('[data-hub-row]')].filter(row => !row.hidden);
+    const visible = visibleRows();
     const count = live ? visible.length : Number(hub.dataset.results);
     const first = visible[0];
-    const top = first ? searchHit({ name: first.dataset.n, aliases: aliases.get(first), description: first.dataset.d }, query)?.field ?? 'none' : 'none';
+    const top = first ? searchHit(keys.get(first), query)?.field ?? 'none' : 'none';
     const chars = normalize(query).length;
     track('mundo_search', { results: count === 0 ? '0' : count === 1 ? '1' : count <= 5 ? '2-5' : '6+', top, chars: chars <= 2 ? String(chars) : chars <= 5 ? '3-5' : '6+', mode: hub.dataset.mode });
   };
@@ -46,8 +48,7 @@ export function initializeHub() {
     if (!row) return;
     sendSearch();
     const searching = !!normalize(input.value);
-    const visible = [...hub.querySelectorAll('[data-hub-row]')].filter(row => !row.hidden);
-    const index = visible.indexOf(row) + 1;
+    const index = visibleRows().indexOf(row) + 1;
     track('mundo_row', { entity: new URL(row.querySelector('[data-hub-link]').href).pathname.split('/').at(-1), entity_class: row.dataset.class,
       from: searching ? 'search' : 'list', group: searching || newLabel.hidden ? 'none' : row.dataset.new === 'true' ? 'novo' : 'conhecidos',
       rank: index <= 5 ? '1-5' : index <= 20 ? '6-20' : index <= 100 ? '21-100' : '101+', view: searching ? 'todos' : selected });
@@ -62,7 +63,7 @@ export function initializeHub() {
     const searching = !!query.trim();
     let count = 0;
     const ranked = rows.map(row => {
-      const hit = searching ? searchHit({ name: row.dataset.n, aliases: aliases.get(row), description: row.dataset.d }, query) : null;
+      const hit = searching ? searchHit(keys.get(row), query) : null;
       row.hidden = searching ? !hit : selected !== 'todos' && row.dataset.class !== selected;
       if (!row.hidden) count++;
       const aliasLine = row.querySelector('[data-row-alias]');
@@ -99,12 +100,12 @@ export function initializeHub() {
     sendSearch();
   }
   input.addEventListener('input', () => {
-    apply(); if (!normalize(input.value)) sentQuery = null; clearTimeout(urlTimer); clearTimeout(statusTimer);
+    apply(); if (!normalize(input.value)) sentQuery = null; stopTimers();
     urlTimer = setTimeout(() => apply(true), 300);
     statusTimer = setTimeout(announceCount, 1000);
   });
-  hub.querySelector('[data-hub-search]').addEventListener('submit', event => { event.preventDefault(); clearTimeout(urlTimer); clearTimeout(statusTimer); apply(true); sendSearch(); input.blur(); });
-  hub.querySelectorAll('[data-clear-search]').forEach(control => control.addEventListener('click', event => { event.preventDefault(); input.value = ''; clearTimeout(urlTimer); clearTimeout(statusTimer); apply(true); status.textContent = ''; sentQuery = null; input.focus(); }));
+  hub.querySelector('[data-hub-search]').addEventListener('submit', event => { event.preventDefault(); stopTimers(); apply(true); sendSearch(); input.blur(); });
+  hub.querySelectorAll('[data-clear-search]').forEach(control => control.addEventListener('click', event => { event.preventDefault(); input.value = ''; stopTimers(); apply(true); status.textContent = ''; sentQuery = null; input.focus(); }));
   filter?.querySelectorAll('[data-filter]').forEach(control => control.addEventListener('click', event => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault(); selected = control.dataset.filter;
@@ -132,6 +133,6 @@ export function initializeHub() {
   removeLanguageListener = () => document.removeEventListener('languagechange', onLanguageChange);
 }
 export function disposeHub() {
-  flushSearch?.(); flushSearch = null; clearTimeout(urlTimer); clearTimeout(statusTimer);
+  flushSearch?.(); flushSearch = null; stopTimers();
   removeLanguageListener?.(); removeLanguageListener = null;
 }

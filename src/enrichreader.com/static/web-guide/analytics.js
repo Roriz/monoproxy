@@ -3,6 +3,7 @@ const website = 'f4411453-fd4a-472f-9b5a-c4adab84f443';
 const pending = [];
 let loading = false;
 const pickerSessions = new WeakMap();
+const guideMaps = new WeakMap();
 let heroObserver;
 let reachObserver;
 let pagePaint = performance.now();
@@ -37,7 +38,9 @@ function common() {
   if (page === 'showcase') return { page_type: page, publisher: document.body.dataset.publisher };
   const map = document.querySelector('#guide-map');
   if (!map) return { page_type: page };
-  const guide = JSON.parse(map.textContent), l = Number(document.body.dataset.positionL), c = document.body.dataset.positionC;
+  // Every event reads the map; parse it once per rendered page, not per event.
+  if (!guideMaps.has(map)) guideMaps.set(map, JSON.parse(map.textContent));
+  const guide = guideMaps.get(map), l = Number(document.body.dataset.positionL), c = document.body.dataset.positionC;
   const book = guide.books.find(book => book.l === l);
   const total = book?.last_ordinal ?? book?.items?.at(-1)?.ordinal;
   const state = document.body.dataset.guideState;
@@ -168,7 +171,7 @@ document.addEventListener('click', event => {
   if (data.authorKind) track('author_link_click', { kind: data.authorKind, surface: link.closest('dialog') ? 'sheet' : 'footer' });
   if (data.launchSource) track('launch_link_click', { source: data.launchSource, slot: data.launchSlot });
   if (data.talk && !link.closest('[data-review-card]')?.querySelector('[data-picker-source="previa"]')) track('talk_click', { surface: data.talk });
-  if ('viewAll' in data) track('ver_tudo', { from: common().pos, page_type: common().page_type });
+  if ('viewAll' in data) { const { pos, page_type } = common(); track('ver_tudo', { from: pos, page_type }); }
   if (data.summaries) track('resumos_toggle', { to: data.summaries, block: page === 'chapter' ? 'chapter' : page === 'entity' ? 'cenas' : 'recap' });
   if (data.panelLink) {
     const path = new URL(link.href).pathname;

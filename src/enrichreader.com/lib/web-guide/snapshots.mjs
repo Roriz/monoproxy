@@ -1,12 +1,11 @@
 import { cutStory, castAt, presenceAt, connectionsAt, threadsFor } from './context.mjs';
 import { completedOrdinal } from './content.mjs';
-import { storyItems, itemLabel } from './position.mjs';
+import { itemAt as storyItemAt, itemLabel } from './position.mjs';
 import { fichaRows, timelineView, quoteText, previousThreadEntries } from './views.mjs';
 export function cardSnapshot(guide, route, entities, position, card, entity, viewURL) {
   const story = cutStory(guide, position);
   const last = completedOrdinal(guide, position);
-  const items = storyItems(guide);
-  const itemAt = ordinal => items.find(item => item.ordinal === ordinal);
+  const itemAt = ordinal => storyItemAt(guide, ordinal);
   const field = (key, value, ordinal) => { const item = itemAt(ordinal); return { key, value, source: `${item.l}:${item.bookOrdinal}` }; };
   const scenes = story.scenes.filter(scene => scene.summary);
   if (card === 'ficha') return fichaRows(guide, entity).map(row => field(row.key, row.value, row.source));

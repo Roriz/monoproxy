@@ -4,22 +4,24 @@ import { officialGuide, approvalLine, thirdPartyBanner, demoDialog, thirdPartyFo
 import { reviewSlot, allLink, summarySwitch, privateFooter, approvalDialog } from './review.mjs';
 import { guideRoute } from './routes.mjs';
 import { classNames, entityPath, cutStory } from './context.mjs';
-import { panelView, profileView, hubView, boardView, timelineView, timelineURL, chapterView, threadView, fichaRows } from './views.mjs';
-import { pickerMap, resolvePosition, internalURL, authorURL, storyItems, announcedNotice, itemLabel } from './position.mjs';
+import { panelView, profileView, hubView, boardView, timelineView, timelineURL, chapterView, threadView, fichaRows, the } from './views.mjs';
+import { pickerMap, resolvePosition, authorURL, itemAt, announcedNotice, itemLabel } from './position.mjs';
 import { guideLook } from './look.mjs';
+import { page, styles } from './page.mjs';
 
-import { guidePath, escape, previewRoles, completedOrdinal, positionHref, cutEntities, positionLabel, source, sourceItem, currentItem } from './content.mjs';
-export { guidePath, cutEntities, positionLabel } from './content.mjs';
+import { escape, previewRoles, completedOrdinal, positionHref, cutEntities, positionLabel, source, currentItem, guideEntities, guideHome, guideURL } from './content.mjs';
+export { cutEntities, positionLabel } from './content.mjs';
 const sentenceSegmenter = new Intl.Segmenter('en', { granularity: 'sentence' });
 
-function picker(guide, path = guidePath, id = 'chapter') {
-  const book = guide.books.find(book => book.l === guide.pickerBook) ?? guide.books.find(book => book.status !== 'announced');
+function picker(guide, path, id = 'chapter') {
   const fallback = guide.books.find(book => book.status !== 'announced');
+  const book = guide.books.find(book => book.l === guide.pickerBook) ?? fallback;
   const items = (book.items ?? fallback.items).filter(item => !item.retired);
   const announced = book.status === 'announced';
-  const bookLink = l => { const target = new URL(guide.pickerURL ?? `https://enrichreader.com${path}`); target.searchParams.set('book', String(l)); return escape(target.pathname + target.search); };
+  const here = guide.pickerURL ?? `https://enrichreader.com${path}`;
+  const bookLink = l => { const target = new URL(here); target.searchParams.set('book', String(l)); return escape(target.pathname + target.search); };
   return `<form class="picker" action="${escape(path)}" method="get" data-picker>
-    ${[...new URL(guide.pickerURL ?? `https://enrichreader.com${path}`).searchParams].filter(([key]) => key.startsWith('utm_')).map(([key, value]) => `<input type="hidden" name="${escape(key)}" value="${escape(value)}">`).join('')}<input type="hidden" name="l" value="${book.l}">${guide.linkContext?.k ? `<input type="hidden" name="k" value="${escape(guide.linkContext.k)}">` : ''}${guide.linkContext?.resumos === '0' ? '<input type="hidden" name="resumos" value="0">' : ''}
+    ${[...new URL(here).searchParams].filter(([key]) => key.startsWith('utm_')).map(([key, value]) => `<input type="hidden" name="${escape(key)}" value="${escape(value)}">`).join('')}<input type="hidden" name="l" value="${book.l}">${guide.linkContext?.k ? `<input type="hidden" name="k" value="${escape(guide.linkContext.k)}">` : ''}${guide.linkContext?.resumos === '0' ? '<input type="hidden" name="resumos" value="0">' : ''}
     ${guide.books.length > 1 ? `<nav class="filter-chips" aria-label="Escolher livro">${guide.books.map(value => `<a href="${bookLink(value.l)}" data-picker-book="${value.l}" data-picker-status="${value.status}" ${value.l === book.l ? 'aria-current="true"' : ''}>Livro ${value.l}${value.status === 'announced' ? ' · em breve' : ''}</a>`).join('')}</nav>` : ''}
     <p data-book-notice ${announced ? '' : 'hidden'}>${escape(announcedNotice(book))}</p>
     ${guide.books.filter(value => value.status === 'announced').map(value => `<template data-book-launch-template="${value.l}">${launchLine(guide, 'picker', 'normal', value.l)}</template>`).join('')}<div data-book-launch ${announced ? '' : 'hidden'}>${launchLine(guide, 'picker', 'normal', book.l)}</div>
@@ -36,7 +38,7 @@ function picker(guide, path = guidePath, id = 'chapter') {
 }
 
 function cards(guide, entities, position) {
-  if (!entities.length) return '<div class="empty"><h2>O começo fica com você.</h2><p>Nada por aqui ainda: volte quando terminar a Carta 1.</p></div>';
+  if (!entities.length) return `<div class="empty"><h2>O começo fica com você.</h2><p>Nada por aqui ainda: volte quando terminar ${the(guide, 1)}.</p></div>`;
   return `<label class="search-label" for="search">Encontrar um personagem</label><input type="search" id="search" placeholder="Buscar entre os nomes que já apareceram" autocomplete="off">
     <p class="muted small" data-result-count aria-live="polite">${entities.length} personagens até sua posição.</p>
     <div class="entity-grid">${entities.map(entity => `<a class="entity-card" data-entity-card data-preview="preview-${entity.slug}" href="${positionHref(entityPath(guide, entity), position)}">
@@ -57,7 +59,7 @@ export function previewDescription(text = '') {
 }
 
 function previewSubline(guide, entity) {
-  const first = sourceItem(guide, entity.first);
+  const first = itemAt(guide, entity.first);
   const classification = classNames[entity.classification] ?? 'Pessoa';
   return `${classification ? `${classification} · desde` : 'Desde'} ${first.gender === 'f' ? 'a' : 'o'} ${guide.books.length > 1 ? `L${first.l} · ` : ''}${first.label.replace('Cap.', 'cap.')}`;
 }
@@ -75,10 +77,10 @@ function previewTemplate(guide, entity, position) {
 }
 
 export function reportFields(guide, entity, position, scope) {
-  const field = (key, value) => { const item = sourceItem(guide, entity.sources[key]); return { key, value, source: `${item.l}:${item.bookOrdinal}` }; };
+  const field = (key, value) => { const item = itemAt(guide, entity.sources[key]); return { key, value, source: `${item.l}:${item.bookOrdinal}` }; };
   const fields = [field('display_name', entity.facts.display_name)];
   if (scope === 'sheet') {
-    const first = sourceItem(guide, entity.first);
+    const first = itemAt(guide, entity.first);
     fields.push({ key: 'first_appearance', value: previewSubline(guide, entity), source: `${first.l}:${first.bookOrdinal}` });
     const definition = previewDescription(entity.facts.definition);
     if (definition) fields.push(field('definition', definition));
@@ -111,15 +113,15 @@ function footer(guide, bridge = false) {
 
 function panel(guide, entities, position) {
   const heading = `<h1 class="sr-only">Painel · ${escape(guide.title)}</h1><h2 tabindex="-1" data-position-heading>Onde você parou</h2>`;
-  if (completedOrdinal(guide, position) === 0) return `${heading}<div class="empty"><p>Você está no começo. Ainda não há nada para lembrar, e nada para estragar.</p><p>Quando terminar a Carta 1, aqui aparece o que você já leu.</p><button class="panel-next" type="button" aria-haspopup="dialog" data-picker-draft="2">Já terminei a Carta 1</button></div>`;
+  if (completedOrdinal(guide, position) === 0) return `${heading}<div class="empty"><p>Você está no começo. Ainda não há nada para lembrar, e nada para estragar.</p><p>Quando terminar ${the(guide, 1)}, aqui aparece o que você já leu.</p><button class="panel-next" type="button" aria-haspopup="dialog" data-picker-draft="2">Já terminei ${the(guide, 1)}</button></div>`;
   const current = currentItem(guide, position);
-  const next = current && storyItems(guide).find(item => item.ordinal === current.ordinal + 1);
+  const next = current && itemAt(guide, current.ordinal + 1);
   const advance = current && (next?.l === position.l || guide.books.find(book => book.l === position.l).status === 'complete') ? `<button type="button" class="panel-next" aria-haspopup="dialog" data-picker-draft="${next?.l === position.l ? next.bookOrdinal : 'fim'}" data-picker-book-draft="${position.l}">Já terminei ${current.gender === 'f' ? 'a' : 'o'} ${escape(current.label.replace('Cap.', 'cap.'))}</button>` : '';
   return `${heading}<p class="intro">${position.c === 'fim' ? 'O livro inteiro, agora à sua disposição.' : `Tudo o que apareceu antes de ${escape(positionLabel(guide, position))}.`}</p>${advance}<section><h2>Personagens até sua posição</h2>${cards(guide, entities, position)}</section>`;
 }
 
 export function renderGuide(guide, url) {
-  const guidePath = `/guia/${guide.series}`;
+  const guidePath = guideHome(guide);
   const bookTitle = escape(guide.title);
   const authorName = escape(guide.authors.join(' e '));
   const context = guide.state === 'private' ? { k: url.searchParams.get('k'), ...(url.searchParams.get('resumos') === '0' ? { resumos: '0' } : {}) } : {};
@@ -149,7 +151,7 @@ export function renderGuide(guide, url) {
       : route.type === 'chapter' ? `${escape(route.item.label)} · ${bookTitle} · Guia sem spoiler`
         : sectionTitles[route.type] ? `${sectionTitles[route.type]} de ${bookTitle} · Guia sem spoiler`
           : route.type === 'not_found' ? `Página não encontrada · ${bookTitle}` : `Guia sem spoiler de ${bookTitle}, de ${authorName}`;
-  const title = guide.state === 'private' ? `Prévia do guia sem spoiler de ${escape(guide.title)} · para ${escape(guide.authors.join(' e '))}` : ordinaryTitle;
+  const title = guide.state === 'private' ? `Prévia do guia sem spoiler de ${bookTitle} · para ${authorName}` : ordinaryTitle;
   const description = approvedIntro ? `${officialGuide(guide) ? 'Guia oficial. ' : ''}${escape(intro.text)}` : guide.state === 'private' ? 'Prévia feita a partir do texto do livro, só para você.' : `${guide.ownership === 'third_party' ? `Demonstração não oficial · obra de ${authorName}, ${escape(guide.presentation.publisher.name)}. ` : officialGuide(guide) ? 'Guia oficial. ' : ''}Escolha sua carta ou capítulo atual para consultar as seções anteriores, já concluídas. Guia de ${bookTitle}, de ${authorName}.`;
   const positionedQuery = url.searchParams.has('l') || url.searchParams.has('c');
   const robots = positionedQuery || guide.state !== 'public' || route.type === 'not_found' ? 'noindex, nofollow' : route.type === 'home' || approvedIntro || route.type === 'mundo' && introEntries.length >= 3 ? 'index, follow' : 'noindex, follow';
@@ -161,12 +163,12 @@ export function renderGuide(guide, url) {
   const cleanHeader = route.type === 'home' ? masthead : `<p class="kicker">${bookTitle}</p><h1 tabindex="-1">${cleanIntro}</h1><p class="intro">${route.type === 'chapter' ? 'Diga onde você está para ver este capítulo, se você já leu:' : route.type === 'misterio' ? 'Diga onde você está para ver esta pergunta, se ela já apareceu:' : 'O guia responde só até sua posição. Diga onde você está:'}</p>`;
   const overview = guide.state === 'public' && route.type === 'home' ? `<section class="guide-overview"><h2>O que é este guia de ${bookTitle}?</h2><p>Este é um guia de leitura de ${bookTitle}, de ${authorName}, preparado pelo EnrichReader. Você consulta personagens e contexto da história até a posição que escolheu, junto do seu próprio exemplar. Não é preciso importar um livro nem instalar o app.</p><h3>Edição e ordem de leitura</h3><p>O guia segue ${escape(guide.edition)}. ${guide.books.length === 1 ? `O seletor contém ${guide.books[0].items.filter(item => !item.retired && item.kind === 'section').length} seções de abertura e ${guide.books[0].items.filter(item => !item.retired && item.kind === 'chapter').length} capítulos.` : 'Escolha o livro e a seção antes de consultar.'} Se a numeração da sua edição for diferente, confira a seção correspondente.</p><h3>Como evitar spoilers na consulta</h3><p>Escolha a carta ou capítulo que está lendo. O guia mostra as seções anteriores, que você já terminou. Ao terminar uma seção, avance para a próxima. Use “Terminei este livro” apenas depois de concluir a leitura.</p><h3>Fontes e limites</h3><p>Os dados são preparados a partir do texto com ajuda de IA e podem conter erros. Cada fato aponta o capítulo de origem; use “Algo errado?” para avisar sobre um problema. ${guide.ownership === 'public-domain' ? 'Esta é uma obra em domínio público; o guia não implica aprovação do autor.' : ''} Perfis em inglês. A interface pode ser exibida em inglês ou português. <a href="/reading-guides/" lang="en">Read the guide instructions in English.</a></p></section>` : '';
   const how = '<section class="how"><h2>Como funciona</h2><ol><li>Você diz em que carta ou capítulo está.</li><li>O guia mostra personagens, lugares e fatos das seções anteriores, que você já terminou.</li><li>Cada fato mostra o capítulo de onde saiu.</li></ol></section>';
-  const about = (guide.presentation?.blurb_approved === true || guide.state === 'private') && guide.presentation.blurb ? `<section class="about"><h2>Sobre o livro</h2>${assets?.about ? `<img src="${assets.about.path}" width="72" height="108" alt="Capa de ${bookTitle}">` : ''}${guide.presentation.blurb.split(/\n\n+/).map(text => `<p class="reading">${escape(text)}</p>`).join('')}<p class="small">por ${escape(guide.authors.join(' e '))}</p></section>` : '';
+  const about = (guide.presentation?.blurb_approved === true || guide.state === 'private') && guide.presentation.blurb ? `<section class="about"><h2>Sobre o livro</h2>${assets?.about ? `<img src="${assets.about.path}" width="72" height="108" alt="Capa de ${bookTitle}">` : ''}${guide.presentation.blurb.split(/\n\n+/).map(text => `<p class="reading">${escape(text)}</p>`).join('')}<p class="small">por ${authorName}</p></section>` : '';
   const introBlock = !position && approvedIntro ? `<section><h2>Apresentação</h2><p class="reading">${escape(intro.text)}</p><p class="small">Apresentação aprovada por ${authorName}</p>${introEntries.length > 1 ? `<p>Também no guia: ${introEntries.filter(([slug]) => slug !== route.entity.slug).map(([slug]) => {
-    const entity = [...guide.entities, ...(guide.context?.world ?? [])].find(entity => entity.slug === slug);
+    const entity = guideEntities(guide).find(entity => entity.slug === slug);
     return `<a href="${positionHref(entityPath(guide, entity))}">${escape(entity.versions[0].set.display_name)}</a>`;
   }).join(' · ')}</p>` : ''}</section>` : !position && route.type === 'mundo' && guide.ownership === 'own' && guide.state !== 'private' && introEntries.length ? `<section><h2>Quem você vai conhecer</h2>${introEntries.map(([slug, value]) => {
-    const entity = [...guide.entities, ...(guide.context?.world ?? [])].find(entity => entity.slug === slug);
+    const entity = guideEntities(guide).find(entity => entity.slug === slug);
     return `<h3><a href="${positionHref(entityPath(guide, entity))}">${escape(entity.versions[0].set.display_name)}</a></h3><p>${escape(value.text)}</p>`;
   }).join('')}<p class="small">Apresentações aprovadas por ${authorName}</p></section>` : '';
   const body = route.type === 'not_found' ? `<h1 tabindex="-1">Página não encontrada.</h1><a class="door" href="${positionHref(guidePath, position)}">Ir para o Painel</a>`
@@ -187,28 +189,28 @@ export function renderGuide(guide, url) {
   const publicMap = JSON.stringify(pickerMap(guide)).replace(/</g, '\\u003c');
   const canonical = `https://enrichreader.com${cleanPath}${context.k ? `?k=${encodeURIComponent(context.k)}` : ''}`;
   const imageHead = assets?.og ? `<meta property="og:image" content="https://enrichreader.com${assets.og.path}"><meta property="og:image:type" content="${assets.og.type}"><meta property="og:image:width" content="${assets.og.width}"><meta property="og:image:height" content="${assets.og.height}"><meta property="og:image:alt" content="Guia sem spoiler de ${bookTitle}, de ${authorName}"><meta name="twitter:image" content="https://enrichreader.com${assets.og.path}"><meta name="twitter:image:alt" content="Guia sem spoiler de ${bookTitle}, de ${authorName}">` : '';
-  const bookId = l => `https://enrichreader.com/guia/${guide.series}#${l === 1 ? 'book' : `book-${l}`}`;
+  const bookId = l => `${guideURL(guide)}#${l === 1 ? 'book' : `book-${l}`}`;
   const builtBooks = guide.books.filter(book => book.status !== 'announced');
   const schemaAuthors = guide.authors.map(name => ({ '@type': 'Person', name }));
   const publisher = guide.presentation?.publisher?.name ? { publisher: { '@type': 'Organization', name: guide.presentation.publisher.name } } : {};
   const schemaBooks = builtBooks.map(book => ({ '@type': 'Book', '@id': bookId(book.l), name: book.l === 1 ? guide.title : `Livro ${book.l}`, inLanguage: guide.text_language, author: schemaAuthors, ...publisher }));
-  const seriesId = `https://enrichreader.com/guia/${guide.series}#series`;
+  const seriesId = `${guideURL(guide)}#series`;
   const graph = guide.state === 'public' && ['home', 'mundo', 'entity'].includes(route.type) ? { '@context': 'https://schema.org', '@graph': [
     { '@type': 'WebPage', '@id': canonical, url: canonical, name: ordinaryTitle, inLanguage: 'pt-BR', isPartOf: { '@id': 'https://enrichreader.com/#website' }, publisher: { '@id': 'https://enrichreader.com/#organization' }, about: { '@id': builtBooks.length > 1 ? seriesId : bookId(1) } },
     ...(builtBooks.length > 1 ? [{ '@type': 'CreativeWorkSeries', '@id': seriesId, name: guide.title, author: schemaAuthors, hasPart: schemaBooks.map(book => ({ '@id': book['@id'] })) }] : []),
     ...schemaBooks,
     { '@type': 'Organization', '@id': 'https://enrichreader.com/#organization', name: 'EnrichReader', url: 'https://enrichreader.com/' },
     { '@type': 'WebSite', '@id': 'https://enrichreader.com/#website', name: 'EnrichReader', url: 'https://enrichreader.com/', publisher: { '@id': 'https://enrichreader.com/#organization' } },
-    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: `Guia de ${guide.title}`, item: `https://enrichreader.com/guia/${guide.series}` }, ...(route.type !== 'home' ? [{ '@type': 'ListItem', position: 2, name: 'Personagens', ...(route.type === 'entity' ? { item: `https://enrichreader.com/guia/${guide.series}/mundo` } : {}) }] : []), ...(route.type === 'entity' ? [{ '@type': 'ListItem', position: 3, name: firstName }] : [])] },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: `Guia de ${guide.title}`, item: guideURL(guide) }, ...(route.type !== 'home' ? [{ '@type': 'ListItem', position: 2, name: 'Personagens', ...(route.type === 'entity' ? { item: `https://enrichreader.com/guia/${guide.series}/mundo` } : {}) }] : []), ...(route.type === 'entity' ? [{ '@type': 'ListItem', position: 3, name: firstName }] : [])] },
   ] } : null;
   const structured = graph ? `<script type="application/ld+json">${JSON.stringify(graph).replace(/</g, '\\u003c')}</script>` : '';
-  return `<!doctype html><html lang="pt-BR" data-scheme="${look.scheme}" style="${escape(look.style)}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content"><meta name="referrer" content="strict-origin-when-cross-origin"><title>${title}</title><meta name="description" content="${description}"><meta name="robots" content="${robots}"><link rel="canonical" href="${escape(canonical)}"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><meta property="og:locale" content="pt_BR"><meta property="og:site_name" content="Guia sem spoiler"><meta property="og:url" content="${escape(canonical)}"><meta name="twitter:card" content="${assets?.og ? 'summary_large_image' : 'summary'}">${imageHead}<meta name="twitter:title" content="${title}"><meta name="twitter:description" content="${description}"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/web-guide/guide.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${escape(look.fontQuery)}&amp;display=swap"><script type="module" src="/web-guide/guide.js"></script>${structured}</head>
-    <body class="reader-page" ${route.type === 'tempo' && position ? `data-view-search="${escape(timelineURL(guide, position, url).search)}"` : ''} ${route.type === 'misterio' ? `data-misterio-state="${!position ? 'clean' : !thread ? 'absent' : thread.closed ? 'resolved' : 'open'}"` : ''} data-ownership="${guide.ownership}" ${route.entity ? `data-entity-slug="${route.entity.slug}" data-entity-class="${route.entity.classification ?? 'person'}" data-entity-state="${!position ? 'clean' : subject ? 'positioned' : 'absent'}" data-intro="${approvedIntro}"` : ''} ${position ? `data-position-l="${position.l}" data-position-c="${position.c}" data-position-label="${escape(positionLabel(guide, position))}"` : ''} data-page-type="${route.type === 'home' ? position ? 'painel' : 'gate' : route.type}" data-guide-state="${guide.state}"><a class="skip" href="#content">Ir para o conteúdo</a><header class="topbar"><a class="brand" href="${positionHref(guidePath, position ?? cleanContextPosition)}">${assets?.thumb ? `<img class="cover-thumb" src="${assets.thumb.path}" width="24" height="36" alt="">` : `<span class="monogram" aria-hidden="true">${escape(guide.title[0])}</span>`}<span>${bookTitle}<small>de ${authorName}</small></span></a>${nav}<button class="position-pill" data-open-picker aria-haspopup="dialog">${position ? escape(positionLabel(guide, position)) : 'Onde você está?'} <span aria-hidden="true">⌄</span></button>${guide.ownership === 'third_party' ? '' : guide.state === 'private' ? allLink(guide, url, position) : '<button class="share" data-share aria-label="Compartilhar guia" aria-haspopup="dialog"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.6 6.6-4.2M8.7 13.4l6.6 4.2"/></svg></button>'}</header>
+  return page({ look, head: `<meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content"><meta name="referrer" content="strict-origin-when-cross-origin"><title>${title}</title><meta name="description" content="${description}"><meta name="robots" content="${robots}"><link rel="canonical" href="${escape(canonical)}"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><meta property="og:locale" content="pt_BR"><meta property="og:site_name" content="Guia sem spoiler"><meta property="og:url" content="${escape(canonical)}"><meta name="twitter:card" content="${assets?.og ? 'summary_large_image' : 'summary'}">${imageHead}<meta name="twitter:title" content="${title}"><meta name="twitter:description" content="${description}"><link rel="icon" href="/favicon.ico">${styles(look.fontQuery)}<script type="module" src="/web-guide/guide.js"></script>${structured}`,
+    attrs: ` class="reader-page" ${route.type === 'tempo' && position ? `data-view-search="${escape(timelineURL(guide, position, url).search)}"` : ''} ${route.type === 'misterio' ? `data-misterio-state="${!position ? 'clean' : !thread ? 'absent' : thread.closed ? 'resolved' : 'open'}"` : ''} data-ownership="${guide.ownership}" ${route.entity ? `data-entity-slug="${route.entity.slug}" data-entity-class="${route.entity.classification ?? 'person'}" data-entity-state="${!position ? 'clean' : subject ? 'positioned' : 'absent'}" data-intro="${approvedIntro}"` : ''} ${position ? `data-position-l="${position.l}" data-position-c="${position.c}" data-position-label="${escape(positionLabel(guide, position))}"` : ''} data-page-type="${route.type === 'home' ? position ? 'painel' : 'gate' : route.type}" data-guide-state="${guide.state}"`, body: `<a class="skip" href="#content">Ir para o conteúdo</a><header class="topbar"><a class="brand" href="${positionHref(guidePath, position ?? cleanContextPosition)}">${assets?.thumb ? `<img class="cover-thumb" src="${assets.thumb.path}" width="24" height="36" alt="">` : `<span class="monogram" aria-hidden="true">${escape(guide.title[0])}</span>`}<span>${bookTitle}<small>de ${authorName}</small></span></a>${nav}<button class="position-pill" data-open-picker aria-haspopup="dialog">${position ? escape(positionLabel(guide, position)) : 'Onde você está?'} <span aria-hidden="true">⌄</span></button>${guide.ownership === 'third_party' ? '' : guide.state === 'private' ? allLink(guide, url, position) : '<button class="share" data-share aria-label="Compartilhar guia" aria-haspopup="dialog"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.6 6.6-4.2M8.7 13.4l6.6 4.2"/></svg></button>'}</header>
     <main id="content">${slot}<div class="alert" role="note" data-nosnippet data-position-alert hidden></div>${body}${position && completedOrdinal(guide, position) === 0 && route.type === 'home' ? about : ''}${templates}</main>
     ${footer(guide, body.includes('data-app-bridge'))}
     <dialog data-picker-dialog aria-labelledby="picker-title"><div class="sheet-grabber" data-grabber aria-hidden="true"></div><div class="dialog-header"><h2 id="picker-title">Onde você está?</h2><button data-close aria-label="Fechar">×</button></div>${picker(guide, cleanPath, 'sheet-chapter')}</dialog>
     ${guide.state !== 'private' && guide.ownership !== 'third_party' ? `<dialog data-share-dialog aria-labelledby="share-title"><div class="dialog-header"><h2 id="share-title">Compartilhar o guia</h2><button data-close aria-label="Fechar">×</button></div><div data-share-options><p class="muted">Quem abrir escolhe a própria posição. Nada da história aparece antes disso.</p><button class="primary" data-share-clean>Compartilhar link sem spoiler</button>${position ? `<button class="share-position" data-share-position>Enviar com minha posição (${escape(positionLabel(guide, position))})</button><p class="muted small">${position.c === 'fim' ? 'Quem ainda não terminou este livro' : `Quem ainda não chegou ${currentItem(guide, position).gender === 'f' ? 'na' : 'no'} ${escape(positionLabel(guide, position).replace('Cap.', 'cap.'))}`} pode ver spoilers.</p>` : ''}</div><div data-manual hidden><label>Copie o link:<input readonly data-manual-url></label><button data-close>Pronto</button></div></dialog>` : ''}
     <dialog data-preview-dialog aria-labelledby="preview-name"><div class="sheet-grabber" data-grabber aria-hidden="true"></div><div class="preview-close"><button data-close aria-label="Fechar">×</button></div><div data-preview-body></div></dialog>
-    <dialog data-report-dialog aria-labelledby="report-title"><div class="sheet-grabber" data-grabber aria-hidden="true"></div><div class="preview-close"><button data-close aria-label="Fechar">×</button></div><div data-report-body></div></dialog>
-    ${demoDialog(guide)}${approvalDialog(guide, url, guide.approval)}<div class="toast" role="status" hidden></div><script type="application/json" id="guide-map">${publicMap}</script></body></html>`;
+    <dialog data-report-dialog data-endpoint="${guidePath}/reports" aria-labelledby="report-title"><div class="sheet-grabber" data-grabber aria-hidden="true"></div><div class="preview-close"><button data-close aria-label="Fechar">×</button></div><div data-report-body></div></dialog>
+    ${demoDialog(guide)}${approvalDialog(guide, url, guide.approval)}<div class="toast" role="status" hidden></div><script type="application/json" id="guide-map">${publicMap}</script>` });
 }

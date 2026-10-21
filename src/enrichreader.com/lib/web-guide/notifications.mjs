@@ -1,6 +1,6 @@
-import { readdir } from 'node:fs/promises';
 import { FileReportStore } from './reports.mjs';
 import { recordID } from './approval.mjs';
+import { guideHome } from './content.mjs';
 
 const retryWindow = 23 * 60 * 60 * 1000;
 const email = value => typeof value === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -37,10 +37,10 @@ export class ApprovalNotifications {
       `Recebido em: ${approval.ts}`, `Divulgação: ${approval.divulgar}${approval.data ? ` (${approval.data})` : ''}`,
       `Resumos: ${approval.resumos}`, `Destino: ${approval.blurb_approved_at_approval ? 'público' : 'não listado'}`,
       'Publicar em até 24 horas e confirmar com o autor no WhatsApp.',
-      `Guia: https://enrichreader.com/guia/${guide.series}`,
+      `Guia: https://enrichreader.com${guideHome(guide)}`,
       'A aprovação está salva. Consulte bin/web-guide approvals para a revisão operacional.',
     ].join('\n');
-    await this.store.create({ id, guide: guide.series, reason: 'approval_alert', page_path: `/guia/${guide.series}`, ts: approval.ts,
+    await this.store.create({ id, guide: guide.series, reason: 'approval_alert', page_path: guideHome(guide), ts: approval.ts,
       status: 'pending', attempts: 0, next_attempt: this.now(),
       payload: { from: this.from, to: [this.to], subject: `Guia aprovado · ${guide.title}`, text } });
   }
@@ -51,11 +51,7 @@ export class ApprovalNotifications {
   }
   async #flush() {
     if (!this.send) return;
-    let files;
-    try { files = await readdir(this.store.directory); }
-    catch (error) { if (error.code === 'ENOENT') return; throw error; }
-    for (const file of files.filter(file => /^[0-9a-f-]+\.json$/.test(file))) {
-      const record = await this.store.get(file.slice(0, -5));
+    for (const record of await this.store.list()) {
       if (record.status !== 'pending' || record.next_attempt > this.now()) continue;
       // Resend's idempotency cache expires after 24h. Ambiguous old deliveries
       // need operator review, rather than risking a second message.

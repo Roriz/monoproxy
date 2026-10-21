@@ -84,8 +84,14 @@
     return String(value).replace(/^\s+/, '').replace(/\s+$/, '');
   }
 
+  // Portuguese templates may add an {article} the English key omits; it follows the position's kind.
+  function positionArticle(parameters) {
+    return /\bLetter\s+\S+$|\bCarta\s+\S+$/.test(normalize(parameters && parameters.position)) ? 'a' : 'o';
+  }
+
   function renderTemplate(template, parameters, targetLanguage, depth = 0) {
     return template.replace(/\{([A-Za-z][A-Za-z0-9_]*)\}/g, (token, name) => {
+      if (name === 'article' && !Object.prototype.hasOwnProperty.call(parameters || {}, name) && parameters && parameters.position) return positionArticle(parameters);
       if (!Object.prototype.hasOwnProperty.call(parameters || {}, name)) return token;
       let value = String(parameters[name]);
       if (depth < 2 && ['edition', 'filter', 'label', 'part', 'position', 'type'].includes(name)) {

@@ -1,10 +1,12 @@
 import { createHash, timingSafeEqual } from 'node:crypto';
+import { isListed } from './states.mjs';
+import { page, styles } from './page.mjs';
 export const tokenHash = token => createHash('sha256').update(token).digest('hex');
 export const aiCrawler = userAgent => /GPTBot|OAI-SearchBot|ChatGPT-User|PerplexityBot|Perplexity-User|ClaudeBot|Claude-User|CCBot|Bytespider/i.test(userAgent ?? '');
 const matches = (value, hash) => typeof hash === 'string' && /^[a-f0-9]{64}$/.test(hash) && timingSafeEqual(Buffer.from(value, 'hex'), Buffer.from(hash, 'hex'));
 export function guideAccess(guide, url, userAgent, access = {}) {
   if (guide.state === 'taken_down') return { status: 410 };
-  if (guide.state !== 'public' && aiCrawler(userAgent)) return { status: 403 };
+  if (!isListed(guide) && aiCrawler(userAgent)) return { status: 403 };
   if (guide.state !== 'private') {
     if (url.searchParams.has('k')) {
       const target = new URL(url); target.searchParams.delete('k'); target.searchParams.delete('resumos');
@@ -27,5 +29,6 @@ export function guideAccess(guide, url, userAgent, access = {}) {
 export function accessError(status, shelfCount = 1) {
   if (status === 403) return '';
   const title = status === 410 ? 'Link inativo' : 'Guia não encontrado';
-  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/web-guide/guide.css"></head><body><main><h1>${title}</h1><p>${status === 410 ? 'Este link não está mais ativo.' : 'Não encontramos este guia.'}</p>${shelfCount ? '<a class="door" href="/guia">Ver guias publicados</a>' : ''}</main></body></html>`;
+  return page({ head: `<meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><meta name="robots" content="noindex, nofollow">${styles()}`,
+    body: `<main><h1>${title}</h1><p>${status === 410 ? 'Este link não está mais ativo.' : 'Não encontramos este guia.'}</p>${shelfCount ? '<a class="door" href="/guia">Ver guias publicados</a>' : ''}</main>` });
 }

@@ -1,10 +1,3 @@
 [
-  {
-    "series": "frankenstein",
-    "data": "frankenstein.json",
-    "presentation": "frankenstein-presentation.json",
-    "context": "frankenstein-context.json",
-    "baseline": "frankenstein-map-baseline.json",
-    "thread_map": "frankenstein-thread-map.json"
-  }
+  { "series": "frankenstein", "context": true }
 ]

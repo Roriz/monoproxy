@@ -1,10 +1,12 @@
-{{/* Mirror catalog publication overrides; never expose private or unlisted entries. */}}
+{{/* Mirror lib/web-guide/catalog.mjs: an entry is a series slug or {series, ...}; artifacts default to
+   `<series>[-suffix].json` unless the entry names a file; context is opt-in. Never expose private or unlisted entries. */}}
 {{ $data := index site.Data "web-guide" }}
 {{ $guides := slice }}
 {{ range $data.catalog }}
-  {{ $guide := index $data (strings.TrimSuffix ".json" .data) }}
-  {{ $presentation := index $data (strings.TrimSuffix ".json" .presentation) }}
-  {{ $context := index $data (strings.TrimSuffix ".json" .context) }}
+  {{ $entry := . }}{{ if not (reflect.IsMap $entry) }}{{ $entry = dict "series" $entry }}{{ end }}
+  {{ $guide := index $data (strings.TrimSuffix ".json" ($entry.data | default $entry.series)) }}
+  {{ $presentation := index $data (strings.TrimSuffix ".json" ($entry.presentation | default (print $entry.series "-presentation"))) }}
+  {{ $context := dict }}{{ with $entry.context }}{{ $context = index $data (strings.TrimSuffix ".json" (cond (eq . true) (print $entry.series "-context") .)) }}{{ end }}
   {{ if eq ($presentation.state | default $guide.state) "public" }}
     {{/* Coverage, counted the way the guide's picker counts it: retired items don't show. */}}
     {{ $sections := 0 }}{{ $part := "" }}{{ $chapters := 0 }}

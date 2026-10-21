@@ -24,7 +24,13 @@ for (const [value, english] of reverse) if (english === null) reverse.delete(val
 
 const templates = Object.entries(webGuideTranslations)
   .filter(([english, portuguese]) => /\{[a-zA-Z][\w]*\}/.test(english) && /\{[a-zA-Z][\w]*\}/.test(portuguese))
-  .sort(([a], [b]) => norm(b.replace(/\{[a-zA-Z][\w]*\}/g, '')).length - norm(a.replace(/\{[a-zA-Z][\w]*\}/g, '')).length);
+  .sort(([a], [b]) => norm(b.replace(/\{[a-zA-Z][\w]*\}/g, '')).length - norm(a.replace(/\{[a-zA-Z][\w]*\}/g, '')).length)
+  .map(([english, portuguese]) => {
+    const pattern = norm(portuguese);
+    const names = [...pattern.matchAll(/\{([a-zA-Z][\w]*)\}/g)].map(match => match[1]);
+    const pieces = pattern.split(/\{[a-zA-Z][\w]*\}/g).map(piece => piece.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    return { english, names, regex: new RegExp(`^${pieces.join('([\\s\\S]+?)')}$`) };
+  });
 function translate(value) {
   const key = norm(value);
   if (reverse.has(key)) return reverse.get(key);
@@ -34,11 +40,8 @@ function translate(value) {
   if (book) return `Book ${book[1]}${/em breve$/i.test(key) ? ' · Coming soon' : ''}`;
   const since = key.match(/^desde\s+(?:o|a)\s+(cap(?:ítulo|\.)|carta)\s+(\d+)$/i);
   if (since) return `since ${since[1].toLowerCase().startsWith('carta') ? 'Letter' : 'Chapter'} ${since[2]}`;
-  for (const [english, portuguese] of templates) {
-    const pattern = norm(portuguese);
-    const names = [...pattern.matchAll(/\{([a-zA-Z][\w]*)\}/g)].map(match => match[1]);
-    const pieces = pattern.split(/\{[a-zA-Z][\w]*\}/g).map(piece => piece.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-    const match = key.match(new RegExp(`^${pieces.join('([\\s\\S]+?)')}$`));
+  for (const { english, names, regex } of templates) {
+    const match = key.match(regex);
     if (!match) continue;
     let result = english;
     names.forEach((name, index) => { result = result.replace(`{${name}}`, translate(match[index + 1]) ?? match[index + 1]); });
@@ -95,12 +98,6 @@ export function localizeWebGuideHTML(html, { runtime = true } = {}) {
   const boot = `<script>window.EnrichReaderTranslations={shared:{},page:${JSON.stringify(webGuideTranslations).replace(/</g, '\\u003c')}};</script><script>${runtimeSource}</script><script>const syncLocale=()=>{const locale=document.querySelector('meta[property="og:locale"]');if(locale)locale.content=document.documentElement.lang==='pt-BR'?'pt_BR':'en_US'};syncLocale();document.addEventListener('languagechange',syncLocale);</script>`;
   const selector = '<div class="language-switch" role="group" aria-label="Language"><button type="button" lang="en" aria-label="English" title="English" aria-pressed="true" data-language-choice="en">EN</button><button type="button" lang="pt-BR" aria-label="Português" title="Português" aria-pressed="false" data-language-choice="pt-BR">PT</button></div>';
   result = result.replace(/<\/head>/i, () => `${boot}</head>`);
-  if (/<header\b[^>]*class="[^"]*topbar[^"]*"[^>]*>/i.test(result)) {
-    result = result.replace(/(<header\b[^>]*class="[^"]*topbar[^"]*"[^>]*>[\s\S]*?)<\/header>/i, `$1${selector}</header>`);
-  } else if (/<header\b[^>]*class="[^"]*marketing-header[^"]*"[^>]*>/i.test(result)) {
-    result = result.replace(/(<header\b[^>]*class="[^"]*marketing-header[^"]*"[^>]*>[\s\S]*?)<\/header>/i, `$1${selector}</header>`);
-  } else {
-    result = result.replace(/<body\b([^>]*)>/i, `<body$1><header class="guide-language-header">${selector}</header>`);
-  }
-  return result;
+  const header = /(<header\b[^>]*class="[^"]*(?:topbar|marketing-header)[^"]*"[^>]*>[\s\S]*?)<\/header>/i;
+  return header.test(result) ? result.replace(header, `$1${selector}</header>`) : result.replace(/<body\b([^>]*)>/i, `<body$1><header class="guide-language-header">${selector}</header>`);
 }

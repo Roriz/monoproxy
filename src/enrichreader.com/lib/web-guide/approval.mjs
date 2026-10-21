@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { FileReportStore, ReportError } from './reports.mjs';
+import { guideHome } from './content.mjs';
 
 export function recordID(key) {
   const chars = createHash('sha256').update(key).digest('hex').slice(0, 32).split('');
@@ -14,7 +15,7 @@ export function approvalRecord(guide, input, now = new Date()) {
   // Use the founder's local date, not the client's clock or timezone.
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(now);
   if (input.divulgar === 'data' && (typeof input.data !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(input.data) || !Number.isFinite(Date.parse(input.data)) || new Date(input.data).toISOString().slice(0, 10) !== input.data || input.data < today)) throw new ReportError(400, 'Invalid date');
-  return { id: recordID(`approval:${guide.series}`), guide: guide.series, reason: 'approval', page_path: `/guia/${guide.series}`,
+  return { id: recordID(`approval:${guide.series}`), guide: guide.series, reason: 'approval', page_path: guideHome(guide),
     divulgar: input.divulgar, ...(input.divulgar === 'data' ? { data: input.data } : {}), resumos: input.resumos,
     blurb_approved_at_approval: guide.presentation.blurb_approved === true && !!guide.presentation.blurb,
     ts: now.toISOString() };
@@ -28,7 +29,7 @@ export class ApprovalStore {
 export class OperatorInbox {
   constructor(directory) { this.store = new FileReportStore(directory); }
   async approval(guide, record) {
-    return this.store.create({ id: recordID(`notice:approval:${guide.series}`), guide: guide.series, reason: 'approval_notice', page_path: `/guia/${guide.series}`, ts: record.ts,
+    return this.store.create({ id: recordID(`notice:approval:${guide.series}`), guide: guide.series, reason: 'approval_notice', page_path: guideHome(guide), ts: record.ts,
       message: `Guia aprovado · ${guide.title} · ${record.divulgar} · resumos ${record.resumos}` });
   }
   async opened(guide, tokenHash, request, now = new Date(), showcase = false) {
@@ -40,6 +41,6 @@ export class OperatorInbox {
     const id = recordID(`notice:open:${guide.series}:${tokenHash}${showcase ? `:${origin}:${device}` : ''}`);
     const prior = await this.store.get(id);
     if (prior && now.getTime() - Date.parse(prior.ts) < 6 * 60 * 60 * 1000) return;
-    await this.store.put({ id, guide: guide.series, reason: 'open_notice', page_path: showcase ? `/guia/v/${guide.publisher}` : `/guia/${guide.series}`, ts: now.toISOString(), message: `${showcase ? 'Vitrine aberta' : 'Prévia aberta'} · ${guide.title} · ${origin} · ${device} · ${time}` });
+    await this.store.put({ id, guide: guide.series, reason: 'open_notice', page_path: showcase ? `/guia/v/${guide.publisher}` : guideHome(guide), ts: now.toISOString(), message: `${showcase ? 'Vitrine aberta' : 'Prévia aberta'} · ${guide.title} · ${origin} · ${device} · ${time}` });
   }
 }
