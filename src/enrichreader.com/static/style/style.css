@@ -2359,6 +2359,13 @@ nav {
   font-size: 0.7rem;
   cursor: pointer;
 }
+.language-switch-compact {
+  flex: 0 0 auto;
+}
+.language-switch-compact button {
+  min-width: 1.75rem;
+  padding: 0.35rem 0.3rem;
+}
 
 .language-switch button[aria-pressed="true"] {
   background: var(--color-gold-500);
@@ -2376,8 +2383,10 @@ nav {
 
 @media (max-width: 1199.98px) {
   .site-nav-menu {
-    gap: 1.25rem;
-    letter-spacing: 0.16em;
+    display: none !important;
+  }
+  #mobile-menu-toggle {
+    display: block !important;
   }
 }
 
