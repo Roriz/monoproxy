@@ -1,53 +1,74 @@
 # Pipeline Orchestrator Handoff
 
-Unified cross-repository workflow for ingesting raw books, generating skins, syncing the backend, and verifying benchmarks.
+`bin/pipeline` coordinates the sibling reader-app parser, skin-maker decision-first stages,
+reader-backend catalog sync, and reader-app benchmark. Shared artifacts live under
+`enrichreader-lfs`: `raws/raw-<rawUuid>.epub`, `volumes/v-<rawUuid>/`, and `skins/<name>.ers`.
+Skin-maker resolves its default package directory from `SKINS_DIR` (`LFS_DIR` in its config).
+Configure these to point at the same shared hub; monoproxy's `ENRICHREADER_LFS_DIR` controls
+its parser inputs, while skin-maker reads its own settings.
 
----
+## Generate or run
 
-## 1. Shared Data Hub (`enrichreader-lfs`)
-
-All canonical cross-repository artifacts live exclusively in `enrichreader-lfs`:
-* `raws/raw-<rawUuid>.epub`: Raw book source files.
-* `volumes/v-<rawUuid>/`: Structured volume JSONs (`volume.json`, `chapters/`, `assets/`).
-* `skins/skin-<skinUuid>.ers`: Compiled skin packages.
-
----
-
-## 2. CLI Commands (`monoproxy/bin/pipeline`)
-
-Run all commands from `~/projects/monoproxy`:
-
-### Full End-to-End Run
-Runs **Parse $\to$ Skin Generation $\to$ Backend Sync $\to$ Benchmark Verification**:
 ```bash
-bin/pipeline run <rawUuid> [options]
-```
-**Example:**
-```bash
-bin/pipeline run dungeon_crawler_carl_1 --theme dungeon_crawler_carl --client vertex
+bin/pipeline generate v-dracula --output-name skin-dracula \
+  --ner-version <pinned-NLP-configuration> --decision-model <approved-local-model-path> \
+  --client openai --llm-model <pinned-enrichment-model>
+
+bin/pipeline run dracula --output-name skin-dracula \
+  --ner-version <pinned-NLP-configuration> --decision-model <approved-local-model-path> \
+  --client openai --llm-model <pinned-enrichment-model>
 ```
 
-### Individual Steps
+Both invoke `process_volume.py decision-first --volume <volumeUuid> --package-output`.
+`run` also parses, syncs and benchmarks. Its `--skip-parse`, `--skip-skin`,
+`--skip-backend` and `--skip-benchmark` omit individual steps. `--force` only forces
+EPUB parsing; stage artifacts determine skin-maker reuse.
+
+`--pipeline recognize|resolve|enrich|decision-first` selects a single-volume route.
+`decision-first` (default) and `enrich` export by default; `recognize` and `resolve`
+only write stage artifacts. Bare `--package-output` selects `<SKINS_DIR>/<name>.ers`;
+`--package-output /absolute/path/custom.ers` selects an explicit destination.
+The default name is `--output-name`, or the volume namespace when omitted.
+No tier suffix is added. Exporting on `recognize`/`resolve` is rejected by skin-maker.
+
+Pin `--ner-version` for Recognition, the approved local `--decision-model` for Resolution,
+and `--client` plus `--llm-model` for uncached Enrichment calls. There is no implicit
+LLM provider in this coordinator. Use the approved local decision model rather than the
+upstream CLI's historical default. Recognition accepts `--theme lotm|ri|generic`,
+`--scope entities|story|both` and `--max-chapters N`; downstream routes consume frozen
+Recognition scope. `--artifact-root` and `--input-root` override stage/input directories.
+For a standalone continuation, pass `--entity-state-input` / `--story-ledger-input`
+frozen predecessor artifacts; `--story-start` declares an initial empty story ledger.
+
+## Series
+
 ```bash
-# 1. Parse EPUB raw into Volume JSON (reader-app -> enrichreader-lfs/volumes)
-bin/pipeline parse <rawUuid>
+bin/pipeline series skin-lotm --skip-parse --phase decision-first \
+  --ner-version <pin> --decision-model <approved-local-model-path> \
+  --client openai --llm-model <pin>
+bin/pipeline series skin-lotm --skip-parse --phase enrich --client openai --llm-model <pin>
+```
 
-# 2. Generate Skin .ers from Volume (skin-maker -> enrichreader-lfs/skins)
-bin/pipeline generate <volumeUuid> [--theme <theme>] [--client <client>] [--output-name <name>] [--prev-volume <vol>]
+The configured volume list remains imported from `orchestrate_volumes.VOLUMES_TO_PROCESS`.
+Parsing happens first unless skipped. The coordinator then invokes
+`orchestrate_volumes.py --series <name> --phase decision-first --package-output`.
+The runner respects configured predecessor edges and executes each stage across the
+volumes before moving to the next. It exports one consolidated `<SKINS_DIR>/<name>.ers`.
+`--phase` accepts the same four routes, and generation options are shared with volume runs.
 
-# 3. Sync Backend DB & ActiveStorage (reader-backend)
-bin/pipeline sync
+Legacy `build`, `preview`, `resume`, `sample`, `reverify`, `stats`, `all`, `detect`,
+`extract`, `story`, `story-finalize`, `package`, `--prev-volume`, `--fresh`,
+`--max-attempts` and `--tier` have no migration alias. Retry by rerunning against the
+frozen artifacts; series continuity comes from the configured predecessor edges.
 
-# 4. Run Benchmark Verification (reader-app)
+## Other steps
+
+```bash
+bin/pipeline parse <rawUuid> [--force]
+bin/pipeline sync                       # seed the existing catalog
+bin/pipeline sync <skinUuid> <file.ers>  # upload a specific package
 bin/pipeline benchmark [rawUuid]
 ```
 
-### Options for `bin/pipeline run`
-* `--theme <theme>`: Series theme for fact extraction (e.g. `lotm`, `dungeon_crawler_carl`, `mistborn`).
-* `--client <client>`: LLM client (`vertex` [default], `gemini`, `openai`, `grok`, `llama`, `agy`).
-* `--output-name <name>`: Consolidated output skin name (e.g. `skin-lotm`).
-* `--prev-volume <volUuid>`: Previous volume namespace for multi-volume progression.
-* `--skip-parse`: Skip parsing if volume already exists in LFS.
-* `--skip-skin`: Skip LLM skin generation.
-* `--skip-backend`: Skip backend database sync.
-* `--skip-benchmark`: Skip reader-app verification benchmark.
+Re-shipping the catalog is a separate owner-approved operation. Threads remain paused;
+these routing changes do not authorize model calls or a re-ship. The web guide is frozen.

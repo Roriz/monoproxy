@@ -62,58 +62,47 @@ Commands:
   parse <rawUuid> [--force]
                         Parse EPUB raw into Volume JSON (in enrichreader-lfs/volumes);
                         skipped when the volume already matches this raw and parser build
-  series <output_name>  Parse every raw of a series, then run skin-maker's passes over it
-                        (detect -> extract -> story -> story-finalize), resumable end to end
-  generate <volumeUuid> Generate Skin from Volume using skin-maker
-  sync [uuid] [file]    Sync skin .ers with reader-backend DB / ActiveStorage (or all via db:seed)
-  benchmark [rawUuid]   Run verification benchmark in reader-app
+  series <output_name>  Parse a series, then run decision-first stages and export one skin
+  generate <volumeUuid> Run decision-first stages and export a skin
+  sync [uuid] [file]    Sync skin .ers with reader-backend (or all via db:seed)
+  benchmark [rawUuid]   Run reader-app verification
 
-Options for 'run' (--theme, --client, --output-name, --prev-volume and --force
-are also accepted by 'generate'):
-  --theme <theme>           Series theme (e.g. lotm, dungeon_crawler_carl, mistborn)
-  --client <client>         LLM client (default: vertex, options: vertex, gemini, openai, grok, llama, agy)
-  --output-name <name>      Consolidated skin output name (e.g. skin-dungeon_crawler_carl)
-  --prev-volume <volUuid>   Previous volume namespace for multi-volume series
-  --force                   Re-run cached steps instead of skipping completed work
-  --tier <high|low>         Extraction depth for build/sample (default: high).
-                            high narrates every character; low narrates the main
-                            cast only. Both keep facts current. A preview skin
-                            comes from --pipeline preview, not from this.
-  --pipeline <name>         Which pipeline to run (default: build). One of:
-                              build     full volume
-                              preview   NLP-only teaser skin, no LLM calls
-                              resume    continue from --start-chapter
-                              sample    bounded dev slice
-                              reverify  re-derive verified facts, free
-                              package   build the .ers from an existing cache
-                              stats     statistics only
-  --skip-parse              Skip EPUB parsing if volume already exists
-  --skip-skin               Skip LLM skin generation
-  --skip-backend            Skip backend database sync
-  --skip-benchmark          Skip reader-app benchmark verification
+Generation options (run, generate, series):
+  --pipeline <route>        generate/run: recognize | resolve | enrich | decision-first (default)
+  --phase <route>           series: same routes (default: decision-first)
+  --output-name <name>      Default package name (single volume defaults to volumeUuid)
+  --package-output [path]   Export to path, or <SKINS_DIR>/<name>.ers without a path
+                            decision-first/enrich export by default; other routes do not
+  --ner-version <version>   Pinned NLP configuration, required for Recognition
+  --decision-model <model>  Pinned local decision model (pass the approved local model path)
+  --client <provider>       Enrichment provider, e.g. openai, gemini or llama
+  --llm-model <model>       Pinned Enrichment model, required for uncached requests
+  --theme <theme>           Recognition theme (lotm, ri or generic)
+  --scope <scope>           entities | story | both
+  --artifact-root <path>    Frozen stage artifacts (default: artifacts)
+  --input-root <path>       Parsed volumes root
+  --max-chapters <n>        Bounded Recognition input
+  --entity-state-input <p>  Frozen predecessor snapshot for a single volume
+  --story-ledger-input <p>  Frozen predecessor story ledger
+  --story-start            Explicit empty initial story ledger
 
-Options for 'series':
-  --client <client>         LLM client (default: vertex)
-  --phase <name>            all (default) | detect | extract | story | story-finalize | package
-  --fresh                   Archive each volume's cache before its first command and rebuild
-                            from the current parse (skin-maker moves it to cache-backups/)
-  --force                   Re-parse every raw and re-run completed steps
-  --skip-parse              Do not touch the volumes, run the skin-maker passes only
-  --max-attempts <n>        Retries per volume and pass before the series stops (default 5)
+Parsing/run options:
+  --force                  Re-parse EPUBs (never forwarded to skin-maker)
+  --skip-parse             Use already parsed volumes (run/series)
+  --skip-skin              Skip generation (run)
+  --skip-backend           Skip catalog sync (run)
+  --skip-benchmark         Skip benchmark (run)
+
+Legacy --prev-volume, --fresh, --max-attempts and --tier are retired.
+Series continuity comes from orchestrate_volumes.VOLUMES_TO_PROCESS.
 
 Examples:
-  bin/pipeline series skin-lotm --fresh              # rebuild from the raws, all passes
-  bin/pipeline series skin-ri --phase story          # resume the story pass only
-  bin/pipeline run dungeon_crawler_carl_1 --theme dungeon_crawler_carl --client vertex
-  bin/pipeline parse lotm-1
-  bin/pipeline generate v-lotm-1 --theme lotm --client gemini
-  bin/pipeline generate v-lotm-1 --pipeline preview      # every series, free
-  bin/pipeline generate v-lotm-1 --tier low             # a lead series
-  bin/pipeline generate v-lotm-1 --theme lotm --client gemini   # on request
-  bin/pipeline sync
-  bin/pipeline benchmark mistborn-1.1
+  bin/pipeline generate v-dracula --ner-version <pin> --decision-model <local-model> --client openai --llm-model <pin>
+  bin/pipeline series skin-lotm --skip-parse --phase enrich --client openai --llm-model <pin>
+  bin/pipeline generate v-dracula --pipeline resolve --decision-model <local-model>
+
 EOF
-  exit 1
+  exit 0
 }
 
 # ------------------------------------------------------------------------------
@@ -162,159 +151,100 @@ PY
 # ------------------------------------------------------------------------------
 # Action: Generate Skin (Volume JSON -> .ers)
 # ------------------------------------------------------------------------------
-action_generate() {
-  local volume_uuid="$1"
-  local theme="${2:-}"
-  local client="${3:-vertex}"
-  local output_name="${4:-}"
-  local prev_volume="${5:-}"
-  local force="${6:-false}"
-  local pipeline="${7:-build}"
-  local tier="${8:-}"
-
-  # Make the interpreter prove it is Python, rather than testing for a file.
-  # A 0-byte .venv/bin/python passes -f and, being executable with no shebang,
-  # is handed to sh: it ignores its arguments, does nothing and exits 0. The
-  # whole pipeline then reports [SUCCESS] having generated nothing. Checking the
-  # exit status alone is not enough for the same reason - only the output is.
-  local python_bin="$SKIN_MAKER_DIR/.venv/bin/python"
-  if [ "$("$python_bin" -c 'import sys; sys.stdout.write("py%d" % sys.version_info[0])' 2>/dev/null)" != "py3" ]; then
-    python_bin="python3"
+# Keep one interpreter check for both volume and series dispatch.
+skin_python() {
+  local candidate="$SKIN_MAKER_DIR/.venv/bin/python"
+  if [ "$("$candidate" -c 'import sys; sys.stdout.write("py%d" % sys.version_info[0])' 2>/dev/null)" != py3 ]; then
+    candidate=python3
   fi
-  if [ "$("$python_bin" -c 'import sys; sys.stdout.write("py%d" % sys.version_info[0])' 2>/dev/null)" != "py3" ]; then
-    error "No working Python 3 interpreter found (tried $SKIN_MAKER_DIR/.venv/bin/python and python3)."
-  fi
-
-  step "Running skin-maker '$pipeline' pipeline for volume '$volume_uuid' (client: ${client:-none})..."
-  
-  # The pipeline is a positional: what to run is a name now, not a flag combination.
-  # `process_volume.py --help` lists them.
-  local cmd=("$python_bin" "process_volume.py" "$pipeline" "--volume" "$volume_uuid")
-  [ -n "$client" ] && cmd+=("--client" "$client")
-  [ -n "$theme" ] && cmd+=("--theme" "$theme")
-  [ -n "$output_name" ] && cmd+=("--output-name" "$output_name")
-  [ -n "$prev_volume" ] && cmd+=("--prev-volume" "$prev_volume")
-  [ "$force" = true ] && cmd+=("--force")
-
-  (
-    cd "$SKIN_MAKER_DIR"
-    # Exported inside the subshell so it reaches skin-maker's config, which reads
-    # it at import, without leaking into the rest of this run.
-    [ -n "$tier" ] && export SKIN_TIER="$tier"
-    "${cmd[@]}"
-  )
-  success "Skin generated and saved to: $LFS_DIR/skins/"
+  [ "$("$candidate" -c 'import sys; sys.stdout.write("py%d" % sys.version_info[0])' 2>/dev/null)" = py3 ] || error "No working Python 3 interpreter found."
+  echo "$candidate"
 }
 
-# Parses the documented flag form of `generate`. The dispatcher used to pass
-# "$@" straight through to action_generate's positional parameters, so the
-# documented invocation
-#   bin/pipeline generate v-lotm-1 --theme lotm --client gemini
-# silently ran with theme="--theme" and client="lotm".
+# Sets generation_args and route in the caller's local scope. Reject retired flags
+# here so they cannot silently change the meaning of a decision-first invocation.
+generation_option() {
+  consumed=1
+  case "$1" in
+    --pipeline|--phase)
+      [ $# -ge 2 ] || error "Missing value for $1"
+      case "$2" in
+        recognize|resolve|enrich|decision-first) route="$2" ;;
+        *) error "Unknown or retired skin-maker route: $2" ;;
+      esac
+      consumed=2 ;;
+    --package-output)
+      generation_args+=("$1")
+      if [ $# -ge 2 ] && [[ "$2" != --* ]]; then
+        generation_args+=("$2"); consumed=2
+      fi ;;
+    --story-start|--discover-candidates|--pathway-relations) generation_args+=("$1") ;;
+    --theme|--client|--output-name|--ner-version|--decision-model|--llm-model|--scope|--artifact-root|--input-root|--max-chapters|--entity-state-input|--story-ledger-input|--decision-concurrency|--minimum-confidence|--acceptance-policy|--proposal-input)
+      [ $# -ge 2 ] && [[ "$2" != --* ]] || error "Missing value for $1"
+      generation_args+=("$1" "$2"); consumed=2 ;;
+    *) error "Unknown or retired generation option: $1" ;;
+  esac
+}
+
+export_by_default() {
+  case "$route" in
+    decision-first|enrich)
+      local arg
+      for arg in "${generation_args[@]}"; do
+        [ "$arg" = --package-output ] && return 0
+      done
+      generation_args+=(--package-output) ;;
+  esac
+}
+
 action_generate_cli() {
   local volume_uuid="$1"; shift
-
-  local theme=""
-  local client="vertex"
-  local output_name=""
-  local prev_volume=""
-  local force=false
-  local pipeline="build"
-  local tier=""
-
+  local route=decision-first consumed
+  local generation_args=()
   while [[ $# -gt 0 ]]; do
-    case "$1" in
-      --theme) theme="$2"; shift 2 ;;
-      --client) client="$2"; shift 2 ;;
-      --output-name) output_name="$2"; shift 2 ;;
-      --prev-volume) prev_volume="$2"; shift 2 ;;
-      --pipeline) pipeline="$2"; shift 2 ;;
-      --tier) tier="$2"; shift 2 ;;
-      --force) force=true; shift ;;
-      *) error "Unknown option for 'generate': $1" ;;
-    esac
+    generation_option "$@"; shift "$consumed"
   done
-
-  # Pipelines with no LLM steps take no client; passing vertex by default would
-  # make process_volume reject them.
-  case "$pipeline" in
-    preview|reverify|stats) client="" ;;
-  esac
-
-  action_generate "$volume_uuid" "$theme" "$client" "$output_name" "$prev_volume" "$force" "$pipeline" "$tier"
+  export_by_default
+  local python_bin
+  python_bin="$(skin_python)"
+  (
+    cd "$SKIN_MAKER_DIR"
+    "$python_bin" process_volume.py "$route" --volume "$volume_uuid" "${generation_args[@]}"
+  )
+  success "Skin stage complete for $volume_uuid. Packages use <SKINS_DIR>/<name>.ers."
 }
 
-# ------------------------------------------------------------------------------
-# Action: Series (parse every raw of a series, then skin-maker's pass runner)
-# ------------------------------------------------------------------------------
-# The volume list, chain order and theme live in skin-maker's
-# orchestrate_volumes.py; this only adds the parse step that lives in
-# reader-app and forwards the rest. Re-runnable end to end: parse skips an
-# up-to-date volume, and each skin-maker pass resumes from its own markers.
 action_series() {
   local series="$1"; shift
-  local client="vertex"
-  local phase="all"
-  local force=false
-  local fresh=false
-  local skip_parse=false
-  local extra=()
-
+  local route=decision-first consumed
+  local force=false skip_parse=false
+  local generation_args=()
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      --client) client="$2"; shift 2 ;;
-      --phase) phase="$2"; shift 2 ;;
       --force) force=true; shift ;;
-      --fresh) fresh=true; shift ;;
       --skip-parse) skip_parse=true; shift ;;
-      --max-attempts) extra+=("--max-attempts" "$2"); shift 2 ;;
-      *) error "Unknown option for 'series': $1" ;;
+      *) generation_option "$@"; shift "$consumed" ;;
     esac
   done
-
-  local python_bin="$SKIN_MAKER_DIR/.venv/bin/python"
-  [ -x "$python_bin" ] || python_bin="python3"
-
-  local volumes
-  volumes="$(cd "$SKIN_MAKER_DIR" && "$python_bin" - "$series" <<'PY'
+  export_by_default
+  local python_bin volumes
+  python_bin="$(skin_python)"
+  volumes="$(cd "$SKIN_MAKER_DIR" && "$python_bin" - "$series" <<'PYTHON'
 import sys
 from orchestrate_volumes import VOLUMES_TO_PROCESS
 print("\n".join(t["volume"] for t in VOLUMES_TO_PROCESS if t.get("output_name") == sys.argv[1]))
-PY
+PYTHON
 )"
   [ -n "$volumes" ] || error "No volumes with output_name '$series' in skin-maker/orchestrate_volumes.py"
-
-  header "Series $series: $(echo "$volumes" | wc -l) volume(s)"
-  if [ "$skip_parse" = true ]; then
-    info "Skipping parse (--skip-parse)."
-  else
-    header "Step 1: Volume parsing (reader-app)"
+  if [ "$skip_parse" != true ]; then
     local v
-    for v in $volumes; do
-      action_parse "${v#v-}" "$force"
-    done
+    for v in $volumes; do action_parse "${v#v-}" "$force"; done
   fi
-
-  # The detect pass is the one NER step, and it talks to skin-maker's nlp-api
-  # container. Fail here, before anything else is archived or spent, rather
-  # than five retries into the first volume.
-  if [ "$phase" = all ] || [ "$phase" = detect ]; then
-    local ner_url="${NER_API_URL:-http://127.0.0.1:8000}"
-    if ! curl -s -m 5 -o /dev/null -X POST -H 'Content-Type: application/json' \
-        -d '{"texts":[],"ignore_labels":[]}' "$ner_url/extract"; then
-      error "NER service not reachable at $ner_url. Start it in another terminal first:\n  cd $SKIN_MAKER_DIR && bin/nlp_api"
-    fi
-  fi
-
-  header "Step 2: skin-maker passes ($phase)"
   (
     cd "$SKIN_MAKER_DIR"
-    local cmd=("$python_bin" orchestrate_volumes.py --series "$series" --client "$client" --phase "$phase" "${extra[@]}")
-    [ "$force" = true ] && cmd+=("--force")
-    [ "$fresh" = true ] && cmd+=("--fresh")
-    "${cmd[@]}"
+    "$python_bin" orchestrate_volumes.py --series "$series" --phase "$route" "${generation_args[@]}"
   )
-  success "Series $series: passes complete."
+  success "Series $series: $route complete."
 }
 
 # ------------------------------------------------------------------------------
@@ -361,10 +291,7 @@ action_run() {
   local raw_uuid="$1"
   shift
 
-  local theme=""
-  local client="vertex"
-  local output_name=""
-  local prev_volume=""
+  local generation_args=() route=decision-first consumed
   local force=false
   local skip_parse=false
   local skip_skin=false
@@ -373,16 +300,12 @@ action_run() {
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      --theme) theme="$2"; shift 2 ;;
-      --client) client="$2"; shift 2 ;;
-      --output-name) output_name="$2"; shift 2 ;;
-      --prev-volume) prev_volume="$2"; shift 2 ;;
       --force) force=true; shift ;;
       --skip-parse) skip_parse=true; shift ;;
       --skip-skin) skip_skin=true; shift ;;
       --skip-backend) skip_backend=true; shift ;;
       --skip-benchmark) skip_benchmark=true; shift ;;
-      *) error "Unknown option: $1" ;;
+      *) generation_option "$@"; shift "$consumed" ;;
     esac
   done
 
@@ -391,16 +314,13 @@ action_run() {
   header "Starting Pipeline Run for: $raw_uuid"
   info "Raw UUID:      $raw_uuid"
   info "Volume UUID:   $volume_uuid"
-  info "Theme:         ${theme:-<auto/none>}"
-  info "Client:        $client"
-  info "Output Name:   ${output_name:-<default>}"
 
   # Step 1: Parse
   if [ "$skip_parse" = true ]; then
     info "Skipping parser step (--skip-parse)."
   else
     header "Step 1: Volume Parsing (reader-app)"
-    action_parse "$raw_uuid"
+    action_parse "$raw_uuid" "$force"
   fi
 
   # Step 2: Skin Generation
@@ -408,7 +328,7 @@ action_run() {
     info "Skipping skin generation step (--skip-skin)."
   else
     header "Step 2: Skin Generation (skin-maker)"
-    action_generate "$volume_uuid" "$theme" "$client" "$output_name" "$prev_volume" "$force"
+    action_generate_cli "$volume_uuid" --pipeline "$route" "${generation_args[@]}"
   fi
 
   # Step 3: Backend Sync
@@ -434,6 +354,7 @@ action_run() {
 # Main Dispatcher
 # ------------------------------------------------------------------------------
 main() {
+  if [[ "${1:-}" = --help || "${1:-}" = -h || "${1:-}" = help ]]; then usage; fi
   verify_repositories
 
   if [ $# -lt 1 ]; then
