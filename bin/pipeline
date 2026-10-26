@@ -74,10 +74,12 @@ Generation options (run, generate, series):
   --package-output [path]   Export to path, or <SKINS_DIR>/<name>.ers without a path
                             decision-first/enrich export by default; other routes do not
   --ner-version <version>   Pinned NLP configuration, required for Recognition
-  --decision-model <model>  Pinned local decision model (pass the approved local model path)
+  --decision-provider <p>   local (default) | typesafe (explicit remote provider)
+  --decision-model <model>  Approved local model id or path (fields and identity adapters);
+                            with typesafe, an explicit pinned remote model id
   --client <provider>       Enrichment provider, e.g. openai, gemini or llama
   --llm-model <model>       Pinned Enrichment model, required for uncached requests
-  --theme <theme>           Recognition theme (lotm, ri or generic)
+  --theme <theme>           Recognition theme: lotm | reverend_insanity; omit for generic
   --scope <scope>           entities | story | both
   --artifact-root <path>    Frozen stage artifacts (default: artifacts)
   --input-root <path>       Parsed volumes root
@@ -179,7 +181,7 @@ generation_option() {
         generation_args+=("$2"); consumed=2
       fi ;;
     --story-start|--discover-candidates|--pathway-relations) generation_args+=("$1") ;;
-    --theme|--client|--output-name|--ner-version|--decision-model|--llm-model|--scope|--artifact-root|--input-root|--max-chapters|--entity-state-input|--story-ledger-input|--decision-concurrency|--minimum-confidence|--acceptance-policy|--proposal-input)
+    --theme|--client|--output-name|--ner-version|--decision-provider|--decision-model|--llm-model|--scope|--artifact-root|--input-root|--max-chapters|--entity-state-input|--story-ledger-input|--decision-concurrency|--minimum-confidence|--acceptance-policy|--proposal-input)
       [ $# -ge 2 ] && [[ "$2" != --* ]] || error "Missing value for $1"
       generation_args+=("$1" "$2"); consumed=2 ;;
     *) error "Unknown or retired generation option: $1" ;;
