@@ -1,10 +1,8 @@
 {
   "Spoiler-Free Reading Guides: Characters by Chapter | EnrichReader": "Guias de leitura sem spoilers: personagens por capítulo | EnrichReader",
-  "Free browser guides that show characters, places and story up to the chapter you're reading. Start with Mary Shelley's Frankenstein.": "Guias gratuitos no navegador que mostram personagens, lugares e história até o capítulo que você está lendo. Comece por Frankenstein, de Mary Shelley.",
   "Reading guides": "Guias de leitura",
   "A guide that stops": "Um guia que para",
   "where you stop.": "onde você parou.",
-  "Tell the guide which chapter you're on. It shows the characters, places and story up to there, and leaves the pages ahead alone. It opens in your browser, next to whatever copy of the book you have.": "Informe ao guia em que capítulo está. Ele mostra os personagens, lugares e acontecimentos até ali e não revela o que vem pela frente. O guia abre no navegador, ao lado da edição que você estiver lendo.",
   "Open the Frankenstein guide": "Abrir o guia de Frankenstein",
   "↗": "↗",
   "How guides work": "Como funcionam os guias",
@@ -71,5 +69,7 @@
   "→": "→",
   "Keep reading.": "Continue lendo.",
   "We'll keep track.": "Nós acompanhamos.",
-  "Open EnrichReader": "Abrir o EnrichReader"
+  "Open EnrichReader": "Abrir o EnrichReader",
+  "Free browser guides for characters, places and story context from sections you’ve finished. Choose your reading position; start with Mary Shelley’s Frankenstein.": "Guias gratuitos no navegador com personagens, lugares e contexto das seções que você já terminou. Escolha seu ponto de leitura e comece por Frankenstein, de Mary Shelley.",
+  "Tell the guide which letter or chapter you’re reading. It shows characters, places and context from earlier sections you’ve finished. Keep it open in your browser beside your copy of the book.": "Diga qual carta ou capítulo está lendo. O guia mostra personagens, lugares e contexto das seções anteriores que você já terminou. Mantenha-o aberto no navegador ao lado da sua cópia do livro."
 }

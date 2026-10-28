@@ -56,7 +56,7 @@ function setFeatured(card, btn, platform) {
   const desc = card.querySelector('p');
   if (desc) {
     desc.textContent = platform === 'android' ? "Native fullscreen reading with offline book storage." :
-                       platform === 'ios' ? "Install borderless Home Screen App for immersive, fullscreen reading." :
+                       platform === 'ios' ? "Open in Safari and add the web app to your Home Screen." :
                        "Instant, zero-install desktop reading with local book loading.";
   }
 }
@@ -89,7 +89,7 @@ function setStandard(card, btn, platform) {
   const desc = card.querySelector('p');
   if (desc) {
     desc.textContent = platform === 'android' ? "Native Android app with offline book storage." :
-                       platform === 'ios' ? "Install borderless Home Screen App for immersive reading." :
+                       platform === 'ios' ? "Open in Safari and add the web app to your Home Screen." :
                        "Instant, zero-install desktop reading with local book loading.";
   }
 }

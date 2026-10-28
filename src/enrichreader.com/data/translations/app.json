@@ -1,15 +1,10 @@
 {
   "Download EnrichReader for Android, iOS & Web": "Baixe o EnrichReader para Android, iOS e web",
   "Download EnrichReader for Android, iOS, or Desktop. Enjoy distraction-free, spoiler-free reading of massive 1,000+ chapter series 100% locally and offline-ready.": "Baixe o EnrichReader para Android, iOS ou computador. Leia séries enormes, com mais de mil capítulos, sem distrações e sem spoilers, com tudo processado localmente e pronto para uso offline.",
-  "Your spoiler-free companion, offline": "Seu companheiro de leitura sem spoilers, também offline",
   "Native Android": "App nativo para Android",
   "Native fullscreen reading with offline book storage.": "Leitura em tela cheia e armazenamento offline dos livros.",
   "Get on Google Play": "Baixar no Google Play",
-  "Choose Your Layout": "Escolha seu formato",
-  "Or pick one of the other formats optimized for your screen.": "Ou escolha outro formato otimizado para a sua tela.",
   "📱": "📱",
-  "iOS App": "App para iOS",
-  "Install borderless Home Screen App for immersive reading.": "Adicione o app à Tela de Início para ler sem barras de navegação.",
   "Add to Home Screen": "Adicionar à Tela de Início",
   "🌐": "🌐",
   "Web Reader": "Leitor web",
@@ -41,5 +36,11 @@
   "Read on your device, with character profiles and lore that follow your progress when a matching Skin is installed. No account is needed for ordinary reading; sign in to install Skins or sync your reading progress.": "Leia no seu dispositivo, com perfis de personagens e informações do universo que acompanham seu progresso quando há uma Skin correspondente instalada. A leitura comum não exige conta; entre para instalar Skins ou sincronizar seu progresso.",
   "Reading, Skins and sync are currently free, with no reader paywalls or paid feature tiers.": "A leitura, as Skins e a sincronização são gratuitas atualmente, sem barreiras de pagamento ou planos pagos para leitores.",
   "Current reader terms": "Condições atuais para leitores",
-  "Read with EnrichReader on Android, iOS or the web. Matching Skins add character profiles and lore that follow your reading progress.": "Leia com o EnrichReader no Android, iOS ou na web. Skins correspondentes adicionam perfis de personagens e informações do universo que acompanham seu progresso."
+  "Read with EnrichReader on Android, iOS or the web. Matching Skins add character profiles and lore that follow your reading progress.": "Leia com o EnrichReader no Android, iOS ou na web. Skins correspondentes adicionam perfis de personagens e informações do universo que acompanham seu progresso.",
+  "Your next chapter, with the cast in reach": "Seu próximo capítulo, com os personagens à mão",
+  "Choose where to read": "Escolha onde ler",
+  "Android app, web reader, or a Home Screen web app on iPhone and iPad.": "App Android, leitor web ou app web na Tela de Início do iPhone e iPad.",
+  "iPhone & iPad": "iPhone e iPad",
+  "Open in Safari and add the web app to your Home Screen.": "Abra no Safari e adicione o app web à Tela de Início.",
+  "Try the included sample book, Initiation Protocol, and its matched Skin before importing your own story.": "Experimente o livro de exemplo incluído, Initiation Protocol, e sua Skin correspondente antes de importar sua própria história."
 }

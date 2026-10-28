@@ -442,5 +442,7 @@
   "Open EnrichReader ↗": "Abrir EnrichReader ↗",
   "Protagonist": "Protagonista",
   "Antagonist": "Antagonista",
-  "In the app, the guide for {title} shows context according to your reading progress. It works with your own book file.": "No app, o guia de {title} mostra contexto conforme seu progresso de leitura. Funciona com o arquivo do seu livro."
+  "In the app, the guide for {title} shows context according to your reading progress. It works with your own book file.": "No app, o guia de {title} mostra contexto conforme seu progresso de leitura. Funciona com o arquivo do seu livro.",
+  "A private preview before launch. Review the profiles and flag corrections before approving publication.": "Uma prévia só para você antes de ir ao ar. Revise as fichas e aponte correções antes de aprovar a publicação.",
+  "You review a preview before publication. Flag the mistake and chapter so I can review and correct the guide.": "Você revisa uma prévia antes da publicação. Aponte o erro e o capítulo para que eu possa revisar e corrigir o guia."
 }

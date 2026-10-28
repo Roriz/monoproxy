@@ -1,10 +1,8 @@
 {
   "How EnrichReader Works: Spoiler-Free Profiles That Follow Your Chapter": "Como funciona o EnrichReader: perfis sem spoilers que acompanham seu capítulo",
-  "How EnrichReader shows characters, places and lore only up to where you've read: the Skin, on-device matching, profiles that grow with each chapter, and the spoiler shield.": "Veja como o EnrichReader mostra personagens, lugares e informações do universo só até onde você leu: Skins, correspondência no dispositivo, perfis que evoluem a cada capítulo e proteção contra spoilers.",
   "How EnrichReader works": "Como funciona o EnrichReader",
   "It only knows": "Ele só sabe",
   "what you've read.": "o que você já leu.",
-  "EnrichReader keeps track of where you are in the story. It shows you the characters, places and lore you've already met, and keeps everything after that hidden.": "O EnrichReader acompanha seu ponto na história. Ele mostra os personagens, lugares e informações do universo que você já encontrou, e mantém oculto tudo o que vem depois.",
   "Open EnrichReader": "Abrir o EnrichReader",
   "↗": "↗",
   "Browse reading guides": "Ver guias de leitura",
@@ -48,7 +46,6 @@
   "Four steps,": "Quatro etapas,",
   "then you're reading.": "e você já pode ler.",
   "Bring your book": "Traga seu livro",
-  "Import a DRM-free book file you own. The app keeps it on your device and opens it there, and you can read without an account. The reader works fine without a Skin, too.": "Importe um arquivo de livro sem DRM que seja seu. O app o mantém e abre no seu dispositivo. Você pode ler sem uma conta e também usar o leitor sem uma Skin.",
   "Find its Skin": "Encontre a Skin correspondente",
   "A Skin is the companion for one story: its characters, places, organizations and lore, each fact tagged with a chapter. We prepare Skins ahead of time for supported stories. Sign in and search the catalog. If your book isn't there, ask for it, and the app will let you know when it's ready.": "Uma Skin é o companheiro de uma história: reúne personagens, lugares, organizações e informações do universo, com cada fato associado a um capítulo. Preparamos Skins com antecedência para histórias compatíveis. Entre na sua conta e pesquise no catálogo. Se seu livro não estiver lá, peça para adicioná-lo; o app avisará quando estiver pronto.",
   "Match it to your copy": "Associe à sua edição",
@@ -112,5 +109,9 @@
   "Reading, Skins and sync are currently free, with no reader paywalls or paid feature tiers.": "A leitura, as Skins e a sincronização são gratuitas atualmente, sem barreiras de pagamento ou planos pagos para leitores.",
   "Skins are prepared ahead of time for supported stories. Facts include chapter references so the app can show context according to your reading progress.": "As Skins são preparadas com antecedência para as histórias compatíveis. Os fatos incluem referências aos capítulos para que o app mostre o contexto conforme seu progresso de leitura.",
   "Importing a book does not create a Skin. Companion data can contain errors; use the report option to flag a mistake.": "Importar um livro não cria uma Skin. Os dados podem conter erros; use a opção de denúncia para apontar um problema.",
-  "A Skin is the companion for one story: its characters, places, organizations and lore, each fact tagged with a chapter. We prepare Skins ahead of time for supported stories. Sign in and search the catalog. If your book isn't there, you can request a companion in the app. Requests have no promised delivery date.": "Uma Skin é o companheiro de uma história: seus personagens, lugares, organizações e informações do universo, com referências aos capítulos. Preparamos as Skins com antecedência para histórias compatíveis. Entre e busque no catálogo. Se seu livro não estiver lá, você pode solicitar um companheiro no app. As solicitações não têm prazo de entrega prometido."
+  "A Skin is the companion for one story: its characters, places, organizations and lore, each fact tagged with a chapter. We prepare Skins ahead of time for supported stories. Sign in and search the catalog. If your book isn't there, you can request a companion in the app. Requests have no promised delivery date.": "Uma Skin é o companheiro de uma história: seus personagens, lugares, organizações e informações do universo, com referências aos capítulos. Preparamos as Skins com antecedência para histórias compatíveis. Entre e busque no catálogo. Se seu livro não estiver lá, você pode solicitar um companheiro no app. As solicitações não têm prazo de entrega prometido.",
+  "Current reader terms": "Condições atuais para leitores",
+  "Import your lawfully obtained, DRM-free EPUB, PDF or TXT file. Compatibility can vary by edition and PDF layout. The app opens it on your device, and ordinary reading works without an account or a Skin.": "Importe seu arquivo EPUB, PDF ou TXT obtido legalmente e sem DRM. A compatibilidade pode variar conforme a edição e o layout do PDF. O app abre o arquivo no seu dispositivo, e a leitura comum funciona sem conta ou Skin.",
+  "See how matching Skins add character profiles, lore and atmosphere to supported stories, with chapter references and adjustable spoiler settings.": "Veja como Skins correspondentes adicionam perfis, informações do universo e ambientação às histórias compatíveis, com referências aos capítulos e configurações de spoilers.",
+  "With a matching Skin installed, EnrichReader follows your reading progress and limits character profiles, places and lore to that point. Chapter references help you check what you’re seeing.": "Com uma Skin correspondente instalada, o EnrichReader acompanha seu progresso e limita perfis, lugares e informações do universo a esse ponto. As referências aos capítulos ajudam você a conferir o que vê."
 }
