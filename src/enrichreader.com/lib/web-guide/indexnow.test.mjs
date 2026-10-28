@@ -23,3 +23,12 @@ test('IndexNow accepts public landing pages and rejects unknown or parameterized
     await assert.rejects(submitIndexNow('test-key-123', [`https://enrichreader.com${path}`], async () => assert.fail('must not send')));
   }
 });
+
+test('unlisted reports leave discovery but prior manifests can notify their removal', () => {
+  const plan = indexNowURLs([], {}, ['/reports/', '/dcc/', '/lotm/']);
+  for (const path of ['/reports/', '/dcc/', '/lotm/']) {
+    assert.ok(!plan.current.includes(path));
+    assert.ok(plan.urls.includes(`https://enrichreader.com${path}`));
+  }
+  assert.ok(!indexNowURLs([], {}).urls.some(url => /\/(reports|dcc|lotm)\//.test(url)));
+});

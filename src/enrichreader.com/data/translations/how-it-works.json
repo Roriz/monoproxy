@@ -50,7 +50,7 @@
   "Bring your book": "Traga seu livro",
   "Import a DRM-free book file you own. The app keeps it on your device and opens it there, and you can read without an account. The reader works fine without a Skin, too.": "Importe um arquivo de livro sem DRM que seja seu. O app o mantém e abre no seu dispositivo. Você pode ler sem uma conta e também usar o leitor sem uma Skin.",
   "Find its Skin": "Encontre a Skin correspondente",
-  "A Skin is the companion for one story: its characters, places, organizations and lore, each fact tagged with a chapter. We prepare Skins ahead of time for partner series. Sign in and search the catalog. If your book isn't there, ask for it, and the app will let you know when it's ready.": "Uma Skin é o companheiro de uma história: reúne personagens, lugares, organizações e informações do universo, com cada fato associado a um capítulo. Preparamos Skins com antecedência para séries parceiras. Entre na sua conta e pesquise no catálogo. Se seu livro não estiver lá, peça para adicioná-lo; o app avisará quando estiver pronto.",
+  "A Skin is the companion for one story: its characters, places, organizations and lore, each fact tagged with a chapter. We prepare Skins ahead of time for supported stories. Sign in and search the catalog. If your book isn't there, ask for it, and the app will let you know when it's ready.": "Uma Skin é o companheiro de uma história: reúne personagens, lugares, organizações e informações do universo, com cada fato associado a um capítulo. Preparamos Skins com antecedência para histórias compatíveis. Entre na sua conta e pesquise no catálogo. Se seu livro não estiver lá, peça para adicioná-lo; o app avisará quando estiver pronto.",
   "Match it to your copy": "Associe à sua edição",
   "The first time you open the book, the app lines the Skin up with your file, chapter by chapter, on your device. That takes a couple of minutes and only happens once. If your edition is too different to line up, the app tells you rather than matching the wrong chapters.": "Na primeira vez que abrir o livro, o app associa a Skin ao seu arquivo, capítulo por capítulo, direto no seu dispositivo. Isso leva alguns minutos e só acontece uma vez. Se sua edição for diferente demais para fazer a correspondência, o app avisa em vez de associar capítulos errados.",
   "Read, and tap a name": "Leia e toque em um nome",
@@ -76,8 +76,6 @@
   "How a Skin is made": "Como uma Skin é feita",
   "Built from the book,": "Criada a partir do livro,",
   "before you open it.": "antes de você abri-lo.",
-  "We make Skins ahead of time for partner series, from the book's text, using EnrichReader's own AI model on our own hardware. Every fact it records gets the chapter that reveals it, which is how the app knows to hold it back until you get there.": "Criamos Skins com antecedência para séries parceiras a partir do texto do livro, usando o modelo de IA do próprio EnrichReader em nosso hardware. Cada fato recebe a indicação do capítulo em que é revelado; assim, o app sabe que deve ocultá-lo até você chegar lá.",
-  "We never send your own book to it. A Skin can still get things wrong, and when you report a mistake, we fix it.": "Nunca enviamos seu próprio livro ao modelo. Ainda assim, uma Skin pode conter erros. Quando você relata um, nós o corrigimos.",
   "The spoiler shield": "A proteção contra spoilers",
   "You decide how": "Você decide o quanto",
   "careful it is.": "quer se proteger.",
@@ -108,8 +106,11 @@
   "Offline": "Offline",
   "Once your book and its Skin are on your device, you can read offline. You need a connection to install a Skin.": "Depois que o livro e a Skin estiverem no seu dispositivo, você poderá ler offline. É preciso estar conectado à internet para instalar uma Skin.",
   "Cost": "Preço",
-  "The app is free to download and has no in-app purchases.": "O download do app é gratuito e não há compras dentro do aplicativo.",
   "Read with EnrichReader": "Leia com o EnrichReader",
   "Start reading": "Comece a ler",
-  "spoiler-free.": "sem spoilers."
+  "spoiler-free.": "sem spoilers.",
+  "Reading, Skins and sync are currently free, with no reader paywalls or paid feature tiers.": "A leitura, as Skins e a sincronização são gratuitas atualmente, sem barreiras de pagamento ou planos pagos para leitores.",
+  "Skins are prepared ahead of time for supported stories. Facts include chapter references so the app can show context according to your reading progress.": "As Skins são preparadas com antecedência para as histórias compatíveis. Os fatos incluem referências aos capítulos para que o app mostre o contexto conforme seu progresso de leitura.",
+  "Importing a book does not create a Skin. Companion data can contain errors; use the report option to flag a mistake.": "Importar um livro não cria uma Skin. Os dados podem conter erros; use a opção de denúncia para apontar um problema.",
+  "A Skin is the companion for one story: its characters, places, organizations and lore, each fact tagged with a chapter. We prepare Skins ahead of time for supported stories. Sign in and search the catalog. If your book isn't there, you can request a companion in the app. Requests have no promised delivery date.": "Uma Skin é o companheiro de uma história: seus personagens, lugares, organizações e informações do universo, com referências aos capítulos. Preparamos as Skins com antecedência para histórias compatíveis. Entre e busque no catálogo. Se seu livro não estiver lá, você pode solicitar um companheiro no app. As solicitações não têm prazo de entrega prometido."
 }

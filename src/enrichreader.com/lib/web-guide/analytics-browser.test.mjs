@@ -118,6 +118,10 @@ test('footer reach fires once per render and author referral is server-validated
   await page.waitForFunction(() => window.analyticsEvents.some(event => event.name === 'footer_view'));
   const footer = await page.evaluate(() => window.analyticsEvents.filter(event => event.name === 'footer_view'));
   assert.equal(footer.length, 1); assert.equal(footer[0].data.app_link, false);
+  await page.locator('.app-bridge a').evaluate(link => link.addEventListener('click', event => event.preventDefault()));
+  await page.locator('.app-bridge a').click();
+  await page.waitForFunction(() => window.analyticsEvents.some(event => event.name === 'app_link_click'));
+  assert.equal(await page.evaluate(() => window.analyticsEvents.filter(event => event.name === 'app_link_click').length), 1);
   await page.locator('header').scrollIntoViewIfNeeded(); await page.locator('footer').scrollIntoViewIfNeeded();
   assert.equal(await page.evaluate(() => window.analyticsEvents.filter(event => event.name === 'footer_view').length), 1);
   await page.goto(`${base}/autores?guia=frankenstein&q=confidential`);

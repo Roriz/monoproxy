@@ -4,7 +4,7 @@ import { resolvePosition } from './position.mjs';
 import { guideLook } from './look.mjs';
 import { approvalLine, isPublished } from './states.mjs';
 import { page, styles } from './page.mjs';
-export const credibilityLine = 'Testado com leitores de webnovels em inglês: mais de 200 mil visualizações em 15 posts no Reddit, 4 deles entre os mais votados do dia.';
+export const credibilityLine = 'Alcance na comunidade: mais de 200 mil visualizações em 15 posts no Reddit. Visualizações não medem uso do app nem validam os dados.';
 const emailOK = value => typeof value === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 export function showcaseURL(showcase, guide, surface) {
   const url = new URL(guideURL(guide));

@@ -97,3 +97,34 @@ test('first-item sentences switch language live for chapter, multi-book, and par
     await browser.close();
   }
 });
+
+test('public entry metadata matches English HTML and guides offer an honest app continuation', async () => {
+  const server = createGuideServer();
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  try {
+    for (const path of ['/guia', '/autores', '/guia/frankenstein', '/guia/frankenstein?l=1&c=12', '/guia/frankenstein/pessoa/the-traveller?l=1&c=12']) {
+      const response = await fetch(base + path);
+      const html = await response.text();
+      assert.equal(response.status, 200);
+      assert.match(html, /<html lang="en"/);
+      assert.doesNotMatch(html.match(/<title>(.*?)<\/title>/s)[1], /Guia|autores/);
+      assert.doesNotMatch(html.match(/<meta name="description" content="([^"]*)"/)[1], /^Filter /);
+      for (const [, raw] of html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)) {
+        const schema = JSON.parse(raw);
+        for (const node of schema['@graph'] ?? [schema]) {
+          if (!['WebPage', 'CollectionPage'].includes(node['@type'])) continue;
+          assert.equal(node.inLanguage, 'en');
+          assert.doesNotMatch(node.name, /Guia|Personagens/);
+        }
+      }
+      if (!path.startsWith('/guia/frankenstein')) continue;
+      assert.match(html, /href="\/app\/"/);
+      assert.match(html, /does not guarantee an app Skin/);
+      if (path.includes('?')) assert.match(html, /content="noindex, nofollow"/);
+    }
+  } finally {
+    server.closeAllConnections();
+    await new Promise(resolve => server.close(resolve));
+  }
+});

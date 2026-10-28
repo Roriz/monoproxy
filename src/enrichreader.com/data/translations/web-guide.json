@@ -31,7 +31,6 @@
   "How much does it cost?": "Quanto custa?",
   "One flat fee, no monthly charge. I’ll tell you the price on the call, before you decide.": "Um valor único, sem mensalidade. Digo o valor na conversa, antes de você decidir.",
   "Does it use AI?": "Usa IA?",
-  "I use models to find who appears in your text and where. Nothing is made up. Summaries are short, each one points to its source chapter, and you can approve or turn them off.": "Uso modelos pra encontrar no seu texto quem aparece e onde. Nada é inventado. Os resumos são curtos, cada um aponta pro capítulo de onde saiu, e você aprova ou desliga.",
   "What if it gets something wrong?": "E se errar?",
   "You see it before everyone else and flag it; I’ll fix it within 24 hours.": "Você vê antes de todo mundo e me aponta; eu corrijo em 24h.",
   "Will my book be exposed?": "Meu livro vai ficar exposto?",
@@ -314,7 +313,6 @@
   "15 minutes to see whether this makes sense for {publisher}": "15 minutos para ver se faz sentido para a {publisher}",
   "Made by Radamés at EnrichReader.": "Feito por Radamés, do EnrichReader.",
   "Each guide goes live only after approval from the book’s rights holder.": "Cada guia só vai ao ar com a aprovação de quem tem os direitos do livro.",
-  "Tested with English webnovel readers: over 200,000 views across 15 Reddit posts, four among the day’s top-rated posts.": "Testado com leitores de webnovels em inglês: mais de 200 mil visualizações em 15 posts no Reddit, 4 deles entre os mais votados do dia.",
   "This is a reading companion for {book}, by {author}, prepared by EnrichReader. You can look up characters and story context up to the position you choose, alongside your own copy. No need to import a book or install the app.": "Este é um guia de leitura de {book}, de {author}, preparado pelo EnrichReader. Você consulta personagens e contexto da história até a posição que escolheu, junto do seu próprio exemplar. Não é preciso importar um livro nem instalar o app.",
   "The guide follows {edition}. The selector has {sections} opening sections and {chapters} chapters. If your edition uses different numbering, check the corresponding section.": "O guia segue {edition}. O seletor contém {sections} seções de abertura e {chapters} capítulos. Se a numeração da sua edição for diferente, confira a seção correspondente.",
   "The data is prepared from the text with help from AI and may contain errors. Each fact points to its source chapter; use “Something wrong?” to report an issue. {publicDomain} Profiles are in English. The interface can be shown in English or Portuguese.": "Os dados são preparados a partir do texto com ajuda de IA e podem conter erros. Cada fato aponta o capítulo de origem; use “Algo errado?” para avisar sobre um problema. {publicDomain} Perfis em inglês. A interface pode ser exibida em inglês ou português.",
@@ -433,5 +431,16 @@
   "You are at Chapter {number}": "Você está no cap. {number}",
   "From {name}’s point of view": "pelo olhar de {name}",
   "· From {name}’s point of view": "· pelo olhar de {name}",
-  "Go to the dashboard →": "Ir para o Painel →"
+  "Go to the dashboard →": "Ir para o Painel →",
+  "Community-post reach: over 200,000 views across 15 Reddit posts. Views do not measure app use or validate the data.": "Alcance na comunidade: mais de 200 mil visualizações em 15 posts no Reddit. Visualizações não medem uso do app nem validam os dados.",
+  "I use models to find who appears in your text and where. Extraction and summaries can contain errors. Summaries are short, each one points to its source chapter, and you can approve or turn them off.": "Uso modelos pra encontrar no seu texto quem aparece e onde. A extração e os resumos podem conter erros. Os resumos são curtos, cada um aponta pro capítulo de onde saiu, e você aprova ou desliga.",
+  "Spoiler-free guides · choose your book": "Guias sem spoiler · escolha o seu livro",
+  "A spoiler-free guide for your book · for authors": "Um guia sem spoiler para o seu livro · para autores",
+  "A spoiler-free guide for your book, built from the text: readers choose their chapter and see only what has appeared so far. I handle the setup.": "Um guia sem spoiler do seu livro, montado a partir do texto: o leitor diz em que capítulo está e só vê o que já apareceu até ali. Sem trabalho seu.",
+  "Continue reading in EnrichReader": "Continue a leitura no EnrichReader",
+  "Read with character profiles and atmosphere when a matching Skin is available. Check the app’s catalog for your story and edition; this browser guide does not guarantee an app Skin.": "Leia com perfis de personagens e ambientação quando houver uma Skin correspondente. Confira sua história e edição no catálogo do app; este guia no navegador não garante uma Skin no app.",
+  "Open EnrichReader ↗": "Abrir EnrichReader ↗",
+  "Protagonist": "Protagonista",
+  "Antagonist": "Antagonista",
+  "In the app, the guide for {title} shows context according to your reading progress. It works with your own book file.": "No app, o guia de {title} mostra contexto conforme seu progresso de leitura. Funciona com o arquivo do seu livro."
 }

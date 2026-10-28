@@ -1,8 +1,8 @@
 {{ $organizationRef := dict "@id" ("/#organization" | absURL) }}
 {{ if .IsHome }}
-{{ $organization := dict "@type" "Organization" "@id" ("/#organization" | absURL) "name" "EnrichReader" "url" site.BaseURL }}
+{{ $organization := dict "@type" "Organization" "@id" ("/#organization" | absURL) "name" "EnrichReader" "legalName" "ENRICH DESENVOLVIMENTO DE SOFTWARES LTDA." "taxID" "65.786.669/0001-04" "url" site.BaseURL }}
 {{ $website := dict "@type" "WebSite" "@id" ("/#website" | absURL) "name" "EnrichReader" "url" site.BaseURL "publisher" $organizationRef }}
-{{ $app := dict "@type" "SoftwareApplication" "@id" ("/#app" | absURL) "name" "EnrichReader" "applicationCategory" "BookApplication" "operatingSystem" "Android, iOS (web app), Web" "description" "Spoiler-free story companion app with chapter-aware character profiles and lore through matching Skins for partner series." "url" ("/app/" | absURL) "downloadUrl" "https://play.google.com/store/apps/details?id=com.enrichreader.app" "publisher" $organizationRef }}
+{{ $app := dict "@type" "SoftwareApplication" "@id" ("/#app" | absURL) "name" "EnrichReader" "applicationCategory" "BookApplication" "operatingSystem" "Android, iOS (web app), Web" "description" "Spoiler-free story companion app with chapter-aware character profiles and lore through matching Skins for supported stories." "url" ("/app/" | absURL) "downloadUrl" "https://play.google.com/store/apps/details?id=com.enrichreader.app" "publisher" $organizationRef }}
 <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $organization $website $app) | jsonify | safeJS }}</script>
 {{ end }}
 {{ if eq .RelPermalink "/reading-guides/" }}

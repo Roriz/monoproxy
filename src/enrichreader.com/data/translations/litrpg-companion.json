@@ -1,6 +1,6 @@
 {
   "LitRPG & Web Novel Reading Companion | EnrichReader": "Companheiro de leitura para LitRPG e webnovels | EnrichReader",
-  "Keep track of characters, items, and lore in partner LitRPG and web novel series, with profiles limited to your reading position.": "Acompanhe personagens, itens e informações do universo em séries parceiras de LitRPG e webnovels, com perfis limitados ao seu ponto de leitura.",
+  "Keep track of characters, items, and lore in supported LitRPG and web novel stories, with profiles limited to your reading position.": "Acompanhe personagens, itens e informações do universo em histórias compatíveis de LitRPG e webnovels, com perfis limitados ao seu ponto de leitura.",
   "For LitRPG & long web novels": "Para LitRPG e webnovels longas",
   "Remember the cast.": "Lembre-se dos personagens.",
   "Keep your place": "Continue no ponto",
@@ -49,7 +49,6 @@
   "Available browser guide": "Guia disponível no navegador",
   "Frankenstein": "Frankenstein",
   "Mary Shelley · 1831 text": "Mary Shelley · texto de 1831",
-  "Portuguese interface": "Interface em português",
   "English profiles": "Perfis em inglês",
   "Try the guide with Frankenstein, a public-domain novel. Check the catalog for a guide to your own book.": "Experimente o guia de Frankenstein, romance em domínio público. Consulte o catálogo para ver se há um guia para seu livro.",
   "B": "B",
@@ -79,5 +78,6 @@
   "Party navigator": "Navegadora do grupo",
   "This profile shows details revealed by chapter 24.": "Este perfil mostra informações reveladas até o capítulo 24.",
   "Example at chapter 12. The party hired Mara to guide them through the northern pass. She knows the old roads and carries a silver compass.": "Exemplo no capítulo 12. O grupo contratou Mara para guiá-los pela passagem do norte. Ela conhece as estradas antigas e carrega uma bússola de prata.",
-  "Example at chapter 24. Mara has mapped the party's route beyond the northern pass. The Wayfinders' Guild gave her the silver compass.": "Exemplo no capítulo 24. Mara mapeou o caminho do grupo para além da passagem do norte. A Guilda dos Navegantes lhe deu a bússola de prata."
+  "Example at chapter 24. Mara has mapped the party's route beyond the northern pass. The Wayfinders' Guild gave her the silver compass.": "Exemplo no capítulo 24. Mara mapeou o caminho do grupo para além da passagem do norte. A Guilda dos Navegantes lhe deu a bússola de prata.",
+  "English or Portuguese interface": "Interface em inglês ou português"
 }

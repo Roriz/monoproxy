@@ -20,7 +20,7 @@
   <meta name="keywords" content="{{ if reflect.IsSlice .Params.keywords }}{{ delimit .Params.keywords ", " }}{{ else }}{{ .Params.keywords }}{{ end }}">
   {{ end }}
   <meta name="author" content="EnrichReader">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="{{ if .Params.unlisted }}noindex, follow{{ else }}index, follow{{ end }}">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="{{ .Permalink }}">

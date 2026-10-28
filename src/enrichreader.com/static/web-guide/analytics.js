@@ -97,7 +97,7 @@ export function initializeReaderMetrics(committed = false) {
   const footer = document.querySelector('footer');
   if (footer && document.querySelector('#guide-map')) {
     const top = document.createElement('span'); top.className = 'metric-sentinel'; top.setAttribute('aria-hidden', 'true'); footer.prepend(top);
-    observe(top, 'footer_view', { app_link: [...footer.querySelectorAll('a')].some(link => /\/(?:download|app)\?/.test(link.href)) });
+    observe(top, 'footer_view', { app_link: [...footer.querySelectorAll('a')].some(link => /^\/(?:download|app)\/?$/.test(new URL(link.href).pathname)) });
   }
   if (page === 'painel') for (const section of document.querySelectorAll('[data-panel-block]')) observe(section.querySelector('h2'), 'painel_block_view', { block: section.dataset.panelBlock });
   if (page === 'painel') observe(document.querySelector('[data-app-bridge]'), 'app_cta_view', { surface: 'painel' });
@@ -192,7 +192,7 @@ document.addEventListener('click', event => {
   if (page === 'chapter' && /\/misterios(?:\/|$)/.test(new URL(link.href).pathname)) track('chapter_link', { target: /\/misterios\/\d/.test(new URL(link.href).pathname) ? 'misterio' : 'misterios' });
   if (data.pickerSource === 'previa') track('previa_action', { action: 'start', ms: Math.round(performance.now() - pagePaint) });
   if (data.talk && link.closest('[data-review-card]') && link.closest('[data-review-card]').querySelector('[data-picker-source="previa"]')) track('previa_action', { action: 'talk', ms: Math.round(performance.now() - pagePaint) });
-  if (link.href.includes('/download?') || link.href.includes('/app?')) track('app_link_click', { surface: link.closest('[data-app-bridge]') ? 'painel' : 'footer', ...(link.closest('[data-app-bridge]') ? { sheets: sheets === 0 ? '0' : sheets === 1 ? '1' : '2+' } : {}) });
+  if (/^\/(?:download|app)\/?$/.test(new URL(link.href).pathname)) track('app_link_click', { surface: link.closest('[data-app-bridge]') ? 'painel' : 'footer', ...(link.closest('[data-app-bridge]') ? { sheets: sheets === 0 ? '0' : sheets === 1 ? '1' : '2+' } : {}) });
 }, true);
 document.addEventListener('click', event => {
   if (event.target.closest('[data-dismiss-review]')) track('previa_action', { action: 'dismiss', ms: Math.round(performance.now() - pagePaint) });

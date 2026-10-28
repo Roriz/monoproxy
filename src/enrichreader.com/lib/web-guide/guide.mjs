@@ -102,12 +102,12 @@ function footer(guide, bridge = false) {
   const appAllowed = presentation.app_published === true && (guide.state === 'public' || (guide.state === 'unlisted' && guide.ownership === 'own'));
   const order = { launch: 0, store: 1, social: 2, site: 3 };
   const links = [...(presentation.links ?? [])].sort((a, b) => order[a.kind] - order[b.kind]).slice(0, 4);
-  return `<footer><section class="footer-author"><h2>De ${escape(guide.authors.join(' e '))}</h2>
+  return `${guide.state === 'public' && !appAllowed ? '<section class="app-bridge"><h2>Continue reading in EnrichReader</h2><p>Read with character profiles and atmosphere when a matching Skin is available. Check the app’s catalog for your story and edition; this browser guide does not guarantee an app Skin.</p><a class="footer-row" href="/app/">Open EnrichReader ↗</a></section>' : ''}<footer><section class="footer-author"><h2>De ${escape(guide.authors.join(' e '))}</h2>
     ${guide.ownership === 'public-domain' ? '<p class="small">Guia público de uma obra em domínio público.</p>' : approvalLine(guide) ? `<p class="small">${escape(approvalLine(guide))}</p>` : ''}<p class="small">${escape(guide.edition)}</p>
     ${links.map(link => `<a class="footer-row" href="${escape(authorURL(link, guide.series).href)}" data-author-kind="${link.kind}" target="_blank" rel="noopener">${escape(link.label)} <span aria-hidden="true">↗</span></a>`).join('')}</section>
     <section class="footer-trust"><p>Cada fato mostra o capítulo de onde saiu.</p><p class="small">Perfis em inglês. A interface pode ser exibida em inglês ou português.</p><button class="report-trigger" data-report data-scope="guia" data-label="este guia">Algo errado? Avise a gente</button></section>
     <section class="footer-share"><button class="footer-row" data-share aria-haspopup="dialog"><span aria-hidden="true">↗</span> Mandar este guia para alguém</button>
-    ${appAllowed && !bridge ? `<a class="footer-row" href="https://enrichreader.com/download?utm_source=guia&amp;utm_campaign=${encodeURIComponent(guide.series)}&amp;utm_content=footer">Também no app: o guia ao lado do texto ↗</a>` : ''}
+    ${appAllowed && !bridge ? `<a class="footer-row" href="/app/?utm_source=guia&amp;utm_campaign=${encodeURIComponent(guide.series)}&amp;utm_content=footer">Também no app: o guia ao lado do texto ↗</a>` : ''}
     ${guide.state === 'public' ? '<p class="small"><a href="/reading-guides/" lang="en">About EnrichReader reading guides (English)</a> · <a href="/guia">Ver guias publicados</a></p>' : ''}<p class="maker">feito com <a href="https://enrichreader.com/">EnrichReader</a>${guide.state === 'public' && authorsAvailable(guide.site ?? {}) ? ` · <a class="authors-line" href="/autores?guia=${guide.series}" data-authors-line>Escreve livros? Quer um guia assim?</a>` : ''}</p></section></footer>`;
 }
 

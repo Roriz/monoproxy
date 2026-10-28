@@ -120,7 +120,6 @@
   "Web Novel & LitRPG Character Reports": "Relatórios de personagens de web novels e LitRPG",
   "Explore character counts, mentions, survival timelines, and reading statistics for Lord of the Mysteries, Dungeon Crawler Carl, Omniscient Reader’s Viewpoint, and other long series. These reports contain spoilers and describe the analyzed datasets. To read with character information limited to your progress, try the": "Explore contagens de personagens, menções, linhas do tempo de sobrevivência e estatísticas de leitura de Lord of the Mysteries, Dungeon Crawler Carl, Omniscient Reader’s Viewpoint e outras séries longas. Estes relatórios contêm spoilers e descrevem os conjuntos de dados analisados. Para ler com informações de personagens limitadas ao seu progresso, experimente o",
   "with a matching Skin.": "com uma Skin compatível.",
-  "A narrative dataset mapping character survival, species selections, and entity journeys across Matt Dinniman's LitRPG series, validated by the reader community.": "Um conjunto de dados narrativos que mapeia a sobrevivência dos personagens, a seleção de espécies e as jornadas de entidades ao longo da série LitRPG de Matt Dinniman, validado pela comunidade de leitores.",
   "A narrative dataset mapping character survival, Beyonder pathway selections, and entity mention gaps across all eight volumes of Cuttlefish's fantasy masterpiece.": "Um conjunto de dados narrativos que mapeia a sobrevivência dos personagens, a seleção de caminhos Beyonder e as lacunas de menções a entidades nos oito volumes da obra de fantasia de Cuttlefish.",
   "A narrative dataset mapping character survival, beyonder pathway progression, and entity mentions across Cuttlefish That Loves Diving's western-fantasy sequel.": "Um conjunto de dados narrativos que mapeia a sobrevivência dos personagens, a progressão pelos caminhos Beyonder e as menções a entidades na sequência de fantasia ocidental de Cuttlefish That Loves Diving.",
   "A narrative dataset mapping character survival, loop progression, and entity mentions across Domagoj Kurmaic's progression fantasy masterpiece.": "Um conjunto de dados narrativos que mapeia a sobrevivência dos personagens, o avanço dos ciclos e as menções a entidades na obra de fantasia de progressão de Domagoj Kurmaic.",
@@ -251,5 +250,6 @@
   "unknown": "desconhecido",
   "Other / Concepts": "Outros / Conceitos",
   "Current Chapter": "Capítulo atual",
-  "Vol. 1, Ch. 2": "Vol. 1, cap. 2"
+  "Vol. 1, Ch. 2": "Vol. 1, cap. 2",
+  "A narrative dataset mapping character survival, species selections, and entity journeys across Matt Dinniman's LitRPG series. This is an automated, exploratory dataset; see the report’s methodology and limitations.": "Um conjunto de dados narrativos que mapeia a sobrevivência de personagens, seleções de espécies e trajetórias de entidades na série LitRPG de Matt Dinniman. Este conjunto de dados é automatizado e exploratório; consulte a metodologia e as limitações do relatório."
 }

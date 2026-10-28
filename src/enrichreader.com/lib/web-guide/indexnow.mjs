@@ -2,12 +2,15 @@ import { guideSitemapPaths } from './sitemap.mjs';
 
 // Explicit public marketing routes; private app and positioned guide URLs stay excluded.
 export const landingPaths = [
-  '/', '/app/', '/how-it-works/', '/reports/', '/reading-guides/', '/story-companion/', '/litrpg-companion/', '/spoiler-free-wiki-alternative/',
+  '/', '/app/', '/how-it-works/', '/reading-guides/', '/story-companion/', '/litrpg-companion/', '/spoiler-free-wiki-alternative/',
+];
+const eligiblePath = /^\/(?:autores|guia(?:\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/(?:mundo|(?:pessoa|lugar|organizacao|objeto|outro)\/[a-z0-9]+(?:-[a-z0-9]+)*))?)?)$/;
+// Previously indexed reports remain eligible only for removal notifications.
+const retiredPaths = ['/reports/',
   '/lotm/', '/coi/', '/dcc/', '/orv/', '/the_wandering_inn/', '/ri/', '/tbate/',
   '/mother_of_learning/', '/he_who_fights_with_monsters/', '/defiance_of_the_fall/', '/trash_of_the_count_family/',
 ];
-const eligiblePath = /^\/(?:autores|guia(?:\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/(?:mundo|(?:pessoa|lugar|organizacao|objeto|outro)\/[a-z0-9]+(?:-[a-z0-9]+)*))?)?)$/;
-const isEligiblePath = path => landingPaths.includes(path) || eligiblePath.test(path);
+const isEligiblePath = path => landingPaths.includes(path) || retiredPaths.includes(path) || eligiblePath.test(path);
 export function indexNowURLs(guides, site, previous = []) {
   const current = [...landingPaths, ...guideSitemapPaths(guides, site)];
   if (!Array.isArray(previous) || previous.some(path => typeof path !== 'string' || !isEligiblePath(path))) throw new Error('Invalid previous public URL manifest');

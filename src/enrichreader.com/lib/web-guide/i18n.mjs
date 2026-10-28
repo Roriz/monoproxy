@@ -29,7 +29,9 @@ const templates = Object.entries(webGuideTranslations)
     const pattern = norm(portuguese);
     const names = [...pattern.matchAll(/\{([a-zA-Z][\w]*)\}/g)].map(match => match[1]);
     const pieces = pattern.split(/\{[a-zA-Z][\w]*\}/g).map(piece => piece.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-    return { english, names, regex: new RegExp(`^${pieces.join('([\\s\\S]+?)')}$`) };
+    const captures = names.map(name => name === 'count' ? '(\\d[\\d,.]*)' : '([\\s\\S]+?)');
+    const source = pieces.map((piece, index) => piece + (captures[index] ?? '')).join('');
+    return { english, names, regex: new RegExp(`^${source}$`) };
   });
 function translate(value) {
   const key = norm(value);
@@ -92,7 +94,21 @@ function translateHTML(html) {
 }
 
 export function localizeWebGuideHTML(html, { runtime = true } = {}) {
-  let result = translateHTML(html).replace(/(<html\b[^>]*\blang=)(['"])pt-BR\2/i, '$1"en"');
+  const localizedSchema = html.replace(/(<script\b[^>]*type="application\/ld\+json"[^>]*>)([\s\S]*?)(<\/script>)/gi, (_whole, open, data, close) => {
+    const schema = JSON.parse(data);
+    const visit = value => {
+      if (!value || typeof value !== 'object') return;
+      if (['WebPage', 'CollectionPage'].includes(value['@type'])) {
+        value.inLanguage = 'en';
+        if (typeof value.name === 'string') value.name = translate(value.name) ?? value.name;
+      }
+      if (value['@type'] === 'ListItem' && typeof value.name === 'string') value.name = translate(value.name) ?? value.name;
+      Object.values(value).forEach(visit);
+    };
+    visit(schema);
+    return open + JSON.stringify(schema).replace(/</g, '\\u003c') + close;
+  });
+  let result = translateHTML(localizedSchema).replace(/(<html\b[^>]*\blang=)(['"])pt-BR\2/i, '$1"en"');
   result = result.replace(/(<meta\s+property="og:locale"\s+content=")pt_BR("\s*\/?\s*>)/i, '$1en_US$2');
   if (!runtime || !/<\/head>/i.test(result) || !/<\/body>/i.test(result)) return result;
   const boot = `<script>window.EnrichReaderTranslations={shared:{},page:${JSON.stringify(webGuideTranslations).replace(/</g, '\\u003c')}};</script><script>${runtimeSource}</script><script>const syncLocale=()=>{const locale=document.querySelector('meta[property="og:locale"]');if(locale)locale.content=document.documentElement.lang==='pt-BR'?'pt_BR':'en_US'};syncLocale();document.addEventListener('languagechange',syncLocale);</script>`;

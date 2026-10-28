@@ -2,9 +2,7 @@
   "EnrichReader: Your Spoiler-Free Story Companion": "EnrichReader: seu companheiro de leitura sem spoilers",
   "Forgot who someone is? EnrichReader is a spoiler-free story companion that shows characters and lore only up to the chapter you are reading.": "Esqueceu quem é alguém? O EnrichReader é um companheiro de leitura sem spoilers que mostra personagens e informações do universo somente até o capítulo que você está lendo.",
   "The end of static text": "O fim do texto estático",
-  "Every character, remembered": "Lembre-se de todos os personagens",
   "Your spoiler-free companion": "Seu companheiro sem spoilers",
-  "Characters, recaps and lore that follow your chapter, in the app or in a reading guide on the web": "Personagens, resumos e informações do universo que acompanham seu capítulo, no app ou em um guia de leitura na web",
   "Open EnrichReader app options": "Abrir opções do EnrichReader",
   "Open EnrichReader": "Abrir o EnrichReader",
   "Explore reading guides": "Conheça os guias de leitura",
@@ -76,5 +74,15 @@
   "Get Android App": "Baixar o app para Android",
   "Install Web App": "Instalar o app web",
   "Launch Web Reader": "Abrir leitor web",
-  ", who mourns his maker.": ", que lamenta a morte de seu criador."
+  ", who mourns his maker.": ", que lamenta a morte de seu criador.",
+  "Remember the cast.": "Lembre de cada personagem.",
+  "Stay in the story.": "Continue na história.",
+  "Read with character profiles and atmosphere that follow your progress in supported stories.": "Leia com perfis de personagens e ambientação que acompanham seu progresso nas histórias compatíveis.",
+  "EnrichReader is a reading app for long stories. With a matching Skin, character profiles and lore follow your reading progress. Atmosphere effects are available in supported Skins.": "O EnrichReader é um aplicativo de leitura para histórias longas. Com uma Skin correspondente, perfis de personagens e informações do universo acompanham seu progresso. Efeitos de ambientação estão disponíveis nas Skins compatíveis.",
+  "You can import EPUB, PDF and TXT files that you obtained lawfully and that have no DRM. Compatibility can vary by edition and PDF layout. Skins are separate companion data, so you still need your own copy of the book.": "Você pode importar arquivos EPUB, PDF e TXT obtidos legalmente e sem DRM. A compatibilidade pode variar conforme a edição e o layout do PDF. Skins são dados complementares separados: você ainda precisa da sua cópia do livro.",
+  "Check the in-app Skin catalog for your story and edition. Ordinary reading works without a Skin, but companion features need a match. You can request a missing companion in the app; requests have no promised delivery date.": "Confira no catálogo de Skins do app a sua história e edição. A leitura funciona sem Skin, mas os recursos de acompanhamento precisam de uma correspondente. Você pode solicitar um companheiro no app, sem prazo de entrega prometido.",
+  "Is EnrichReader free?": "O EnrichReader é gratuito?",
+  "Reading, Skins and sync are currently free, with no reader paywalls or paid feature tiers.": "A leitura, as Skins e a sincronização são gratuitas atualmente, sem barreiras de pagamento ou planos pagos para leitores.",
+  "Current reader terms": "Condições atuais para leitores",
+  "Yes. Your books are stored on your device. Install the app and download the book and any Skin before you go offline. Ordinary reading and sync do not upload book text. If you submit a chapter-problem report, it includes that chapter’s text. See our": "Sim. Seus livros ficam no seu dispositivo. Instale o app e baixe o livro e a Skin antes de ficar offline. A leitura comum e a sincronização não enviam o texto dos livros. Se você enviar um relato de problema em um capítulo, ele inclui o texto daquele capítulo. Consulte nossa"
 }
