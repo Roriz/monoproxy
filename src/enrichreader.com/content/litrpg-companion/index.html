@@ -1,10 +1,11 @@
 ---
-title: "LitRPG & Web Novel Reading Companion | EnrichReader"
-description: "Keep track of characters, items, and lore in supported LitRPG and web novel stories, with profiles limited to your reading position."
+title: "LitRPG Companion App: Character Tracker for Web Novels | EnrichReader"
+description: "Keep track of characters, factions and lore in long LitRPG and web novel series. Profiles stop at your reading position in stories with a matching Skin."
 layout: companion
 body_class: companion-page
 stylesheets:
 - "/style/companion.css"
+- "/style/how-it-works.css"
 scripts:
 - "/litrpg.js"
 scripts_defer: true
@@ -12,9 +13,9 @@ scripts_defer: true
 <div class="companion-landing">
   <section class="companion-hero companion-shell" aria-labelledby="companion-title">
     <div class="companion-hero-copy">
-      <p class="companion-eyebrow"><span aria-hidden="true"></span> For LitRPG &amp; long web novels</p>
-      <h1 id="companion-title">Remember the cast.<br><em>Keep your place<br>in the story.</em></h1>
-      <p class="companion-intro">You've seen the name before, but you can't place it. EnrichReader shows character profiles and lore up to your reading position in supported stories.</p>
+      <p class="companion-eyebrow"><span aria-hidden="true"></span> LitRPG reading companion</p>
+      <h1 id="companion-title">Remember the cast<br><em>of your LitRPG and<br>web novel series.</em></h1>
+      <p class="companion-intro">You've seen the name before, but you can't place it. EnrichReader is a reading app with a character tracker built in: tap a name to see what the story has told you about them so far, and nothing after. It works in stories with a matching Skin.</p>
       <div class="companion-actions">
         <a class="companion-button companion-button-primary" href="/app/">Open EnrichReader <span aria-hidden="true">↗</span></a>
         <a class="companion-button companion-button-secondary" href="/reading-guides/">Browse reading guides <span aria-hidden="true">↗</span></a>
@@ -36,7 +37,7 @@ scripts_defer: true
         <span>Change chapters to see her profile update.</span>
         <div role="group" aria-label="Example reading position"><button type="button" data-demo-chapter="12" aria-pressed="true">Chapter 12</button><button type="button" data-demo-chapter="24" aria-pressed="false">Chapter 24</button></div>
       </div>
-        <div class="companion-profile-heading"><span class="companion-monogram" aria-hidden="true">MV</span><div><p>Character profile</p><h2>Mara Venn</h2></div></div>
+        <div class="companion-profile-heading"><span class="companion-monogram" aria-hidden="true">MV</span><div><p>Character profile</p><strong class="companion-profile-name">Mara Venn</strong></div></div>
         <p class="companion-profile-description" data-demo-description>The party hired Mara to guide them through the northern pass. She knows the old roads and carries a silver compass.</p>
         <p class="companion-profile-role" data-demo-role>Mountain guide</p>
         <p class="companion-profile-boundary"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m12 3 8 4v6c0 4-8 8-8 8s-8-4-8-8V7l8-4Z"/><path d="m8 12 3 3 5-6"/></svg><span data-demo-boundary>This profile shows details revealed by chapter 12.</span></p>
@@ -51,8 +52,9 @@ scripts_defer: true
   <section class="companion-chapter companion-shell" id="how-it-works" aria-labelledby="progress-heading">
     <div class="companion-section-heading"><p class="companion-eyebrow">01 <span class="companion-eyebrow-rule" aria-hidden="true"></span> When you forget a name</p><h2 id="progress-heading">Look up a character<br>without reading ahead.</h2></div>
     <div class="companion-progress-copy">
+      <p>Long LitRPG and progression fantasy series can run for hundreds of chapters across years of releases. Characters pick up new names, classes and titles, minor faces return arcs later, and a pause between books means relearning who belongs to which faction.</p>
       <p>A wiki page can give away a character's fate before you've finished the book. With a matching guide or Skin, EnrichReader limits what you see to your reading position. If you're returning after a break, check your saved position first, then look up the people, places and lore you've already encountered.</p>
-      <a class="companion-text-link" href="/spoiler-free-wiki-alternative/">How spoiler-free lookups work <span aria-hidden="true">↗</span></a>
+      <a class="companion-text-link" href="/spoiler-free-wiki-alternative/">Compare spoiler-free ways to look someone up <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 
@@ -78,12 +80,24 @@ scripts_defer: true
   <section class="companion-before companion-shell" aria-labelledby="before-heading">
     <div><p class="companion-eyebrow">03 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Books, accounts and privacy</p><h2 id="before-heading">Before you start.</h2><p>You'll need your own book, and a matching guide or Skin for companion features.</p></div>
     <dl class="companion-facts">
-      <div><dt>Current reader access</dt><dd>Reading, Skins and sync are currently free, with no reader paywalls or paid feature tiers. <a href="/terms-of-service/#free-service-sync">Current reader terms</a>.</dd></div>
+      <div><dt>Current reader access</dt><dd>Reading, Skins and sync are currently free, with no reader paywalls or paid feature tiers, as set out in the <a href="/terms-of-service/#free-service-sync">current reader terms</a>.</dd></div>
       <div><dt>Check your story</dt><dd>Check browser guides and the app's Skin catalog separately. A published guide doesn't guarantee an app Skin for the same book.</dd></div>
       <div><dt>Bring your book</dt><dd>You'll need your own lawfully obtained copy of the novel. The reader opens DRM-free book files; EnrichReader doesn't provide the books.</dd></div>
       <div><dt>Reading &amp; accounts</dt><dd>You can read your books without an account. Sign in to install Skins or sync your library. Before you go offline, download your book and any Skin you need.</dd></div>
       <div><dt>Your book stays on your device</dt><dd>The app stores imported books on your device. If you report a chapter problem, the report includes that chapter's text. The <a href="/privacy-policy/">privacy policy</a> explains sync, usage data and the settings you can change.</dd></div>
     </dl>
+  </section>
+
+  <section id="faq" class="hiw-section companion-shell" aria-labelledby="faq-heading">
+    <div class="companion-section-heading"><p class="companion-eyebrow">04 <span class="companion-eyebrow-rule" aria-hidden="true"></span> Questions from LitRPG readers</p><h2 id="faq-heading">LitRPG companion FAQ.</h2></div>
+    <div class="hiw-features">
+      <article><h3>Which LitRPG and web novel series are supported?</h3><p>Those with a Skin in the app's catalog. Coverage isn't universal and changes over time, so check the catalog for your series and edition. If yours is missing, request a companion in the app; requests have no promised delivery date.</p></article>
+      <article><h3>Can I use it for a story I read on Royal Road or another serial site?</h3><p>The app reads book files you have, in EPUB, PDF or TXT without DRM. It doesn't connect to serial websites. A browser guide works beside any reader, but guides exist only for the books listed on the reading guides page.</p></article>
+      <article><h3>I took a break between books. Can it catch me up?</h3><p>With a matching Skin, open the book at your saved position. The Codex flags what's new since your last session, and when the Skin includes story data, a briefing recaps the current arc and the leads still open.</p><a class="companion-text-link" href="/story-companion/">Coming back after a break <span aria-hidden="true">↗</span></a></article>
+      <article><h3>Can I look up a character I haven't met yet?</h3><p>Search only finds people you've already run into, and the app asks before showing anything past your position. To see more, loosen the spoiler shield to the end of your volume, or switch it off for a reread.</p></article>
+      <article><h3>How is this different from a fan wiki?</h3><p>A wiki is written from the latest chapter and covers far more series. The companion covers fewer stories, but it stops at your position and sits inside the reader, so you stay on the page.</p></article>
+      <article><h3>What if a profile is wrong?</h3><p>Companion data can contain errors, including unintended spoilers. Every profile has a report option. A report includes that chapter's text so the mistake can be checked and fixed in the Skin.</p></article>
+    </div>
   </section>
 
   <section class="companion-final companion-shell" aria-labelledby="continue-heading">

@@ -1,15 +1,44 @@
+# EnrichReader crawl rules.
+#
+# Public pages are open to search engines and to AI search, assistant and training crawlers.
+#
+# Spoiler boundary: reading-guide URLs that carry a reading position (?l= book, ?c= chapter) show
+# story details up to that point. They answer "noindex, nofollow" (HTML and X-Robots-Tag) and
+# point their canonical at the clean guide URL. Search engines may fetch them to see that. AI
+# crawlers, which don't all honour noindex, are asked not to fetch them at all. A group below
+# replaces the "*" group for the crawlers it names, so each group repeats every rule.
+
+# AI crawlers and AI-assistant fetchers (OpenAI, Anthropic, Perplexity, Google, Apple, Common
+# Crawl, Amazon, Meta, ByteDance, DuckDuckGo, Mistral, Cohere).
 User-agent: GPTBot
 User-agent: OAI-SearchBot
-User-agent: PerplexityBot
+User-agent: ChatGPT-User
 User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
 User-agent: CCBot
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: Bytespider
+User-agent: DuckAssistBot
+User-agent: MistralAI-User
+User-agent: cohere-ai
+Allow: /
 Disallow: /*?l=
 Disallow: /*&l=
 Disallow: /*?c=
 Disallow: /*&c=
+Disallow: /_ops/
 
+# Everyone else, including search engines.
 User-agent: *
 Allow: /
+Disallow: /_ops/
 
 Sitemap: https://enrichreader.com/sitemap.xml
 Sitemap: https://enrichreader.com/guia/sitemap.xml

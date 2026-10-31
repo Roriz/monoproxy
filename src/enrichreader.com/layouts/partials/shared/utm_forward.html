@@ -22,7 +22,8 @@
       } catch (e) {}
     }
 
-    if (!tags.toString() && !ref) return;
+    var tagQuery = tags.toString();
+    if (!tagQuery && !ref) return;
 
     function rewrite(selector, apply) {
       document.querySelectorAll(selector).forEach(function (link) {
@@ -39,10 +40,11 @@
 
     rewrite('a[href^="https://app.enrichreader.com"]', forward);
     rewrite('a[href="/app/"]', forward);
-    if (tags.toString()) {
-      rewrite('a[href^="https://play.google.com/store/apps/details?id=com.enrichreader.app"]', function (target) {
-        target.set('referrer', tags.toString());
-      });
-    }
+    // Play only reports utm_* in the install referrer, so a visit with just a referring site
+    // is passed on as a referral from that site.
+    var install = tagQuery || new URLSearchParams({ utm_source: ref, utm_medium: 'referral' }).toString();
+    rewrite('a[href^="https://play.google.com/store/apps/details?id=com.enrichreader.app"]', function (target) {
+      target.set('referrer', install);
+    });
   })();
 </script>

@@ -1,0 +1,14 @@
+{{/* The questions and answers in a page's visible FAQ: the <section id="faq"> in its content, written
+   as <h3> + <p> or <dt> + <dd> pairs. Read from the rendered page so the FAQPage data and /llms.txt
+   always say exactly what readers see. A page without that section returns an empty list. */}}
+{{ $items := slice }}
+{{ with findRE `(?s)<section\b[^>]*\bid="faq"[^>]*>.*?</section>` .Content 1 }}
+  {{ range findRESubmatch `(?s)<(?:h3|dt)\b[^>]*>(.*?)</(?:h3|dt)>\s*<(?:p|dd)\b[^>]*>(.*?)</(?:p|dd)>` (index . 0) }}
+    {{ $question := index . 1 | plainify | htmlUnescape | replaceRE `\s+` " " | replaceRE `^ | $` "" }}
+    {{ $answer := index . 2 | plainify | htmlUnescape | replaceRE `\s+` " " | replaceRE `^ | $` "" }}
+    {{/* Same answer with its links kept, as Markdown, for llms.txt. */}}
+    {{ $markdown := index . 2 | replaceRE `(?s)<a\b[^>]*\bhref="/([^"]*)"[^>]*>(.*?)</a>` (printf "[$2](%s$1)" site.BaseURL) | replaceRE `(?s)<a\b[^>]*\bhref="(https?://[^"]*)"[^>]*>(.*?)</a>` "[$2]($1)" | plainify | htmlUnescape | replaceRE `\s+` " " | replaceRE `^ | $` "" }}
+    {{ if and $question $answer }}{{ $items = $items | append (dict "question" $question "answer" $answer "answer_markdown" $markdown) }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ return $items }}

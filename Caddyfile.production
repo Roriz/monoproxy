@@ -72,9 +72,22 @@ enrichreader.com {
 			header_up X-Web-Guide-Client-IP {remote_host}
 		}
 	}
+	# Static Hugo site: a file, or a directory with an index.html (file_server redirects /app to /app/).
+	# No /index.html fallback: unknown URLs must return a real 404, not the homepage with a 200
+	# (that made every typo, and paths such as /llms.txt before it existed, a soft 404).
 	handle {
-		try_files {path} {path}/ /index.html
+		try_files {path} {path}/
 		file_server
+	}
+
+	# Static-site 404s get the generated /404.html with the 404 status kept. Responses from the
+	# web-guide service above are passed through as the service sent them.
+	handle_errors {
+		@notFound expression {err.status_code} == 404
+		handle @notFound {
+			rewrite * /404.html
+			file_server
+		}
 	}
 }
 

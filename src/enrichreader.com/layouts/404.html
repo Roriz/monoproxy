@@ -1,0 +1,12 @@
+{{ define "main" }}
+<section class="pt-40 pb-24 px-6 max-w-3xl mx-auto text-center">
+  <h1 class="text-4xl md:text-5xl font-bold serif italic text-cream-100 leading-tight mb-6">We couldn’t find that page.</h1>
+  <p class="text-neutral-300 leading-relaxed mb-10">The link may be old or mistyped. These pages are a good place to continue:</p>
+  <ul class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 text-sm">
+    <li><a class="text-gold-500 underline" href="/">EnrichReader home</a></li>
+    <li><a class="text-gold-500 underline" href="/how-it-works/">How it works</a></li>
+    {{ if partialCached "shared/public-guides.html" . }}<li><a class="text-gold-500 underline" href="/reading-guides/">Reading guides</a></li>{{ end }}
+    <li><a class="text-gold-500 underline" href="/app/">Get the app</a></li>
+  </ul>
+</section>
+{{ end }}

@@ -57,7 +57,7 @@ function setFeatured(card, btn, platform) {
   if (desc) {
     desc.textContent = platform === 'android' ? "Native fullscreen reading with offline book storage." :
                        platform === 'ios' ? "Open in Safari and add the web app to your Home Screen." :
-                       "Instant, zero-install desktop reading with local book loading.";
+                       "Runs in a modern browser with nothing to install. Books load from your device.";
   }
 }
 
@@ -90,7 +90,7 @@ function setStandard(card, btn, platform) {
   if (desc) {
     desc.textContent = platform === 'android' ? "Native Android app with offline book storage." :
                        platform === 'ios' ? "Open in Safari and add the web app to your Home Screen." :
-                       "Instant, zero-install desktop reading with local book loading.";
+                       "Runs in a modern browser with nothing to install. Books load from your device.";
   }
 }
 

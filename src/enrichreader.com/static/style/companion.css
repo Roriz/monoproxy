@@ -49,7 +49,7 @@
 .companion-profile-heading { display: flex; gap: 14px; align-items: center; margin-block: 20px 15px; }
 .companion-monogram { width: 44px; height: 48px; display: grid; place-items: center; border: 1px solid #625638; border-radius: 22px 22px 4px 4px; font-family: var(--font-master, Georgia, serif); font-size: 15px; color: var(--companion-gold); background: #d3b46d08; }
 .companion-profile-heading p { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #a8abb0; }
-.companion-profile-heading h2 { font-family: var(--font-master, Georgia, serif); font-weight: 400; font-size: 26px; line-height: 1.2; }
+.companion-profile-heading h2, .companion-profile-name { display: block; font-family: var(--font-master, Georgia, serif); font-weight: 400; font-size: 26px; line-height: 1.2; }
 .companion-profile-description { min-height: 4.8em; font-size: 14px; line-height: 1.6; color: #b7bbc1; margin-bottom: 14px; }
 .companion-profile-boundary { display: flex; align-items: center; gap: 8px; border-top: 1px solid var(--companion-line); padding-top: 14px; color: #b5c4bb; font-size: 11px; }
 .companion-profile-boundary svg { flex-shrink: 0; }

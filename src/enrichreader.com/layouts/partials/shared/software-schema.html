@@ -1,15 +1,52 @@
+{{/* Structured data, one @graph per page. The organization, site and app are described on the home
+   page and referenced from other pages by @id. Every value must match something the page or the
+   site footer visibly says: no ratings, reviews, partners or claims that readers can't see. */}}
+{{ $description := site.Params.description }}
 {{ $organizationRef := dict "@id" ("/#organization" | absURL) }}
+{{ $websiteRef := dict "@id" ("/#website" | absURL) }}
+{{ $appRef := dict "@id" ("/#app" | absURL) }}
+{{ $graph := slice }}
 {{ if .IsHome }}
-{{ $organization := dict "@type" "Organization" "@id" ("/#organization" | absURL) "name" "EnrichReader" "legalName" "ENRICH DESENVOLVIMENTO DE SOFTWARES LTDA." "taxID" "65.786.669/0001-04" "url" site.BaseURL }}
-{{ $website := dict "@type" "WebSite" "@id" ("/#website" | absURL) "name" "EnrichReader" "url" site.BaseURL "publisher" $organizationRef }}
-{{ $app := dict "@type" "SoftwareApplication" "@id" ("/#app" | absURL) "name" "EnrichReader" "applicationCategory" "BookApplication" "operatingSystem" "Android, iOS (web app), Web" "description" "Spoiler-free story companion app with chapter-aware character profiles and lore through matching Skins for supported stories." "url" ("/app/" | absURL) "downloadUrl" "https://play.google.com/store/apps/details?id=com.enrichreader.app" "publisher" $organizationRef }}
-<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $organization $website $app) | jsonify | safeJS }}</script>
+  {{/* Real profiles only: the X account and the founder's LinkedIn linked from the site footer. The
+     Play Store listing describes the app, so it is the app's sameAs, not the organization's. */}}
+  {{ $founder := dict "@type" "Person" "name" "Radamés Roriz" "sameAs" (slice "https://www.linkedin.com/in/radames-roriz/") }}
+  {{ $address := dict "@type" "PostalAddress" "addressLocality" "São José dos Campos" "addressRegion" "SP" "addressCountry" "BR" }}
+  {{ $organization := dict "@type" "Organization" "@id" ("/#organization" | absURL) "name" "EnrichReader" "legalName" "ENRICH DESENVOLVIMENTO DE SOFTWARES LTDA." "taxID" "65.786.669/0001-04" "url" site.BaseURL "description" $description "logo" (dict "@type" "ImageObject" "url" ("/assets/logo.png" | absURL) "width" 322 "height" 253) "email" "hello@enrichreader.com" "address" $address "founder" $founder "sameAs" (slice "https://x.com/EnrichReader") }}
+  {{ $website := dict "@type" "WebSite" "@id" ("/#website" | absURL) "name" "EnrichReader" "url" site.BaseURL "description" $description "inLanguage" "en" "publisher" $organizationRef }}
+  {{/* Price: reading, Skins and sync are currently free (home FAQ, /app/, Terms). Not a permanent promise. */}}
+  {{ $play := "https://play.google.com/store/apps/details?id=com.enrichreader.app" }}
+  {{ $offer := dict "@type" "Offer" "price" "0" "priceCurrency" "USD" "url" ("/app/" | absURL) }}
+  {{ $app := dict "@type" "SoftwareApplication" "@id" ("/#app" | absURL) "name" "EnrichReader" "applicationCategory" "BookApplication" "operatingSystem" "Android, iOS (web app), Web" "description" "Reading app for long stories. With a matching Skin for a supported story, character profiles and lore follow your reading progress." "url" ("/app/" | absURL) "downloadUrl" $play "sameAs" (slice $play) "offers" $offer "publisher" $organizationRef }}
+  {{ $graph = slice $organization $website $app }}
 {{ end }}
-{{ if eq .RelPermalink "/reading-guides/" }}
-{{ $items := slice }}
-{{ range $index, $guide := partialCached "shared/public-guides.html" . }}
-  {{ $items = $items | append (dict "@type" "ListItem" "position" (add $index 1) "url" ($guide.url | absURL) "name" (printf "%s reading guide" $guide.title)) }}
+
+{{/* The page itself, for indexable pages. Spoiler-heavy series reports are unlisted (noindex) and
+   carry their own Dataset data instead (report-schema.html). */}}
+{{ if not (or .Params.unlisted (eq .Kind "404")) }}
+  {{ $page := dict "@type" "WebPage" "@id" (print .Permalink "#webpage") "url" .Permalink "name" .Title "description" (.Description | default $description) "inLanguage" "en" "isPartOf" $websiteRef "publisher" $organizationRef }}
+  {{ if not .Lastmod.IsZero }}{{ $page = merge $page (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05-07:00")) }}{{ end }}
+  {{ if .IsHome }}
+    {{ $page = merge $page (dict "about" $appRef) }}
+  {{ else }}
+    {{ $name := .Params.linkTitle | default (replaceRE `\s*\|\s*EnrichReader\s*$` "" .Title) }}
+    {{ $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "EnrichReader" "item" site.BaseURL) (dict "@type" "ListItem" "position" 2 "name" $name "item" .Permalink) }}
+    {{ $page = merge $page (dict "breadcrumb" (dict "@type" "BreadcrumbList" "itemListElement" $crumbs)) }}
+  {{ end }}
+  {{ if eq .RelPermalink "/reading-guides/" }}
+    {{ $items := slice }}
+    {{ range $index, $guide := partialCached "shared/public-guides.html" . }}
+      {{ $items = $items | append (dict "@type" "ListItem" "position" (add $index 1) "url" ($guide.url | absURL) "name" (printf "%s reading guide" $guide.title)) }}
+    {{ end }}
+    {{ $page = merge $page (dict "@type" "CollectionPage" "mainEntity" (dict "@type" "ItemList" "itemListElement" $items)) }}
+  {{ end }}
+  {{/* FAQPage only for questions visibly answered on the page (faq-items.html reads them from it). */}}
+  {{ with partial "shared/faq-items.html" . }}
+    {{ $questions := slice }}
+    {{ range . }}{{ $questions = $questions | append (dict "@type" "Question" "name" .question "acceptedAnswer" (dict "@type" "Answer" "text" .answer)) }}{{ end }}
+    {{ $page = merge $page (dict "@type" "FAQPage" "mainEntity" $questions) }}
+  {{ end }}
+  {{ $graph = $graph | append $page }}
 {{ end }}
-{{ $collection := dict "@context" "https://schema.org" "@type" "CollectionPage" "url" .Permalink "name" .Title "description" .Description "inLanguage" "en" "isPartOf" (dict "@id" ("/#website" | absURL)) "publisher" $organizationRef "mainEntity" (dict "@type" "ItemList" "itemListElement" $items) }}
-<script type="application/ld+json">{{ $collection | jsonify | safeJS }}</script>
+{{ with $graph }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" . | jsonify | safeJS }}</script>
 {{ end }}

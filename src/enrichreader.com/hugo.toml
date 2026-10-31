@@ -8,7 +8,28 @@ publishDir = '../../public/enrichreader.com'
 # Disable automatic RSS and taxonomies generation to keep output clean and strictly matching current files
 disableKinds = ["RSS", "taxonomy"]
 
+# Page dates for the sitemap and structured data come from the last commit that touched the page,
+# unless the front matter sets `lastmod` explicitly. Pages are never given a date they don't have.
+enableGitInfo = true
+
+[frontmatter]
+  lastmod = ['lastmod', ':git', 'date']
+
+# /llms.txt: a plain-text map of the public pages for AI tools (layouts/index.llms.txt). Built from
+# page titles, descriptions and the visible FAQ, so it can't drift from what the pages say.
+[outputFormats.llms]
+  mediaType = 'text/plain'
+  baseName = 'llms'
+  isPlainText = true
+  notAlternative = true
+
+[outputs]
+  home = ['HTML', 'llms']
+
 [params]
+  # Fallback description for pages without their own, and the description in the organization data.
+  description = 'EnrichReader is a reading app for long stories, with character profiles and lore that follow your progress in supported books.'
+
   # Visit counting with Umami on our own server (privacy policy, sections 3.3 and 5). Empty: the
   # site loads no statistics script at all. Set to the website ID from the Umami dashboard.
   umamiHost = 'https://stats.enrichreader.com'

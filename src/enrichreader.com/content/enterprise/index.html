@@ -157,6 +157,8 @@ scripts:
     <p class="enterprise-kicker">Questions</p>
     <h2 class="enterprise-section-title">Before you ask.</h2>
     <dl class="enterprise-faq">
+      <dt>Who is this for?</dt>
+      <dd>Authors and small publishers of long fiction with a big cast: web serials, LitRPG, progression fantasy and multi-book series. If your readers ask "wait, who is this again?", it's a fit.</dd>
       <dt>What does it cost?</dt>
       <dd>A one-time fee per book, no subscription. I quote it on the call, before you decide.</dd>
       <dt>Does it use AI? How do I review the results?</dt>
@@ -192,3 +194,19 @@ scripts:
 </section>
 
 <p class="enterprise-reader-strip px-6">Reading, not writing? <a href="/">Open EnrichReader <span aria-hidden="true">→</span></a></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://enrichreader.com/enterprise/#service",
+  "name": "Spoiler-free reading guide for your book",
+  "serviceType": "Spoiler-free reading guide creation",
+  "description": "A spoiler-free reading guide for an author's or publisher's book, published on the web with the book's cover and buy links. Readers only see what they've reached, and the author approves a private preview before publication.",
+  "url": "https://enrichreader.com/enterprise/",
+  "provider": { "@id": "https://enrichreader.com/#organization" },
+  "audience": { "@type": "BusinessAudience", "audienceType": "Authors and small publishers of long fiction" },
+  "offers": { "@type": "Offer", "description": "A one-time fee per book, no subscription, quoted on a call before you decide." },
+  "subjectOf": { "@id": "https://enrichreader.com/enterprise/#webpage" }
+}
+</script>

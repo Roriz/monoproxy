@@ -39,6 +39,20 @@ test('parameterized guide labels preserve names, counts, and whitespace around i
   assert.match(result, />  Something wrong\?  </);
 });
 
+test('chapter spellings, attached articles and titled labels resolve to existing dictionary entries', () => {
+  const html = '<html lang="pt-BR"><head><title>Personagens · Frankenstein · Guia sem spoiler</title></head><body><p>Ver o cap. 7 inteiro →</p><p>Quem estreou no cap. 1</p><p>✦ novo no capítulo 23</p><p>Ainda sem resposta até o cap. 7.</p><p>Quem ainda não leu até o cap. 8 pode ver spoilers.</p><p>O que se sabe de cada uma até o fim do Livro 1. As que avançaram por último vêm primeiro.</p><p class="preview-role"><span>Protagonista</span> · </p><button data-label="Onde você parou">x</button></body></html>';
+  const result = localizeWebGuideHTML(html, { runtime: false });
+  assert.match(result, /<title>Characters · Frankenstein · Spoiler-free guide<\/title>/);
+  assert.match(result, /Read the whole Chapter 7 →/);
+  assert.match(result, /Who debuted in Chapter 1/);
+  assert.match(result, /New in Chapter 23/);
+  assert.match(result, /No answer yet through Chapter 7\./);
+  assert.match(result, /Readers who haven’t reached Chapter 8 may see spoilers\./);
+  assert.match(result, /through the end of Book 1\./);
+  assert.match(result, /<span>Protagonist<\/span>/);
+  assert.match(result, /data-label="Where did you stop\?"/);
+});
+
 const readData = name => JSON.parse(readFileSync(new URL(`../../data/web-guide/${name}.json`, import.meta.url), 'utf8'));
 const frankenstein = readData('frankenstein');
 // Synthetic first-item variants: a chapter, a multi-book label, and a numbered part.
@@ -103,7 +117,7 @@ test('public entry metadata matches English HTML and guides offer an honest app 
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
   try {
-    for (const path of ['/guia', '/autores', '/guia/frankenstein', '/guia/frankenstein?l=1&c=12', '/guia/frankenstein/pessoa/the-traveller?l=1&c=12']) {
+    for (const path of ['/guia', '/autores', '/guia/frankenstein', '/guia/frankenstein?l=1&c=12', '/guia/frankenstein/pessoa/the-traveller?l=1&c=12', '/guia/frankenstein/mundo', '/guia/frankenstein/tempo?l=1&c=12']) {
       const response = await fetch(base + path);
       const html = await response.text();
       assert.equal(response.status, 200);
@@ -118,8 +132,14 @@ test('public entry metadata matches English HTML and guides offer an honest app 
           assert.doesNotMatch(node.name, /Guia|Personagens/);
         }
       }
+      for (const [, raw] of html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)) {
+        for (const node of JSON.parse(raw)['@graph'] ?? []) {
+          if (node['@type'] === 'BreadcrumbList') for (const item of node.itemListElement) assert.doesNotMatch(item.name, /Guia|Personagens/);
+        }
+      }
+      if (/og:site_name/.test(html)) assert.match(html, /<meta property="og:site_name" content="EnrichReader">/);
       if (!path.startsWith('/guia/frankenstein')) continue;
-      assert.match(html, /href="\/app\/"/);
+      assert.match(html, /href="\/app\/\?utm_source=guia&amp;utm_campaign=frankenstein&amp;utm_content=app_bridge"/);
       assert.match(html, /does not guarantee an app Skin/);
       if (path.includes('?')) assert.match(html, /content="noindex, nofollow"/);
     }

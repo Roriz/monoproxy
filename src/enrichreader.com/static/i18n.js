@@ -291,6 +291,8 @@
   function setLanguage(language, persist) {
     currentLanguage = languageFrom(language) || 'en';
     document.documentElement.lang = currentLanguage;
+    const locale = document.querySelector('meta[property="og:locale"]');
+    if (locale) locale.setAttribute('content', currentLanguage === 'pt-BR' ? 'pt_BR' : 'en_US');
     updateSelectors();
     translateTree(document.documentElement);
 

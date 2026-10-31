@@ -48,6 +48,10 @@
       "bytes": 44266
     }
   },
+  "same_as": {
+    "book": ["https://en.wikipedia.org/wiki/Frankenstein"],
+    "authors": { "Mary Shelley": ["https://en.wikipedia.org/wiki/Mary_Shelley"] }
+  },
   "public_domain_example": true,
   "example_basis": "Owner-authorized public-domain first example; no author approval implied."
 }

@@ -11,7 +11,9 @@ const decode = value => value.replace(/&(?:amp|lt|gt|quot|#39|apos);/g, entity =
 })[entity]);
 const escapeText = value => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const escapeAttribute = value => escapeText(value).replace(/"/g, '&quot;');
-const norm = value => value.replace(/\s+/g, ' ').trim();
+// Templates and the dictionary spell chapter references as "cap.", "Cap." or "capítulo"; match them as one form.
+const chapterWord = value => value.replace(/\b(?:[Cc]ap\.|[Cc]apítulo)(?=\s)/g, 'cap.');
+const norm = value => chapterWord(value.replace(/\s+/g, ' ').trim());
 const preserveEdges = (original, replacement) => `${(original.match(/^\s*/) ?? [''])[0]}${replacement}${(original.match(/\s*$/) ?? [''])[0]}`;
 const reverse = new Map();
 for (const [english, portuguese] of Object.entries(webGuideTranslations)) {
@@ -36,8 +38,11 @@ const templates = Object.entries(webGuideTranslations)
 function translate(value) {
   const key = norm(value);
   if (reverse.has(key)) return reverse.get(key);
-  const chapter = key.match(/^(cap(?:ítulo|\.)|carta)\s+(\d+)$/i);
-  if (chapter) return `${chapter[1].toLowerCase().startsWith('carta') ? 'Letter' : 'Chapter'} ${chapter[2]}`;
+  // Positions arrive with the Portuguese article or preposition attached: "o cap. 7", "na Carta 2".
+  const chapter = key.match(/^(?:(o|a|no|na)\s+)?(cap(?:ítulo|\.)|carta)\s+(\d+)$/i);
+  if (chapter) return `${/^n/i.test(chapter[1] ?? '') ? 'in ' : ''}${chapter[2].toLowerCase().startsWith('carta') ? 'Letter' : 'Chapter'} ${chapter[3]}`;
+  const bookEnd = key.match(/^(?:o\s+)?fim do livro\s+(\d+)$/i);
+  if (bookEnd) return `the end of Book ${bookEnd[1]}`;
   const book = key.match(/^livro\s+(\d+)(?:\s+·\s+em breve)?$/i);
   if (book) return `Book ${book[1]}${/em breve$/i.test(key) ? ' · Coming soon' : ''}`;
   const since = key.match(/^desde\s+(?:o|a)\s+(cap(?:ítulo|\.)|carta)\s+(\d+)$/i);
@@ -46,9 +51,17 @@ function translate(value) {
     const match = key.match(regex);
     if (!match) continue;
     let result = english;
-    names.forEach((name, index) => { result = result.replace(`{${name}}`, translate(match[index + 1]) ?? match[index + 1]); });
+    names.forEach((name, index) => {
+      let value = translate(match[index + 1]) ?? match[index + 1];
+      // "chegou no cap. 8" carries its preposition inside the position; English "reached" takes none.
+      if (name === 'position' && english.includes('reached {position}')) value = value.replace(/^in /, '');
+      result = result.replace(`{${name}}`, value);
+    });
     return norm(result);
   }
+  // Page titles join a label, the book title and the product name: "Personagens · Frankenstein · Guia sem spoiler".
+  const titled = key.match(/^(.+) · Guia sem spoiler$/);
+  if (titled) return `${titled[1].split(' · ').map(part => translate(part) ?? part).join(' · ')} · ${reverse.get('Guia sem spoiler') ?? 'Spoiler-free guide'}`;
   return null;
 }
 
@@ -72,7 +85,7 @@ function translateHTML(html) {
       const inEnglish = englishStack.length > 0;
       const english = /\blang=["']en["']/i.test(token);
       if (!inProtected && !inEnglish && !english) {
-        token = token.replace(/\b(title|aria-label|placeholder|alt|content)=("[^"]*"|'[^']*')/gi, (whole, name, quoted) => {
+        token = token.replace(/\b(title|aria-label|data-label|placeholder|alt|content)=("[^"]*"|'[^']*')/gi, (whole, name, quoted) => {
           const quote = quoted[0];
           const value = decode(quoted.slice(1, -1));
           const next = translate(value);
@@ -103,6 +116,8 @@ export function localizeWebGuideHTML(html, { runtime = true } = {}) {
         if (typeof value.name === 'string') value.name = translate(value.name) ?? value.name;
       }
       if (value['@type'] === 'ListItem' && typeof value.name === 'string') value.name = translate(value.name) ?? value.name;
+      // Only the generated "Livro N" names; real book titles stay as published.
+      if (value['@type'] === 'Book' && /^Livro \d+$/.test(value.name ?? '')) value.name = translate(value.name) ?? value.name;
       Object.values(value).forEach(visit);
     };
     visit(schema);

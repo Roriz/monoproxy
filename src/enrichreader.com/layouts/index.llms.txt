@@ -1,0 +1,50 @@
+{{- /* /llms.txt (https://llmstxt.org). Generated from page titles, descriptions and the home page FAQ,
+   so it only repeats what the site already says. Unlisted (noindex) pages are left out. */ -}}
+{{- $trim := `\s*\|\s*EnrichReader\s*$` -}}
+{{- $policies := slice "/privacy-policy/" "/terms-of-service/" -}}
+{{- $order := slice "/app/" "/how-it-works/" "/story-companion/" "/litrpg-companion/" "/spoiler-free-wiki-alternative/" "/reading-guides/" "/enterprise/" -}}
+{{- $listed := where site.RegularPages "Params.unlisted" "!=" true -}}
+{{- $pages := slice -}}
+{{- range $order }}{{ with site.GetPage . }}{{ if not .Params.unlisted }}{{ $pages = $pages | append . }}{{ end }}{{ end }}{{ end -}}
+{{- range $listed }}{{ if not (or (in $order .RelPermalink) (in $policies .RelPermalink)) }}{{ $pages = $pages | append . }}{{ end }}{{ end -}}
+# EnrichReader
+
+> {{ site.Params.description }}
+
+The pages below are in English. Visitors can switch the same pages to Brazilian Portuguese in the browser.
+
+Story details in EnrichReader depend on how far the reader has got. Reading guides only show characters and context once the reader picks a position, and guide pages for a specific position are kept out of search on purpose, as are the series statistics reports. Please don't treat them as general summaries of a story.
+
+## Pages
+
+- [EnrichReader home]({{ site.BaseURL }}): {{ .Description }}
+{{ range $pages -}}
+- [{{ replaceRE $trim "" .Title }}]({{ .Permalink }}): {{ .Description }}
+{{ end -}}
+{{ with partialCached "shared/public-guides.html" . }}
+## Reading guides
+
+Free browser guides. The reader picks a position in the book and sees characters, places and context from the sections already finished.
+
+{{ range . -}}
+- [{{ .title }}, by {{ delimit .authors ", " " and " }}]({{ .url | absURL }}): {{ .chapters }} chapters, {{ .characters }} characters, {{ .places }} places{{ if .public_domain }}. Public-domain book{{ end }}.
+{{ end -}}
+{{ end -}}
+{{ with partial "shared/faq-items.html" . }}
+## Questions readers ask
+
+{{ range . -}}
+### {{ .question }}
+
+{{ .answer_markdown }}
+
+{{ end -}}
+{{ end -}}
+## Policies
+
+{{ range $policies }}{{ with site.GetPage . }}- [{{ replaceRE $trim "" .Title }}]({{ .Permalink }}): {{ .Description }}
+{{ end }}{{ end }}
+## Contact
+
+- Email: hello@enrichreader.com
+- X: https://x.com/EnrichReader

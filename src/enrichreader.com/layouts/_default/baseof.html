@@ -4,37 +4,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {{/* Title, description, robots, canonical and social tags come first in <head>. The inline
+       translation dictionary below can be 100 KB or more, and link-preview bots and some AI fetchers
+       only read the start of a page. The delivered HTML is English (lang="en"); Portuguese is a
+       client-side translation of the same URL, so there are no hreflang alternates to declare. */}}
+  {{ $title := .Title | default site.Title }}
+  {{ $description := .Description | default site.Params.description }}
+  {{ $image := .Params.og_image | default "/assets/social/reader.jpg" | absURL }}
+  {{ $notFound := eq .Kind "404" }}
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $description }}">
+  {{ if .Params.keywords }}
+  <meta name="keywords" content="{{ if reflect.IsSlice .Params.keywords }}{{ delimit .Params.keywords ", " }}{{ else }}{{ .Params.keywords }}{{ end }}">
+  {{ end }}
+  <meta name="author" content="EnrichReader">
+  <meta name="robots" content="{{ if or .Params.unlisted $notFound }}noindex, follow{{ else }}index, follow{{ end }}">
+
+  {{ if not $notFound }}
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ end }}
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EnrichReader">
+  <meta property="og:locale" content="en_US">
+  {{ if not $notFound }}<meta property="og:url" content="{{ .Permalink }}">{{ end }}
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:image" content="{{ $image }}">
+
+  <!-- X / Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@EnrichReader">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta name="twitter:description" content="{{ $description }}">
+  <meta name="twitter:image" content="{{ $image }}">
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  {{ partial "shared/software-schema.html" . }}
+
   {{ $translationSlug := cond .IsHome "home" (path.Base (strings.TrimSuffix "/" .RelPermalink)) }}
   {{ $sharedTranslations := site.Data.translations.shared | default dict }}
   {{ $pageTranslations := index (site.Data.translations | default dict) $translationSlug | default dict }}
   <script>window.EnrichReaderTranslations = { shared: {{ $sharedTranslations | jsonify | safeJS }}, page: {{ $pageTranslations | jsonify | safeJS }} };</script>
   <script>{{ readFile "static/i18n.js" | safeJS }}</script>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-  <!-- Primary Meta Tags -->
-  <title>{{ if .Title }}{{ .Title }}{{ else }}EnrichReader | The End of Static Text{{ end }}</title>
-  <meta name="title" content="{{ if .Title }}{{ .Title }}{{ else }}EnrichReader | The End of Static Text{{ end }}">
-  <meta name="description" content="{{ if .Params.description }}{{ .Params.description }}{{ else }}EnrichReader transforms static text into a living story. Discover progressive character profiles and dynamic reading experiences without spoilers.{{ end }}">
-  {{ if .Params.keywords }}
-  <meta name="keywords" content="{{ if reflect.IsSlice .Params.keywords }}{{ delimit .Params.keywords ", " }}{{ else }}{{ .Params.keywords }}{{ end }}">
-  {{ end }}
-  <meta name="author" content="EnrichReader">
-  <meta name="robots" content="{{ if .Params.unlisted }}noindex, follow{{ else }}index, follow{{ end }}">
-
-  <!-- Canonical URL -->
-  <link rel="canonical" href="{{ .Permalink }}">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}EnrichReader | The End of Static Text{{ end }}">
-  <meta property="og:description" content="{{ if .Params.description }}{{ .Params.description }}{{ else }}EnrichReader transforms static text into a living story.{{ end }}">
-  <meta property="og:image" content="{{ if .Params.og_image }}{{ .Params.og_image | absURL }}{{ else }}https://enrichreader.com/assets/social/reader.jpg{{ end }}">
-
-  {{ partial "shared/software-schema.html" . }}
-
-  <meta name="twitter:card" content="summary_large_image">
 
   <noscript><style>
     .reveal-on-scroll, .fade-in-up, .fade-in { opacity: 1 !important; transform: none !important; }
