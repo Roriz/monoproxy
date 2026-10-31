@@ -1,0 +1,7 @@
+{{/* The page's Brazilian Portuguese URL, or "" for pages without one (site.Params.ptBRPages in
+   hugo.toml). The /pt-br/ copy itself is written after Hugo by scripts/web-guide/build-pt-br.mjs. */}}
+{{ $url := "" }}
+{{ if and (not .Params.unlisted) (in (site.Params.ptBRPages | default slice) .RelPermalink) }}
+  {{ $url = print "/pt-br" .RelPermalink | absURL }}
+{{ end }}
+{{ return $url }}

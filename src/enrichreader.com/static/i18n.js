@@ -97,13 +97,18 @@
       if (depth < 2 && ['edition', 'filter', 'label', 'part', 'position', 'type'].includes(name)) {
         const source = resolvedSource(value);
         if (source) {
-          value = targetLanguage === 'pt-BR'
-            ? renderTemplate(translations[source.english], source.parameters, targetLanguage, depth + 1)
-            : source.englishRaw;
+          value = renderSource(source, targetLanguage, depth + 1);
         }
       }
       return value;
     });
+  }
+
+  // A resolved source (resolvedSource) as `language` shows it: the Portuguese template filled in, or the English as written.
+  function renderSource(source, language, depth = 0) {
+    return language === 'pt-BR'
+      ? renderTemplate(translations[source.english], source.parameters, 'pt-BR', depth)
+      : source.englishRaw;
   }
 
   function templateMatch(value, templates, reverseSource = false) {
@@ -129,22 +134,61 @@
     return null;
   }
 
-  function initialLanguage() {
+  function saveLanguage(language) {
+    try {
+      window.localStorage.setItem('enrichreader-language', language);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function preferredLanguage() {
     try {
       const explicit = languageFrom(new URLSearchParams(window.location.search).get('lang'));
-      if (explicit) {
-        try { window.localStorage.setItem('enrichreader-language', explicit); } catch (_) {}
-        return explicit;
-      }
+      if (explicit) return { language: explicit, explicit: true, saved: saveLanguage(explicit) };
     } catch (_) {}
 
     try {
       const saved = languageFrom(window.localStorage.getItem('enrichreader-language'));
-      if (saved) return saved;
+      if (saved) return { language: saved, explicit: false, saved: true };
     } catch (_) {}
 
     const browserLanguages = navigator.languages || [navigator.language || ''];
-    return browserLanguages.map(languageFrom).find(Boolean) || 'en';
+    return { language: browserLanguages.map(languageFrom).find(Boolean) || 'en', explicit: false, saved: false };
+  }
+
+  // Pages with a static Portuguese copy (/pt-br/..., written by scripts/web-guide/build-pt-br.mjs)
+  // list both versions as hreflang alternates above this script. There the URL sets the language,
+  // and choosing the other language opens the other version instead of translating this one.
+  const alternates = Object.create(null);
+  document.querySelectorAll('link[rel="alternate"][hreflang][href]').forEach(link => {
+    const language = languageFrom(link.getAttribute('hreflang'));
+    if (language) alternates[language] = link.getAttribute('href');
+  });
+  const pageLanguage = alternates.en && alternates['pt-BR'] ? languageFrom(document.documentElement.getAttribute('lang')) : null;
+
+  // The other version on this origin, keeping the visit's query (without lang) and fragment. An
+  // English choice that could not be saved travels as ?lang=en, or the English page would forward a
+  // reader with Portuguese browser settings straight back.
+  function alternateURL(language, saved) {
+    const url = new URL(window.location.href);
+    url.pathname = new URL(alternates[language], url.href).pathname;
+    url.searchParams.delete('lang');
+    if (language === 'en' && !saved) url.searchParams.set('lang', language);
+    return url.href;
+  }
+
+  function initialLanguage() {
+    const preference = preferredLanguage();
+    if (!pageLanguage) return preference.language;
+    // The English version forwards a Portuguese reader to the Portuguese one. The Portuguese
+    // version only moves on an explicit ?lang=en, never on browser settings, so crawlers and
+    // visitors with English settings still get the page they asked for.
+    if (preference.language !== pageLanguage && (preference.explicit || pageLanguage === 'en')) {
+      try { window.location.replace(alternateURL(preference.language, preference.saved)); } catch (_) {}
+    }
+    return pageLanguage;
   }
 
   let currentLanguage = initialLanguage();
@@ -202,9 +246,7 @@
       record.parameters = source.parameters;
     }
 
-    const translated = currentLanguage === 'pt-BR'
-      ? renderTemplate(translations[source.english], source.parameters, 'pt-BR')
-      : source.englishRaw;
+    const translated = renderSource(source, currentLanguage);
     if (typeof translated !== 'string') return;
     const next = preserveEdges(value, translated);
     if (next !== value) node.nodeValue = next;
@@ -238,9 +280,7 @@
       record.englishRaw = source.englishRaw;
       record.parameters = source.parameters;
     }
-    const translated = currentLanguage === 'pt-BR'
-      ? renderTemplate(translations[source.english], source.parameters, 'pt-BR')
-      : source.englishRaw;
+    const translated = renderSource(source, currentLanguage);
     if (typeof translated !== 'string') return;
     const next = preserveEdges(value, translated);
     if (next !== value) element.setAttribute(name, next);
@@ -252,7 +292,8 @@
     if (element.closest(excludedSubtreeSelector)) return;
     if (element.matches(metadataSelector)) translateAttribute(element, 'content');
     translatableAttributes.forEach(name => translateAttribute(element, name));
-    if (element.hasAttribute('data-language-choice')) {
+    // Language links (pages with a /pt-br/ copy) mark the current version with aria-current instead.
+    if (element.hasAttribute('data-language-choice') && element.tagName !== 'A') {
       const selected = languageFrom(element.getAttribute('data-language-choice')) === currentLanguage;
       element.setAttribute('aria-pressed', String(selected));
     }
@@ -282,7 +323,7 @@
   }
 
   function updateSelectors() {
-    document.querySelectorAll('[data-language-choice]').forEach(button => {
+    document.querySelectorAll('[data-language-choice]:not(a)').forEach(button => {
       const selected = languageFrom(button.getAttribute('data-language-choice')) === currentLanguage;
       button.setAttribute('aria-pressed', String(selected));
     });
@@ -315,12 +356,35 @@
       const key = String(englishKey);
       const source = currentLanguage === 'pt-BR' ? (translations[key] || key) : key;
       return renderTemplate(source, parameters, currentLanguage);
+    },
+    // One text node or attribute value as the live switch renders it in `language`, or null when
+    // nothing matches. scripts/web-guide/build-pt-br.mjs writes the /pt-br/ pages with this, so they
+    // say exactly what switching the English page in the browser shows.
+    translateValue(value, language = currentLanguage) {
+      const source = resolvedSource(value);
+      if (!source) return null;
+      const translated = renderSource(source, languageFrom(language));
+      return typeof translated === 'string' ? preserveEdges(value, translated) : null;
     }
   };
 
   document.addEventListener('click', event => {
     const button = event.target.closest('[data-language-choice]');
-    if (button) setLanguage(button.getAttribute('data-language-choice'), true);
+    if (!button) return;
+    const language = languageFrom(button.getAttribute('data-language-choice'));
+    if (pageLanguage && language && alternates[language]) {
+      const saved = saveLanguage(language);
+      if (language === pageLanguage) {
+        event.preventDefault();
+        return;
+      }
+      // A new-tab or modified click on the link goes to the plain link target.
+      if (button.matches('a[href]') && (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)) return;
+      event.preventDefault();
+      window.location.assign(alternateURL(language, saved));
+      return;
+    }
+    setLanguage(button.getAttribute('data-language-choice'), true);
   });
 
   document.documentElement.lang = currentLanguage;

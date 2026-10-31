@@ -1,9 +1,12 @@
 import { guideSitemapPaths } from './sitemap.mjs';
 
 // Explicit public marketing routes; private app and positioned guide URLs stay excluded.
-export const landingPaths = [
+const englishLandingPaths = [
   '/', '/app/', '/how-it-works/', '/reading-guides/', '/story-companion/', '/litrpg-companion/', '/spoiler-free-wiki-alternative/',
+  '/about/', '/what-is-a-skin/', '/keep-track-of-characters/',
 ];
+// Every English landing page has a static pt-BR copy (hugo.toml ptBRPages).
+export const landingPaths = [...englishLandingPaths, ...englishLandingPaths.map(path => `/pt-br${path}`)];
 const eligiblePath = /^\/(?:autores|guia(?:\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/(?:mundo|(?:pessoa|lugar|organizacao|objeto|outro)\/[a-z0-9]+(?:-[a-z0-9]+)*))?)?)$/;
 // Previously indexed reports remain eligible only for removal notifications.
 const retiredPaths = ['/reports/',

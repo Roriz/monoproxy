@@ -1,7 +1,7 @@
 <!-- Copies a visit's UTM tags, plus the site that sent the visitor, onto every link into the app.
      The app runs on another origin (app.enrichreader.com), so on its own it only ever sees
      "enrichreader.com" as the referrer, and we can't tell which channel a signup came from
-     (reader-app: src/lib/utils/attribution.js). Internal /app/ links get the tags as well, since
+     (reader-app: src/lib/utils/attribution.js). Internal /app/ links (and /pt-br/app/) get the tags as well, since
      most visitors land on the home page first. The script stores nothing; the tags only travel in
      the URLs. The Play Store link receives them as its install `referrer`, which Play Console reports. -->
 <script>
@@ -39,7 +39,7 @@
     }
 
     rewrite('a[href^="https://app.enrichreader.com"]', forward);
-    rewrite('a[href="/app/"]', forward);
+    rewrite('a[href="/app/"], a[href="/pt-br/app/"]', forward);
     // Play only reports utm_* in the install referrer, so a visit with just a referring site
     // is passed on as a referral from that site.
     var install = tagQuery || new URLSearchParams({ utm_source: ref, utm_medium: 'referral' }).toString();

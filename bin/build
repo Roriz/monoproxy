@@ -58,6 +58,8 @@ main() {
       if $hugo_cmd -s "$project_dir"; then
         if [ "$project_name" = "enrichreader.com" ]; then
           ./bin/web-guide-node scripts/web-guide/build-sitemap.mjs
+          # Static /pt-br/ copies of the pages Hugo marked with a pt-BR alternate (hugo.toml ptBRPages).
+          ./bin/web-guide-node scripts/web-guide/build-pt-br.mjs
         fi
         success "Successfully built Hugo project: $project_name"
         built=true

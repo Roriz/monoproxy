@@ -12,7 +12,9 @@
   {{ $founder := dict "@type" "Person" "name" "Radamés Roriz" "sameAs" (slice "https://www.linkedin.com/in/radames-roriz/") }}
   {{ $address := dict "@type" "PostalAddress" "addressLocality" "São José dos Campos" "addressRegion" "SP" "addressCountry" "BR" }}
   {{ $organization := dict "@type" "Organization" "@id" ("/#organization" | absURL) "name" "EnrichReader" "legalName" "ENRICH DESENVOLVIMENTO DE SOFTWARES LTDA." "taxID" "65.786.669/0001-04" "url" site.BaseURL "description" $description "logo" (dict "@type" "ImageObject" "url" ("/assets/logo.png" | absURL) "width" 322 "height" 253) "email" "hello@enrichreader.com" "address" $address "founder" $founder "sameAs" (slice "https://x.com/EnrichReader") }}
-  {{ $website := dict "@type" "WebSite" "@id" ("/#website" | absURL) "name" "EnrichReader" "url" site.BaseURL "description" $description "inLanguage" "en" "publisher" $organizationRef }}
+  {{/* /about/ is the organization's own page (AboutPage below names it as its main entity). */}}
+  {{ with site.GetPage "/about/" }}{{ $organization = merge $organization (dict "mainEntityOfPage" (dict "@id" (print .Permalink "#webpage"))) }}{{ end }}
+  {{ $website := dict "@type" "WebSite" "@id" ("/#website" | absURL) "name" "EnrichReader" "url" site.BaseURL "description" $description "inLanguage" (slice "en" "pt-BR") "publisher" $organizationRef }}
   {{/* Price: reading, Skins and sync are currently free (home FAQ, /app/, Terms). Not a permanent promise. */}}
   {{ $play := "https://play.google.com/store/apps/details?id=com.enrichreader.app" }}
   {{ $offer := dict "@type" "Offer" "price" "0" "priceCurrency" "USD" "url" ("/app/" | absURL) }}
@@ -23,6 +25,8 @@
 {{/* The page itself, for indexable pages. Spoiler-heavy series reports are unlisted (noindex) and
    carry their own Dataset data instead (report-schema.html). */}}
 {{ if not (or .Params.unlisted (eq .Kind "404")) }}
+  {{/* The /pt-br/ copy of a page (build-pt-br.mjs) rewrites this WebPage node: its own @id and url,
+     inLanguage pt-BR, and the name, description, breadcrumb and FAQ as its visible text says them. */}}
   {{ $page := dict "@type" "WebPage" "@id" (print .Permalink "#webpage") "url" .Permalink "name" .Title "description" (.Description | default $description) "inLanguage" "en" "isPartOf" $websiteRef "publisher" $organizationRef }}
   {{ if not .Lastmod.IsZero }}{{ $page = merge $page (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05-07:00")) }}{{ end }}
   {{ if .IsHome }}
@@ -31,6 +35,11 @@
     {{ $name := .Params.linkTitle | default (replaceRE `\s*\|\s*EnrichReader\s*$` "" .Title) }}
     {{ $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "EnrichReader" "item" site.BaseURL) (dict "@type" "ListItem" "position" 2 "name" $name "item" .Permalink) }}
     {{ $page = merge $page (dict "breadcrumb" (dict "@type" "BreadcrumbList" "itemListElement" $crumbs)) }}
+  {{ end }}
+  {{ if eq .RelPermalink "/about/" }}
+    {{ $page = merge $page (dict "@type" "AboutPage" "about" $organizationRef "mainEntity" $organizationRef) }}
+  {{ else if eq .RelPermalink "/what-is-a-skin/" }}
+    {{ $page = merge $page (dict "about" $appRef) }}
   {{ end }}
   {{ if eq .RelPermalink "/reading-guides/" }}
     {{ $items := slice }}

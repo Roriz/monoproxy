@@ -32,8 +32,19 @@ enrichreader.localhost {
 			header_up X-Web-Guide-Client-IP {remote_host}
 		}
 	}
+	# Same 404 handling as production: no /index.html fallback, so unknown URLs get a real 404.
 	handle {
-		try_files {path} {path}/ /index.html
+		try_files {path} {path}/
 		file_server
+	}
+
+	# Static-site 404s get the generated /404.html with the 404 status kept. Responses from the
+	# web-guide service above are passed through as the service sent them.
+	handle_errors {
+		@notFound expression {err.status_code} == 404
+		handle @notFound {
+			rewrite * /404.html
+			file_server
+		}
 	}
 }

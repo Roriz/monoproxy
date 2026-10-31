@@ -11,7 +11,7 @@
         <p class="rg-book-author">By {{ delimit .authors ", " " and " }}</p>
         <p class="rg-book-coverage">{{ with .sections }}{{ . }} {{ $g.part }} · {{ end }}{{ .chapters }} chapters · {{ .characters }} characters · {{ .places }} places</p>
         <div class="companion-actions">
-          <a class="companion-button companion-button-primary" href="{{ .url }}" hreflang="en">Open the guide <span aria-hidden="true">↗</span></a>
+          <a class="companion-button companion-button-primary" href="{{ .url }}" hreflang="en">Open the guide</a>
           {{ with .edition_url }}<a class="companion-button companion-button-secondary" href="{{ . }}" rel="noopener">Get this edition{{ if $g.public_domain }}, free{{ end }} <span aria-hidden="true">↗</span></a>{{ end }}
         </div>
       </div>

@@ -1,15 +1,26 @@
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 {{/* Indexable pages only: unlisted pages are noindex. lastmod is the page's last commit (hugo.toml),
-     omitted when unknown. scripts/web-guide/build-sitemap.mjs appends the public guide URLs. */}}
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+     omitted when unknown. A page with a Brazilian Portuguese copy (site.Params.ptBRPages) is listed in
+     both languages, each entry naming both as alternates, the way the pages' hreflang links do.
+     scripts/web-guide/build-sitemap.mjs appends the public guide URLs. */}}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{ range .Data.Pages }}
   {{ if not .Params.unlisted }}
+  {{ $page := . }}
+  {{ $ptBR := partial "shared/pt-br-url.html" . }}
+  {{ range cond (eq $ptBR "") (slice .Permalink) (slice .Permalink $ptBR) }}
   <url>
-    <loc>{{ .Permalink }}</loc>
-    {{ if not .Lastmod.IsZero }}<lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>{{ end }}
-    {{ with .Sitemap.ChangeFreq }}<changefreq>{{ . }}</changefreq>{{ end }}
-    {{ if ge .Sitemap.Priority 0.0 }}<priority>{{ .Sitemap.Priority }}</priority>{{ end }}
+    <loc>{{ . }}</loc>
+    {{ if not $page.Lastmod.IsZero }}<lastmod>{{ $page.Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>{{ end }}
+    {{ with $page.Sitemap.ChangeFreq }}<changefreq>{{ . }}</changefreq>{{ end }}
+    {{ if ge $page.Sitemap.Priority 0.0 }}<priority>{{ $page.Sitemap.Priority }}</priority>{{ end }}
+    {{ with $ptBR }}
+    <xhtml:link rel="alternate" hreflang="en" href="{{ $page.Permalink }}"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="{{ . }}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ $page.Permalink }}"/>
+    {{ end }}
   </url>
+  {{ end }}
   {{ end }}
   {{ end }}
 </urlset>

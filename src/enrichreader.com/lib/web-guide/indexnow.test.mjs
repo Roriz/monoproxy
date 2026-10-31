@@ -32,3 +32,11 @@ test('unlisted reports leave discovery but prior manifests can notify their remo
   }
   assert.ok(!indexNowURLs([], {}).urls.some(url => /\/(reports|dcc|lotm)\//.test(url)));
 });
+test('IndexNow landing pages match the pages that get a static pt-BR copy', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const config = await readFile(new URL('../../hugo.toml', import.meta.url), 'utf8');
+  const ptBRPages = [...config.match(/ptBRPages\s*=\s*\[([^\]]*)\]/)[1].matchAll(/'([^']+)'/g)].map(match => match[1]);
+  const english = landingPaths.filter(path => !path.startsWith('/pt-br/'));
+  assert.deepEqual([...english].sort(), [...ptBRPages].sort());
+  assert.deepEqual(landingPaths.filter(path => path.startsWith('/pt-br/')), english.map(path => `/pt-br${path}`));
+});

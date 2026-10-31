@@ -1,8 +1,9 @@
-{{- /* /llms.txt (https://llmstxt.org). Generated from page titles, descriptions and the home page FAQ,
-   so it only repeats what the site already says. Unlisted (noindex) pages are left out. */ -}}
+{{- /* /llms.txt (https://llmstxt.org). Generated from page titles, descriptions and the visible FAQ of
+   each listed page, so it only repeats what the site already says. Unlisted (noindex) pages are left
+   out. A question several pages share is listed once, under the first page that asks it. */ -}}
 {{- $trim := `\s*\|\s*EnrichReader\s*$` -}}
 {{- $policies := slice "/privacy-policy/" "/terms-of-service/" -}}
-{{- $order := slice "/app/" "/how-it-works/" "/story-companion/" "/litrpg-companion/" "/spoiler-free-wiki-alternative/" "/reading-guides/" "/enterprise/" -}}
+{{- $order := slice "/about/" "/app/" "/how-it-works/" "/what-is-a-skin/" "/story-companion/" "/keep-track-of-characters/" "/litrpg-companion/" "/spoiler-free-wiki-alternative/" "/reading-guides/" "/enterprise/" -}}
 {{- $listed := where site.RegularPages "Params.unlisted" "!=" true -}}
 {{- $pages := slice -}}
 {{- range $order }}{{ with site.GetPage . }}{{ if not .Params.unlisted }}{{ $pages = $pages | append . }}{{ end }}{{ end }}{{ end -}}
@@ -11,7 +12,7 @@
 
 > {{ site.Params.description }}
 
-The pages below are in English. Visitors can switch the same pages to Brazilian Portuguese in the browser.
+The pages below are in English. The home page and the reader pages also have Brazilian Portuguese versions at the same path under {{ site.BaseURL }}pt-br/ (for example {{ site.BaseURL }}pt-br/story-companion/), linked from each page as an hreflang alternate. Other pages can be switched to Portuguese in the browser.
 
 Story details in EnrichReader depend on how far the reader has got. Reading guides only show characters and context once the reader picks a position, and guide pages for a specific position are kept out of search on purpose, as are the series statistics reports. Please don't treat them as general summaries of a story.
 
@@ -30,14 +31,27 @@ Free browser guides. The reader picks a position in the book and sees characters
 - [{{ .title }}, by {{ delimit .authors ", " " and " }}]({{ .url | absURL }}): {{ .chapters }} chapters, {{ .characters }} characters, {{ .places }} places{{ if .public_domain }}. Public-domain book{{ end }}.
 {{ end -}}
 {{ end -}}
-{{ with partial "shared/faq-items.html" . }}
-## Questions readers ask
+{{- $seen := slice -}}
+{{- $groups := slice -}}
+{{- range $page := slice . | append $pages -}}
+  {{- $new := slice -}}
+  {{- range partial "shared/faq-items.html" . -}}
+    {{- if not (in $seen .question) }}{{ $seen = $seen | append .question }}{{ $new = $new | append . }}{{ end -}}
+  {{- end -}}
+  {{- with $new }}{{ $groups = $groups | append (dict "page" $page "items" .) }}{{ end -}}
+{{- end -}}
+{{- with $groups }}
+## Frequently asked questions
 
 {{ range . -}}
-### {{ .question }}
+### {{ with .page }}[{{ if .IsHome }}EnrichReader home{{ else }}{{ replaceRE $trim "" .Title }}{{ end }}]({{ .Permalink }}){{ end }}
+
+{{ range .items -}}
+#### {{ .question }}
 
 {{ .answer_markdown }}
 
+{{ end -}}
 {{ end -}}
 {{ end -}}
 ## Policies

@@ -232,13 +232,13 @@ scripts:
 <!-- Web guides: generic pointer to /reading-guides/ (no per-book cards on the home page) -->
 <section id="web-guides" class="py-20 px-6 max-w-5xl mx-auto" aria-labelledby="web-guide-heading">
   <h2 id="web-guide-heading" class="text-3xl font-bold serif mb-6">Reading guides you can open in your browser</h2>
-  <p class="text-neutral-300 leading-relaxed mb-8">A reading guide is a free web page for one book. Pick where you are in the book and look up characters and story context from sections you’ve finished, with no install or account. The first guide is Mary Shelley’s Frankenstein. To read with a companion inside your book, check the app’s Skin catalog. A browser guide does not guarantee a matching app Skin.</p>
+  <p class="text-neutral-300 leading-relaxed mb-8">A reading guide is a free web page for one book. Pick where you are in the book and look up characters and story context from sections you’ve finished, with no install or account. The first guide is Mary Shelley’s Frankenstein, and it is web-only: the app has no Frankenstein Skin. To read with a companion inside your own book, check the app’s Skin catalog.</p>
   <p class="flex flex-wrap gap-x-6 gap-y-2"><a href="/guia/frankenstein" hreflang="en" class="text-gold-500 underline">Open the Frankenstein guide</a> <a href="/reading-guides/" class="text-gold-500 underline">Browse the reading guides</a></p>
 </section>
 
 <!-- How it Works Section: Asymmetric Process -->
 <section id="how-it-works" class="py-40 px-6 max-w-7xl mx-auto relative">
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-y-12 mb-32 items-end reveal-on-scroll">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-y-12 mb-16 items-end reveal-on-scroll">
     <div class="md:col-span-7">
       <h2 class="text-4xl md:text-5xl font-bold serif italic">How EnrichReader Works</h2>
     </div>
@@ -252,71 +252,40 @@ scripts:
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative z-10">
 
-    <!-- Step 1: Baseline -->
+    <!-- Step 1 -->
     <article
       class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 hover:border-neutral-500/50 bg-neutral-950/90 reveal-on-scroll"
       style="transition-delay: 100ms;">
       <div
-        class="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-700 flex items-center justify-center text-2xl mb-8 font-mono text-neutral-400 group-hover:text-cream-100 transition-colors duration-300 shadow-sm shrink-0"
+        class="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-700 flex items-center justify-center text-2xl mb-6 font-mono text-neutral-400 group-hover:text-cream-100 transition-colors duration-300 shadow-sm shrink-0"
         aria-hidden="true">1</div>
-      <div class="block mb-8 relative w-full flex justify-center">
-        <div
-          class="w-[200px] h-[400px] rounded-[32px] border-[6px] border-neutral-800 bg-black relative overflow-hidden shadow-2xl group-hover:border-neutral-500 transition-colors duration-500">
-          <div class="absolute top-0 inset-x-0 h-4 bg-neutral-800 rounded-b-xl w-24 mx-auto z-20"></div>
-          <img src="/assets/step1-importing.jpeg" id="img-step-1"
-            alt="Screenshot of importing a book file to EnrichReader" width="200" height="400" loading="lazy"
-            class="w-full h-full object-cover relative z-10">
-        </div>
-      </div>
-      <h3 class="text-2xl font-bold mb-4 serif italic text-cream-200">Your book stays on your device</h3>
+      <h3 class="text-2xl font-bold mb-4 serif italic text-cream-200">Import your EPUB</h3>
       <p class="text-sm text-neutral-550 leading-relaxed">
-        Import and read your book on your device. Optional sync stores library details and reading positions; reporting a chapter problem sends that chapter’s text. See the <a href="/privacy-policy/" class="text-gold-500 underline">privacy policy</a> for data controls.
+        Import a DRM-free EPUB you already own. It stays on your device: optional sync stores library details and reading positions, and reporting a chapter problem sends that chapter’s text. See the <a href="/privacy-policy/" class="text-gold-500 underline">privacy policy</a> for data controls.
       </p>
     </article>
 
-    <!-- Step 2: Offset Downward -->
+    <!-- Step 2 -->
     <article
-      class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 md:mt-24 hover:border-gold-500/50 hover:shadow-gold bg-neutral-950/90 reveal-on-scroll"
+      class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 hover:border-gold-500/50 hover:shadow-gold bg-neutral-950/90 reveal-on-scroll"
       style="transition-delay: 300ms;">
       <div
-        class="w-16 h-16 rounded-full bg-gold-900/10 border border-gold-500/30 flex items-center justify-center text-2xl mb-8 font-mono text-gold-500 group-hover:text-gold-300 transition-colors duration-300 shadow-sm shrink-0"
+        class="w-16 h-16 rounded-full bg-gold-900/10 border border-gold-500/30 flex items-center justify-center text-2xl mb-6 font-mono text-gold-500 group-hover:text-gold-300 transition-colors duration-300 shadow-sm shrink-0"
         aria-hidden="true">2</div>
-      <div class="block mb-8 relative w-full flex justify-center">
-        <div
-          class="w-[200px] h-[400px] rounded-[32px] border-[6px] border-neutral-900/40 bg-black relative overflow-hidden shadow-sm group-hover:border-gold-500/80 transition-all duration-500">
-          <div
-            class="absolute top-0 inset-x-0 h-4 bg-neutral-900/40 group-hover:bg-gold-500/80 rounded-b-xl w-24 mx-auto z-20 transition-colors duration-500">
-          </div>
-          <img src="/assets/step2-skin.jpeg" id="img-step-2"
-            alt="Screenshot of a Skin installing for a book already in the library" width="200" height="400"
-            loading="lazy" class="w-full h-full object-cover relative z-10">
-        </div>
-      </div>
-      <h3 class="text-2xl font-bold mb-4 serif italic text-gold-300">The Skin</h3>
+      <h3 class="text-2xl font-bold mb-4 serif italic text-gold-300">Add the story’s Skin</h3>
       <p class="text-sm text-neutral-400 leading-relaxed">
         A Skin is the companion for one story: its characters, places and lore, each fact tagged with the chapter that reveals it. Skins are prepared in advance for supported stories. Sign in to find and install one.
       </p>
     </article>
 
-    <!-- Step 3: Slightly Offset -->
+    <!-- Step 3 -->
     <article
-      class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 md:mt-12 hover:border-gold-400/60 hover:shadow-gold bg-neutral-950/90 border-gold-500/20 z-20 reveal-on-scroll"
+      class="glass relative z-10 p-8 rounded-[40px] flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-2 hover:border-gold-400/60 hover:shadow-gold bg-neutral-950/90 border-gold-500/20 z-20 reveal-on-scroll"
       style="transition-delay: 500ms;">
       <div
-        class="w-16 h-16 rounded-full bg-gold-500 border border-gold-300 flex items-center justify-center text-2xl mb-8 font-mono text-neutral-950 transition-colors duration-300 shadow-gold shrink-0"
+        class="w-16 h-16 rounded-full bg-gold-500 border border-gold-300 flex items-center justify-center text-2xl mb-6 font-mono text-neutral-950 transition-colors duration-300 shadow-gold shrink-0"
         aria-hidden="true">3</div>
-      <div class="block mb-8 relative w-full flex justify-center">
-        <div
-          class="w-[200px] h-[400px] rounded-[32px] border-[6px] border-gold-500/50 bg-black relative overflow-hidden shadow-gold group-hover:border-gold-400 transition-all duration-500">
-          <div
-            class="absolute top-0 inset-x-0 h-4 bg-gold-500/50 group-hover:bg-gold-400 rounded-b-xl w-24 mx-auto z-20 transition-colors duration-500">
-          </div>
-          <img src="/assets/step3-reader.jpeg" id="img-step-3"
-            alt="Screenshot of a character profile open over the book text" width="200" height="400" loading="lazy"
-            class="w-full h-full object-cover relative z-10">
-        </div>
-      </div>
-      <h3 class="text-2xl font-bold mb-4 serif italic text-cream-100 glow-text-gold">The Experience</h3>
+      <h3 class="text-2xl font-bold mb-4 serif italic text-cream-100 glow-text-gold">Read with the cast in reach</h3>
       <p class="text-sm text-neutral-300 leading-relaxed">
         With a matching Skin installed, character profiles and lore follow your reading progress as you turn the pages.
       </p>
@@ -383,6 +352,7 @@ scripts:
         EnrichReader to handle the memory work so I could stop studying and just enjoy the story."
       </blockquote>
       <div class="text-[10px] font-bold tracking-[0.5em] text-gold-500 uppercase">- <a href="https://www.linkedin.com/in/radames-roriz/" target="_blank" rel="noopener" class="hover:text-gold-400 underline transition-colors">Radamés Roriz</a>, Founder</div>
+      <p class="mt-8 text-sm text-neutral-400"><a href="/about/" class="text-gold-500 underline">About EnrichReader and who makes it</a></p>
     </div>
   </div>
 </section>

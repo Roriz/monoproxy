@@ -34,3 +34,9 @@ enableGitInfo = true
   # site loads no statistics script at all. Set to the website ID from the Umami dashboard.
   umamiHost = 'https://stats.enrichreader.com'
   umamiWebsiteId = 'f4411453-fd4a-472f-9b5a-c4adab84f443'
+
+  # Reader pages that also have a Brazilian Portuguese URL, /pt-br/<path>. Hugo builds the English
+  # page with hreflang alternates and a linked language switcher; after Hugo, bin/build runs
+  # scripts/web-guide/build-pt-br.mjs, which writes the Portuguese copy from the built page and the
+  # same data/translations dictionaries the in-browser switch uses. Other pages keep that switch only.
+  ptBRPages = ['/', '/story-companion/', '/spoiler-free-wiki-alternative/', '/how-it-works/', '/reading-guides/', '/litrpg-companion/', '/app/', '/about/', '/what-is-a-skin/', '/keep-track-of-characters/']

@@ -140,7 +140,7 @@ test('public entry metadata matches English HTML and guides offer an honest app 
       if (/og:site_name/.test(html)) assert.match(html, /<meta property="og:site_name" content="EnrichReader">/);
       if (!path.startsWith('/guia/frankenstein')) continue;
       assert.match(html, /href="\/app\/\?utm_source=guia&amp;utm_campaign=frankenstein&amp;utm_content=app_bridge"/);
-      assert.match(html, /does not guarantee an app Skin/);
+      assert.match(html, /the EnrichReader app has no Skin for this book/);
       if (path.includes('?')) assert.match(html, /content="noindex, nofollow"/);
     }
   } finally {

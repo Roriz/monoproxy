@@ -58,7 +58,8 @@ Build into a preview directory so review does not modify the served site:
 ```sh
 ./bin/hugo -s src/enrichreader.com --destination /tmp/enrichreader-seo-preview
 node scripts/web-guide/build-sitemap.mjs /tmp/enrichreader-seo-preview/sitemap.xml
-node --test src/enrichreader.com/lib/web-guide/{indexnow,sitemap,marketing,publisher}.test.mjs
+node scripts/web-guide/build-pt-br.mjs /tmp/enrichreader-seo-preview
+node --test src/enrichreader.com/lib/web-guide/{indexnow,sitemap,marketing,publisher}.test.mjs src/enrichreader.com/lib/pt-br-pages.test.mjs
 ```
 
 After editing report titles or headline statistics, regenerate the committed

@@ -7,12 +7,17 @@
 
   {{/* Title, description, robots, canonical and social tags come first in <head>. The inline
        translation dictionary below can be 100 KB or more, and link-preview bots and some AI fetchers
-       only read the start of a page. The delivered HTML is English (lang="en"); Portuguese is a
-       client-side translation of the same URL, so there are no hreflang alternates to declare. */}}
+       only read the start of a page. The delivered HTML is English (lang="en"). Pages listed in
+       site.Params.ptBRPages also get a static Brazilian Portuguese copy at /pt-br/<path>
+       (scripts/web-guide/build-pt-br.mjs), and both versions declare each other as hreflang
+       alternates. The alternates must stay above the i18n.js script: it reads them to send the
+       language switcher to the other URL. Elsewhere Portuguese is a client-side translation of the
+       same URL, with no alternates. */}}
   {{ $title := .Title | default site.Title }}
   {{ $description := .Description | default site.Params.description }}
   {{ $image := .Params.og_image | default "/assets/social/reader.jpg" | absURL }}
   {{ $notFound := eq .Kind "404" }}
+  {{ $ptBR := partial "shared/pt-br-url.html" . }}
   <title>{{ $title }}</title>
   <meta name="description" content="{{ $description }}">
   {{ if .Params.keywords }}
@@ -25,11 +30,17 @@
   <!-- Canonical URL -->
   <link rel="canonical" href="{{ .Permalink }}">
   {{ end }}
+  {{ with $ptBR }}
+  <link rel="alternate" hreflang="en" href="{{ $.Permalink }}">
+  <link rel="alternate" hreflang="pt-BR" href="{{ . }}">
+  <link rel="alternate" hreflang="x-default" href="{{ $.Permalink }}">
+  {{ end }}
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EnrichReader">
   <meta property="og:locale" content="en_US">
+  {{ if $ptBR }}<meta property="og:locale:alternate" content="pt_BR">{{ end }}
   {{ if not $notFound }}<meta property="og:url" content="{{ .Permalink }}">{{ end }}
   <meta property="og:title" content="{{ $title }}">
   <meta property="og:description" content="{{ $description }}">

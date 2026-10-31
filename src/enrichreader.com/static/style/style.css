@@ -2357,7 +2357,8 @@ nav {
   letter-spacing: 0.04em;
 }
 
-.language-switch button {
+.language-switch button,
+.language-switch a {
   display: inline-flex;
   min-width: 2.75rem;
   min-height: 2.75rem;
@@ -2372,25 +2373,30 @@ nav {
   font-size: 0.6875rem;
   font-weight: 700;
   line-height: 1;
+  text-decoration: none;
   cursor: pointer;
   transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
 }
 
-.language-switch button:hover {
+.language-switch button:hover,
+.language-switch a:hover {
   color: var(--color-cream-100);
 }
 
-.language-switch button[aria-pressed="true"] {
+.language-switch button[aria-pressed="true"],
+.language-switch a[aria-current="true"] {
   background: oklch(74% 0.12 85 / 0.12);
   box-shadow: inset 0 0 0 1px oklch(74% 0.12 85 / 0.28);
   color: var(--color-gold-500);
 }
 
-.language-switch button[aria-pressed="true"]:hover {
+.language-switch button[aria-pressed="true"]:hover,
+.language-switch a[aria-current="true"]:hover {
   background: oklch(74% 0.12 85 / 0.18);
 }
 
-.language-switch button:focus-visible {
+.language-switch button:focus-visible,
+.language-switch a:focus-visible {
   outline: 2px solid var(--color-cream-100);
   outline-offset: 2px;
 }

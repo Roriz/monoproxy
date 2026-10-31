@@ -4,6 +4,7 @@
   <ul class="space-y-4 text-neutral-300 leading-relaxed">
     {{ if ne $current "/story-companion/" }}<li><a class="text-gold-500 underline" href="/story-companion/">Story companion</a> — what a story companion is and how reading with one works.</li>{{ end }}
     {{ if ne $current "/litrpg-companion/" }}<li><a class="text-gold-500 underline" href="/litrpg-companion/">LitRPG and web novel companion</a> — a character tracker for long LitRPG and web novel series.</li>{{ end }}
+    {{ if ne $current "/keep-track-of-characters/" }}<li><a class="text-gold-500 underline" href="/keep-track-of-characters/">How to keep track of characters</a> — notes, wikis, Kindle X-Ray and companions compared, and getting back into a series after a break.</li>{{ end }}
     {{ if ne $current "/spoiler-free-wiki-alternative/" }}<li><a class="text-gold-500 underline" href="/spoiler-free-wiki-alternative/">Spoiler-free wiki alternative</a> — compare ways to look up a character without spoilers.</li>{{ end }}
     {{ if and (ne $current "/reading-guides/") (partialCached "shared/public-guides.html" .) }}<li><a class="text-gold-500 underline" href="/reading-guides/">Browser reading guides</a> — choose your position and look up story context alongside your own book.</li>{{ end }}
   </ul>

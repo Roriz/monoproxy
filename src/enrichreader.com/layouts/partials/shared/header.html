@@ -21,8 +21,15 @@
 
     <div class="site-nav-actions">
       <div class="language-switch language-switch-compact" role="group" aria-label="Language">
+        {{/* Pages with a /pt-br/ copy link the two versions (build-pt-br.mjs moves aria-current there);
+           elsewhere the buttons translate the same page in the browser (i18n.js). */}}
+        {{ with partial "shared/pt-br-url.html" . }}
+        <a href="{{ $current }}" hreflang="en" data-language-choice="en" aria-label="English" title="English" lang="en" aria-current="true">EN</a>
+        <a href="{{ (urls.Parse .).Path }}" hreflang="pt-BR" data-language-choice="pt-BR" aria-label="Português" title="Português" lang="pt-BR">PT</a>
+        {{ else }}
         <button type="button" data-language-choice="en" aria-label="English" title="English" lang="en" aria-pressed="true">EN</button>
         <button type="button" data-language-choice="pt-BR" aria-label="Português" title="Português" lang="pt-BR" aria-pressed="false">PT</button>
+        {{ end }}
       </div>
 
       <button id="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu-drawer" class="lg:hidden text-neutral-400 hover:text-gold-500 focus:outline-none cursor-pointer p-2" style="position: relative; z-index: 60;">
