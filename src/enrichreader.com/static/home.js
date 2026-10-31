@@ -24,22 +24,12 @@ const profileData = {
   }
 };
 
-function detectDeviceType() {
-  const ua = navigator.userAgent.toLowerCase();
-  if (/android/.test(ua)) return 'android';
-  if (/iphone|ipad|ipod/.test(ua)) return 'ios';
-  return 'desktop';
-}
-
-function getCtaText(device) {
-  if (device === 'android') return 'Get Android App';
-  if (device === 'ios') return 'Install Web App';
-  return 'Launch Web Reader';
+function getCtaText() {
+  return /android/i.test(navigator.userAgent) ? 'Get Android App' : 'Open EnrichReader';
 }
 
 function initDynamicCtas() {
-  const device = detectDeviceType();
-  const ctaText = getCtaText(device);
+  const ctaText = getCtaText();
   const heroCta = document.getElementById('hero-cta');
   const footerCta = document.getElementById('footer-cta');
 

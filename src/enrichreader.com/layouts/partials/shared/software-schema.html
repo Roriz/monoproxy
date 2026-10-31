@@ -18,7 +18,7 @@
   {{/* Price: reading, Skins and sync are currently free (home FAQ, /app/, Terms). Not a permanent promise. */}}
   {{ $play := "https://play.google.com/store/apps/details?id=com.enrichreader.app" }}
   {{ $offer := dict "@type" "Offer" "price" "0" "priceCurrency" "USD" "url" ("/app/" | absURL) }}
-  {{ $app := dict "@type" "SoftwareApplication" "@id" ("/#app" | absURL) "name" "EnrichReader" "applicationCategory" "BookApplication" "operatingSystem" "Android, iOS (web app), Web" "description" "Reading app for long stories. With a matching Skin for a supported story, character profiles and lore follow your reading progress." "url" ("/app/" | absURL) "downloadUrl" $play "sameAs" (slice $play) "offers" $offer "publisher" $organizationRef }}
+  {{ $app := dict "@type" "SoftwareApplication" "@id" ("/#app" | absURL) "name" "EnrichReader" "applicationCategory" "BookApplication" "operatingSystem" "Android" "description" "Reading app for long stories. With a matching Skin for a supported story, character profiles and lore follow your reading progress." "url" ("/app/" | absURL) "downloadUrl" $play "sameAs" (slice $play) "offers" $offer "publisher" $organizationRef }}
   {{ $graph = slice $organization $website $app }}
 {{ end }}
 

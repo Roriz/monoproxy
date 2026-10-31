@@ -11,16 +11,38 @@ lookups in crawlable HTML. The three intent pages are `/story-companion/`,
 `/how-it-works/` is the full explanation of the reader and guides; product facts
 on it come from the reader app's own strings and `src/lib/data/spoilers.js`.
 
-## Copy rule: EPUB
+## Copy rules (owner, non-negotiable)
 
-Set by the owner on 2026-10-18. Avoid the term "EPUB" in enrichreader.com copy
-as much as possible. EPUB does not represent the app and is not its focus:
-EnrichReader is a spoiler-free story companion, not a format reader. Use "book"
-or "book file" instead.
+These apply to every piece of public copy: enrichreader.com pages and their
+pt-BR translations, the web guide, the Play Store listing, social posts, author
+and publisher outreach. Technical and code identifiers are exempt, such as the
+`@epubReader` redirect matcher in `Caddyfile.production` and parser code.
 
-The only allowed exception is the FAQ, and only when EPUB is listed alongside
-other formats, never on its own. Technical and code identifiers are exempt, such
-as the `@epubReader` redirect matcher in `Caddyfile.production` and parser code.
+### 1. Never name a file format
+
+Set on 2026-10-18 and tightened on 2026-10-31. Do not write "EPUB" (or PDF, TXT,
+MOBI or any other extension) anywhere in copy, FAQ included. Authors and
+publishers read "EPUB" as piracy, even when the file is official, and
+mentioning it loses author contacts. Format support was never the reason a
+reader dropped the app. Say "your book" or "a book you own" and omit the
+format. A FAQ about formats answers without naming one.
+
+### 2. Never say "web reader"; lead with the native app
+
+Set on 2026-10-31. Do not write "web reader", "web app", "in your browser" or
+"add to Home Screen" as a way to read in the app. Readers take "web reader",
+especially next to an install suggestion, as slow and with the worst possible
+UI. Mention the native Android app wherever a platform comes up and omit the
+web route. The public browser reading guides (`/reading-guides/`, `/guia/`) are a
+separate product and may still be called guides.
+
+### 3. Book content never reaches the server and is never shared
+
+Set on 2026-10-31. Copy always says that the book's content never reaches our
+servers and is never shared. Do not describe the chapter problem report or
+what it sends. The report is a debug path used by a very small share of
+readers, and its structure and payload change without notice. Legal pages
+(privacy policy, terms) are written separately and are not marketing copy.
 
 Approved wording on the site: the home title is "EnrichReader: Your Spoiler-Free
 Story Companion"; app CTAs say "Open EnrichReader"; "partner series" replaces
@@ -31,8 +53,9 @@ Story Companion"; app CTAs say "Open EnrichReader"; "partner series" replaces
 The privacy policy is the current source for account, Skin, and data-handling
 claims. Reading needs no account; installing Skins and syncing require one.
 Skins are prepared ahead of time for partner series. Importing a book does not
-generate a Skin. Imported book files stay local; a chapter problem report sends
-chapter text. Usage data and crash reports have separate controls.
+generate a Skin. Imported book files stay on the device and their content never
+reaches our servers (copy rule 3). Usage data and crash reports have separate
+controls.
 
 The repository contains 11 series reports. Their Dataset JSON-LD now comes from exported JSON metadata,
 links to that export, and uses its SHA-256 hash as a version. They contain spoilers, including deaths and aliases. They must not be advertised
@@ -48,8 +71,8 @@ Pricing, dyslexia features, and text-to-speech are not
 promised here because they have not been verified. Confirm product support before
 adding those claims or an accessibility landing page. The app's import code
 (`reader-app/src/lib/utils/volume_import_helper.js`) accepts `.epub` only; PDF
-and TXT show as "Coming soon" in the import menu. Site copy therefore names no
-formats, rather than claiming several.
+and TXT show as "Coming soon" in the import menu. Copy names no format at all
+(copy rule 1).
 
 ## Build and review
 
