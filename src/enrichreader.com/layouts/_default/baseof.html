@@ -67,23 +67,13 @@
     .reveal-on-scroll, .fade-in-up, .fade-in { opacity: 1 !important; transform: none !important; }
   </style></noscript>
 
-  <!-- Resource Hints for Performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <!-- Preload Critical Styles -->
   {{ $styleVersion := crypto.SHA256 (readFile "static/style/style.css") }}
   <link rel="preload" href="/style/style.css?v={{ $styleVersion }}" as="style">
 
-  <!-- Non-Blocking Google Fonts Loading -->
-  {{ if .Params.fonts_override }}
-    {{ .Params.fonts_override | safeHTML }}
-  {{ else }}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'">
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
-    </noscript>
-  {{ end }}
+  <!-- Self-hosted fonts -->
+  {{ $fontsVersion := crypto.SHA256 (readFile "static/style/fonts.css") }}
+  <link rel="stylesheet" href="/style/fonts.css?v={{ $fontsVersion }}">
 
   <!-- Static Styling System -->
   <link rel="stylesheet" href="/style/style.css?v={{ $styleVersion }}">

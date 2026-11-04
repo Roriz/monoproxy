@@ -1,8 +1,8 @@
 const fonts = {
-  playfair: ["'Playfair Display', Georgia, serif", 'Playfair+Display:wght@600'],
-  cormorant: ["'Cormorant Garamond', Georgia, serif", 'Cormorant+Garamond:wght@600'],
-  cinzel: ["'Cinzel', 'Times New Roman', serif", 'Cinzel:wght@600'],
-  oswald: ["'Oswald', 'Arial Narrow', sans-serif", 'Oswald:wght@600'],
+  playfair: "'Playfair Display', Georgia, serif",
+  cormorant: "'Cormorant Garamond', Georgia, serif",
+  cinzel: "'Cinzel', 'Times New Roman', serif",
+  oswald: "'Oswald', 'Arial Narrow', sans-serif",
 };
 
 // OKLCH → linear sRGB, clipped to the display gamut, for WCAG 2 contrast.
@@ -60,7 +60,6 @@ export function guideLook(config = {}) {
   const css = Object.entries(colors).map(([token, [l, c, h]]) => `--color-${token}:oklch(${(l * 100).toFixed(2)}% ${c} ${h})`).join(';');
   return {
     scheme, colors,
-    style: `color-scheme:${dark ? 'dark' : 'light'};${css};--font-guide-title:${fonts[title_font][0]}`,
-    fontQuery: `Inter:wght@400;500;600&family=Libre+Baskerville&family=Playfair+Display:wght@500;600${title_font === 'playfair' ? '' : `&family=${fonts[title_font][1]}`}`,
+    style: `color-scheme:${dark ? 'dark' : 'light'};${css};--font-guide-title:${fonts[title_font]}`,
   };
 }

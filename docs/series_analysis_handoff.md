@@ -15,7 +15,6 @@ The page metadata, styles, scripts, and visualizer data-binding values are defin
 ---
 title: "Series Title, by the numbers | EnrichReader"
 description: "Quantitative analysis of the series. X chapters, Y words, Z unique characters analyzed."
-fonts_override: '<link href="https://fonts.googleapis.com/...">'
 stylesheets:
   - "/dcc/style.css" # Unified base layout stylesheet
 scripts:

@@ -29,6 +29,6 @@ export function guideAccess(guide, url, userAgent, access = {}) {
 export function accessError(status, shelfCount = 1) {
   if (status === 403) return '';
   const title = status === 410 ? 'Link inativo' : 'Guia não encontrado';
-  return page({ head: `<meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><meta name="robots" content="noindex, nofollow">${styles()}`,
+  return page({ head: `<meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><meta name="robots" content="noindex, nofollow">${styles}`,
     body: `<main><h1>${title}</h1><p>${status === 410 ? 'Este link não está mais ativo.' : 'Não encontramos este guia.'}</p>${shelfCount ? '<a class="door" href="/guia">Ver guias publicados</a>' : ''}</main>` });
 }

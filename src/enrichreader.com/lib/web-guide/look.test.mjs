@@ -21,6 +21,6 @@ test('look inputs are whitelisted before rendering CSS or font requests', () => 
   }
   const paper = guideLook({ hue: 18, scheme: 'papel', title_font: 'oswald' });
   assert.match(paper.style, /color-scheme:light/);
-  assert.match(paper.fontQuery, /Oswald/);
+  assert.match(paper.style, /Oswald/);
   assert.match(guideLook().style, /color-scheme:dark/);
 });

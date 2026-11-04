@@ -18,6 +18,14 @@ app.enrichreader.com {
 	}
 	header @no-cache Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
 
+	# A share from Android is the service worker's to answer. Before the app's first launch there is
+	# no worker yet and the file can't be kept: open the app, whose file marker says it didn't arrive.
+	@shareWithoutWorker {
+		method POST
+		path /share-target
+	}
+	redir @shareWithoutWorker /library?open_file=1 303
+
 	try_files {path} {path}/ /index.html
 
 	file_server
@@ -37,14 +45,13 @@ enrichreader.com {
 	@epubReader path /epub-reader /epub-reader/ /epub-reader/*
 	redir @epubReader /story-companion/ permanent
 
-	# Baseline browser security policy. Kept explicit for the externally hosted
-	# fonts, report charts and our own Umami visit counter (stats.enrichreader.com).
+	# Baseline browser security policy. Kept explicit for the report charts and our own Umami visit counter (stats.enrichreader.com).
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains"
 		X-Content-Type-Options "nosniff"
 		Referrer-Policy "strict-origin-when-cross-origin"
 		Permissions-Policy "camera=(), geolocation=(), microphone=()"
-		Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://stats.enrichreader.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https://api.enrichreader.com https://stats.enrichreader.com"
+		Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://stats.enrichreader.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https://api.enrichreader.com https://stats.enrichreader.com"
 	}
 
 	# Enable compression
