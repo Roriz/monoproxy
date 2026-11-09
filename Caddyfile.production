@@ -4,13 +4,22 @@ app.enrichreader.com {
 	# Enable compression
 	encode zstd gzip
 
-	# Cache headers for static assets
+	# Only the build's hashed files can be kept forever: their names change with their content.
+	@immutable {
+		file
+		path /_app/immutable/*
+	}
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
+
+	# Every other file keeps its name across releases (vendored libraries, fonts, icons,
+	# release-notes.json), so the browser checks with us before reusing it; unchanged files cost a
+	# 304. Kept for a year, a library's files outlived an upgrade and mixed with the new ones.
 	@static {
 		file
-		path *.ico *.css *.js *.png *.jpg *.jpeg *.svg *.gif *.woff *.woff2 *.webp *.json
-		not path /service-worker.js /version.txt
+		path *.ico *.css *.js *.mjs *.png *.jpg *.jpeg *.svg *.gif *.woff *.woff2 *.webp *.json *.wasm
+		not path /_app/immutable/* /service-worker.js /version.txt
 	}
-	header @static Cache-Control "public, max-age=31536000, immutable"
+	header @static Cache-Control "public, no-cache"
 
 	# Cache headers for dynamic versioning and service worker updates
 	@no-cache {
